@@ -26,12 +26,7 @@ static void check_errors(void);
 /* ---------------------------------------------------------------------- */
 /* ********************************************************************** */
 
-#if WITH_FIXES
-int
-#else
-void
-#endif
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	int n;
 	
@@ -46,15 +41,8 @@ main(int argc, char **argv)
 	if (options.verbose)
 	{
 		fprintf(stdout, "\nready.\n");
-#if !WITH_FIXES
-		getch();
-#endif
 	}
-#if WITH_FIXES
 	return EXIT_SUCCESS;
-#else
-	exit(EXIT_SUCCESS);
-#endif
 }
 
 /* ---------------------------------------------------------------------- */
@@ -92,10 +80,6 @@ static void usage(void)
 		"      separate lines for each filename,\n"
 		"      comments start with a semicolon and\n"
 		"      end at the end of line\n");
-#if !WITH_FIXES
-	if (!options.verbose)
-		getch();
-#endif
 }
 
 /* ---------------------------------------------------------------------- */
@@ -132,20 +116,9 @@ static int read_commandfile(int argc, char **argv)
 	gotoptions = FALSE;
 	if (argc <= 1)
 		return 0;
-#if WITH_FIXES
 	end = xbasename(argv[1]);
 	pathlen = end - argv[1];
 	strncpy(path, argv[1], pathlen);
-#else
-	end = strrchr(argv[1], '\\');
-	if (end != NULL)
-	{
-		strncpy(path, argv[1], pathlen = end - argv[1] + 1);
-	} else
-	{
-		pathlen = 0;
-	}
-#endif
 	path[pathlen] = '\0';
 	if ((fp = fopen(argv[1], "r")) == NULL)
 	{
@@ -155,15 +128,10 @@ static int read_commandfile(int argc, char **argv)
 	{
 		size_t len = strlen(line);
 		
-#if WITH_FIXES
 		if (len > 0 && line[len - 1] == '\n')
 			line[--len] = '\0';
 		if (len > 0 && line[len - 1] == '\r')
 			line[--len] = '\0';
-#else
-		if (line[len - 1] == '\n')
-			line[len - 1] = '\0';
-#endif
 		start = line;
 		while (*start == ' ' || *start == '\t')
 			start++;
@@ -232,19 +200,11 @@ static int read_commandfile(int argc, char **argv)
 			{
 				size_t len = strlen(start);
 				
-				if (start[1] != ':' && start[0] != '\\'
-#if WITH_FIXES
-					&& start[0] != '/'
-#endif
-					)
+				if (start[1] != ':' && start[0] != '\\' && start[0] != '/')
 					len += pathlen;
 				if ((end = (char *)malloc(len + 1)) == NULL)
 					hclog(ERR_NOMEM, LVL_FATAL);
-				if (start[1] != ':' && start[0] != '\\'
-#if WITH_FIXES
-					&& start[0] != '/'
-#endif
-					)
+				if (start[1] != ':' && start[0] != '\\' && start[0] != '/')
 				{
 					strcpy(end, path);
 					strcat(end, start);
@@ -263,11 +223,7 @@ static int read_commandfile(int argc, char **argv)
 	fclose(fp);
 	if (errors_thisfile != 0)
 	{
-#if WITH_FIXES
 		exit(EXIT_FAILURE);
-#else
-		exit(-2);
-#endif
 	}
 
 	return nfiles;
@@ -278,9 +234,6 @@ static int read_commandfile(int argc, char **argv)
 static void compile_help(char *helpfilename, int findex, int nfiles, char **names)
 {
 	strcpy(outfile_name, helpfilename);
-#if !WITH_FIXES && !TEST_CODE
-	strupr(outfile_name);
-#endif
 	file_index = findex;
 	alloc_buffers();
 	if (options.create_log)
@@ -290,7 +243,6 @@ static void compile_help(char *helpfilename, int findex, int nfiles, char **name
 	log_close();
 	unlink(HC_TMP_COMPRESSED);
 	unlink(HC_TMP_STRINGS);
-#if WITH_FIXES
 	while (--nfiles >= 0)
 		g_free(names[nfiles]);
 	g_free(helpfilename);
@@ -299,7 +251,6 @@ static void compile_help(char *helpfilename, int findex, int nfiles, char **name
 	g_free(hc_inbuf);
 	hc_inbuf = NULL;
 	free_keyword_hash();
-#endif
 }
 
 /* ---------------------------------------------------------------------- */
@@ -420,10 +371,8 @@ void compile_files(int nfiles, char **names)
 		do_references(HC_TMP_ENCODED);
 		check_errors();
 	}
-#if WITH_FIXES
 	/* not needed any longer */
 	free_index();
-#endif
 	if (generate_help > 0)
 	{
 		fprintf(stdout, "\n\tpass 3:\n");

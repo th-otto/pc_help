@@ -11,11 +11,7 @@ const char *err_filename = NULL;
 
 
 
-#if WITH_FIXES
 #define LOG_FILENAME "hc.log"
-#else
-#define LOG_FILENAME "HC.LOG"
-#endif
 
 /* ********************************************************************** */
 /* ---------------------------------------------------------------------- */
@@ -70,21 +66,9 @@ bool hc_putc(unsigned char b)
 
 bool hc_putw(short w)
 {
-#if WITH_FIXES
 	if (hc_putc(w >> 8))
 		return hc_putc(w);
 	return FALSE;
-#else
-	union {
-		unsigned short w;
-		unsigned char c[2];
-	} u;
-	
-	u.w = w;
-	if (hc_putc(u.c[0]))
-		return hc_putc(u.c[1]);
-	return FALSE;
-#endif
 }
 
 /* ---------------------------------------------------------------------- */
@@ -162,9 +146,6 @@ bool hc_fwrite(FILE *fp, size_t count, void *ptr)
 void hc_openfile(char *filename)
 {
 	err_filename = filename;
-#if !WITH_FIXES
-	strupr(filename);
-#endif
 	if ((hc_infile = fopen(filename, "rb")) == NULL)
 		hclog(ERR_OPEN_SOURCE, LVL_FATAL, err_filename);
 }
@@ -181,46 +162,22 @@ void hc_createfile(const char *filename)
 
 void log_open(void)
 {
+	struct tm tm;
+
 	if ((logfile = fopen(LOG_FILENAME, "w")) == NULL)
 		hclog(ERR_OPEN_OUTPUT, LVL_FATAL, LOG_FILENAME);
-#if WITH_FIXES
-	{
-		time_t t;
-		struct tm tm;
-		
-		t = time(0);
-		tm = *localtime(&t);
-		fprintf(logfile,
-			"\n"
-			" Help Compiler                                   (c) 1990 Borland Germany GmbH\n"
-			"\n"
-			"-------------------------------------------------------------------------------\n"
-			"\tlog file for %s\n"
-			"\tdate:        %d.%s %d\n"
-			"-------------------------------------------------------------------------------\n"
-			"\n",
-			outfile_name,
-			tm.tm_mday, month_names[tm.tm_mon], tm.tm_year + 1900);
-		
-	}
-#else
-	{
-		struct date d;
-		
-		getdate(&d);
-		fprintf(logfile,
-			"\n"
-			" Help Compiler                                   (c) 1990 Borland Germany GmbH\n"
-			"\n"
-			"-------------------------------------------------------------------------------\n"
-			"\tlog file for %s\n"
-			"\tdate:        %d.%s %d\n"
-			"-------------------------------------------------------------------------------\n"
-			"\n",
-			outfile_name,
-			(unsigned char)d.da_day, month_names[(unsigned char)d.da_mon - 1], d.da_year);
-	}
-#endif
+	get_localtime(&tm);
+	fprintf(logfile,
+		"\n"
+		" Help Compiler                                   (c) 1990 Borland Germany GmbH\n"
+		"\n"
+		"-------------------------------------------------------------------------------\n"
+		"\tlog file for %s\n"
+		"\tdate:        %d.%s %d\n"
+		"-------------------------------------------------------------------------------\n"
+		"\n",
+		outfile_name,
+		tm.tm_mday, month_names[tm.tm_mon], tm.tm_year + 1900);
 }
 
 /* ---------------------------------------------------------------------- */
@@ -230,9 +187,7 @@ void hc_closeout(void)
 	if (hc_outfile != NULL)
 	{
 		fclose(hc_outfile);
-#if WITH_FIXES
 		hc_outfile = NULL;
-#endif
 	}
 }
 
@@ -251,9 +206,7 @@ void log_close(void)
 			"-------------------------------------------------------------------------------\n",
 			errors_total, warnings_total);
 		fclose(logfile);
-#if WITH_FIXES
 		logfile = NULL;
-#endif
 	}
 }
 
@@ -265,9 +218,7 @@ void hc_closein(void)
 	if (hc_infile != NULL)
 	{
 		fclose(hc_infile);
-#if WITH_FIXES
 		hc_infile = NULL;
-#endif
 	}
 }
 

@@ -2,22 +2,19 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdarg.h>
-#ifdef __PUREC__
-#include <ext.h>
-#else
 #include <time.h>
+#ifdef __PUREC__
+#include <tos.h>
+#else
+#ifdef __atarist__
+#include <osbind.h>
+#endif
 #include <unistd.h>
-#define getch()
 #endif
 #include <stdlib.h>
 #include <stdint_.h>
 #include "hcint.h"
 #include "endian_.h"
-
-#ifndef __PUREC__
-#undef WITH_FIXES
-#define WITH_FIXES 1
-#endif
 
 #ifndef FALSE
 #define FALSE 0
@@ -241,7 +238,6 @@ struct hashitem {
 extern struct hashitem *keyword_hash[];
 extern uint32_t *screen_table_offset;
 extern HLPHDR helphdr;
-extern const char *last_indexentry_name;
 extern NAME_ENTRY *namelist;
 extern int screen_cnt;
 extern size_t screen_start;
@@ -267,6 +263,7 @@ extern long sens_size;
 
 
 void generate_index(void);
+void get_localtime(struct tm *tm);
 void add_index_entry(const char *s, int screen_no, int attr);
 int16_t get_index_screen_code(const char *s);
 void generate_index_page(void);

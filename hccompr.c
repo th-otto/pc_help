@@ -28,18 +28,6 @@ static void sort_codes(void *table, size_t nmemb, size_t size, int32_t (*cmp)(st
 /* ---------------------------------------------------------------------- */
 /* ********************************************************************** */
 
-#if defined(__PUREC__)
-/* from nibble.s */
-void write_nibble_asm(unsigned char b);
-void flush_nibble_asm(void);
-void write_compression_asm(void);
-#endif
-
-#if defined(__PUREC__) && !TEST_CODE
-#define write_nibble(b) write_nibble_asm(b)
-#define flush_nibble() flush_nibble_asm()
-#define write_compression() write_compression_asm()
-#else
 static unsigned char nibble;
 static unsigned char oddflag;
 
@@ -74,8 +62,6 @@ static void flush_nibble(void)
 	}
 }
 
-#endif
-
 /* ---------------------------------------------------------------------- */
 
 void do_compress(void)
@@ -88,31 +74,19 @@ void do_compress(void)
 
 	d3 = 0;
 	x163e2 = g_new(struct x, MAX_CODES);
-#if WITH_FIXES || TEST_CODE
 	/* the code below will access this array with negative values??? */
 	x163ea = g_new(struct codeinfo, 0x10000UL);
-#else
-	x163ea = g_new(struct codeinfo, MAX_CODES);
-#endif
 	char_counts = g_new(struct codeinfo, 256);
 	if (x163e2 == NULL || x163ea == NULL || char_counts == NULL)
 	{
 		hclog(ERR_NOMEM, LVL_FATAL);
 	}
 	init_tables();
-#if WITH_FIXES || TEST_CODE
 	init_codeinfo(x163ea, 0x10000UL);
-#else
-	init_codeinfo(x163ea, MAX_CODES);
-#endif
 	init_codeinfo(char_counts, 256);
 	if ((hc_infile = fopen(HC_TMP_ENCODED, "rb")) == NULL)
 	{
-#if WITH_FIXES
 		hclog(ERR_OPEN_SOURCE, LVL_FATAL, "temporary file");
-#else
-		hclog(ERR_OPEN_SOURCE, LVL_FATAL); /* BUG: filename missing */
-#endif
 	}
 	if (options.verbose)
 		fprintf(stderr, "\n\treading uncompressed help screens\n");
@@ -130,7 +104,7 @@ void do_compress(void)
 		hc_inbuf_ptr = hc_inbuf;
 		str_len = 1;
 		prev_code = -*hc_inbuf_ptr;
-		char_counts[(int)*hc_inbuf_ptr++].count++; /* FIXME: cast */
+		char_counts[*hc_inbuf_ptr++].count++;
 		while (hc_inbuf_ptr < hc_inbuf + hc_inbuf_size)
 		{
 			int32_t code;
@@ -201,7 +175,7 @@ void do_compress(void)
 	{
 		if (x163ea[i].count > xd5)
 		{
-			int32_t step; /* XXX swapped d6<->d7 */
+			int32_t step;
 			int32_t middle;
 
 			middle = 2047;
@@ -216,7 +190,7 @@ void do_compress(void)
 					middle += step;
 				else
 					middle -= step;
-				step /= 2; /* FIXME: avoid long div */
+				step >>= 1;
 			}
 			memmove(&x163ea[middle + 1], &x163ea[middle], (4095 - middle) * sizeof(*x163ea));
 			x163ea[middle] = x163ea[i];
@@ -284,15 +258,15 @@ void do_compress(void)
 			while (x163e2[code].prev_code >= 0)
 			{
 				*--a5 = x163e2[code].this_char ^ HC_ENCRYPT;
-				char_counts[(int)*a5].count -= count; /* FIXME: cast */
+				char_counts[*a5].count -= count;
 				if (x163e2[code].str_code < -1)
 					x163e2[code].str_code = -1;
 				code = x163e2[code].prev_code;
 			}
 			*--a5 = x163e2[code].this_char ^ HC_ENCRYPT;
-			char_counts[(int)*a5].count -= count; /* FIXME: cast */
+			char_counts[*a5].count -= count;
 			*--a5 = -x163e2[code].prev_code ^ HC_ENCRYPT;
-			char_counts[(int)*a5].count -= count; /* FIXME: cast */
+			char_counts[*a5].count -= count;
 			if (x163e2[code].str_code < -1)
 				x163e2[code].str_code = -1;
 			hc_flshbuf();
@@ -302,9 +276,7 @@ void do_compress(void)
 	if ((helphdr.str_size = str_offset[str_count]) & 1)
 	{
 		helphdr.str_size += 1;
-#if WITH_FIXES || TEST_CODE
 		*screenbuf_ptr = 0;
-#endif
 		fwrite(screenbuf_ptr, 1, 1, hc_outfile);
 	}
 
@@ -321,56 +293,10 @@ void do_compress(void)
 	}
 	g_free(char_counts);
 	rewind(hc_infile);
-#if TEST_CODE
-	{
-		uint32_t *uncompressed_screen_table_copy;
-		
-		/*
-		 * copy original screen table (contains uncompressed offsets so far)
-		 */
-		uncompressed_screen_table_copy = g_new(uint32_t, screen_cnt + 1);
-		memcpy(uncompressed_screen_table_copy, screen_table_offset, (screen_cnt + 1) * sizeof(*screen_table_offset));
-		/*
-		 * compress using generic version
-		 */
-		write_compression();
-
-#ifdef __PUREC__
-		{
-			uint32_t *screen_table_copy;
-
-			/*
-			 * copy screen table
-			 */
-			screen_table_copy = g_new(uint32_t, screen_cnt + 1);
-			memcpy(screen_table_copy, screen_table_offset, (screen_cnt + 1) * sizeof(*screen_table_offset));
-			/*
-			 * copy screen table back, and
-			 * compress again using asm version
-			 */
-			memcpy(screen_table_offset, uncompressed_screen_table_copy, (screen_cnt + 1) * sizeof(*screen_table_offset));
-			rewind(hc_infile);
-			write_compression_asm();
-	
-			if (memcmp(screen_table_offset, screen_table_copy, (screen_cnt + 1) * sizeof(*screen_table_offset)) != 0)
-			{
-				fprintf(stderr, "screen offsets differ!\n");
-				for (i = 0; i <= screen_cnt; i++)
-				{
-					if (screen_table_offset[i] != screen_table_copy[i])
-					{
-						fprintf(stderr, "%5ld: %8lu should be %8lu\n", i, (unsigned long)screen_table_copy[i], (unsigned long)screen_table_offset[i]);
-					}
-				}
-			}
-			g_free(screen_table_copy);
-		}
-#endif
-		g_free(uncompressed_screen_table_copy);
-	}
-#else
+	/*
+	 * compress using generic version
+	 */
 	write_compression();
-#endif
 	fclose(hc_infile);
 	g_free(x163e2);
 	unlink(HC_TMP_ENCODED);
@@ -394,9 +320,7 @@ static void init_tables(void)
 		x163e2[i].str_len = 0;
 		x163e2[i].prev_code = -256;
 		x163e2[i].str_code = -2;
-#if WITH_FIXES || TEST_CODE
 		x163e2[i].this_char = 0;
-#endif
 	}
 }
 
@@ -517,8 +441,6 @@ static void swap(unsigned char *p1, unsigned char *p2, size_t size)
 }
 
 /* ---------------------------------------------------------------------- */
-
-#if !defined(__PUREC__) || TEST_CODE
 
 void write_compression(void)
 {
@@ -659,5 +581,3 @@ void write_compression(void)
 	fprintf(stderr, "write_compression: total size: %lu\n", screen_start);
 #endif
 }
-
-#endif

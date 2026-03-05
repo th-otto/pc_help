@@ -1,7 +1,5 @@
 help_rc.ttp
 
-.C[-I..\common]
-
 .C[-A-]
 
 .C[-K-]
@@ -17,7 +15,7 @@ help_rc.ttp
 .L[-S=4096]
 
 =
-..\lib\cstartv.o
+cstartv.s
 help_rc.c
 
 pcstdlib.lib

@@ -29,11 +29,7 @@ static void read_inf(void)
 	const char *env;
 	
 	found = TRUE;
-#if WITH_FIXES
 	fd = (int)Fopen("pc_help.inf", 0);
-#else
-	fd = (int)Fopen("TC_HELP.INF", 0);
-#endif
 	if (fd >= 0)
 	{
 		size = Fread(fd, sizeof(pc_dir), pc_dir);
@@ -44,11 +40,7 @@ static void read_inf(void)
 		Fclose((int)fd);
 	} else
 	{
-#if WITH_FIXES
 		env = getenv("PC");
-#else
-		env = getenv("TC");
-#endif
 		if (env != NULL)
 		{
 			strcpy(pc_dir, env);
@@ -59,14 +51,12 @@ static void read_inf(void)
 	}
 	if (found)
 	{
-#if WITH_FIXES
 		size_t len = strlen(pc_dir);
 		if (len > 0 && pc_dir[len - 1] != '\\' && pc_dir[len - 1] != '/')
 		{
 			pc_dir[len++] = '\\';
 			pc_dir[len] = '\0';
 		}
-#endif
 		help_init(pc_dir);
 	}
 }
@@ -152,19 +142,12 @@ static void send_reply(_WORD sender)
 	
 	msg[0] = AC_REPLY;
 	msg[1] = ap_id;
-#if WITH_FIXES
 	msg[2] = 0;
-#else
-	msg[2] = 0x101; /* BUG: msg[2] is reserved for extra message length */
-#endif
 	msg[3] = win_get_handle();
-#if WITH_FIXES
-	/* BUG: not initialized */
 	msg[4] = 0;
 	msg[5] = 0;
 	msg[6] = 0;
 	msg[7] = 0;
-#endif
 	appl_write(sender, (int)sizeof(msg), msg);
 }
 
@@ -218,29 +201,17 @@ static bool handle_message(_WORD *msg)
 
 	case AC_COPY:
 		edit_copy();
-#if WITH_FIXES
 		send_reply(msg[1]);
-#else
-		send_reply(msg[2]); /* BUG: sender is msg[1] */
-#endif
 		break;
 	
 	case AC_HELP:
 		help_exit();
 		help_show_topic(*((char **)&msg[3]));
-#if WITH_FIXES
 		send_reply(msg[1]);
-#else
-		send_reply(msg[2]); /* BUG: sender is msg[1] */
-#endif
 		break;
 	
 	case AC_VERSION:
-#if WITH_FIXES
 		send_reply(msg[1]);
-#else
-		send_reply(msg[2]); /* BUG: sender is msg[1] */
-#endif
 		break;
 	}
 	return quit;
@@ -250,20 +221,19 @@ static bool handle_message(_WORD *msg)
 
 static void eventloop(bool isapp, const char *keyword)
 {
-	_WORD mox; /* 30 */
-	_WORD moy; /* 28 */
-	_WORD kstate; /* 26 */
-	_WORD key; /* 24 */
-	_WORD clicks; /* 22 */
-	_WORD button; /* 20 */
-	_WORD top; /* 18 */
-	_WORD dummy; /* 16 */
-	_WORD msg[8]; /* 0 */
+	_WORD mox;
+	_WORD moy;
+	_WORD kstate;
+	_WORD key;
+	_WORD clicks;
+	_WORD button;
+	_WORD top;
+	_WORD dummy;
+	_WORD msg[8];
 	bool quit;
 	_WORD events;
 	
 	quit = FALSE;
-	events = 0; /* FIXME: useless */
 	if (isapp)
 	{
 		if (keyword == NULL)
@@ -273,7 +243,6 @@ static void eventloop(bool isapp, const char *keyword)
 	}
 	while (!quit || !isapp)
 	{
-		graf_mkstate(&mox, &moy, &dummy, &dummy); /* FIXME: useless */
 		events = evnt_multi(MU_MESAG | MU_TIMER | MU_KEYBD | MU_BUTTON,
 			2, 1, 1,
 			0, 0, 0, 0, 0,
@@ -320,15 +289,9 @@ int main(int argc, char **argv)
 		if (!_app)
 			menu_register(ap_id, "  Turbo Help ");
 		phys_handle = graf_handle(&gl_wchar, &gl_hchar, &dummy, &dummy);
-#if WITH_FIXES
 		vdi_handle = phys_handle;
 		for (i = 0; i < 10; i++)
 			workin[i] = 1;
-#else
-		workin[0] = vdi_handle = phys_handle; /* BUG: workin[0] is nonsense */
-		for (i = 1; i < 10; i++)
-			workin[i] = 1;
-#endif
 		workin[10] = 2;
 		v_opnvwk(workin, &vdi_handle, workout);
 		if (vdi_handle != 0)
@@ -364,7 +327,7 @@ int main(int argc, char **argv)
 	} else
 	{
 		(void) Cconws("appl_init()-Error-Hit any key to return to desktop");
-		getche();
+		Cconin();
 	}
 	return 0;
 }

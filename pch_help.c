@@ -16,12 +16,12 @@ static const char *const help_table[] = {
 
 static const char *get_help_title(void);
 
-struct {
+static struct {
 	long selection_start;
 	long selection_end;
 	char str[LINK_SIZE];
 } help_stack[HELP_MAX_DEPTH + 1];
-char help_title[(HELP_MAX_DEPTH + 1) * LINK_SIZE + 6];
+static char help_title[(HELP_MAX_DEPTH + 1) * LINK_SIZE + 6];
 
 
 /* ********************************************************************** */
@@ -46,17 +46,11 @@ static void make_link(char *_dst, const char *_src)
 		memcpy(&dst[3], src, LINK_SIZE - 4);
 	}
 	dst[LINK_SIZE - 1] = '\0';
-#if WITH_OPTIMIZATIONS
 	{
 		char *p = strchr(&dst[3], ESC_CHR);
 		if (p != NULL)
 			*p = '\0';
 	}
-#else
-	src = strchr(&dst[3], ESC_CHR);
-	if (src != NULL)
-		*(char *)src = '\0';
-#endif
 }
 
 /* ---------------------------------------------------------------------- */
@@ -109,9 +103,6 @@ static const char *get_help_title(void)
 		strcat(help_title, ": ");
 		str = &help_stack[len].str[3];
 		strcat(help_title, str);
-#if !WITH_OPTIMIZATIONS
-		str = &help_title[strlen(help_title)] - 1;
-#endif
 	}
 	return help_title;
 }
@@ -221,8 +212,3 @@ void help_set_title(void)
 	edit_set_help(title, NULL, 0, FALSE);
 	mouse_on();
 }
-
-/* ********************************************************************** */
-/* ---------------------------------------------------------------------- */
-/* ********************************************************************** */
-

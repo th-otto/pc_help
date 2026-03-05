@@ -7,10 +7,8 @@ const char *const errmsg[] = {
 #define HCERR(e, s) s,
 #include "hcerr.h"
 };
-#if WITH_FIXES
 #if !defined(__atarist__) && !defined(__TOS__)
 #include "cp_atari.h"
-#endif
 #endif
 
 
@@ -68,18 +66,13 @@ void cleanup(void)
 	unlink(HC_TMP_ENCODED);
 	unlink(HC_TMP_COMPRESSED);
 	unlink(HC_TMP_STRINGS);
-#if WITH_FIXES
 	exit(EXIT_FAILURE);
-#else
-	exit(-1);
-#endif
 }
 
 /* ---------------------------------------------------------------------- */
 
 void logstr(const char *str)
 {
-#if WITH_FIXES
 	if (logfile != NULL)
 		fputs(str, logfile);
 #if !defined(__atarist__) && !defined(__TOS__)
@@ -112,11 +105,5 @@ void logstr(const char *str)
 	}
 #else
 	fputs(str, stdout);
-#endif
-
-#else
-	if (logfile != NULL)
-		fprintf(logfile, str); /* BUG: str may contain '%' */
-	fprintf(stdout, str);
 #endif
 }

@@ -1,10 +1,6 @@
 pc_help.prg
 
-.C[-DWITH_FIXES=1]
-.S[-DWITH_FIXES=1]
 .S[-U-]
-
-.C[-I..\common]
 
 .C[-A-]
 
@@ -23,60 +19,17 @@ pc_help.prg
 .L[-S=4096]
 
 =
-pcstart.s
+cstartv.s
 
 pch_main.c
 pch_help.c
 display.c
 win.c
-pchrsc.c
 membuf.c
-util2.s
-findstr.s
-util5.s
 mmalloc.c
-util7.s
+pchlplib.c
 
 
-..\pctoslib\nf_debug.o
-..\pctoslib\nf_ops.o
-
-; pcstdlib.lib
-lib\fpuinit.s
-lib\setjmp.s
-lib\getenv.s
-lib\unlink.s
-lib\vsprintf.s
-lib\_printf.s
-lib\_outintd.s
-lib\_xlterr.s
-lib\strcat.s
-lib\strchr.c
-lib\strcmp.s
-lib\strcpy.s
-lib\strlen.s
-lib\strupr.s
-lib\strtoul.s
-lib\ultoa.s
-lib\_freeall.s
-lib\memcpy.s
-lib\isdigit.s
-lib\isspace.s
-lib\isword.s
-lib\_upctab.s
-lib\_chrcla1.s
-lib\_chrcla2.s
-lib\_digcnvt.s
-lib\_memblk.c
-lib\_lmul.s
-lib\_ldiv.s
-
-; pcgemlib.lib
-lib\vdi.s
-lib\aes.s
-
-pcextlib.lib
-
-; pctoslib.lib
-lib\tos.s
-
+pcstdlib.lib
+pcgemlib.lib
+pctoslib.lib

@@ -276,12 +276,8 @@ void parse_keyword(void)
 		hc_curtok = h->type;
 	} else
 	{
-#if WITH_FIXES
 		hc_curtok = TK_NONE;
 		hc_curscope = SC_PLAINTEXT;
-#else
-		hc_curtok = hc_curscope = TK_NONE;
-#endif
 	}
 }
 
@@ -316,18 +312,8 @@ void parse_link(char *s)
 		/*
 		 * write link code
 		 */
-#if WITH_FIXES
 		*ptr++ = scr_code >> 8;
 		*ptr = scr_code;
-#else
-		union {
-			unsigned short w;
-			unsigned char c[2];
-		} u;
-		u.w = scr_code;
-		*ptr++ = u.c[0];
-		*ptr = u.c[1];
-#endif
 	}
 	hc_putc(ESC_CHR);
 	in_link = FALSE;

@@ -4,7 +4,6 @@
 #
 CROSS=m68k-atari-mint-
 
-COMMON_DIR=-I../common/
 TEST_CODE?=0
 COUNTRY?=1
 
@@ -38,7 +37,6 @@ PCHELP_OBJS = \
 	pch_help.o \
 	display.o \
 	win.o \
-	pchrsc.o \
 	membuf.o \
 	pchlplib.o \
 	mmalloc.o \

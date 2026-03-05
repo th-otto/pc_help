@@ -3,7 +3,6 @@
 #include <ctype.h>
 #include <stdarg.h>
 #if defined(__PUREC__) || defined(__TURBOC__)
-#include <ext.h>
 #include <aes.h>
 #include <vdi.h>
 #if defined(__STDIO)
@@ -14,41 +13,7 @@
 #endif
 #define DTA _DTA
 #define d_fname dta_name
-#if WITH_FIXES
 #include <tos.h>
-#else
-typedef struct          /* used by Fsetdta, Fgetdta */
-{
-    char            d_reserved[21];
-    unsigned char   d_attrib;
-    unsigned int    d_time;
-    unsigned int    d_date;
-    unsigned long   d_length;
-    char            d_fname[14];
-} DTA;
-int Fopen(const char *filename, int mode);
-int     Fcreate( const char *filename, int attr );
-int Fclose( int handle );
-long    Fread( int handle, long count, void *buf );
-long    Fwrite( int handle, long count, void *buf );
-void    Fsetdta( DTA *buf );
-int     Fsfirst( const char *filename, int attr );
-int     Fsnext( void );
-long    Crawio( int w );
-int     Cconws( const char *buf );
-int     Dcreate( const char *path );
-void    *Malloc( long number );
-int     Mfree( void *block );
-int     Mshrink( int zero, void *block, long newsiz );
-long    Super( void *stack );
-void    *Logbase( void );
-int     Blitmode( int mode );
-long    Fseek( long offset, int handle, int seekmode );
-#if defined(__TURBOC__) && !defined(__PUREC__)
-/* tcextlib has a bug and does not export getche() */
-#define getche() Cconin()
-#endif
-#endif
 #else
 #include <time.h>
 #include <unistd.h>
@@ -72,11 +37,6 @@ extern short _app;
 
 #ifndef EVNT_TIME
 #define EVNT_TIME(lo) lo
-#endif
-
-#if !defined(__PUREC__) && !defined(__TURBOC__)
-#undef WITH_FIXES
-#define WITH_FIXES 1
 #endif
 
 #ifndef FALSE
@@ -125,16 +85,6 @@ typedef int bool;
 #define _WORD short
 #endif
 #endif
-
-#ifdef __GNUC__
-#define ASM_NAME(x) __asm__(x)
-#define C_NAME(x) __asm__(x)
-#else
-#define ASM_NAME(x)
-#define C_NAME(x)
-#endif
-
-#define WITH_OPTIMIZATIONS WITH_FIXES
 
 #define LINK_SIZE 64
 #define TABSIZE 4
@@ -293,7 +243,7 @@ void *m_alloc(size_t size);
 int m_free(void *ptr);
 void memfd_init(void);
 void memfd_readbuf(off_t start, char *dst, ssize_t count);
-signed char memfd_writebuf(off_t start, ssize_t delete, ssize_t insert, const char **src);
+int memfd_writebuf(off_t start, ssize_t delete, ssize_t insert, const char **src);
 int memfd_getc(off_t start);
 off_t memfd_getsize(void);
 int memfd_new(void);

@@ -7,12 +7,9 @@ uint32_t *screen_table_offset;
 
 /* current screen number during parsing */
 int screen_cnt = 0;
-/* FIXME: set, but nowhere used */
-const char *last_indexentry_name = NULL;
 /* offset into temporary file where current screen starts */
 size_t screen_start = 0;
 NAME_ENTRY *namelist = NULL;
-long unused_15080 = 0; /* unused */
 
 static void free_namelist(NAME_ENTRY *list);
 static void write_table(INTERNAL_SRCHKEY_ENTRY *table, long count, size_t strsize);
@@ -61,11 +58,7 @@ void init_keyword_hash(void)
 	 * FIXME: there are only 10 keywords. Do we really need
 	 * a hash for this?
 	 */
-#if WITH_FIXES
 	memset(keyword_hash, 0, sizeof(keyword_hash));
-#else
-	memset(keyword_hash, 0, KEYW_HASH_SIZE); /* BUG */
-#endif
 	for (kw = keywords; kw->name != NULL; kw++)
 	{
 		hash = calchash(kw->name, KEYW_HASH_SIZE);
@@ -129,12 +122,12 @@ void write_help(void)
 	helphdr.str_size = cpu_to_be32(helphdr.str_size);
 #endif
 	helphdr.caps_offset = cpu_to_be32(be32_to_cpu(helphdr.str_offset) + be32_to_cpu(helphdr.str_size));
-	if ((caps_size % 2) != 0) /* FIXME avoid % */
+	if ((caps_size & 1) != 0)
 		caps_size++;
 	helphdr.caps_size = cpu_to_be32(caps_cnt * SIZEOF_SRCHKEY_ENTRY + caps_size);
 	helphdr.caps_cnt = cpu_to_be32(caps_cnt);
 	helphdr.sens_offset = cpu_to_be32(be32_to_cpu(helphdr.caps_offset) + be32_to_cpu(helphdr.caps_size));
-	if ((sens_size % 2) != 0) /* FIXME avoid % */
+	if ((sens_size & 1) != 0)
 		sens_size++;
 	helphdr.sens_size = cpu_to_be32(sens_cnt * SIZEOF_SRCHKEY_ENTRY + sens_size);
 	helphdr.sens_cnt = cpu_to_be32(sens_cnt);
@@ -175,12 +168,10 @@ void write_help(void)
 	hc_copyfile(HC_TMP_STRINGS);
 	write_table(caps_table, caps_cnt, caps_size);
 	write_table(sens_table, sens_cnt, sens_size);
-#if WITH_FIXES
 	g_free(caps_table);
 	caps_table = NULL;
 	g_free(sens_table);
 	sens_table = NULL;
-#endif
 	hc_copyfile(HC_TMP_COMPRESSED);
 	hc_closeout();
 }
@@ -245,19 +236,13 @@ void do_references(const char *tmpname)
 				scr_code = -1;
 			}
 		}
-#if WITH_FIXES
 		putc(scr_code >> 8, fp);
 		putc(scr_code, fp);
-#else
-		fwrite(&scr_code, sizeof(scr_code), 1, fp);
-#endif
 	}
 	fclose(fp);
 	free_namelist(namelist);
-#if WITH_FIXES
 	namelist = NULL;
 	namelist_tail = NULL;
-#endif
 }
 
 /* ---------------------------------------------------------------------- */
@@ -338,7 +323,6 @@ static void write_table(INTERNAL_SRCHKEY_ENTRY *table, long count, size_t strsiz
 			hclog(ERR_WRITE_ERROR, LVL_FATAL, outfile_name);
 		}
 	}
-#if WITH_FIXES
 	len = hc_inbuf_ptr - hc_inbuf;
 	if (len & 1)
 	{
@@ -349,13 +333,8 @@ static void write_table(INTERNAL_SRCHKEY_ENTRY *table, long count, size_t strsiz
 	{
 		hclog(ERR_STRING_MISMATCH, LVL_FATAL);
 	}
-#endif
 	if (!hc_fwrite(hc_outfile, strsize, hc_inbuf))
 	{
 		hclog(ERR_WRITE_ERROR, LVL_FATAL, outfile_name);
 	}
-#if !WITH_FIXES
-	/* free it now in write_help(), otherwise this is not done when table is empty */
-	g_free(table);
-#endif
 }

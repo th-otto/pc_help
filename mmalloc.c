@@ -66,7 +66,6 @@ static struct memblock *getmemblock(void)
 	*((unsigned long *)((char *)block + MEM_BLOCK_SIZE - 4)) = 0x34FEAF1BUL;
 	last = &mem_blk_list;
 	next = *last;
-	(void)next; /* hmpf */
 	while (next != NULL)
 	{
 		if (next > block)

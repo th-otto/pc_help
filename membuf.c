@@ -119,8 +119,7 @@ int memfd_getc(off_t start)
 
 /* ---------------------------------------------------------------------- */
 
-/* FIXME: should be int */
-signed char memfd_writebuf(off_t start, ssize_t delete, ssize_t insert, const char **src)
+int memfd_writebuf(off_t start, ssize_t delete, ssize_t insert, const char **src)
 {
 	struct memfd *mem;
 	long len;
@@ -288,11 +287,7 @@ void membuf_init(void)
 {
 	struct membuf *buf;
 	
-#if WITH_FIXES
 	for (buf = membufs; buf < &membufs[MAX_MEMBUFS]; buf++)
-#else
-	for (buf = membufs; buf <= &membufs[MAX_MEMBUFS]; buf++)
-#endif
 		buf->buf = NULL;
 }
 
@@ -303,11 +298,7 @@ struct membuf *membuf_alloc(size_t size)
 	struct membuf *buf;
 	
 	size += size & 1;
-#if WITH_FIXES
 	for (buf = membufs; buf < &membufs[MAX_MEMBUFS] && buf->buf != NULL; buf++)
-#else
-	for (buf = membufs; buf->buf != NULL; buf++) /* BUG: no check for array end */
-#endif
 		;
 	if (buf == &membufs[MAX_MEMBUFS])
 		return NULL;
@@ -326,7 +317,7 @@ int membuf_realloc(struct membuf *buf, size_t size)
 	
 	size += size & 1;
 	
-	if ((ssize_t)size > (ssize_t)buf->size) /* hmpf */
+	if (size > buf->size)
 	{
 		newptr = m_alloc(size);
 		if (newptr == NULL)

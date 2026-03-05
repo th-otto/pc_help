@@ -23,7 +23,7 @@ typedef struct _editwin {
 
 EDITWIN editwin;
 
-#define IS_LINK_START(c) ((int)(signed char)(c) < 0) /* FIXME 2nd cast */
+#define IS_LINK_START(c) ((signed char)(c) < 0)
 #define CR_S "\r"
 
 #ifdef __PUREC__
@@ -44,7 +44,7 @@ void editwin_set_cursor(_WORD cursor_y, _WORD cursor_x)
 	win->cursor_y = cursor_y;
 	win->cursor_x = cursor_x;
 	win->target_column = cursor_x;
-	win_set_cursor(cursor_y, (unsigned int)cursor_x - win->left_offset); /* FIXME: cast */
+	win_set_cursor(cursor_y, cursor_x - win->left_offset);
 }
 
 /* ---------------------------------------------------------------------- */
@@ -110,7 +110,6 @@ static int expand_tabs(const char *src, char *dst, int srclen, int dstlen)
 
 /* ---------------------------------------------------------------------- */
 
-#if !defined(__PUREC__) || WITH_FIXES
 /*
  * only used here to find a single character,
  * so it is faster to replace find_str_forward/find_str_backward
@@ -208,7 +207,6 @@ static long find_cr_backward(long offset)
 	}
 	return offset;
 }
-#endif
 
 /* ---------------------------------------------------------------------- */
 
@@ -363,7 +361,7 @@ static int get_display_width(long offset)
 	
 	start = find_line_start_backward(offset);
 	len = min((int)(offset - start), MAX_LINE_LEN - 1);
-	len = read_line_at(find_line_start_backward(offset), buf, len); /* FIXME: 2nd call */
+	len = read_line_at(start, buf, len);
 	i = 0;
 	in_link = FALSE;
 	ptr = buf;
@@ -461,14 +459,6 @@ static long count_lines(long startoffset, long endoffset)
 	long count;
 	char swapped;
 	
-#ifdef __PUREC__ /* XXX to get registers right */
-#pragma warn -def
-	(void)count;
-	(void)swapped;
-	(void)end;
-	(void)start;
-#pragma warn .def
-#endif
 	start = startoffset;
 	end = endoffset;
 	count = 0;
@@ -569,11 +559,7 @@ static void scrap_write(char **str, long len)
 	if (scrp_read(scrap_path) == 0 || scrap_path[0] == '\0')
 		return;
 	pathlen = strlen(scrap_path);
-#if WITH_FIXES
 	if (pathlen == 0 || (scrap_path[pathlen - 1] != '\\' && scrap_path[pathlen - 1] != '/'))
-#else
-	if (scrap_path[pathlen - 1] != '\\')
-#endif
 	{
 		scrap_path[pathlen++] = '\\';
 	}
@@ -587,11 +573,7 @@ static void scrap_write(char **str, long len)
 			unlink(scrap_path);
 		} while (Fsnext() == 0);
 	}
-#if WITH_FIXES
 	strcpy(&scrap_path[pathlen], "scrap.txt");
-#else
-	strcpy(&scrap_path[pathlen], "SCRAP.TXT");
-#endif
 	fd = (int)Fcreate(scrap_path, 0);
 	if (fd >= 0)
 	{
@@ -680,14 +662,6 @@ static void redraw_lines(EDITWIN *win, long offset, int firstline, int count)
 	int columns;
 	bool did_draw;
 	
-#ifdef __PUREC__ /* XXX to get registers right */
-	(void)count;
-	(void)offset;
-#pragma warn -def
-	(void)selection_start;
-	(void)selection_end;
-#pragma warn .def
-#endif
 	if (firstline >= win->displayed_lines)
 		return;
 	if (count <= 0)
@@ -708,9 +682,7 @@ static void redraw_lines(EDITWIN *win, long offset, int firstline, int count)
 	if (selection_start < offset)
 		selection_start = offset;
 	did_draw = FALSE;
-#if WITH_FIXES
-	line_end = selection_end; /* BUG: otherwise maybe uninitialized below */
-#endif
+	line_end = selection_end; /* otherwise maybe uninitialized below */
 	while (count > 0 && offset < size)
 	{
 		did_draw = TRUE;
@@ -1068,11 +1040,7 @@ static void set_new_selection(long start, long end)
 	}
 	memfd_set_mark(win->selection_start_mark, start);
 	memfd_set_mark(win->selection_end_mark, end);
-#if WITH_FIXES
 	win->target_column = get_display_width(start);
-#else
-	win->target_column = get_display_width(win->selection_start_mark); /* BUG in PC_HELP only */
-#endif
 	if (start == end)
 	{
 		edit_set_cursor_pos(start);
@@ -1570,9 +1538,6 @@ void edit_win_clicked(_WORD row, _WORD column)
 	long pos;
 	int col = column;
 	
-	/*
-	 * FIXME: use get_windidx here to allow clicks in background windows
-	 */
 	win = &editwin;
 	pos = find_line_start_backward(find_line_in_window(win, row));
 	col += win->left_offset;
@@ -1588,25 +1553,15 @@ void edit_win_double_click(_WORD row, _WORD column)
 	EDITWIN *win;
 	long pos;
 	
-	/*
-	 * FIXME: use get_windidx here to allow clicks in background windows
-	 */
 	win = &editwin;
 	pos = find_line_start_backward(find_line_in_window(win, row));
 	pos = get_file_pos(pos, column + win->left_offset);
-	switch (win->wintype) /* FIXME: switch not needed here */
-	{
-	case WINTYPE_HELP:
-		edit_set_cursor_to(pos);
-		show_help_context();
-		break;
-	}
-#if WITH_FIXES
+	edit_set_cursor_to(pos);
+	show_help_context();
 	{
 		_WORD dummy;
 		evnt_button(1, 1, 0, &dummy, &dummy, &dummy, &dummy);
 	}
-#endif
 }
 
 /* ---------------------------------------------------------------------- */
@@ -1695,7 +1650,6 @@ void edit_set_help(const char *title, const char *str, long len, bool settext)
 	{
 		/* avoid errors for readonly window */
 		win->wintype = -WINTYPE_HELP;
-		/* FIXME: this will unneccessarily cause all text to be placed into undo buffer */
 		edit_delete_insert(0, 0, memfd_getsize(), len, &str);
 		edit_set_cursor_pos(find_char_backward(find_char_forward(0)));
 		win->wintype = WINTYPE_HELP;

@@ -35,11 +35,7 @@ static short const name_to_index[256] = {
 	26, 26, 26, 26, 26, 26, 26, 26
 };
 
-#if WITH_FIXES
 static unsigned char const uppercase_table[256] =
-#else
-static unsigned short const uppercase_table[256] =
-#endif
 {
 	0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
 	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
@@ -80,15 +76,9 @@ long sens_size = 0;
 
 #if !defined(ENABLE_NLS) && defined(COUNTRY) && COUNTRY == 0
 #define index_name_other "Other"
-#if WITH_FIXES
 #define index_name_other2 index_name_other
 #define index_name_other_end "\\#\\end" CTRL_Z_S
 #define COMPILED_ON "was formatted on %d %s %d." "\r\n%s"
-#else
-#define index_name_other2 "Other\0ges"
-#define index_name_other_end "\\#\\end" CTRL_Z_S "\0nd" CTRL_Z_S
-#define COMPILED_ON "was formatted on %d %s %d" "\\end" CTRL_Z_S "\0s\0"
-#endif
 #define NO_INDEX_ENTRY "No keywords starting with this letter." "\\end" CTRL_Z_S "\0den." "\\end" CTRL_Z_S
 #define SCREEN_TITLE "Index of available keywords:          "
 #else
@@ -132,18 +122,10 @@ static const char *copyright = "\r\n(c) 1990 Borland International, Inc.\\end" C
 
 const char *month_names[12] = {
 #if !defined(ENABLE_NLS) && defined(COUNTRY) && COUNTRY == 0
-#if WITH_FIXES
 	"January",
 	"February",
 	"March",
 	"April",
-#else
-/* patched version which just replaces memory from german binary */
-	"Jan.\0r",
-	"Feb.\0ar",
-	"Mar.",
-	"April",
-#endif
 	"May",
 	"June",
 	"July",
@@ -173,9 +155,7 @@ struct indexentry {
 	char *text;
 	scr_code_t scr_code;
 	struct indexentry *next;
-#if WITH_FIXES
 	unsigned char free_me;
-#endif
 };
 struct nameindex {
 	struct indexentry *entries;
@@ -230,10 +210,6 @@ void generate_index(void)
 		}
 		index_name[0]++;
 	}
-#if !WITH_FIXES && !TEST_CODE
-	/* BUG: must not be freed yet, because it is still used in do_references() */
-	free_index();
-#endif
 }
 
 /* ---------------------------------------------------------------------- */
@@ -248,19 +224,15 @@ void free_index(void)
 		for (entry = nameindex[i].entries; entry != NULL; entry = next)
 		{
 			/* entry->name need not be freed, since it was copied to the search tables */
-#if WITH_FIXES
 			/*
 			 * unless it was never copied to the search tables, because it was just a screen name
 			 */
 			if (entry->free_me)
 				g_free(entry->text);
-#endif
 			next = entry->next;
 			g_free(entry);
 		}
-#if WITH_FIXES
 		nameindex[i].entries = NULL;
-#endif
 	}
 }
 
@@ -313,7 +285,6 @@ static void generate_index_entries(const char *name, int idx)
 	struct indexentry *neighbor;
 	int count;
 	
-	last_indexentry_name = name;
 	memset(buf, 0, sizeof(buf));
 	memset(buf2, 0, sizeof(buf2));
 	right = nameindex[idx].entries;
@@ -355,23 +326,16 @@ static void generate_index_entries(const char *name, int idx)
 	screen_table_offset[screen_cnt - 1] = screen_start;
 	screen_start += screenbuf_ptr - screenbuf;
 	hc_flshbuf();
-	last_indexentry_name = NULL;
 }
 
 /* ---------------------------------------------------------------------- */
 
 void clear_index(void)
 {
-#if WITH_FIXES
 	memset(nameindex, 0, sizeof(nameindex));
-#else
-	memset(nameindex, 0, INDEX_CNT); /* BUG */
-#endif
 }
 
 /* ---------------------------------------------------------------------- */
-
-static long last_index_screenno = -1;
 
 void add_index_entry(const char *name, int screen_no, int attr)
 {
@@ -397,14 +361,7 @@ void add_index_entry(const char *name, int screen_no, int attr)
 	entry->scr_code.u.screen_no = screen_no;
 	entry->scr_code.u.attr = file_index;
 	entry->next = NULL;
-#if WITH_FIXES
 	entry->free_me = TRUE;
-#endif
-	if (last_index_screenno != screen_no)
-	{
-		last_index_screenno = screen_no;
-		last_indexentry_name = newname;
-	}
 	if (nameindex[idx].entries == NULL)
 	{
 		nameindex[idx].entries = entry;
@@ -416,17 +373,14 @@ void add_index_entry(const char *name, int screen_no, int attr)
 		
 		prev = nameindex[idx].entries;
 		table = &nameindex[idx].entries;
-		(void)&table; /* XXX to get registers right */
 		while (prev != NULL)
 		{
 			cmp = index_namecmp(prev->text, name);
 			if (cmp == 0 && strcmp(prev->text, name) == 0)
 			{
 				hclog(ERR_DUPLICATE_SCREEN, LVL_ERROR, name);
-#if WITH_FIXES
 				g_free(newname);
 				g_free(entry);
-#endif
 				return;
 			}
 			if (cmp > 0)
@@ -459,9 +413,7 @@ static void add_search_key(INTERNAL_SRCHKEY_ENTRY *table, size_t count, struct i
 	 */
 	table[count].u.name = entry->text;
 	table[count].code = SCR_CODE(entry->scr_code);
-#if WITH_FIXES
 	entry->free_me = FALSE;
-#endif
 }
 
 /* ---------------------------------------------------------------------- */
@@ -489,11 +441,7 @@ static int index_namecmp(const char *s1, const char *s2)
 		s1++;
 		s2++;
 	}
-#if WITH_FIXES
 	return uppercase_table[(unsigned char)*s1] - uppercase_table[(unsigned char)*s2];
-#else
-	return (unsigned char)*s1 - (unsigned char)*s2;
-#endif
 }
 
 /* ---------------------------------------------------------------------- */
@@ -520,37 +468,52 @@ void generate_index_page(void)
 
 /* ---------------------------------------------------------------------- */
 
+void get_localtime(struct tm *tm)
+{
+#if defined(__TOS__) || defined(__atarist__)
+	/*
+	 * Since we only need a local time, avoid the overhead of pulling
+	 * in all the timezone stuff.
+	 * It is not well supported in Pure-C, anyway.
+	 */
+	unsigned short date;
+	unsigned short time;
+	
+	date = Tgetdate();
+	tm->tm_mday = date & 0x1f;
+	date >>= 5;
+	tm->tm_mon = (date & 0x0f) - 1;
+	date >>= 4;
+	date += 80;
+	tm->tm_year = date;
+	time = Tgettime();
+	tm->tm_sec = (time << 1) & 0x3f;
+	time >>= 5;
+	tm->tm_min = time & 0x3f;
+	time >>= 6;
+	tm->tm_hour = time;
+	tm->tm_wday = -1;
+	tm->tm_yday = -1;
+	tm->tm_isdst = -1;
+#else
+	time_t t;
+	struct tm tm;
+		
+	t = time(0);
+	*tm = *localtime(&t);
+#endif
+}
+
+/* ---------------------------------------------------------------------- */
+
 void generate_copyright_page(void)
 {
 	char *name;
+	struct tm tm;
 	
-#if WITH_FIXES
 	name = xbasename(outfile_name);
-#else
-	name = strrchr(outfile_name, '\\');
-	if (name == NULL)
-		name = outfile_name;
-	else
-		name++;
-#endif
-#if WITH_FIXES
-	{
-		time_t t;
-		struct tm tm;
-		
-		t = time(0);
-		tm = *localtime(&t);
-	
-		sprintf((char *)hc_inbuf, "%s%s " COMPILED_ON, copyright_name, name, tm.tm_mday, month_names[tm.tm_mon], tm.tm_year + 1900, copyright);
-	}
-#else
-	{
-		struct date d;
-		
-		getdate(&d);
-		sprintf((char *)hc_inbuf, "%s%s " COMPILED_ON, copyright_name, name, (unsigned char)d.da_day, month_names[(unsigned char)d.da_mon - 1], d.da_year, copyright);
-	}
-#endif
+	get_localtime(&tm);
+	sprintf((char *)hc_inbuf, "%s%s " COMPILED_ON, copyright_name, name, tm.tm_mday, month_names[tm.tm_mon], tm.tm_year + 1900, copyright);
 	hc_inbuf_ptr = hc_inbuf;
 	parse_file();
 }

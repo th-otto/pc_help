@@ -25,20 +25,14 @@ struct windtab {
 
 #define MAX_WIND 1
 
-#if !WITH_FIXES
-void *physbase;
-#endif
 static struct windtab windtab[MAX_WIND];
 static bool wind_was_clipped;
 static bool redraw_clip_flag;
-static PXY4 redraw_clip;
+static GRECT redraw_clip;
 static _WORD win_x_margin;
 static _WORD win_y_margin;
 static GRECT full;
 static GRECT winwork;
-#if !WITH_FIXES
-static short not_st_high;
-#endif
 
 #define ed_wchar gl_wchar
 #define ed_hchar gl_hchar
@@ -59,9 +53,6 @@ void win_init(void)
 {
 	_WORD dummy;
 	
-#if !WITH_FIXES
-	not_st_high = (Blitmode(-1) & 1) || screen_height != 399 || screen_width != 639 || vdi_planes != 1;
-#endif
 	vst_alignment(vdi_handle, 0, 5, &dummy, &dummy);
 	vswr_mode(vdi_handle, MD_REPLACE);
 	win_x_margin = ed_wchar / 2;
@@ -75,7 +66,9 @@ void win_init(void)
 static void clip_pxy(bool flag, PXY4 *pxy)
 {
 	redraw_clip_flag = flag;
-	redraw_clip = *pxy;
+	redraw_clip = *(const GRECT *)pxy;
+	redraw_clip.g_w -= redraw_clip.g_x - 1;
+	redraw_clip.g_h -= redraw_clip.g_y - 1;
 	vs_clip(vdi_handle, flag, &pxy->x1);
 }
 
@@ -151,9 +144,9 @@ static void invert_cursor(void)
 	win = &windtab[0];
 	xoff = ed_wchar / 4;
 	ysize = ed_hchar;
-	xend = windtab[0].cursor_x * ed_wchar + win->work.g_x; /* XXX use win */
+	xend = win->cursor_x * ed_wchar + win->work.g_x;
 	xend += win_x_margin / 2;
-	yend = windtab[0].cursor_y * ysize + win->work.g_y + win_y_margin;
+	yend = win->cursor_y * ysize + win->work.g_y + win_y_margin;
 	screen_maxx = min(win->work.g_x + win->work.g_w, screen_width);
 	screen_maxy = min(win->work.g_y + win->work.g_h, screen_height);
 	if (xend >= win->work.g_x &&
@@ -204,15 +197,9 @@ static void invert_cursor(void)
 	
 		vsf_color(vdi_handle, G_WHITE);
 		vswr_mode(vdi_handle, MD_REPLACE);
-#if WITH_FIXES
 		if (mouse_flag)
 			mouse_on();
-#endif
 	}
-#if !WITH_FIXES
-	if (mouse_flag) /* BUG: misplaced: mouse_flag only set inside if */
-		mouse_on();
-#endif
 	wnd_update(END_UPDATE);
 }
 
@@ -277,7 +264,7 @@ void win_draw_str(_WORD line, char *str, _WORD first_char, _WORD width)
 	GRECT gr;
 	char *p;
 	
-	x = windtab[0].work.g_x + win_x_margin;	 /* XXX use pointer */
+	x = windtab[0].work.g_x + win_x_margin;
 	y = windtab[0].work.g_y + win_y_margin + line * ed_hchar;
 	w = windtab[0].work.g_w - 2 * win_x_margin;
 	start_redraw();
@@ -287,7 +274,7 @@ void win_draw_str(_WORD line, char *str, _WORD first_char, _WORD width)
 		gr.g_y = y;
 		gr.g_w = w;
 		gr.g_h = ed_hchar;
-		if (!rc_intersect((GRECT *)&redraw_clip, &gr)) /* BUG: redraw_clip is not a GRECT */
+		if (!rc_intersect(&redraw_clip, &gr))
 			return;
 	}
 	
@@ -414,12 +401,10 @@ _WORD win_create(struct windinfo *info, const char *title)
 	}
 	win->work.g_x += winwork.g_x;
 	win->work.g_y += winwork.g_y;
-#if WITH_FIXES
 	if (win->work.g_x > winwork.g_x + winwork.g_w + 2 * ed_wchar)
 		win->work.g_x = winwork.g_x + winwork.g_w + 2 * ed_wchar;
 	if (win->work.g_y > winwork.g_y + winwork.g_h)
 		win->work.g_y = winwork.g_y + winwork.g_h;
-#endif
 	win->work.g_x = x_align(win->work.g_x);
 	win->work.g_w = info->columns * ed_wchar + 2 * win_x_margin;
 	if (win->work.g_w > winwork.g_w)
@@ -536,13 +521,6 @@ void win_scroll(_WORD y, _WORD x, _WORD h, _WORD w, _WORD offset)
 	gr.g_h = h * ed_hchar;
 	start_redraw();
 	mouse_off();
-#if !WITH_FIXES
-	if (!not_st_high)
-	{
-		physbase = Logbase();
-		fast_copy_grect(&gr, offset * ed_hchar);
-	} else
-#endif
 	{
 		dst = gr;
 		dst.g_y += offset * ed_hchar;
@@ -789,25 +767,8 @@ _WORD win_get_handle(void)
 #define BYTE char
 #define LONG long
 #define WORD _WORD
-struct treeinfo {
-	_WORD tree;
-	_WORD dummy;
-};
 #include "pchlprsc.h"
-#if WITH_FIXES
 #include "pchlprsc.rsh"
-static struct treeinfo treeinfo[2] = { { MAIN_DIALOG, 0 }, { 0, 0 } };
-#else
-#include "tchlprsc.rsh"
-#endif
-
-#if defined(__PUREC__) && !WITH_FIXES
-/* unused here; need this only for the string constant */
-void getpath(char *path)
-{
-	strcpy(path, "\\");
-}
-#endif
 
 /* FIXME: move to resource */
 struct alertmsg {
@@ -830,7 +791,7 @@ static struct alertmsg const alertmsg_table[] = {
 
 void mouse_on(void)
 {
-	v_show_c(vdi_handle, 1);
+	v_show_c(vdi_handle, 0);
 }
 
 /* ---------------------------------------------------------------------- */
@@ -851,7 +812,7 @@ void arrow_mouse(void)
 
 OBJECT *obj_addr(_WORD tree, _WORD obj)
 {
-	return &rs_object[treeinfo[tree].tree + obj];
+	return &rs_object[rs_trindex[tree] + obj];
 }
 
 /* ---------------------------------------------------------------------- */
@@ -871,9 +832,6 @@ void get_ptext(_WORD tree, _WORD obj, char *str)
 	
 	while (--len >= 0 && (*str++ = *src++) != '\0')
 		;
-#if !WITH_FIXES
-	*str = '\0'; /* BUG: NUL byte already copied */
-#endif
 }
 
 /* ---------------------------------------------------------------------- */
@@ -1104,6 +1062,6 @@ void rsrc_fix(void)
 		ted->te_pvalid = rs_strings[(long) (ted->te_pvalid)];
 	}
 	for (tree = 0; tree < NUM_TREE; tree++)
-		fix_rsh(&rs_object[treeinfo[tree].tree], 0, NIL);
+		fix_rsh(&rs_object[rs_trindex[tree]], 0, NIL);
 }
 

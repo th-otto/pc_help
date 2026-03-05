@@ -104,7 +104,6 @@ void parse_file(void)
 #endif
 			screen_start += screenbuf_ptr - screenbuf;
 			hc_flshbuf();
-			last_indexentry_name = NULL;
 			break;
 		
 		case TK_PRINT:
