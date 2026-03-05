@@ -1,0 +1,2156 @@
+
+
+screen( capsensitive("Editor") )
+Editor          (For more information, double-click text in boldface.)
+----------------------------------------------------------------------
+Pure C v1.0 supports up to six edit windows at the same time (or four
+edit windows plus the \#Messages\# and \#Help Window\#s).  Later versions
+support as many windows as AES allows.
+
+The \#Cut\#, \#Copy\# and \#Paste\# operations can be used to copy text from one
+window to another.
+
+These windows support all the standard GEM features: scroll bars,
+close icons , resize icons , full size icons , and title (drag)
+bars.  The title bar shows the full pathname of the file being edited,
+with an '*' to indicate if any edit changes have been made.
+
+Each window is depicted as being 255 characters wide regardless of the
+actual content.  (This is also the maximum line length the editor can
+handle.)
+
+To open an edit window, see \#File\#/\#Open .C\# through \#Open .PRJ\#
+(the editor treats all file types the same).
+
+See also \#Edit\#, \#Search\#, \#edit keys\#, \#block selection\# and
+\#block operations\#.
+\end
+
+screen( "edit keys" )
+Edit Key           | Explanation
+----------------------------------------------------------------------
+Return             | Create new line, or break line at cursor.
+Backspace          | Delete character left of cursor.  If cursor is
+                   |  at start of line, merge with previous line.
+Delete             | Delete character right of cursor.  If cursor is
+                   |  at end of line, merge with next line.
+Undo               | Restores the last deleted character, or deletes
+                   |  the last entered character.
+                   |  Also works on \#block operations\#.
+Tab                | Insert TAB character.  Cursor moves to next
+                   |  tab stop  (See \#Shell Options\#.)
+Home               | Move cursor to top of file.
+Shift-Home         | Move cursor to bottom of file.
+Up Arrow           | Move cursor to previous line.
+Down Arrow         | Move cursor to next line.
+Left Arrow         | Move cursor one character left.  If cursor is at
+                   |  start of line, move to end of previous line.
+Right Arrow        | Move cursor one character right.  If cursor is
+                   |  at end of line, move to start of next line.
+Shift-Up Arrow     | Move cursor up one page (window height).
+Shift-Down Arrow   | Move cursor down one page (window height).
+Shift-Left Arrow   | Move cursor to start of line.
+Shift-Right Arrow  | Move cursor to end of line.
+Control-Left Arrow | Move cursor one word left.
+Control-Right Arrow| Move cursor one word right.
+
+See also \#CONTROL\# keys.
+\end
+
+screen( "CONTROL" )
+Control Codes for Pure C (Editor Commands)
+----------------------------------------------------------------------
+Key(s)       Function
+----------------------------------------------------------------------
+ESC          View user screen image (\#Edit\#/\#User Screen\#).
+SHIFT/SHIFT  Abort compiler.
+CONTROL-B    Check for unbalanced braces (\#Search\#/\#Check Braces\#).
+CONTROL-C    Copy block to paste buffer (\#Edit\#/\#Copy\#).
+CONTROL-D    Print block (\#File\#/\#Print Selection\#).
+CONTROL-E    Locate source code which caused the selected error
+              message (\#Search\#/\#Find Error\#).
+CONTROL-F    Find next occurrence of string (\#Search\#/\#Find...\#).
+CONTROL-G    Repeat last search (\#Search\#/\#Find Same\#).
+CONTROL-H    Close window, don't save (\#File\#/\#Abandon\#).
+CONTROL-I    Find next occurrence of block (\#Search\#/\#Find Selection\#).
+CONTROL-J    Remove starting tabs in block (\#Edit\#/\#Shift Left\#).
+CONTROL-K    Add starting tabs in block (\#Edit\#/\#Shift Right\#).
+CONTROL-L    Locate line by number (\#Search\#/\#Goto Line...\#). 
+CONTROL-M    Save under new name (\#File\#/\#Save as...\#).
+CONTROL-N    Select entire window (\#Edit\#/\#Select All\#).
+CONTROL-O    Open edit window (\#File\#/\#Open .C\#).
+CONTROL-P    Print window contents (\#File\#/\#Print\#).
+CONTROL-Q    Exit Pure C (\#File\#/\#Quit\#).
+CONTROL-R    Locate and replace a string (\#Search\#/\#Replace...\#).
+CONTROL-S    Save edit window (\#File\#/\#Save\#).
+CONTROL-T    Repeat last replace (\#Search\#/\#Replace Same\#).
+CONTROL-U    Close window (\#File\#/\#Close\#).
+CONTROL-V    Insert paste buffer contents (\#Edit\#/\#Paste\#).
+CONTROL-W    Move bottom window to top (\#Edit\#/\#Cycle Windows\#).
+CONTROL-X    Copy block to paste buffer and delete (\#Edit\#/\#Cut\#).
+CONTROL-Y    Copy line to paste buffer and delete.
+
+CONTROL/SHIFT-Q  Quit without saving \#Configuration File\#.
+
+See also \#block selection\#, \#edit keys\#, \#Help key\# and \#ALTERNATE\# keys.
+\end
+
+screen( "ALTERNATE" )
+'Alternate Codes' for Pure C (Project Commands)
+----------------------------------------------------------------------
+Key(s)       Function
+----------------------------------------------------------------------
+ALTERNATE-A  Assemble (*.S) code in window (\#Compile\#/\#Assemble ''\#)
+ALTERNATE-C  Compile (*.C) code in window (\#Compile\#/\#Compile ''\#).
+ALTERNATE-D  Make project and execute Pure Debugger
+              (\#Project\#/\#Debug ''\#).
+ALTERNATE-E  Execute external program (\#Compile\#/\#Execute...\#).
+ALTERNATE-F  Search project (\#Search\#/\#Search project...\#).
+ALTERNATE-G  Search path (\#Search\#/\#Search multiple...\#).
+ALTERNATE-H  Save configuration file (\link("Options Menu")Options\#/\#Save ''\#).
+ALTERNATE-I  Set assembler options (\link("Options Menu")Options\#/\#Assembler...\#).
+ALTERNATE-J  Load new configuration file (\link("Options Menu")Options\#/\#Load...\#).
+ALTERNATE-L  Link project (\#Project\#/\#Link ''\#).
+ALTERNATE-M  Make project (\#Project\#/\#Make ''\#).
+ALTERNATE-O  Set linker options (\link("Options Menu")Options\#/\#Linker...\#).
+ALTERNATE-R  Make project and execute program (\#Project\#/\#Run ''\#).
+ALTERNATE-S  Assemble (*.S) file (\#Compile\#/\#Assemble...\#).
+ALTERNATE-U  Set compiler options (\link("Options Menu")Options\#/\#Compiler...\#).
+ALTERNATE-V  Compile (*.C) file (\#Compile\#/\#Compile...\#).
+ALTERNATE-X  Compile all source code files listed in project file
+              (\#Project\#/\#Make all ''\#).
+ALTERNATE-Z  Set misc. options (\link("Options Menu")Options\#/\#Shell...\#).
+
+ALTERNATE/SHIFT-D Shut down Pure C then start Pure Debugger.
+
+See also \#Project File\# and \#CONTROL\# codes.
+\end
+
+screen( "block selection" )
+Block Selection
+----------------------------------------------------------------------
+A selected block of text will appear in reverse video (white letters
+on black background).  When a block is selected, the cursor location
+is defined as the beginning of the block.
+
+The simplest way to select a block of text is to position the mouse
+at either the beginning or end of the block to be selected, drag the
+mouse (holding down the left mouse button) to the other end of the
+block, then release the mouse button. 
+
+If you drag the mouse past the edge of the active window, the contents
+of the window will move to reveal what had been beyond the edge.
+
+One can select everything from the cursor location to the mouse
+pointer by pressing the 'Shift' key while clicking the mouse.
+
+One can select the entire contents of a window using the
+\#Edit\#/\#Select All\# command or pressing \#CONTROL\#-N.
+
+One can select a word by double clicking it with the mouse.
+
+One can select everything between a '( )' pair, a '[ ]' pair, or a
+'{ }' pair by double clicking one of the two parenthesis, brackets
+or braces (respectively).
+
+\#Search\# operations leave a block selected if they are successful.
+\#Find Error\# and \#Goto Line...\# select a whole line.
+
+See also \#block operations\#.
+\end
+
+screen( "block operations" )
+block operations
+----------------------------------------------------------------------
+... use the paste buffer to move text blocks from one location to
+another within a window or between windows.  All operations which
+write to the paste buffer destroy its previous contents.
+
+\#Cut\# \#CONTROL\#-X or 'Delete' copies the selected block to the paste
+buffer and deletes it from the window.
+
+\#CONTROL\#-Y copies the current line to the paste buffer and deletes
+it from the window.
+
+\#Copy\# or \#CONTROL\#-C copies the selected block to the paste buffer.
+
+\#Paste\# or \#CONTROL\#-V or 'Insert' inserts the paste buffer contents
+at the cursor location.
+
+'Backspace' deletes the selected block.
+
+'Undo' un-does the last block (or character) operation.
+
+\#Shift Left\# or \#CONTROL\#-J removes a tab from the start of each line
+within the selected block (or the equivalent number of spaces).
+
+\#Shift Right\# or \#CONTROL\#-K adds a tab to the start of each line
+within the selected block.
+
+\#Print Selection\# or \#CONTROL\#-D prints the block.
+
+\#Find Selection\# or \#CONTROL\#-I locates the next occurrence of the
+block (and selects it).
+
+See also \#block selection\#.
+\end
+
+screen( "File Selector" )
+File Selector
+----------------------------------------------------------------------
+The small window displays a list of folders and files (which match the
+current extension) found in the current folder.  The selected file or
+folder is shown in reverse video (white letters on black background).
+One can select a file or folder by clicking it with the mouse, or by
+using the  and  keys and pressing RETURN, or by typing in the name.
+
+Double clicking a file name will 'Open' the file (see below).
+Double clicking a folder name will display its contents.
+
+Clicking the '' (close icon) will back up to the parent folder.
+
+One can select a new drive by clicking a button on the left
+(labelled 'A:', 'B:', etc.).
+
+One can change the extension by clicking a button in the middle
+(labelled '*.*', '*.C', etc.).
+
+'Open'       displays the selected folder or uses the selected file
+             for the calling function.
+
+'New'        creates an new file to be used for the calling function.
+             Another dialog box will appear to enter the new name.
+
+'Cancel'     returns without perform the calling function.
+
+Calling functions include \#Open .C\#, \#Print\#, \#Save as...\#, \#Compile...\#,
+\#Assemble...\#, \#Execute...\#, \#Select...\#, and \#Load...\#
+
+The remaining buttons have nothing to do with the calling function:
+
+'New Folder' creates a new folder within the current folder.
+'Delete'     deletes the selected file.
+'Touch'      changes the file's creation time/date to the current
+              time/date.  (See also \#Make ''\#.)
+'Copy'       copies the file.  Another dialog box will appear to
+              enter the new file name.  (Will not change folders.)
+'Info'       displays the size, date, time, and write protection
+              status of a file.  One can also use this button to
+              rename the file or change its status.
+\end
+
+screen( "*.PRJ",
+		capsensitive("Project File") )
+Project File  (*.PRJ)
+----------------------------------------------------------------------
+The project file is used by the \#Project\# commands to define which files
+need to be compiled, assembled and/or linked together to create an
+executable program.
+
+Since even the most simple programs require a certain amount of
+linking, a project file is always needed to run a program.  The
+provided file DEFAULT.PRJ will run a program if its source code is
+entirely contained in the active edit window.
+
+Project files have the following \#syntax\#:
+
+  { <output_file> | * }
+  { .L [ \#Linker Options\# ] }
+  { .C [ \#Compiler Options\# ] }
+  { .S [ \#Assembler Options\# ] }
+  =
+  <module_name1> { [ <options> ] }  { ( <include_files> ) }
+  <module_name2> { [ <options> ] }  { ( <include_files> ) }
+  ...
+
+The <output_file> should have either a .TOS .TTP .PRG .ACC or .LIB
+extension. See \#Program Extensions\#.
+
+Each <module_name> can either be an asterisk '*', to represent the
+active edit window, a source code filename, an object filename, a
+library filename, or an included project filename.  These modules will
+be linked in the order they appear, so the startup module \link("%%GLOBAL%%")PCSTART\#.O
+\link("%%GLOBAL%%")PCXSTART\#.O or \link("%%GLOBAL%%")PCVSTART\#.O must go first and the \link("%%GLOBAL%%")Libraries\# usually
+go last.
+
+The <options> list refers to \#Compiler Options\# or \#Assembler Options\#,
+and only applies to source code files.  (These lists can be used to
+set flags which are clear by default, but not to clear flags which
+are set by default.)
+
+The <include_files> list forces the module to be re-compiled if any
+of the listed files is changed.
+
+See also \#Project Examples\# and \#Linker\#.
+\end
+
+screen( "syntax" )
+Syntax
+----------------------------------------------------------------------
+Items in angle-brackets '< >' are variable.
+Items in braces '{ }' are optional.
+A bar '|' denotes a choice between two options.
+Blanks don't count.
+\end
+
+screen( "Project Examples" )
+Examples of Project Files
+----------------------------------------------------------------------
+  Example 1:
+
+hello.tos      ;no graphics interface
+=
+PCSTART.O
+hello.c
+PCSTDLIB.LIB
+
+
+  Example 2:
+
+math.lib       ;not executable
+.L [-J]        ;create library file
+.C [-2 -8]     ;use 68030 and 68881 processors
+=
+conjgrad.c (math.h)
+simplex.c (math.h)
+eigen.c (math.h)
+
+
+  Example 3:
+
+;uses resource file 'test.rsc' with header 'test.h'
+;math.h and math.lib are in another folder
+
+test.prg
+.C [-8]
+.L [-G -L -Y]   ;debugging plotter.c
+= 
+PCSTART.O
+main.c (plotter.h test.h ..\\math\\math.h)
+plotter.c [-Y] (plotter.h)
+..\\math\\math.lib
+PC881LIB.LIB    ;-8 option affects parameter passing
+PCSTDLIB.LIB    ;must be after PC881LIB or PCFLTLIB
+PCGEMLIB.LIB
+PCTOSLIB.LIB
+\end
+
+screen( "Configuration File",
+		"*.CFG" )
+Configuration File  (*.CFG)
+----------------------------------------------------------------------
+The configuration file contains essentially everything about the
+current status of PC.PRG, including the settings for all of the
+\link("Options Menu")Options\#, which edit windows are open, where they are open, the
+\#Search Options\#, the \#Find...\# and \#Replace...\# strings, and even
+the arguments used for \#Execute...\#
+
+File PC.CFG is loaded automatically when PC.PRG is started, and can be
+saved automatically when PC.PRG is terminated by setting the autosave
+flag of the \#Shell Options\#.
+
+\link("Options Menu")Options\#/\#Save ''\# will save the configuration file on request.
+
+\link("Options Menu")Options\#/\#Load...\# can be used to load a different configuration file,
+and/or change the filename used for subsequent saves.
+\end
+
+screen( "Project Database",
+		"Project Help",
+		"*.PDB" )
+Project Help  (*.PDB)
+----------------------------------------------------------------------
+By setting the Project Help flag of the \#Shell Options\#, Pure C will
+create a Project Database file which can be used to locate the source
+code definitions for data structures, constants, variables and
+functions (even when the code is found in another file).
+
+Simply place with cursor within the name in question and press the
+\#Help key\#.  (If the name in question is also a context sensitive Help
+keyword, Project Help takes precedence.  If you want the Help entry,
+either turn off Project Help or search through the Index.)
+
+Pressing the UNDO key will return you to your previous location.
+
+The name of the *.PDB file used/created is the same as the *.PRJ file.
+(See also \#Project\#/\#Select...\#)
+\end
+
+screen( "Help Window" )
+Help Window
+----------------------------------------------------------------------
+The help window can be initiated using the drop-down \#Help\# menu or by
+pressing the \#Help key\# while the cursor is within a context sensitive
+keyword.
+
+Within the text of help window are keywords in boldface and
+underlined.  By double clicking the mouse on a keyword, or by
+placing the cursor within a keyword and pressing the \#Help key\#,
+a different help window will appear with additional information.
+
+To return to the previous help window, press the UNDO key.
+
+To close the help window, press \#CONTROL\#-U or click the  (close icon)
+in the upper left-hand corner of the window.
+
+You can create your own help windows using the \#Help Compiler\# to
+create a \#USR.HLP\# file.
+\end
+
+screen( "Help key" )
+Help key
+----------------------------------------------------------------------
+The 'Help' key can be used to select a keyword within a help window,
+or bring up a help window without going through the drop-down \#Help\#
+menu, or locate the definition of a data structure, constant, variable
+or function using \#Project Help\#.
+
+If you are editing a file and the cursor is within a context sensitive
+help keyword when the 'Help' key is pressed, the \#Help Window\# for that
+keyword will appear directly.  (Note, not all keywords shown in the
+\#Index\# are context sensitive.)
+
+One can create additional context sensitive keywords by using the
+\#Help Compiler\# to create a \#USR.HLP\# file.
+
+If nothing is selected when the 'Help' key is pressed, the \#Index\#
+help window will appear.
+
+If the \#Project Help\# option is set, when a data structure, constant,
+variable or function is selected and the 'Help' key is pressed, the
+source code definition for that item will be found (even if it is in
+another file).
+
+See also \#Shell Options\#.
+\end
+
+screen( "Search Options" )
+Search Options
+----------------------------------------------------------------------
+\#Backwards\#
+\#Ignore Case\#
+\#All\#
+\#Whole Word\#
+\#List only first occurence\#
+\#Search subdirectories\#
+
+See also \#Find...\# and \#Replace...\#
+\end
+
+screen( "Backwards" )
+Backwards
+----------------------------------------------------------------------
+Search through the active window for the PREVIOUS occurrence of a text
+string (starting from the cursor location).
+
+Note: This direction is reversed each time a search fails (unless the
+      \#All\# option is selected).
+
+See also \#Find...\# and \#Replace...\#
+\end
+
+screen( "Ignore Case" )
+Ignore Case
+----------------------------------------------------------------------
+Ignore the case of any of the characters in the text string being
+located.  For example 'TEXT' 'text' or even 'TeXt' would all be
+treated as equivalent.
+
+See also \#Find...\#, \#Replace...\#, \#Search project...\# and \#Search multiple...\#
+\end
+
+screen( "All" )
+All
+----------------------------------------------------------------------
+Replace every occurrence of the selected string starting from the
+cursor position in the direction specified by the \#Backwards\# option.
+
+See also \#Replace...\#
+\end
+
+screen( "Whole Word" )
+Whole Word
+----------------------------------------------------------------------
+The string being located must be preceded and followed by word
+termination characters, such as Tab Space Comma Period ( ) [ ] { }
+' " + - * / = & | ! ^ ~ < > ? : ; % \\ or Newline.
+Characters _ and # will not work.
+
+For example, searching for 'test' will find ' test ' and '(test)' but
+not 'testify', 'test2' or 'error_test'.
+
+See also \#Find...\#, \#Replace...\#, \#Search project...\# and \#Search multiple...\#
+\end
+
+screen( "List only first occurence" )
+List only first occurence
+----------------------------------------------------------------------
+... searches every file, but only lists the first match in each file
+in the \#Messages\# window.
+
+See also \#Search project...\# and \#Search multiple...\#
+\end
+
+screen( "Search subdirectories" )
+Search subdirectories
+----------------------------------------------------------------------
+... not only searches every file (matching the wildcards) in the
+specified directory, but also files in any subdirectories of the
+specified directory, and any subdirectories of the subdirectories,
+and so on (i.e., the entire subdirectory tree).
+
+See also \#Search multiple...\#
+\end
+
+screen( "Messages" )
+Messages Window
+----------------------------------------------------------------------
+The 'Messages' window is automatically opened by the compiler,
+assembler or linker to display \link("%%GLOBAL%%")Compiler Errors\#, \link("%%GLOBAL%%")Warning\#s,
+\link("%%GLOBAL%%")Assembler Errors\# or \#Linker Errors\#.
+
+It is also used by the \#Search project...\# and \#Search multiple...\#
+commands to list matches.
+
+By double-clicking a compiler error or warning message (or using the
+\#Search\#/\#Find Error\# command), the source code which caused the error
+(or at least the line which was being processed when the error was
+noticed) will be located.  (See also \#Search\#/\#Check Braces\#.)
+
+Note: If you add or remove a source code line while fixing one error,
+      subsequent error messages will no longer be correctly aligned
+      with the source code.
+
+When you \#Close\# the Messages window, its contents are erased.
+\end
+
+screen( "Resource File",
+		"*.RSC" )
+Resource File  (*.RSC)
+----------------------------------------------------------------------
+A resource file defines drop-down menus, dialog boxes, icons, and
+other image and text data used in the Application Environment Services
+(AES) of a GEM program.
+
+A resource file editor allows a programmer to create a graphical user
+interface in WYSIWYG fashion by placing, dragging, resizing, cutting
+and pasting the various \link("%%GLOBAL%%")OBJECT\#s on the screen with the mouse.  It
+will generally also produce a C language header file containing macro
+definitions for named indexes to be used by \link("%%GLOBAL%%")rsrc_gaddr\#().
+
+Additional information available under \link("%%GLOBAL%%")RSHDR\#.
+\end
+
+screen( capsensitive("Error") )
+Error Messages
+----------------------------------------------------------------------
+\link("%%GLOBAL%%")Compiler Errors\#
+
+\link("%%GLOBAL%%")Assembler Errors\#
+
+\#Linker Errors\#
+
+\#Help Compiler Messages\#
+
+See also PASM \link("%%GLOBAL%%")ERROR\# directive.
+\end
+
+screen( capsensitive("Menu") )
+Drop-down Menus (For more information, double-click text in boldface.)
+----------------------------------------------------------------------
+\#Pure C\#  \#File\#  \#Edit\#  \#Search\#  \#Compile\#  \#Project\#  \link("Options Menu")Options\#  \#Help\#
+
+
+
+
+
+Introduction:  \#Help Window\#
+               \#Project File\#
+               \#Project Help\#
+               \#Messages\#
+               \#Copyright\#
+               \#Registration\#
+
+
+Reference:     \#Linker\#
+               \#Help Compiler\#
+               \link("%%GLOBAL%%")User Help\# (reserved keyword for \#USR.HLP\#)
+\end
+
+screen( "Pure C" )
+Pure C
+----------------------------------------------------------------------
+About Pure C - Copyright and version information.
+
+Other entries are accessories.
+\end
+
+screen( "File" )
+File
+----------------------------------------------------------------------
+        \#Open .C\#
+        \#Open .H\#
+        \#Open .S\#
+        \#Open .PRJ\#
+
+        \#Print\#
+        \#Print Selection\#
+
+        \#Close\#
+        \#Abandon\#
+
+        \#Save\#
+        \#Save as...\#
+
+        \#TOS Shell\#
+
+        \#Quit\#
+
+See also \#File Selector\#.
+\end
+
+screen( "Edit" )
+Edit
+----------------------------------------------------------------------
+        \#Undo\#
+
+        \#Cut\#
+        \#Copy\#
+        \#Paste\#
+
+        \#Select All\#
+
+        \#Shift Left\#
+        \#Shift Right\#
+
+        \#Cycle Windows\#
+
+        \#User Screen\#
+\end
+
+screen( "Search" )
+Search
+----------------------------------------------------------------------
+        \#Find...\#
+        \#Find Same\#
+        \#Find Selection\#
+
+        \#Replace...\#
+        \#Replace Same\#
+
+        \#Check Braces\#
+        \#Find Error\#
+        \#Goto Line...\#
+
+        \#Search project...\#
+        \#Search multiple...\#
+
+See also \#Search Options\#.
+\end
+
+screen( "Compile" )
+Compile
+----------------------------------------------------------------------
+        \#Compile...\#
+        \#Compile ''\#
+        \#Assemble...\#
+        \#Assemble ''\#
+
+        \#Execute...\#
+
+See also \#Help Compiler\#.
+\end
+
+screen( "Project" )
+Project
+----------------------------------------------------------------------
+        \#Select...\#
+
+        \#Debug ''\#
+        \#Run ''\#
+        \#Make ''\#
+
+        \#Make all ''\#
+        \#Link ''\#
+
+See also \#Project File\#.
+\end
+
+screen( "Options Menu" )
+Options
+----------------------------------------------------------------------
+        \#Shell...\#
+        \#Compiler...\#
+        \#Assembler...\#
+        \#Linker...\#
+
+        \#Load...\#
+        \#Save ''\#
+
+See also \#Configuration File\# and \#Options Help\#.
+\end
+
+screen( "Help" )
+Help
+----------------------------------------------------------------------
+        \#Menu\#       - Information about drop down menus.
+        \#Editor\#     - Information about editor operation.
+        \link("%%GLOBAL%%")C Language\# - Information about C language.
+        \link("%%GLOBAL%%")Libraries\#  - Information about library functions.
+        \#Options\#    - Information about program options.
+        \link("%%GLOBAL%%")Assembler\#  - Information about assembly language.
+        \#Index\#      - See \#Index Help\#
+
+See also \#Help Window\#.
+\end
+
+screen( "Open .C" )
+\#File\#/Open .C                                                 \#CONTROL\#-O
+----------------------------------------------------------------------
+... uses the \#File Selector\# with the '.C' extension set to open
+a C language source code file for editing.
+
+Note: one can change the extension inside the \#File Selector\#.
+\end
+
+screen( "Open .H" )
+\#File\#/Open .H
+----------------------------------------------------------------------
+... uses the \#File Selector\# with the '.H' extension set to open a
+C language header file for editing.
+\end
+
+screen( "Open .S" )
+\#File\#/Open .S
+----------------------------------------------------------------------
+... uses the \#File Selector\# with the '.S' extension set to open an
+assembly language source code file for editing.
+\end
+
+screen( "Open .PRJ" )
+\#File\#/Open .PRJ
+----------------------------------------------------------------------
+... uses the \#File Selector\# with the '.PRJ' extension set to open a
+\#Project File\# for editing.
+
+See also \#Project\#/\#Select...\#
+\end
+
+screen( "Print" )
+\#File\#/Print                                                   \#CONTROL\#-P
+----------------------------------------------------------------------
+... prints the contents of the active window.  This works for \#Messages\#
+and \#Help Window\#s as well as edit windows.
+\end
+
+screen( "Print Selection" )
+\#File\#/Print Selection                                         \#CONTROL\#-D
+----------------------------------------------------------------------
+... prints the selected text block (if any) in the active window.
+
+See also \#block selection\#.
+\end
+
+screen( "Close" )
+\#File\#/Close                                                   \#CONTROL\#-U
+----------------------------------------------------------------------
+... closes the active window.  If there have been editing changes,
+will ask whether you wish to save the file first.
+
+Equivalent to clicking the close window icon '' (upper left corner).
+\end
+
+screen( "Abandon" )
+\#File\#/Abandon                                                 \#CONTROL\#-H
+----------------------------------------------------------------------
+... closes the active window without saving the file.
+\end
+
+screen( "Save" )
+\#File\#/Save                                                    \#CONTROL\#-S
+----------------------------------------------------------------------
+... saves the file in the active window using the filename shown in
+the window title bar.  ('*' indicates editing changes.)
+\end
+
+screen( "Save as..." )
+\#File\#/Save as...                                              \#CONTROL\#-M
+----------------------------------------------------------------------
+... uses the \#File Selector\# to save the file in the active window
+under a new filename.  The window will also be renamed.
+\end
+
+screen( "TOS Shell" )
+\#File\#/TOS Shell                                               \#CONTROL\#-Z
+---------------------------------------------------------------------------
+... activates a user supplied subshell routine (if any).
+
+The system variable _shell_p ($4F6) must contain the address of the
+routine, or environment parameter SHELL must define a pathname.
+\end
+
+screen( "Quit" )
+\#File\#/Quit                                 SHIFT-\#CONTROL\#-Q or \#CONTROL\#-Q
+----------------------------------------------------------------------
+... closes all windows and terminates Pure C.  Asks whether edit
+changes are to be saved first.
+
+The SHIFT-\#CONTROL\#-Q key combination, or holding down the SHIFT key
+while clicking 'Quit' will terminate Pure C without saving the
+\#Configuration File\#.
+
+See also the autosave feature of the \#Shell Options\#.
+\end
+
+screen( "Undo" )
+\#Edit\#/Undo                                                         UNDO
+----------------------------------------------------------------------
+... undoes the last edit operation.
+
+For example, a text block which had been \#Cut\# will be restored, or a
+text block which had been \#Paste\#d will be removed.  A single character
+which had been removed using DELETE or BACKSPACE will be restored, or
+a single character which had been typed will be removed.  A second
+UNDO will restore the text to its condition before the first UNDO.
+\end
+
+screen( "Cut" )
+\#Edit\#/Cut                                                     \#CONTROL\#-X
+----------------------------------------------------------------------
+... deletes the selected block of text from the active window.  This
+block can then be copied (usually at a different location) using the
+\#Paste\# command.
+
+See also \#block selection\#.
+\end
+
+screen( "Copy" )
+\#Edit\#/Copy                                                    \#CONTROL\#-C
+----------------------------------------------------------------------
+... prepares a selected block of text to be copied using the \#Paste\#
+command.  Unlike \#Cut\#, Copy does not delete the original block.
+
+See also \#block selection\#.
+\end
+
+screen( "Paste" )
+\#Edit\#/Paste                                         INSERT or \#CONTROL\#-V
+----------------------------------------------------------------------
+... inserts the block of text last processed by \#Cut\# or \#Copy\# into
+the active window at the cursor location.  Multiple copies can be
+generated by repeating the paste command.  One can copy from one
+window and paste into another.
+
+If another block of text is selected when the paste command is used,
+the new block will be replaced by the block to be pasted.
+
+See also \#block selection\#.
+\end
+
+screen( "Select All" )
+\#Edit\#/Select All                                              \#CONTROL\#-H
+----------------------------------------------------------------------
+... selects the entire contents of the active window as a text block.
+This is useful to insert the contents of one file into another.
+
+See also \#Cut\#, \#Copy\#, \#Paste\# and \#block selection\#.
+\end
+
+screen( "Shift Left" )
+\#Edit\#/Shift Left                                              \#CONTROL\#-J                  
+----------------------------------------------------------------------
+... deletes a TAB (or eqivalent number of SPACEs) from the start of
+every line in the selected block of text.
+
+See also \#Shift Right\# and \#block selection\#.
+\end
+
+screen( "Shift Right" )
+\#Edit\#/Shift Right                                             \#CONTROL\#-K
+----------------------------------------------------------------------
+... inserts a TAB at the start of every line in the selected block of
+text.
+
+See also \#Shift Left\# and \#block selection\#.
+\end
+
+screen( "Cycle Windows" )
+\#Edit\#/Cycle Windows                                           \#CONTROL\#-W
+----------------------------------------------------------------------
+... moves the bottom-most window to the top, making it the active
+window.
+
+One can also swap windows by clicking the mouse on any exposed section
+of a partially obscured window, moving it to the top.
+\end
+
+screen( "User Screen" )
+\#Edit\#/User Screen                                                   ESC
+----------------------------------------------------------------------
+... shows the screen image corresponding to the last \link("%%GLOBAL%%")Execute\# or \link("%%GLOBAL%%")Run\#
+command.  (Pure C maintains two screen images in memory.)
+
+One can return to Pure C by pressing any key.
+\end
+
+screen( "Find..." )
+\#Search\#/Find...                                               \#CONTROL\#-F
+----------------------------------------------------------------------
+... locates the next occurrence of a text string starting from the
+current cursor location.  This command opens a dialog box where one
+can specify the string to be found and select search options
+\#Backwards\#, \#Ignore Case\#, and/or \#Whole Word\#.
+\end
+
+screen( "Find Same" )
+\#Search\#/Find Same                                             \#CONTROL\#-G
+----------------------------------------------------------------------
+... locates the next occurrence of a text string starting from the
+current cursor location, using the string last specified by either
+\#Search\#/\#Find...\# or \#Search\#/\#Find Selection\# and the search options last
+specified by \#Search\#/\#Find...\#
+
+Note: the search direction is reversed each time a search fails.
+\end
+
+screen( "Find Selection" )
+\#Search\#/Find Selection                                         \#CONTROL\#-T
+----------------------------------------------------------------------
+... locates the next occurrence of a selected block of text using the
+search options last specified by \#Search\#/\#Find...\#
+
+Note: the search direction is reversed each time a search fails.
+
+See also \#block selection\#.
+\end
+
+screen( "Replace..." )
+\#Search\#/Replace...                                            \#CONTROL\#-R
+----------------------------------------------------------------------
+... locates and replaces one text string with another.  This command
+opens a dialog box where one can specify the string to be located,
+the string to replace it, and the search options \#Backwards\#,
+\#Ignore Case\#, \#All\# and/or \#Whole Word\#.
+\end
+
+screen( "Replace Same" )
+\#Search\#/Replace Same                                          \#CONTROL\#-T
+----------------------------------------------------------------------
+... locates and replaces the next occurrence of a text string using
+the strings and options last specified by \#Search\#/\#Replace...\#
+
+Note: the search direction is reversed each time a search fails
+      (unless the \#All\# option is selected).
+\end
+
+screen( capsensitive("Check Braces") )
+\#Search\#/Check Braces                                          \#CONTROL\#-B
+----------------------------------------------------------------------
+... checks the active window for unbalanced braces, '{' and '}', and
+locates the first offending brace (if any).  This command is available
+only when editing *.C source code.
+
+Note: double-clicking a brace will select the entire block of text
+      between it and its corresponding end brace.
+\end
+
+screen( capsensitive("Find Error") )
+\#Search\#/Find Error                                            \#CONTROL\#-E
+----------------------------------------------------------------------
+... locates the source code line corresponding to the warning or error
+message selected in the \#Messages\# window (where the cursor is located).
+
+A faster method is to double click the error message.
+\end
+
+screen( capsensitive("Goto Line...") )
+\#Search\#/Goto Line...                                          \#CONTROL\#-L
+----------------------------------------------------------------------
+... locates a particular line by its line number. A dialog box is used
+to enter the desired line number.
+
+Since the default line number is the current cursor location, this
+command can also be used as a 'Goto Cursor' or 'Goto start of block'
+command.
+\end
+
+screen( "Search project..." )
+\#Search\#/Search project...                                   \#ALTERNATE\#-F
+----------------------------------------------------------------------
+... searches all the source and header files listed in the currrent
+\#Project File\# for a text string.  This command opens a dialog box where
+one can enter the text to be located and select search options
+\#Whole Word\#, \#Ignore Case\# and \#List only first occurence\#.
+
+The \#Messages\# window will list all of the matches found.  Double
+clicking a line in this window will open an edit window showing the
+line containing the match.
+
+See also \#Project\#/\#Select...\#
+\end
+
+screen( "Search multiple..." )
+\#Search\#/Search multiple...                                  \#ALTERNATE\#-G
+----------------------------------------------------------------------
+... searches all files which match the directory\\filename (wildcards)
+specification for a text string.  This command opens a dialog box
+where one can enter the text to be located, the directory pathname and
+filename, and specify search options \#Whole Word\#, \#Ignore Case\#,
+\#List only first occurence\# and \#Search subdirectories\#.
+
+The filename specification can include wildcards '?' and '*':
+
+  Search for: size_t
+  Directory:  C:\\PC\\INCLUDE
+  Filename:   *.h
+
+The \#Messages\# window will list all of the matches found.  Double
+clicking a line in this window will open an edit window showing the
+line containing the match.
+\end
+
+screen( "Compile..." )
+\#Compile\#/Compile...                                         \#ALTERNATE\#-V
+----------------------------------------------------------------------
+... compiles a C source code file, using the \#File Selector\# to select
+the file to be compiled.
+
+Error messages will appear in the \#Messages\# window.
+
+See also \#Compiler Options\#, \#Find Error\# and \#Project\#.
+\end
+
+screen( "Compile ''" )
+\#Compile\#/Compile ''                                         \#ALTERNATE\#-C
+----------------------------------------------------------------------
+... compiles the C source code in the active window (as opposed to the
+saved version).
+
+Error messages will appear in the \#Messages\# window.
+
+See also \#Compiler Options\#, \#Find Error\# and \#Project\#.
+\end
+
+screen( "Assemble..." )
+\#Compile\#/Assemble...                                        \#ALTERNATE\#-S
+----------------------------------------------------------------------
+... compiles an assembly language source code file, using the
+\#File Selector\# to select the file to be compiled.
+
+Error messages will appear in the \#Messages\# window.
+
+See also \#Assembler Options\#, \#Find Error\# and \#Project\#.
+\end
+
+screen( "Assemble ''" )
+\#Compile\#/Assemble ''                                        \#ALTERNATE\#-A
+----------------------------------------------------------------------
+... compiles the assembly language source code in the active window
+(as opposed to the saved version).
+
+Error messages will appear in the \#Messages\# window.
+
+See also \#Assembler Options\#, \#Find Error\# and \#Project\#.
+\end
+
+screen( "Execute..." )
+\#Compile\#/Execute...                                         \#ALTERNATE\#-E
+----------------------------------------------------------------------
+... loads and starts an executable (linked) program, using the
+\#File Selector\# to select the program to be executed.
+
+This command is particularly useful for executing utilities such as
+the \#Help Compiler\# or a \#Resource File\# editor.
+
+See also \#Project\#/\#Run ''\# and \#Edit\#/\#User Screen\#.
+\end
+
+screen( "Select..." )
+\#Project\#/Select...                                          \#ALTERNATE\#-P
+----------------------------------------------------------------------
+... selects a \#Project File\# using the \#File Selector\#.
+
+Note: DEFAULT.PRJ can be used to link a program which has its source
+      code entirely contained in the active window (not counting
+      \link("%%GLOBAL%%")#include\#s).
+
+See also \#Project Help\#.
+\end
+
+screen( "Debug ''" )
+\#Project\#/Debug ''                      SHIFT-\#ALTERNATE\#-D or \#ALTERNATE\#-D
+----------------------------------------------------------------------
+... compiles and links all updated source files specified in the
+\#Project File\#, then starts the Pure Debugger (PD.PRG).
+
+Note: one must set the -Y \#Compiler Options\# and the -GLY \#Linker Options\#
+      to debug in source code format.  (Actually, one need set the -Y
+      option only for those modules where the problem is suspected.)
+
+Using the SHIFT-\#ALTERNATE\#-D key combination or pressing the SHIFT key
+while clicking \#Project\#/Debug '' with the mouse will remove Pure C from
+RAM before loading the Pure Debugger.  One will return to Pure C after
+quitting Pure Debugger.  (You might want to set the \#Configuration File\#
+autosave option first.  See \#Shell Options\#.)
+\end
+
+screen( capsensitive("Run ''") )
+\#Project\#/Run ''                                             \#ALTERNATE\#-R
+----------------------------------------------------------------------
+... compiles and links all updated source files specified in the
+\#Project File\#, then loads and executes the program.
+
+Note: 'Run' compares the date/time of each source file and its object
+       file to see if it needs to be re-compiled.  It also compares
+       the date/time of the linked file to the object files to see if
+       they need to be re-linked.
+
+See also \#Edit\#/\#User Screen\#.
+\end
+
+screen( "Make ''" )
+\#Project\#/Make ''                                            \#ALTERNATE\#-M
+----------------------------------------------------------------------
+... compiles and links all updated source files specified in the
+\#Project File\#.
+
+Note: 'Make' compares the date/time of the source file and its object
+      file to see if it needs to be re-compiled.  It also compares the
+      date/time of the linked file to the object files to see if they
+      need to be re-linked.
+\end
+
+screen( "Make all ''" )
+\#Project\#/Make all ''                                        \#ALTERNATE\#-X
+----------------------------------------------------------------------
+... compiles and links all files specified in the \#Project File\#.
+
+If the \#Compiler Options\# are changed, one can use 'Make All' to
+force all of the files to be re-compiled.
+\end
+
+screen( "Link ''" )
+\#Project\#/Link ''                                            \#ALTERNATE\#-L
+----------------------------------------------------------------------
+... links the files specified in the \#Project File\#.
+
+If the \#Linker Options\# are changed, one can use 'Link' to force the
+files to be re-linked.
+\end
+
+screen( "Shell...",
+		capsensitive("Shell Options") )
+\link("Options Menu")Options\#/Shell                                              \#ALTERNATE\#-Z
+----------------------------------------------------------------------
+Windows:    \#Auto indent\#       \#Use Clipboard\#
+\#Autosave\#:   Configuation      Files
+Project:    \#Project Help\#      \#Auto dependencies\#
+Filebox:    \#Standard file selector\#
+
+Tabsize - Enter the number of columns between tab stops.
+
+Break make on warnings of compiler and/or linker - Normally the \link("%%GLOBAL%%")Make\#
+        process breaks on error messages and ignores warnings.
+
+Cache - The cache is used to reduce disk I/O by storing files in RAM.
+        Header files refer to all files read using \link("%%GLOBAL%%")#include\#.  Object
+        files are created by the compiler and used by the linker.
+        Clearing the cache writes the files to disk (if modified) and
+        frees the RAM for use by the program to be run.
+\end
+
+screen( "Auto indent" )
+\link("Options Menu")Options\#/\link("%%GLOBAL%%")Shell\#/Auto indent
+----------------------------------------------------------------------
+When you create a new line by typing RETURN, the number of starting
+TABs in the current line will be copied to the new line and the cursor
+will be placed after them.
+\end
+
+screen( "Use Clipboard" )
+\link("Options Menu")Options\#/\link("%%GLOBAL%%")Shell\#/Use Clipboard
+----------------------------------------------------------------------
+The clipboard can be used to copy text from one program to another in
+a multitasking environment.  The text to be copied will be written to
+disk file in the scrap directory (e.g. C:\\CLIPBRD\\SCRAP.TXT).
+
+See also \link("%%GLOBAL%%")scrp_read\# and \link("%%GLOBAL%%")scrp_write\#.
+\end
+
+screen( "Autosave" )
+\link("Options Menu")Options\#/\link("%%GLOBAL%%")Shell\#/Autosave
+----------------------------------------------------------------------
+... automatically saves the \#Configuration File\# and/or all files being
+edited before running a program.
+
+If there is any possibility of the program crashing, use autosave!
+Otherwise all your changes may be lost.
+\end
+
+screen( "Auto dependencies" )
+\link("Options Menu")Options\#/\link("%%GLOBAL%%")Shell\#/Auto dependencies
+----------------------------------------------------------------------
+The \#Project File\# normally lists all included files (dependencies) with
+each source file, e.g.:
+
+  main.c (rsc.h)
+
+The \link("%%GLOBAL%%")Make\# process will recompile the source file (main.c) if any of the
+dependencies (rsc.h) have been modified, even if the source file is
+unchanged.
+
+The Auto dependencies option will search the source file for all
+\link("%%GLOBAL%%")#include\# directives and use these files instead.  (The dependencies
+in the \#Project File\# will be ignored.)
+\end
+
+screen( "Standard file selector" )
+\link("Options Menu")Options\#/\link("%%GLOBAL%%")Shell\#/Standard file selector
+----------------------------------------------------------------------
+... replaces Pure C's \#File Selector\# with the default file selector
+(e.g., UIS if installed).
+\end
+
+screen( "Compiler...",
+		capsensitive("Compiler Options") )
+\link("Options Menu")Options\#/Compiler...                                        \#ALTERNATE\#-U
+----------------------------------------------------------------------
+-A  Generate errors on non-ANSI keywords, like \link("%%GLOBAL%%")cdecl\# or \link("%%GLOBAL%%")pascal\#.
+-C  Allow nested comments; e.g. /* /* */ */ is a valid comment.
+-Y  Add debug information.  See \#Debug ''\#.
+-T  Generate run-time error if insufficient stack space has been
+    reserved.
+-B  Write object files in DRI format for use with another linker.
+    (The Pure Debugger will not work with DRI format objects.)
+-X  Add an underbar to the beginning of global names.
+    (For compatibility with Mark Williams C.)
+-H  Pass all function arguments on the stack.  See also \link("%%GLOBAL%%")cdecl\#.
+-Q  Use \link("%%GLOBAL%%")pascal\# parameter passing. 
+-K  Default \link("%%GLOBAL%%")char\# data type is \link("%%GLOBAL%%")unsigned\# (0-256).
+-J  Do NOT rearrange code to reduce jumps.
+-Z  Do NOT try to keep repeatedly accessed values in registers.
+-M  Do NOT merge string definitions together.
+-R  Do NOT implement \link("%%GLOBAL%%")register\# variables on registers.
+-G  Optimize program size (instead of execution speed).
+-P  Use absolute addressing for external functions.
+    Fixes \#Linker PC overflow\# error.
+-S  Use \link("%%GLOBAL%%")LINK\# and \link("%%GLOBAL%%")UNLK\# instructions to manipulate stack pointer
+    (used to allocate local variables in stack).
+-2  Use expanded 68020 instruction set.
+-8  Use 68881 floating point coprocessor (12 byte \link("%%GLOBAL%%")double\#).
+    One must link \link("%%GLOBAL%%")PC881LIB\#.LIB instead of \link("%%GLOBAL%%")PCFLTLIB\#.LIB.
+    (See \#Project File\# and \link("%%GLOBAL%%")Parameter Passing\#.)
+    This only works for 68881 or 68882 FPU's, not the SFP004.
+
+Include directory:  (-N option)
+    Pathname for directory containing Pure C header files;
+    e.g. 'include' or 'd:\\pc\\include'
+
+Output directory:  (-O option)
+    Pathname for directory to contain object files (*.O).
+    Default is to use the same directory as source code.
+
+Define macro:  (-D option)
+    'xxx' or 'xxx=yyy' equivalent to '#define xxx' or
+    '#define xxx yyy' (respectively) in source code.
+    (Usually used for conditional compilation;
+    e.g. '#ifdef xxx' or '#if xxx == yyy' directives.)
+
+Stop after ___ errors  (-E option)  See also \link("%%GLOBAL%%")Compiler Errors\#.
+
+Stop after ___ warnings  (-F option)  See also \link("%%GLOBAL%%")Warning\#.
+
+Maximum identifier length ___  (-L option)
+    Applies to variables, functions, and macro names, etc.
+    Enter number between 1 and 255.
+
+Warning level (0..2) _  (-W option)
+    0 - Report no warning messages.
+    1 - Report some warning messages.
+    2 - Report all warning messages.
+    (See also \link("%%GLOBAL%%")#pragma warn\#.)
+\end
+
+screen( "Assembler...",
+		capsensitive("Assembler Options") )
+\link("Options Menu")Options\#/Assembler...                                       \#ALTERNATE\#-I
+----------------------------------------------------------------------
+-1  Use 68010 instructions; e.g. \link("%%GLOBAL%%")MOVE\# from SR & \link("%%GLOBAL%%")MOVEC\#
+-2  Use 68020 instructions and addressing modes; e.g. \link("%%GLOBAL%%")DIVSL\#,
+    \link("%%GLOBAL%%")DIVUL\# & \link("%%GLOBAL%%")TRAPcc\#
+-3  Use 68030 instructions and addressing modes.
+-4  Use 68040 instructions and addressing modes.
+-5  Use 68851 memory manager instructions; e.g. \link("%%GLOBAL%%")CALLM\# & \link("%%GLOBAL%%")RTM\#
+-8  Use 68881 floating point processor instructions.
+-S  Use supervisor mode instructions.
+-Y  Store information for Pure Debugger.
+-B  Create DRI format object files for use with another linker.
+    (The Pure Debugger will not work with DRI format objects.)
+-C  Do not list lines from included files.
+-F  Do not list lines excluded by IF/ELSE/ENDIF directives.
+-M  Do not list macro definitions.
+-A  List macro expansions.
+-P  Produce a listing (creates file *.LST).
+-U  Assume all undefined labels are external.
+-V  Verbose messages.
+
+Include directory:  (-I option)
+    Directory containing include files.
+    Defaults to source directory.
+
+Define macro:  (-D option)
+    'xxx=yyy' equivalent to 'xxx = yyy' in source code.
+
+Output directory:  (-O option)
+    Directory to contain object file (*.O)
+    Defaults to source directory.
+\end
+
+screen( "Linker...",
+		capsensitive("Linker Options") )
+\link("Options Menu")Options\#/Linker...                                          \#ALTERNATE\#-O
+----------------------------------------------------------------------
+-G  Add global symbols to symbol table.   (See \#Debug ''\#).
+-L  Add local symbols to symbol table.  (See \#Debug ''\#).
+-Y  Add debug information.  (See \#Debug ''\#).
+-J  Create library file instead of executable program.
+-F  Do not set Fastload bit.  Fastload (available starting with
+    TOS 1.4) does not zero out the heap space.
+-R  Load program to \link("%%GLOBAL%%")ST RAM\# (applies only to TT and Falcon).
+-M  Allocate memory from \link("%%GLOBAL%%")ST RAM\# (applies only to TT and Falcon).
+-V  Generate verbose messages (symbol table listing, etc).
+
+Stacksize:  (-S option)
+    Size of RAM allocated to stack (default is 4096 bytes).
+    (See also -T flag from \#Compiler Options\# and \link("%%GLOBAL%%")PCSTART\#.)
+
+Heapsize:  (-H option)
+    Sets the TPAsize field (applies only to TT and Falcon).
+    If the program is to be loaded into \link("%%GLOBAL%%")TT RAM\# and there is more
+    \link("%%GLOBAL%%")ST RAM\# than \link("%%GLOBAL%%")TT RAM\#, then unless there will be at least
+    'heapsize' Kbytes of free \link("%%GLOBAL%%")TT RAM\# after the program is loaded,
+    load the program into \link("%%GLOBAL%%")ST RAM\#.
+    (TPAsize increments in units of 128 Kbytes.)
+
+PLINK can also be used to generate non-relocatable code.
+(Not a good idea unless you are trying to program a ROM!)
+The following allow you to set the absolute starting addresses for
+the program. 
+
+Text segment address:  (-T option)
+Data segment address:  (-D option)
+BSS segment address:   (-B option)
+
+See also \#Linker\#.
+\end
+
+screen( "Load..." )
+\link("Options Menu")Options\#/Load...                                            \#ALTERNATE\#-J
+----------------------------------------------------------------------
+... uses the \#File Selector\# to load a previously saved
+\#Configuration File\#, or create a new \#Configuration File\# with a
+different filename.
+
+Subsequent saves will use the new filename.
+
+File PC.CFG is loaded automatically when Pure C starts.
+\end
+
+screen( "Save ''" )
+\link("Options Menu")Options\#/Save ''                                            \#ALTERNATE\#-H
+----------------------------------------------------------------------
+... saves the current version of the \#Configuration File\#.
+
+See also Autosave/Configuration flag from \#Shell Options\#.
+\end
+
+screen( "Options Help",
+		capsensitive("Options") )
+Options Help    (For more information, double-click text in boldface.)
+----------------------------------------------------------------------
+\#Shell Options\#         - Windows, Autosave, Project Help, Cache
+\#Compiler Options\#      - Arguments for PCC.TTP and CCP.TTP
+\#Assembler Options\#     - Arguments for PASM.TTP
+\#Linker Options\#        - Arguments for PLINK.TTP
+
+\#Search Options\#        - Backwards, Ignore Case, Whole Word, etc.
+\#Help Compiler Options\# - Arguments for HC.TTP
+
+See also \#Options Menu\#.
+\end
+
+screen( "Index Help" )
+Index Help
+----------------------------------------------------------------------
+        Pure C           - PC.HLP
+        C Language       - C.HLP
+        Libraries        - LIB.HLP
+        Assembler        - PASM.HLP
+        Userdefined Help - \#USR.HLP\#
+
+The index contains the list of all keywords for each of the help
+files.
+
+Keywords are arranged in alphabetical order and grouped by their
+first letter.
+\end
+
+screen( "Linker",
+		capsensitive("PLINK"),
+		capsensitive("_StkSize") )
+Linker
+----------------------------------------------------------------------
+... combines the text, data and BSS segments from several object files
+and resolves all global name references.  It reserves space in the BSS
+segment for the stack and defines global name _StkSize (which IS the
+stack size, not the address of a variable containing the stack size).
+
+Its output can be either an executable program or a library file.
+(Only those subsegments needed will be linked into an executable
+program.)
+
+    \#Program Extensions\#
+    \#Program Segments\#
+    \#Object File Format\#
+    \#Executable File Format\#
+    \#Absolute File Format\#
+    \#Linker Errors\#
+
+See Also: \link("%%GLOBAL%%")PCSTART\# and \link("%%GLOBAL%%")Libraries\#.
+\end
+
+screen( "Program Extensions" )
+Program Extensions
+----------------------------------------------------------------------
+TOS  Used for programs which perform terminal I/O using 'standard I/O'
+     functions, such as \link("%%GLOBAL%%")puts\# and \link("%%GLOBAL%%")Cconws\#.  See \#User Screen\#.
+
+TTP  Same as TOS except that the operating system will allow you to
+     enter a UNIX style command line.  See \link("%%GLOBAL%%")main\#.
+
+PRG  Used for programs which perform terminal I/O using \link("%%GLOBAL%%")AES\# and \link("%%GLOBAL%%")VDI\#
+     graphics.  Also used for programs in the \#AUTO folder\#.
+
+ACC  Used for accessories.  Accessories residing on the boot disk are
+     loaded automatically by GEMDOS at boot time and whenever the
+     resolution is changed.  They install themselves on the leftmost
+     drop-down menu using \link("%%GLOBAL%%")menu_register\# then wait for a \link("%%GLOBAL%%")MN_SELECTED\#
+     event using \link("%%GLOBAL%%")evnt_mesag\# or \link("%%GLOBAL%%")evnt_multi\#.
+
+LIB  Used for libraries (see the -J flag from \#Linker Options\#).
+     Libraries are simply an object file formed by linking several
+     object files together (used to reduce the number of entries in
+     the \#Project File\#).
+\end
+
+screen( "AUTO folder" )
+AUTO Folder
+----------------------------------------------------------------------
+During the boot process, all programs with a PRG extension which are
+located in the AUTO folder will be executed before any accessories are
+loaded or the desktop starts.
+
+They will be executed in the order in which they appear in the
+directory.  To change this order, one can move all the files out of
+the AUTO folder then move them back in the desired order.  There are
+also programs (such as AUTOSORT) which can perform this function.
+
+In most versions of TOS, AUTO programs cannot use \link("%%GLOBAL%%")AES\# or \link("%%GLOBAL%%")VDI\# graphics.
+
+See also \link("%%GLOBAL%%")_p_cookies\#.
+\end
+
+screen( "Program Segments" )
+Program Segments
+----------------------------------------------------------------------
+A program is loaded into memory in the following form:
+
+  \link("%%GLOBAL%%")BASPAG\#       - basepage (256 bytes)
+  text segment - program instructions
+  data segment - constants and initialized variables
+  BSS segment  - un-initialized variables
+  stack        - all remaining contiguous RAM
+
+Note: \link("%%GLOBAL%%")PCSTART\# reduces the stack and releases excess RAM to the
+      heap (see \link("%%GLOBAL%%")Malloc\# and \link("%%GLOBAL%%")malloc\#).
+\end
+
+screen( "Object File Format" )
+Object File Format
+----------------------------------------------------------------------
+  \#oheader\#         - 32 bytes
+  text segment    - program instructions
+  data segment    - constants and initialized variables
+  \#relocation code\# - used to link symbols with program
+  symbol table    - Pascal strings (first byte = length)
+  debug info
+
+The header contains the size of each section.
+
+Note: PLINK also supports DRI format object files (produced by other
+      compilers).
+\end
+
+screen( "oheader" )
+Object File Header Format
+----------------------------------------------------------------------
+struct oheader {
+  int magic;      /* magic number 0x4efa  */
+  int hsize;      /* length of remaining header = 28 */
+  long psize;     /* size of text + data segments */
+  long rsize;     /* size of relocation code */
+  long ssize;     /* size of symbol table */
+  long reserved1; /* must be zero */
+  long dbsize;    /* size of debug info */
+  long reserved2; /* must be zero */
+  long reserved3; /* must be zero */
+ };
+\end
+
+screen( "relocation code" )
+Relocation Code
+----------------------------------------------------------------------
+struct reloc {
+  unsigned char code;    /* type of operation */
+  unsigned char offset;  /* offset from last definition */
+  int           symbol;  /* index into symbol table, or -1 */
+ };
+
+Partial List of Codes:
+
+  1 - end of code (text + data + BSS).
+  2 - skip offset + (symbol * 256) bytes.
+  3 - start of text subsegment.
+  4 - start of data subsegment.
+  5 - start of BSS subsegment.
+  6 - end of library.
+  7 - define word aligned global address.
+  8 - define general global address.
+  9 - define word aligned local address.
+ 10 - define general local address.
+ 11 - relocate absolute.
+ 14 - relocate PC relative.
+
+To relate 'symbol' to the text in symbol table, create a pointer array
+for the strings and use 'symbol' as the array index.
+\end
+
+screen( "Executable File Format" )
+Executable File Format
+----------------------------------------------------------------------
+  \#drihdr\#               - 28 bytes
+  text segment         - program instructions
+  data segment         - constants and initialized variables
+  \#symbol table\#         - not used by loader
+  first fixup location - 4 bytes (0L means no fixups needed)
+  fixup codes          - 1 byte each, null terminated
+  debug info           - not used by loader
+
+The loader simply adds the address of the start of the text segment
+to every long word which needs a fixup.  The fixup codes are:
+
+     0 - end of fixup codes
+     1 - skip 254 bytes
+ 2-254 - (even) offset to next fixup
+ 3-255 - (odd) undefined
+\end
+
+screen( "drihdr" )
+Program Header Format
+----------------------------------------------------------------------
+struct drihdr {
+  int magic;      /* magic number 0x601a          */
+  long tsize;     /* size of text segment         */
+  long dsize;     /* size of data segment         */
+  long bsize;     /* size of BSS segment          */
+  long ssize;     /* size of symbol table         */
+  long reserved1; /* must be zero                 */
+  long flags;     /* bit flags for fastload, etc. */
+  int  absflag;   /* must be zero                 */
+ };
+
+When absflag is not zero, it indicates that there is no fixup code.
+However, early versions of TOS do not honor this.
+\end
+
+screen( "symbol table" )
+DRI Symbol Table Format
+----------------------------------------------------------------------
+struct table {
+  char name[8];        /* NULL padded - max 8 characters    */
+  unsigned int flags;  /* bit flags                         */
+  long addr;           /* location of symbol reference      */
+ };
+
+The bit flags are:
+
+0x8000  Label definition
+0x4000  Equated label
+0x2000  Global label
+0x1000  Register equate
+0x0800  External label
+0x0400  addr = offset from start of TEXT segment
+0x0200  addr = offset from start of DATA segment
+0x0100  addr = offset from start of BSS segment
+\end
+
+screen( "Absolute File Format" )
+Absolute File Format
+----------------------------------------------------------------------
+  \#abshdr\#               - 36 bytes
+  text segment         - program instructions
+  data segment         - constants and initialized variables
+  \#symbol table\#         - not used by loader
+  first fixup location - 4 bytes (0L means no fixups needed).
+  fixup codes          - 1 byte each, null terminated
+  debug info           - not used by loader
+
+The loader simply adds the address of the start of the text segment
+to every long word which needs a fixup.  The fixup codes are:
+
+     0 - end of fixup codes
+     1 - skip 254 bytes
+ 2-254 - (even) offset to next fixup
+ 3-255 - (odd) undefined
+
+Same as the \#Executable File Format\# except for the header.
+\end
+
+screen( "abshdr" )
+Absolute File Header Format
+----------------------------------------------------------------------
+struct abshdr {
+  int magic;      /* magic number 0x601b  */
+  long tsize;     /* size of text segment */
+  long dsize;     /* size of data segment */
+  long bsize;     /* size of BSS segment */
+  long ssize;     /* size of symbol table */
+  long reserved;  /* must be zero */
+  long textbase;  /* load address for text segment */
+  long relocflag; /* zero if fixup code needed */
+  long database;  /* load address for data segment */
+  long bssbase;   /* load address for BSS segment */
+ };
+\end
+
+screen( "Linker Errors" )
+Linker Error Messages                          (in alphabetical order)
+----------------------------------------------------------------------
+        (For more information, double click the [?] button.)
+
+\link("Linker PC overflow")[?]\#  16 bit PC relative overflow: 'XXXXXX'
+\link("Linker 16 bit relocation")[?]\#  16 bit relocation is not supported 
+\link("Linker input error")[?]\#  Cannot close file 'XXXXXX'
+\link("Linker output error")[?]\#  Cannot create file 'XXXXXX'
+\link("Linker input error")[?]\#  Cannot open file 'XXXXXX'
+\link("Linker duplicate error")[?]\#  Doubly defined symbol: 'XXXXXX'
+\link("Linker format error")[?]\#  Format error in object file 'XXXXXX'
+\link("Linker option error")[?]\#  Illegal option set
+\link("Linker option error")[?]\#  Missing argument in option 'XXXXXX'
+\link("Linker format error")[?]\#  Neither text nor data in input files
+\link("Linker RAM error")[?]\#  Not enough memory
+\link("Linker input error")[?]\#  Read error on file 'XXXXXX'
+\link("Linker output error")[?]\#  Seek error on file 'XXXXXX'
+\link("Linker undefined symbol")[?]\#  Undefined symbol: 'XXXXXX'
+\link("Linker unknown error")[?]\#  Unknown error: #
+\link("Linker unknown error")[?]\#  Unknown fatal error: #
+\link("Linker user break")[?]\#  User break: Linker aborted
+\link("Linker output error")[?]\#  Write error on file 'XXXXXX'
+\end
+
+screen( "Linker output error" )
+\#Linker\# Output Errors
+----------------------------------------------------------------------
+An I/O error occurred while writing the program to disk.
+
+Check for write protection, free disk space, bad sectors or (rarely)
+directory full.
+\end
+
+screen( "Linker input error" )
+\#Linker\# Input Errors
+----------------------------------------------------------------------
+An I/O error occurred while reading an object file.
+
+Check for bad sectors, re-compile object file or restore library from
+backup.
+\end
+
+screen( "Linker PC overflow" )
+\#Linker\# PC Relative Overflow Error
+----------------------------------------------------------------------
+\link("%%GLOBAL%%")BSR\# and other PC relative instructions can only access addresses
+Ò32 Kbytes and the address is located further away than that.
+
+Re-compile setting the -P flag from \#Compiler Options\# and/or replace
+\link("%%GLOBAL%%")BSR\# with \link("%%GLOBAL%%")JSR\# in assembly code (for global functions).
+\end
+
+screen( "Linker 16 bit relocation" )
+\#Linker\# 16 bit relocation is not supported 
+----------------------------------------------------------------------
+DRI object file created by some other compiler used 16 bit relocation.
+PLINK does not support 16 bit relocation.
+\end
+
+screen( "Linker duplicate error" )
+\#Linker\# Doubly defined symbol: 'XXXXXX'
+----------------------------------------------------------------------
+XXXXXX was used in two different function definitions, two different
+global variable definitions, or as both a function and a global
+variable name.  (Actually, it could be more than two.)
+
+If the definitions are identical, simply delete one of them.
+
+Otherwise you must either make one (or both) of the definitions \link("%%GLOBAL%%")static\#
+or rename one of the functions (or global variables) and all of its
+references.
+\end
+
+screen( "Linker RAM error" )
+\#Linker\# Not enough memory
+----------------------------------------------------------------------
+First, turn off and clear the cache using \#Shell Options\#.
+Second, turn off -Y flags from \#Compiler Options\# and \#Assembler Options\#.
+Third, remove all accessories and/or boot programs.
+
+If that doesn't work, either write smaller programs or get a bigger
+computer. 
+\end
+
+screen( "Linker undefined symbol" )
+\#Linker\# Undefined symbol: 'XXXXXX'
+----------------------------------------------------------------------
+XXXXXX was referenced as external but was never defined.
+
+Check your \#Project File\# to see if all the needed \link("%%GLOBAL%%")Libraries\#
+or modules are being linked.
+\end
+
+screen( "Linker unknown error" )
+\#Linker\# Unknown error: #
+----------------------------------------------------------------------
+Note down error number and call Gribnif to complain.
+\end
+
+screen( "Linker user break" )
+\#Linker\# User Break
+----------------------------------------------------------------------
+You used the 'SHIFT/SHIFT' abort key combination.
+\end
+
+screen( "Linker option error" )
+\#Linker\# Options Error
+----------------------------------------------------------------------
+Somehow PC.PRG constructed a bad command line for PLINK.TTP
+
+Check the edit fields in \#Linker Options\# for blanks or commas.
+\end
+
+screen( "Linker format error" )
+\#Linker\# Format Error
+----------------------------------------------------------------------
+Object file does not have a valid format.  (See \#Object File Format\#.)  
+
+Re-compile or restore from backup.
+\end
+
+screen( "USR.HLP" )
+Userdefined Help
+----------------------------------------------------------------------
+Pure C will look for help keywords in a file by the name of USR.HLP
+which can be created using the \#Help Compiler\#.
+
+Context sensitive keywords can be triggered from an edit window using
+the help key.  The keyword \link("%%GLOBAL%%")User Help\# is reserved for use by USR.HLP,
+so that it can be accessed from the \#Menu\# screen.
+
+One can also intercept calls to the context sensitive keywords already
+defined in PC.HLP, C.HLP, LIB.HLP, and PASM.HLP.  The \#Help\# drop-down
+menu uses the context sensitive keywords \#Menu\#, \#Editor\#, \link("%%GLOBAL%%")C Language\#,
+\link("%%GLOBAL%%")Libraries\#, \#Options\# and \link("%%GLOBAL%%")Assembler\# which can be intercepted.
+
+Once you are in a help window from USR.HLP, you can only return to a
+help window in one of the other help files by using a context
+sensitive keyword defined in the other file.
+
+Note: Context sensitive keywords containing blanks cannot be accessed
+      using the HELP key.
+\end
+
+screen( "Help Compiler" )
+Help Compiler
+----------------------------------------------------------------------
+HC.TTP can be used to create your own help files, such as \#USR.HLP\#.
+Its only argument is the filename of the command file, which must be
+in the following \#syntax\#:
+
+-<options>
+USR.HLP
+<source_file_1>
+<source_file_2>
+...
+
+See \#Help Compiler Options\# for the list of options.  (The '-' is
+required even if no options are specified.)
+
+See \#Help Compiler Language\# for a description of the source code.
+
+See \#Help Compiler Messages\# for a list or error and warning
+messages generated by the help compiler.
+
+Note: the \#Index\# is generated automatically.
+\end
+
+screen( "Help Compiler Options" )
+\#Help Compiler\# Options
+----------------------------------------------------------------------
+L    Produce log file HC.LOG (copy of output to \#User Screen\#).
+N    Parse source file, but do not generate help file.
+T=n  Translate TABs as "n" blanks, where 0 < n < 10.  Default is 4.
+     (Does not use tab stops.)
+V    Verbose message output.
+W    Break on warning.
+
+0    Create new PC.HLP or PD.HLP file.
+1    Create new C.HLP file.
+2    Create new LIB.HLP file.
+3    Create new PASM.HLP file.
+4    Create USR.HLP file (default).
+
+Here is a sample command file:
+
+-LVT=8     ;log file on, verbose output, tab size = 8
+USR.HLP    ;Help file name
+USR.TXT    ;Source file
+\end
+
+screen( capsensitive("Help Compiler Language") )
+Help Compiler Language
+----------------------------------------------------------------------
+The source files for the help compiler contain blocks of separated
+text, where each block defines one \#Help Window\# screen.
+The \#syntax\# of each block follows:
+
+screen(\link("Help Compiler - keywords")<keywords>\#)
+<several lines of help window text>
+\\end
+
+The text of the help window will appear almost verbatim.
+The exceptions to this are:
+
+TAB key  Expanded according to the \#Help Compiler Options\#.
+\\\\       Translated as a single \\.
+\\EOF     Translated as ''.
+
+\\#       Used to mark the beginning and end of an external keyword.
+         \\#keyword\\# will appear as \#keyword\#.
+
+\\link    Alias the shown text as another keyword.
+         \\link("keyword")alias\\# will appear as \link("keyword")alias\#
+         but will pull up the 'keyword' screen.
+
+\\print   Write message to screen: \\print("This text is written.")
+
+\\extern  No function; used as a comment.  Also \\0 through \\9.
+
+
+Example: The following two help screens are linked together:
+
+    screen("First")
+    Double-click the underlined text to go to the \\#Second\\# screen.
+    \\end
+
+    screen("Second")
+    Double-click \\link("First")here\\# to return.
+    \\end
+
+Note: 'here' will not appear in the Index.
+
+Also, the '\\link' command cannot be used to alias a keyword which is
+a context sensitive keyword from another help file.
+\end
+
+screen( "Help Compiler - keywords",
+		capsensitive("capsensitive"),
+		capsensitive("sensitive") )
+Help Compiler - keywords
+----------------------------------------------------------------------
+The 'screen( )' command argument list consists are one or more
+keyword definition separated by commas and/or blanks.  Each keyword
+definition can be of the \link("syntax")form\#:
+
+  "<keyword>"
+  sensitive("<keyword>")
+  capsensitive("<keyword>")
+
+The 'sensitive( )' and 'capsensitive( )' functions are used to define
+context sensitive keywords.  While ordinary help keywords can be used
+to link help screens together, context dependent keywords can also be
+used to bring up a help screen from an edit window by pressing the
+\#Help key\#, or to link screens from different help files.
+
+Keywords defined by 'sensitive( )' can be either upper or lower case,
+or any combination thereof, so that 'sensitive("text")' would respond
+to 'text', 'TEXT' or even 'TeXt'.  They will appear in the \#Index\# in
+upper case.
+
+Keywords defined by 'capsensitive( )' must match exactly.
+
+All keywords defined by a 'screen( )' command will appear in the
+\#Index\#, as opposed to aliases used by the \\link( ) \\# command.
+
+Keywords 'Version', 'Index', 'A..' through 'Z..', and 'Other'
+are generated by HC.TTP (after patch) and cannot be redefined.
+
+PC.PRG uses context sensitive keywords 'Menu', 'Editor', 'C Language',
+'Libraries', 'Options' and 'Assembler' to implement the \#Help\# drop-down
+menu.  These CAN be redefined and intercepted by \#USR.HLP\#
+\end
+
+screen( "keyword" )
+screen("keyword")
+Included simply to demonstrate the \#Help Compiler Language\#.
+Press UNDO key to return.
+\end
+
+screen( "Help Compiler Messages" )
+Error and Warning Messages from the Help Compiler
+----------------------------------------------------------------------
+    (For more information, double-click the [?] button.)
+
+\link("HC tab error")[?]\#  '=' expected in option
+\link("HC duplicate name")[?]\#  Doubly defined screen name
+\link("HC option error")[?]\#  Illegal option character
+\link("HC missing end")[?]\#  Missing end of screen
+\link("HC missing parameter")[?]\#  Missing Parameter
+\link("HC out of RAM")[?]\#  Out of memory
+\link("HC missing quote")[?]\#  Pending end of string
+\link("HC input error")[?]\#  Read error
+\link("HC unknown screen")[?]\#  Reference to unknown screen
+\link("HC screen to long")[?]\#  Screen too long
+\link("HC link error")[?]\#  Too many parameters
+\link("HC too many files")[?]\#  Too many source file in command file
+\link("HC output error")[?]\#  Unable to open output file
+\link("HC input error")[?]\#  Unable to open command file
+\link("HC input error")[?]\#  Unable to open source file
+\link("HC unknown statement")[?]\#  Unknown statement
+\link("HC bad character")[?]\#  Use of illegal character
+\link("HC output error")[?]\#  Write error
+\link("HC bad parameter")[?]\#  Wrong parameter type
+\link("HC wrong scope")[?]\#  Wrong scope for statement
+\end
+
+screen( "HC unknown screen" )
+Warning: Reference to unknown screen
+----------------------------------------------------------------------
+  A keyword was used which was not defined in a screen keyword list.
+
+  This message is always given when referencing context keywords from
+  another help file.
+\end
+
+screen( "HC missing parameter" )
+Warning: Missing Parameter
+----------------------------------------------------------------------
+  No keyword definition was found between two commas in a screen()
+  keyword list.
+\end
+
+screen( "HC tab error" )
+Error: '=' expected in option
+----------------------------------------------------------------------
+  The 'T' option was entered in the command file with no '=nn'.
+  (See \#Help Compiler Options\#.)
+\end
+
+screen( "HC duplicate name" )
+Error: Doubly defined screen name
+----------------------------------------------------------------------
+  A screen keyword has been used already for another screen.
+\end
+
+screen( "HC option error" )
+Error: Illegal option character
+----------------------------------------------------------------------
+  Legal options are L, N, T, V, W and 0-4.
+  (See \#Help Compiler Options\#.)
+\end
+
+screen( "HC missing end" )
+Error: Missing end of screen
+----------------------------------------------------------------------
+  No '\\end' found before end of source file.
+\end
+
+screen( "HC missing quote" )
+Error: Pending end of string
+----------------------------------------------------------------------
+  No closing " before end of line.
+\end
+
+screen( "HC screen to long" )
+Error: Screen too long
+----------------------------------------------------------------------
+  Each screen can be at most 32 Kbytes.  (Check for missing '\\end'.)
+\end
+
+screen( "HC link error" )
+Error: Too many parameters
+----------------------------------------------------------------------
+  The \\link( ) function can only contain one string inside its
+  parenthesis.
+\end
+
+screen( "HC too many files" )
+Error: Too many source file in command file
+----------------------------------------------------------------------
+  At most 64 source files can be used.
+\end
+
+screen( "HC unknown statement" )
+Error: Unknown statement
+----------------------------------------------------------------------
+  Something was found before a 'screen( )' and/or after an '\\end'.
+\end
+
+screen( "HC bad character" )
+Error: Use of illegal character
+----------------------------------------------------------------------
+  '\\x1d' cannot be used in a source file.
+\end
+
+screen( "HC bad parameter" )
+Error: Wrong parameter type
+----------------------------------------------------------------------
+  All parameters must be strings in quotes " ".
+\end
+
+screen( "HC wrong scope" )
+Error: Wrong scope for statement
+----------------------------------------------------------------------
+  '\\link' '\\#' or '\\end' was found before a 'screen( )' and/or after
+  an '\\end' statement.
+\end
+
+screen( "HC out of RAM" )
+Error: Out of memory
+----------------------------------------------------------------------
+  Execute HC.TTP from the desktop.
+  Remove accessories and boot files.
+  Get a bigger computer.
+\end
+
+screen( "HC input error" )
+Help Compiler Input File Error
+----------------------------------------------------------------------
+  Check for missing file, missing folder or bad sectors.
+\end
+
+screen( "HC output error" )
+Help Compiler Output File Error
+----------------------------------------------------------------------
+  Check for write protection, missing folder, disk full or (rarely)
+  directory full.
+\end
+
+screen( "Copyright" )
+This online documentation was created by John Kormylo
+    Ω1994,1995,1996 E.L.F. Software
+
+It uses information obtained from:
+
+C-Entwicklungssystem fÅr Atari ST/TT und Mega STE
+MC68040 Makro-Assembler fÅr Atari ST/TT und Mega STE
+Quelltextdebugger fÅr Atari ST/TT und Mega STE
+    Ω1991 Pure Software GmbH
+    Ω1988/1990 Borland International Inc.
+
+PureC-Update Version 1.1
+
+Harper Collins German Dictionary
+    Ω1991 HarperCollins Publishers
+
+Pure C English Overview - Dan Wilga
+    Ω1992 Gribnif Software
+
+Atari TOS Developer's Kit
+    Ω1991/1990/1987 Atari Corp.
+    Ω1985 Digital Research Inc.
+
+Atari Falcon030 Developer's Kit
+    Ω1993 Atari Corp.
+
+Atari ST Internals
+Atari ST GEM Programmer's Reference
+Atari ST Tricks & Tips
+ST Disk Drives: Inside & Out
+    Ω1985/1986/1987/1988 Data Becker GmbH
+    Ω1985/1986/1987/1988 Abacus Software
+
+The Atari Compendium
+    Ω1993,1994 Software Development Systems
+
+MiNT is Not TOS:
+A Multitasking Operating System Extension for the Atari ST
+    Ω1990,1991,1992 Eric R. Smith.
+    Ω1992,1993,1994 Atari Corporation
+
+C Quick Reference
+    Ω1988 Que Corp.
+
+Learning to Program in C
+    Ω1983 Plum Hall Inc.
+
+Using C on the UNIX System
+    Ω1985, 1987, 1988 Purdue Research Foundation
+    Ω1989 O'Reilly & Associates
+
+Power Graphics using Turbo Pascal
+    Ω1989 John Wiley & Sons
+
+68030 Assembly Language Reference
+    Ω1989 Steve Williams
+
+M68000 Microprocessors User's Manual (9th edition)
+    Ω1993 Motorola Inc.
+
+MC146818A/D Real Time Clock Plus RAM (RTC)
+    Ω1988 Motorola Inc.
+
+DSP46002 Digital Signal Processor User's Manual
+    Ω1993 Motorola Inc.
+
+SCC User's Manual
+    Ω1992 Zilog Inc.
+
+NCR 53C80 Family SCSI Protocol Controller
+    Ω1989/1994 by NCR Corp.
+
+The VMEbus Handbook
+    Ω1988, 1990, 1991, 1992 by Wade D. Peterson
+
+
+It was formatted as compressed hypertext by HC.TTP
+    Ω1990 Borland International, Inc.
+
+See also \#Registration\#.
+\end
+
+screen( "Registration" )
+**********************************************************************
+****************  THIS IS AN UNREGISTERED DEMO COPY  *****************
+**********************************************************************
+
+If you want to register your copy, send $20 to:
+
+     E.L.F. Software
+     9614 Oregano Circle
+     Houston, TX 77036
+     U.S.A.
+
+Now accepting DISCOVER (need card number and expiration date).
+
+If you have previously registered, contact me on how best to send you
+your key file.  (elfsoft@mindspring.com)
+\end

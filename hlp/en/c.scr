@@ -1,0 +1,3534 @@
+
+
+screen( capsensitive("C Language") )
+C Language      (For more information, double-click text in boldface.)
+----------------------------------------------------------------------
+Keyword Reference:
+
+\#auto\#          \#default\#       \#for\#           \#return\#        \#typedef\#
+\#break\#         \#do\#            \#goto\#          \#short\#         \#union\#
+\#case\#          \#double\#        \#if\#            \#signed\#        \#unsigned\#
+\#cdecl\#         \#else\#          \#int\#           \#sizeof\#        \#void\#
+\#char\#          \#enum\#          \#long\#          \#static\#        \#volatile\#
+\#const\#         \#extern\#        \#pascal\#        \#struct\#        \#while\#
+\#continue\#      \#float\#         \#register\#      \#switch\#
+
+Tutorial: \#Introduction\#          \#Arrays\#
+          \#Data Types\#            \#Pointers\#
+          \#Storage Classes\#       \#Structures\#
+          \#Type Qualifiers\#       \#Unions\#
+          \#Constants\#             \#Functions\#
+          \#Variables\#             \#Preprocessor\#
+          \#Operators\#             \#Pure C Features\#
+
+Tables: \#Operator Precedence\#     \#printf/scanf Formats\#
+        \#Backslash Sequences\#     \link("Compiler Errors")Error Messages\#
+        \#ASCII Character Set\#     \link("Warning")Warning Messages\#
+\end
+
+screen( "Introduction" )
+Introduction to the C Language
+----------------------------------------------------------------------
+\link("Comments")/* Hypertext Example of a C Program */\#
+
+\##include\# <stdio.h>
+
+\#int\# \#main\# (\#void\#)
+ \link("local block"){\#
+  \link("%%GLOBAL%%")puts\#(\link("Constants")"Hello world!\\n"\#)\link("Not an Operator");\#
+  \#return\#(0);
+ }
+
+A C Language source code file basically consists of \link("Functions")function\#, \link("Variables")data\#,
+and \link("Preprocessor")macro\# definitions.  The function \#main\#() is called automatically
+by the actual main program, PCSTART (See \link("%%GLOBAL%%")Project File\#).  All
+executable code is located inside the function definition blocks { }.
+
+If multiple source code files are to be linked together, definitions
+common between files are usually put into header files (*.h) which are
+accessed using the \##include\# directive.  (See also \#extern\#.)
+
+Definitions (except for \#static\# variables) made inside a function
+definition or \#local block\# can only be used inside that block.
+Definitions made outside of a function definition (\#global\# definitions)
+are valid to the end of the source file.
+Note: ALL variables must be defined before they are used!
+
+Except for \link("Preprocessor")preprocessor\# directives, C source code is NOT line oriented.
+Definitions and executable code consist of statements separated by
+semicolons (;).  Statements can extend over multiple lines until
+terminated by a semicolon, or several statements can be put into one
+line.  \#Comments\# can be inserted almost anywhere.
+
+Executable code consists of expressions involving \link("Operators")operators\#, \link("Variables")variables\#
+and function calls, or program flow control using \#if\#, \#else\#, \#for\#,
+\#while\#, \#do\#-while, \#switch\# and \#goto\# statements.
+
+Blanks are used to separate names from names (and constants) and to
+separate operators from operators, but not to separate names from
+operators.  In particular, the constructs '\link("Pointers")char*\# p', 'char * p'
+'char *p' and 'char*p' (for example) are equivalent.
+
+All operations, including \link("Assignment Operators")'='\#, have a return value which can be
+used in another operation.  Therefore, the statements
+
+  a = 1;
+  b = 2;
+  c = a + b;
+
+could be written as
+
+  c = (a = 1) + (b = 2);
+
+The C Language itself has no I/O commands.   All I/O is handled by
+functions from the \link("%%GLOBAL%%")Libraries\#, of which there are many with largely
+duplicate functions.  Those in the ANSI standard library are easiest
+to use, but were intended for UNIX rather than GEM operating systems.
+
+/* Hypertext Example of a GEM Program */
+
+#include <aes.h>
+
+int main(void)
+ {
+  \link("%%GLOBAL%%")appl_init\#();
+  \link("%%GLOBAL%%")form_alert\#(1, "[0][Hello world! ][OK]");
+  \link("%%GLOBAL%%")appl_exit\#();
+  return(0);
+ }
+\end
+
+screen( "Comments" )
+Comments
+----------------------------------------------------------------------
+Anything between '/*' and '*/' will be ignored by the compiler and
+can therefore be used as a comments.  Comments can be extended over
+several lines.
+
+Note: The default is to ignore any '/*' inside of a comment, so that
+
+/* *** this code is no longer used ***
+  ...  /* old comment */ ...
+*** end of obsolete code *** */
+
+would terminate the comment after 'old comment '.  Similarly,
+
+  ... /* comment with missing terminator
+  ... /* next comment */
+
+would accidentally comment out the code between the two comments (hard
+bug to locate).  Both problems can be fixed using the -C flag from
+the \link("%%GLOBAL%%")Compiler Options\#.  The latter example would cause a compiler error
+(unless a later extra '*/' corrected the imbalance).
+\end
+
+screen( "Data Types" )
+Data Types
+----------------------------------------------------------------------
+Type                 bytes   minimum        maximum 
+----                 -----   -------        -------
+\#void\#                     0
+\#signed\# \#char\#              1   -128           +127
+\#unsigned\# \#char\#            1   0              255
+\#enum\#                     2   -32768         +32767
+\#signed\# \#short\#, \#int\#        2   -32768         +32767
+\#unsigned\# \#short\#, \#int\#      2   0              65535
+\#signed\# \#long\#              4   -2147483648    +2147483647
+\#unsigned\# \#long\#            4   0              4294967295
+\#Pointers\#                 4   0              4292967295
+
+Type    bytes   dynamic range          significant digits
+----    -----   -------------          ------------------
+\#float\#       4   3.4E-38   to 1.2E+38      6
+\#double\#  10/12   1.7E-4932 to 1.2E+4932   18
+
+Defaults are 'signed' and 'int'.  (See -K flag of \link("%%GLOBAL%%")Compiler Options\#.)
+
+See also \#typedef\#, \#struct\#, and \#union\#.
+\end
+
+screen( "global",
+		"Storage Classes" )
+Storage Classes
+----------------------------------------------------------------------
+Determine where \link("Variables")variables\# and \link("Functions")functions\# are to be stored in RAM.
+Not used in \#casting\#.
+
+\#auto\#     - Default storage class inside any function or \#local block\#.
+           Auto variables are stored on the \#stack\# and are therefore
+           lost when the function returns.  Auto name are defined only
+           within the current block { }.
+
+\#static\#   - Defined to the end of the current source file.  Static
+           variables are stored in the program Data or BSS segments
+           and therefore retain their value between function calls and
+           can be initialized.  Static functions cannot be called from
+           another file (avoids name duplication problems).
+
+global   - Default storage class for function definitions and for
+           variables defined outside of a function definition.
+           Global variables are the same as static variables with the
+           additional feature than their addresses are resolved by the
+           linker.  (Note: there is NO 'global' keyword in ANSI C.)
+
+\#extern\#   - Default storage class for function prototypes.  Used to
+           link global variables between modules.
+
+\#register\# - Do not store variable in RAM; leave it on the registers (as
+           much as possible).  Note: registers do not have addresses.
+\end
+
+screen( "local block" )
+local block
+----------------------------------------------------------------------
+A local block consists of pair of braces surrounding one or more lines
+of executable code.  These are primarily used with \#if\#, \#else\#, \#for\#, \#do\#
+and \#while\# statements, or with a \link("Functions")function\# definition.  They can
+be used anywhere, however.
+
+In addition, one can define \#auto\# variables which are stored on the
+\#stack\# and released when the local block is exited.  This can be useful
+for large functions so as not to clutter up the initial variable
+definitions with lots of names used only locally, or to define
+temporary \#register\# variables in speed sensitive locations.
+\end
+
+screen( "stack" )
+the stack
+----------------------------------------------------------------------
+\link("%%GLOBAL%%")PCSTART\# reserves a section of RAM and sets register A7 (the stack
+pointer) to point to the top of it.  Data is pushed onto the stack
+by pre-decrementing the stack pointer by the appropriate amount and
+writing to that address.  Data is popped off the stack by reading from
+that address then incrementing the stack pointer again.
+
+All function calls store the return address on the stack.
+
+Some function arguments are passed on the stack.
+
+Local variables are allocated from the stack (except when Pure_C
+implements them as register variables).
+
+Registers are often saved to the stack.
+
+Unless you request stack checking (\link("%%GLOBAL%%")Compiler Options\# -T), the stack can
+easily overflow into your global data area (BSS segment).
+
+See also \link("%%GLOBAL%%")SP\#.
+\end
+
+screen( "Type Qualifiers" )
+Type Qualifiers
+----------------------------------------------------------------------
+\#const\#    - variable's value will never be changed.
+\#volatile\# - variable's value can change without warning.
+
+Default is neither.
+
+These are primarily used to improve maintainability.
+\end
+
+screen( "Constants" )
+Constants
+----------------------------------------------------------------------
+Character constants:
+  Type is \#char\#
+  \#Syntax\#: '<single character>' or '\\<backslash sequence>'
+  Examples:  'a' '0' '\\0' '\\\\'
+  See also \#Backslash Sequences\#.
+
+String constants:
+  Type is \#char\#*
+  \#Syntax\#: "<list of characters and backslash sequences>"
+  Examples: "string" "first line\\nsecond line\\n"
+  Strings can be extended over two lines of source: puts("this is a"
+    " very long string"); 
+  A NULL ('\\0') character is automatically appended.
+  See also \#Backslash Sequences\# and the -M flag of \link("%%GLOBAL%%")Compiler Options\#.
+
+Decimal constants:
+  Default type is \#int\#
+  \#Syntax\#: [+/-] <digits> [L | l]
+    where <digits> are composed of 0 1 2 3 4 5 6 7 8 9
+    and L or l indicates \#long\#.
+  Examples: 255 -1 999999L 
+
+Octal constants:
+  Default type is \#int\#
+  \#Syntax\#: [+/-] 0 <octal digits> [L | l]
+    where <octal digits> are composed of 0 1 2 3 4 5 6 7
+    and L or l indicates \#long\#.
+  Examples: 0377 -01 0777777L
+
+Hexadecimal constants:
+  Default type is \#int\#
+  \#Syntax\#: [+/-] 0x <hex digits> [L | l]
+    where <hex digits> are composed of 0 1 2 3 4 5 6 7 8 9 a b c d e f
+    (or A B C D E F) and L or l indicates \#long\#.
+  Examples: 0xff -0x1 0x123456L
+
+Floating point constants:
+  Type is \#float\# or \#double\#
+  \#Syntax\#: [+/-] <digits> [. <digits>] [e |E [+/-] <digits> ]  (float)
+       or [+/-] <digits> [. <digits>] c | C [+/-] <digits>    (double)
+  Examples: 0.0  1.0  1e3 == 1000.0  3.141592653589793c0
+    Either the '.' or 'e' is required for a float.  The 'c' is always
+    required for a double.
+
+Note: Compiler pre-computes all calculations involving only constants
+and converts to appropriate type.  Multiplication by a constant is
+implemented using shift and add instructions (so using x<<2 instead
+of x*4 saves you nothing).  (See -G flag of \link("%%GLOBAL%%")Compiler Options\#.)
+\end
+
+screen( "Variables" )
+Variables
+----------------------------------------------------------------------
+... must be declared in the global area (outside of any function
+definition) or at the beginning of a function or local block { }.
+\#Syntax\#:
+
+[<qualifier>] [<class>] [<type> [*]] <name> [= <constant>] [, ...] ;
+
+where <qualifier> is a \link("Type Qualifiers")type qualifier\#,
+<class> is a \link("global")storage class\#,
+<type> is a \link("Data Types")data type\#,
+'*' ('**' '***' etc.) denotes a \link("Pointers")pointer\#, 
+<name> is a variable \link("Names")name\#, and
+<constant> is the initialization value (see \#Constants\#).
+
+Only \#global\# and \#static\# variables can be initialized.
+
+One can mix regular variables and pointers in the list: e.g.,
+
+  char c, *p, null = '', *string = "string";
+
+Note: While <qualifier>, <class> and <type> are all optional, at least
+      ONE of them is required per definition.
+
+See also \#Arrays\# and \#Structures\#.
+\end
+
+screen( "Names" )
+Names
+----------------------------------------------------------------------
+... are composed of characters a-z A-Z 0-9 and _
+The first character must not be 0-9 and the maximum length is set by
+the \link("%%GLOBAL%%")Compiler Options\#.
+
+A name cannot be identical to one of the \#C Language\# keywords, including
+unused keywords \#far\#, \#huge\# and \#near\#.
+
+A name defined in a function or \#local block\# will override a previous
+definition for the duration of the block { }.
+
+By convention, macros and (new) data types are in upper case while
+variables, functions, structures, unions and enums are in lower case.
+Pointers should start with the letter 'p', and unions with the letter
+'u'.  (Optional)
+\end
+
+screen( "Arrays" )
+Arrays
+----------------------------------------------------------------------
+An array is a block of consecutive data items of the same type,
+referenced with a subscript in brackets [ ].  The first subscript is
+always 0.
+
+  for(i=0; i<n; i++) array[i] = i;
+
+Arrays are defined the same as other \#Variables\#, except for the
+subscript range in brackets [ ] and the number of initializations.
+
+  int colors[4] = {BLACK, WHITE, RED, GREEN};
+
+One can define more than one subscript by using multiple brackets.
+
+  float matrix[10][20];
+
+When an array is initialized,  one can leave the subscript range empty
+and the compiler will set it using the number of entries initialized.
+
+  char string[] = "string";     /* sizeof(string) == 7 */
+
+When an array is passed as a function parameter or in an \#extern\#
+statement, one can leave the (first) subscript range empty and pass
+the subscript range (if needed) separately.  (Size is unknown.)
+
+  extern char buffer[];
+  void function(int array[][10], int num);
+
+An array name without its subscript(s) is a pointer constant.
+
+Using the above examples, 'buffer' would be (const char*) and 'array'
+would be (const int**).
+
+'array[i]' would be (int*) and would point to 'array[i][0]'.
+
+See also \#Pointers\# and \#Pointer Arrays\#.
+\end
+
+screen( "Pointers" )
+Pointers
+----------------------------------------------------------------------
+A pointer is a variable containing the memory address of another item.
+To access the thing the pointer is pointing to (dereference), use the
+unary '*' operator (see \#Unary Operators\#).
+
+The type of the pointer depends on what it supposed to be pointing to.
+
+  char *p;        /* p is a character pointer (char*) */
+  void **v;       /* v is a pointer to a void pointer (void**) */
+
+One can initialize a pointer with the address of \#global\# or \#static\#
+variable (or a string constant);
+
+When one increments a pointer, the address is incremented by the size
+of the type being pointed to, so that
+
+  (long) (p + i)  ==  ((long) p) + i * \#sizeof\#(*p)
+
+where 'p' is a pointer and 'i' is an integer.  Consequently, one can
+use array and pointer notation interchangeably:
+
+  *(p + i)  ==  p[i]
+
+See also \#Names\#, \#Pointer Arrays\# and \#Function Pointers\#.
+\end
+
+screen( "Pointer Arrays" )
+Pointer Arrays
+----------------------------------------------------------------------
+FORTRAN programmers might be dismayed by the fact that C does not
+support variable dimensions for 2 (or more) dimensional arrays:
+
+  float trace(int n, float a[n][n]);  /* NOT ALLOWED!  */
+
+However, an effective substitute is to use a pointer array.  For
+example, if an array of pointers 'float *pa[]' were initialized using
+
+  for(i=0; i<n; i++) pa[i] = a[i];  /* &(a[i][0]) */
+
+then one could use 'pa[i][j]' in place of 'a[i][j]' in any expression,
+and
+
+  float trace(int n, float *pa[]);
+
+is legal!  And while this technique uses more RAM, it compensates with
+much faster execution speeds.
+
+The following function will allocate space for a 2 dimensional array
+and initialize a pointer array for it.  (You can copy and paste it
+directly from the Help window.)
+
+/* Allocate a 2 dimensional array and return a pointer array[n] */
+
+  void* array_alloc(
+    const int n,       /* first dimension */
+    const long size)   /* sizeof(type) * second dimension */
+   {
+    char **a, *p;
+    int i;
+
+    a = \link("%%GLOBAL%%")malloc\#(n * (sizeof(char*) + size));
+    if(!a) return(0L);  /* not enough RAM */
+    p = (char*) (a + n);
+    for(i=0; i<n; i++, p += size) a[i] = p;
+    return(a);
+   }
+
+which can be called using
+
+  float **a;
+  ...
+  a = array_alloc(n, m * sizeof(float));
+
+  for(i=0; i<n; i++) for(j=0; j<m; j++) a[i][j] = 0.0;
+  ...
+  \link("%%GLOBAL%%")free\#(a);
+
+Note: Use 'a[0]' instead of 'a' in functions which expect the array
+      itself (like \link("%%GLOBAL%%")memset\#).
+\end
+
+screen( "Structures" )
+Structures
+----------------------------------------------------------------------
+A structure is a block of consecutive data items of mostly different
+types, referenced by member names.  For example,
+
+  \#struct\# list {
+    char *name;
+    int index;
+   };
+
+where 'list' is the structure name, and 'name' and 'index' are member
+names.  Now that 'struct list' is a defined data type, it can be used
+in variable definitions:
+
+  \#struct\# list card[100];
+
+where 'card' is an array of structures.  The individual items in the
+structure are referenced using the '.' and '->' \#Membership Operators\#:
+
+  card[i].name = "John Doe."
+  (card + i)->index = 1;
+
+One can also initialize a \#global\# or \#static\# structure variable:
+
+  \#static\# \#struct\# list dead = {"deceased", -1};
+
+Note: All entries (except \#char\#) will be aligned to even offsets.
+      \#sizeof\#( \#struct\# <name> ) will always be an even number.
+
+See also \#Names\#, \#Bit Fields\#, \#Linked List\# and \#typedef\#.
+\end
+
+screen( "Unions" )
+Unions
+----------------------------------------------------------------------
+A union is a set of data items of different types with the same
+address in memory.  For example,
+
+  \#union\# pack {
+    unsigned long l;
+    unsigned char bytes[4];
+   } u;
+
+  u.bytes[0] = 'p';
+  u.bytes[1] = 'a';
+  u.bytes[2] = 'c';
+  u.bytes[3] = 'k';
+
+accomplishes the same thing as
+
+  u.l = (((((((long) 'p') << 8) | 'a') << 8) | 'c') << 8) | 'k':
+
+When you initialize a union, it uses the type of the first entry.
+
+See also \#Names\#, \#Data Types\# and \#typedef\#.
+\end
+
+screen( "Bit Fields" )
+Bit Fields
+----------------------------------------------------------------------
+A way to pack fields with different numbers of bits is to use a
+structure with bitfields:
+
+\#struct\# {
+  int high:8;             /* leftmost 8 bits */
+  unsigned int flag:1;    /* 1 bit flag */
+ } packed;
+
+Members 'packed.high' and 'packed.flag' will behave like ordinary
+variables except that they have a more limited range of values.
+
+Only \#int\# and \#unsigned\# int can be used with bit fields.  A \#signed\# int
+requires at least one bit for the sign, so that 'packed.high = 255'
+and 'packed.high = -1' are equivalent.
+
+See also \#Structures\#.
+\end
+
+screen( "Linked List" )
+Linked List
+----------------------------------------------------------------------
+It is possible for a structure to contain a structure pointer to
+itself:
+
+\#struct\# link {
+  struct link *prev;
+  struct link *next;
+  char *data;
+ } list[100];
+
+After proper initialization this can be used as a linked list of
+string pointers.
+
+See also \#Arrays\#, \#Pointers\#, \#Structures\# and \#Unions\#.
+\end
+
+screen( "Pure C Features" )
+Pure C Features
+----------------------------------------------------------------------
+These are peculiar to Pure C:  \#cdecl\#
+                               \#pascal\#
+                               \#Parameter Passing\#
+                               \##pragma warn\#
+
+Elements of these are peculiar to Pure C:
+
+                               \#double\#
+                               \#Predefined Macros\#
+                               \#System Header Files\#
+\end
+
+screen( "Operators" )
+Operators
+----------------------------------------------------------------------
+Nomenclature:  'Lvalue Operator Rvalue'  as in  'a + b'
+
+\#Unary Operators\#        - + ~ ! * & ++ -- \#sizeof\# \link("casting")(<type>)\#
+\#Arithmetic Operators\#   * / % + -
+\#Bitwise Operators\#      & | ^ << >>
+\#Logical Operators\#      == != < > <= => && ||
+\#Membership Operators\#   . -> ( ) [ ]
+\#Assignment Operators\#   = += -= *= /= %= &= |= ^= <<= >>=
+\#Conditional Operator\#   ?
+\#Not an Operator\#        , ; : { } /* */
+
+In general, Lvalue and Rvalue can be \#Variables\#, \#Constants\#, \#Functions\#,
+or further operator expressions; e.g., '(a + 1) < (b & 0xff)'
+
+(Some operators require certain operands or data types.)
+
+See also \#Operator Precedence\#.
+\end
+
+screen( "Unary Operators" )
+Unary Operators
+----------------------------------------------------------------------
+... have only one operand (usually the Rvalue); e.g., -x.
+
+-  Unary minus: change sign of Rvalue.
++  Unary plus: return value of Rvalue (no change).
+~  One's Complement: invert all bits in Rvalue.
+!  Logical Not: replace Rvalue TRUE with FALSE or FALSE with TRUE.
+   (0 is FALSE, anything else is TRUE.)
+*  Indirection (Rvalue must be a \link("Pointers")pointer\#): returns what the pointer
+   was pointing to.
+&  Address (Rvalue must NOT be a \#register\#): returns the address of the
+   Rvalue.
+
+++ Increment: add one to variable (changes variable).
+   Pre-increment (++Rvalue) returns incremented Rvalue.
+   Post-increment (Lvalue++) returns Lvalue before increment.
+
+-- Decrement: subtract one from variable (changes variable).
+   Pre-decrement (--Rvalue) returns decremented value.
+   Post-decrement (Lvalue--) returns value before decrement.
+
+\#sizeof\# returns number of bytes for type or variable name.
+
+\link("casting")(<type>)\# converts Rvalue from one data type to another, where <type>
+   is the desired data type.
+\end
+
+screen( "casting" )
+Casting
+----------------------------------------------------------------------
+\#Syntax\#:
+                        ( <type> ) <value>
+
+where <type> is a data type and <value> is an expression, variable or
+function name with a different data type.
+Returns <value> converted into desired type.
+
+Converting \#signed\# \#char\# to signed \#int\# or signed \#long\# will preserve the
+sign and value (sign bit extension).  Converting unsigned char to 
+unsigned int or unsigned long pads zero's.  Converting signed or
+unsigned longs to int or char chops off the left bits (sign bit not
+copied).
+
+Check \#Operator Precedence\# for correct usage:
+
+  (char*) p + i;       /* convert p to char* and add i bytes */
+  (char*) (p + i);     /* add p & i and convert to char*     */
+  ((struct s*) p)->pp; /* convert p to struct s* and get pp  */
+  (struct s*) p->pp;   /* get p->pp and convert to struct s* */
+
+See also \#Unary Operators\#.
+\end
+
+screen( "Arithmetic Operators" )
+Arithmetic Operators
+----------------------------------------------------------------------
++  Addition             2 + 3 == 5
+-  Subtraction          5 - 3 == 2
+*  Multiplication       2 * 3 == 6
+/  Division             7 / 3 == 2  (remainder is dropped)
+%  Modulus (Remainder)  7 % 3 == 1  (a % b) == (a - (a/b)*b)
+
+%   can only be used with int, short & long.
+* / can also be used with float & double.
++ - can also be used with char and pointers.
+
+See also \#Unary Operators\# + - ++ and --
+and \#Assignment Operators\# += -= *= /= and %=
+\end
+
+screen( "Bitwise Operators" )
+Bitwise Operators
+----------------------------------------------------------------------
+&  Bitwise And         01100 & 01010 == 01000
+|  Bitwise Or          01100 | 01010 == 01110
+^  Bitwise Xor         01100 ^ 01010 == 00110
+
+<< Shift Left:         1 << 3 == 010 == 8
+   return Lvalue shifted left Rvalue bits.
+
+>> Shift Right         012 >> 3 == 1
+   return Lvalue shifted right Rvalue bits.
+
+Note: Bitwise operators cannot be used with \#float\# or \#double\#.
+
+See also \#Unary Operators\# ~
+and \#Assignment Operators\# &= |= ^= <<= and >>=
+\end
+
+screen( "Logical Operators" )
+Logical Operators
+----------------------------------------------------------------------
+... return either TRUE (-1) or FALSE (0).
+
+==  Equal: return TRUE if operands are equal.
+!=  Not Equal: return TRUE if operands are not equal.
+
+<   Less Than: return TRUE if Lvalue is less than Rvalue.
+>   Greater Than: return TRUE if Lvalue is greater than Rvalue.
+
+<=  Less Than or Equal: return TRUE if Lvalue is less than or equal to
+     Rvalue.
+
+=>  Equal or Greater Than: return TRUE if Lvalue is greater than or
+     equal to Rvalue.
+
+&&  Logical And: return TRUE if both operands are TRUE.
+||  Logical Or: return TRUE if either operand is TRUE.
+
+Note: Logical expressions are actually implemented using branches, so
+      if the Lvalue of an && is FALSE, or the Lvalue of an || is TRUE,
+      then the Rvalue is never evaluated.
+      The order in which expressions are evaluated can have a
+      significant effect on program speed and reliability.
+
+See also \#Unary Operators\# !
+\end
+
+screen( "Membership Operators" )
+Membership Operators
+----------------------------------------------------------------------
+... return a more specific definition.
+
+. is used with structures and unions to select a particular member or
+    subtype; e.g., structure_name.member or union_name.subtype
+    See also \#Structures\# and \#Unions\#.
+
+-> is used with structure pointers to select a particular member;
+    e.g., pointer->member  This is equivalent to (*pointer).member
+    but is somewhat more readable.
+
+[ ] are used with arrays; e.g., array_name[index] or pointer[index]
+    See also \#Arrays\# and \#Pointers\#.
+
+( ) are used to establish precedence in expressions;
+    e.g., (a + b) / ((c + d) << (e++))
+
+    They are also used with \#Functions\#, \#casting\#, and \#if\#, \#do\#, \#while\#,
+    \#for\#, \#return\#, \#sizeof\# and \#enum\# statements.
+\end
+
+screen( "Assignment Operators" )
+Assignment Operators
+----------------------------------------------------------------------
+... do two things:  First, they change the Lvalue.  Second, they
+return this changed Lvalue for further operations (if any).
+for example;  a = b = 0;  or  if((err = funct()) != 0)
+
+= Set Lvalue equal to Rvalue.  Perform type conversion if necessary.
+  Note: one can copy an entire structure (but not an array) using '='.
+
+*=  Compute (Lvalue * Rvalue) and replace Lvalue.
+/=  Compute (Lvalue / Rvalue) and replace Lvalue.
+%=  Compute (Lvalue % Rvalue) and replace Lvalue.
++=  Compute (Lvalue + Rvalue) and replace Lvalue.
+-=  Compute (Lvalue - Rvalue) and replace Lvalue.
+&=  Compute (Lvalue & Rvalue) and replace Lvalue.
+|=  Compute (Lvalue | Rvalue) and replace Lvalue.
+^=  Compute (Lvalue ^ Rvalue) and replace Lvalue.
+<<= Compute (Lvalue << Rvalue) and replace Lvalue.
+>>= Compute (Lvalue >> Rvalue) and replace Lvalue.
+
+See also \#Unary Operators\# ++ and --
+\end
+
+screen( "Conditional Operator" )
+Conditional Operator  '?'
+----------------------------------------------------------------------
+  Lvalue = <test> ? Rtrue: Rfalse;
+
+where <test> is a logical expression.  This is equivalent to
+
+  \#if\#( <test> ) Lvalue = Rtrue;
+  \#else\# Lvalue = Rfalse;
+
+The advantage of the conditional operator can be seen when Lvalue is
+a complicated expression (involving arrays of pointers to structures
+containing unions with pointers ...).  The savings is in program size
+rather than speed.
+\end
+
+screen( "Not an Operator" )
+The following are not operators, but are used in the C Language.
+----------------------------------------------------------------------
+, is used to separate parameters in \link("Functions")function\# statements, names in
+    \link("Variables")variable\# definitions, constants in \link("Arrays")array\# or \link("Structures")structure\#
+    initializations, and constant names in an \#enum\# definition.
+    One can also combine executable statements into a series of the
+    form
+                   (<statement> , <statement> [, ...] )
+
+    which will be executed from left to right (returning the value of
+    the rightmost statement).  This is used primarily in a \#for\#
+    statement or in macro definitions.
+
+; is used to separate statements in a code block, elements in a
+    \link("Structures")structure\# or \link("Unions")union\# definition, and the initialization, test, and
+    increment sections of a \#for\# statement.
+
+: is used to define a statement label (see \#goto\#), a \#case\# statement,
+    or a \link("Bit Fields")bit field\#.  It is also used with the \#Conditional Operator\#.
+
+{ } are used to define \link("Functions")functions\#, \link("Structures")structures\#, \link("Unions")unions\#, and \#enum\#s.
+    They are used by \#switch\# statements, and are optional with \#if\#,
+    \#else\#, \#for\#, \#while\# and \#do\#-while statements.  They are used to group
+    constants for initialization of \link("Arrays")array\# or structure variables.
+    They can also be used to create \#local block\#s.
+
+/* is used to start a \link("Comments")comment\#.
+
+*/ is used to end a \link("Comments")comment\#.
+\end
+
+screen( "Functions" )
+Functions
+----------------------------------------------------------------------
+Functions break the work of the program into smaller (hopefully
+reusable) segments.  The values of the parameters are passed to the
+function and a single value is returned.  Any changes to the
+parameters inside the function will not affect the calling routine.
+
+Execution returns to the calling routine using the \#return\#
+statement.  \link("void")Void\# functions can use 'return;' or 'return(void);',
+or use the implied return at the end of the local block }.
+
+Additional information can be returned by passing the addresses of the
+variables to be changed, or by using global or static variables.
+Parameters of the form 'array[]' and '*array' are equivalent.
+
+  \#ANSI Definition\#
+  \#K&R Definition\#
+  \#Prototyping\#
+  \#Calling\#
+  \#main\#
+  \#Variable Argument Lists\#
+  \#Function Pointers\#
+  \#Parameter Passing\#
+
+Note: functions can even call themselves, creating a new set of local
+      variables on the \#stack\#.
+\end
+
+screen( "ANSI Definition" )
+ANSI Function Definition
+----------------------------------------------------------------------
+\#Syntax\#:
+  [\#static\#] [<type>] [<parm>] <name> (
+    <type> <arg name>,
+    <type> <arg name>,
+    ... )
+   {
+    <local block>
+   }
+
+where <type> is a \link("Data Types")data type\#,
+<parm> is either '\#cdecl\#' or '\#pascal\#',
+<name> is the function name,
+<arg name> is a parameter name, and
+<local block> consists of local variable definitions and executable
+code.
+
+If there are no parameters, the syntax is
+
+  [\#static\#] [<type>] [<parm>] <name> (void)
+   {
+    <local block>
+   }
+
+Example:
+
+  \#float\# trace(      /* returns trace of matrix a */
+    \#int\# n,          /* dimension of matrix a     */
+    float a[N][N] ) /* array a    (N is a \link("#define")macro\#) */
+   {
+    float sum;
+    int i;
+
+    sum = 0.0;
+    \#for\#(i=0; i<n; i++) sum = sum + a[i][i];
+    \#return\#(sum);
+   }
+
+See also \#Names\#.
+\end
+
+screen( "K&R Definition" )
+K&R Function Definition
+----------------------------------------------------------------------
+\#Syntax\#:
+  [\#static\#] [<type>] [<parm>] <name> (<arg name> [, ...] )
+    <type> <arg name> [, ...] ;
+    <type> <arg name> [, ...] ;
+    ...
+   {
+    <local block>
+   }
+
+where <type> is a \link("Data Types")data type\#,
+<parm> is either '\#cdecl\#' or '\#pascal\#',
+<name> is the function name,
+<arg name> is a parameter name, and
+<local block> consists of local variable definitions and executable
+code.
+
+Example:
+
+  \#float\# trace(n,a)  /* returns trace of matrix a */
+    \#int\# n;          /* dimension of matrix a     */
+    float a[N][N];  /* array a    (N is a \link("#define")macro\#) */
+   {
+    float sum;
+    int i;
+
+    sum = 0.0;
+    \#for\#(i=0; i<n; i++) sum = sum + a[i][i];
+    \#return\#(sum);
+   }
+
+See also \#Names\#
+\end
+
+screen( "Prototyping" )
+Function Prototyping
+----------------------------------------------------------------------
+... enables the compiler to perform type checking and conversion for
+function calls.  Also, without prototypes functions have to be defined
+before they can be called, forcing a "bottom up" programming style.
+
+Prototypes are generally stored in header files (see \##include\#).
+The storage class for prototypes is \#extern\#.
+
+Prototypes will not interfere with a subsequent function definition
+(so long as the types agree).
+
+The \link("Syntax")syntax\# is essentially the same as the \#ANSI Definition\#, except
+that the {<local block>} is replaced with a semicolon and the argument
+names are optional.
+
+  [<type>] [<parm>] <name> (
+    <type> [<arg name>],
+    <type> [<arg name>],
+    ...) ;
+
+Examples:
+
+  float trace(int n, float a[N][N]);
+  void signal_handler(int);
+\end
+
+screen( "Calling" )
+Function Calling
+----------------------------------------------------------------------
+\#Syntax\#:
+               <name> ( <arg> [, ...] )
+               <name> ()
+
+where <name> is the function name and the value of <arg> is passed to
+the corresponding function parameter.
+
+Function arguments can be \link("Variables")variables\#, \link("Constants")constants\# or \link("Operators")expressions\#.
+Functions can be used as part of an expression, or simply as a
+statement by itself (the return value does not have to be used).
+
+Examples:
+
+  fd = \link("%%GLOBAL%%")fopen\#("file.dat", "w");   /* FILE *fd */
+
+  \link("%%GLOBAL%%")strcpy\#(array, "string");   /* char array[32] */
+
+  if( \link("%%GLOBAL%%")fwrite\#(array, \link("%%GLOBAL%%")strlen\#(array), 1, fd) ) return(-1);
+\end
+
+screen( capsensitive("argv"),
+		capsensitive("argc"),
+		capsensitive("envp"),
+		capsensitive("main") )
+main()
+----------------------------------------------------------------------
+Function main() is called by \link("%%GLOBAL%%")PCSTART\#, \link("%%GLOBAL%%")PCXSTART\# or \link("%%GLOBAL%%")PCVSTART\#.
+\#Syntax\#:
+
+    int main(void) { <code> }
+    int main(int argc, char* argv[], char** envp ) { <code> }
+
+argc       - number of elements in argv[].
+
+argv[0]    - NULL string under TOS (program name under UNIX).
+argv[1]    - first parameter in command line (usually a filename).
+...
+argv[argc] - NULL string.
+
+envp       - Pointer to environment parameter list, which is a series of
+             consecutive NULL terminated strings of the form
+             "name=descripton", ending with a NULL string.
+
+The return value is used as a program completion code, where 0 means
+no errors, <0 for system errors, and >0 for user errors.
+
+The second form of main() is used primarily for *.TTP programs, where
+a command line can be entered at run time, or for subprograms of a
+shell program.  It can also be used by *.PRG programs using the
+'Install Application' feature of GEMDOS, where opening a file with a
+special extension will start up the selected application, or by
+dragging a file onto an application icon.  The name of the file is
+passed to the application as the only command line parameter.
+
+Environment parameters are another way for programs to communicate
+with one another.  Since command lines are limitted to 127 characters,
+one can use environment parameter "ARGV=..." to pass longer command
+lines (see \link("%%GLOBAL%%")PCVSTART\#).  However, TOS doesn't really support environment
+parameters (without a TOS shell).
+
+Note: Calling \link("%%GLOBAL%%")Fsfirst\#() will overwrite the command line!
+\end
+
+screen( "Variable Argument Lists",
+		sensitive("...") )
+Variable Argument Lists
+----------------------------------------------------------------------
+... allow you to define functions where the number and type of the
+arguments can vary from call to call.  For example, \link("%%GLOBAL%%")printf\# and \link("%%GLOBAL%%")scanf\#
+use variable argument lists.
+
+To define a function with a variable argument list, simply use '...'
+as the last argument in the list.  At least one other argument is
+required, so that by using it (and possibly others) the function can
+determine how many and what type of arguments to expect.
+
+Within the function, call the function (actually, a macro)
+
+  \link("%%GLOBAL%%")va_start\#(ap, parmN);
+
+where 'ap' is a void pointer and 'parmN' isn't used in Pure C's
+implementation.  One can then extract the extra parameters one
+at a time from left to right using the function call
+
+  parm = \link("%%GLOBAL%%")va_arg\#(ap, type);
+
+where 'type' is the data type of parameter 'parm'.  Finally, call
+
+  \link("%%GLOBAL%%")va_end\#(ap);
+
+for portability (with Pure C it does nothing).  These macro's are
+defined in header file STDARG.H (see \##include\#).
+
+Note: Using '...' forces the remaining arguments to be passed on the
+      \#stack\#.  And as part of the ANSI standard, \#char\#'s will be
+      converted to \#int\#'s and \#float\#'s will be converted to \#double\#'s
+      before being passed (so never use \#char\# or \#float\# with \link("%%GLOBAL%%")va_arg\#).
+
+Example:
+
+/* Return the largest of n doubles */
+
+double dmax(int n, ...)
+ {
+  void *ap;
+  double max, parm;
+
+  if(n < 1) return(-DBL_MAX);
+  va_start(ap, n);
+  max = va_arg(ap, double);
+  while(--n) {
+    parm = va_arg(ap, double);
+    if(parm > max) max = parm;
+   }
+  va_end(ap);
+  return(max);
+ }
+\end
+
+screen( "Function Pointers" )
+Function Pointers
+----------------------------------------------------------------------
+... are variables which store the starting address of a function.
+De-referencing a function pointer means executing that function.
+Otherwise they are like any other pointer variable.
+
+The most common application for function pointers is as a function
+parameter so that one can execute a function (or several different
+functions) inside another (older) function (as is done by \link("%%GLOBAL%%")signal\#
+and \link("%%GLOBAL%%")Supexec\#).
+
+Definition \#Syntax\#:
+
+ [<class>] [<type>] [<parm>] (* <name>) (<type> <arg name> [, ...] );
+
+where <class> is the \link("global")storage class\# of the pointer,
+<type> is a \link("Data Types")data type\# of the function,
+<parm> is either '\#cdecl\#' or '\#pascal\#',
+<name> is the pointer name, and
+<arg name> is a dummy argument name.
+
+Calling \#Syntax\#:
+
+   (* <name>) ( <arg> [, ...] )
+
+where the value of <arg> is passed to the corresponding <arg name>.
+
+Example:
+
+  int (* write_string) (const char *s);
+
+  write_string = puts;
+  (* write_string) ("Hello world! \\n");
+\end
+
+screen( capsensitive("Parameter Passing") )
+Parameter Passing
+----------------------------------------------------------------------
+Pure C passes parameters by registers.  Registers D0-D2 are used for
+passing data and registers A0-A1 for passing pointers.  Once these are
+full, everything else is passed on the stack.  \#Variable Argument Lists\#
+are always passed on the stack.
+
+Normally, \#float\#s and \#double\#s are also passed on the stack, but when
+using the FPU (see \link("%%GLOBAL%%")Compiler Options\#), registers FP0-FP2 are used for
+passing floating point values.
+
+The first pointer goes into A0 and the second into A1.  The first
+non-pointer goes into D0, the second into D1, and the third into D2.
+The first \#double\# goes into FP0, the second into FP1, and the third
+into FP2 (when used).
+
+The remaining parameters are pushed onto the \#stack\# from right to left.
+(Since the stack fills from the top down, that means that the
+parameters are arranged in memory from left to right.)
+A \#double\# function (when not using the FPU) or a \#struct\# function is
+also passed a pointer for the return value (it will be found at 4(A7) ).
+
+The return value uses register D0 for data, A0 for pointers, and FP0
+for floating point (when used).  When not using the FPU, \#double\#
+functions put the result into the location whose address was passed
+on the stack (see above).
+
+See also \#stack\#, \#cdecl\#, \#pascal\# and \link("%%GLOBAL%%")Compiler Options\#.
+\end
+
+screen( "Preprocessor" )
+Preprocessor
+----------------------------------------------------------------------
+The preprocessor (CPP.TTP) performs symbolic substitution and editing
+on the C source code before it is turned over to the compiler
+(creating file *.I which is subsequently deleted).
+
+Preprocessor directives are line oriented, and always start with '#'
+in the first column.  The backslash '\\' character can be used as the
+last character in a line to continue on the next line.
+
+The most common directives are:
+
+\##include\# - insert code from a header file.
+\##define\#  - create a macro.
+\##undef\#   - remove a macro.
+\##pragma\#  - see \##pragma warn\#.
+
+Condition compilation is often used in header files to prevent
+duplicate definitions.  It is also used to make source code portable
+between different compilers, or to create a special DEBUG version of
+the program, or to deactivate obsolete code.
+
+\##if\#  \##ifdef\#  \##ifndef\#  \##else\#  \##elif\#  \##endif\#
+
+\##line\#    - resume compilation at a specific line number.
+\##error\#   - stop compilation and display message.
+
+Note: One can insert blanks between the '#' and the directive name in
+      order to achieve a more structured appearance.
+
+See also \#Predefined Macros\#.
+\end
+
+screen( capsensitive("#include") )
+#include
+----------------------------------------------------------------------
+  #include <sysfile.h>
+  #include "filename.ext"
+  #include "pathname"
+
+where 'sysfile.h' is located in the INCLUDE folder, 'filename.ext'
+is located in the same folder as the source code, and 'pathname' is
+either a full pathname ("c:\\folder\\filename.ext") or a relative
+pathname ("..\\folder\\filename.ext" where '..' means the folder which
+contains the current folder).
+
+See also \#Preprocessor\# and \#System Header Files\#.
+\end
+
+screen( "System Header Files" )
+System Header Files in the INCLUDE Folder
+----------------------------------------------------------------------
+                        Standard Headers
+
+<stdio.h>    - Standard I/O function prototypes.
+<errno.h>    - Standard I/O error codes.
+<string.h>   - String function prototypes.
+<time.h>     - Date & time function prototypes.
+<math.h>     - Floating point function prototypes.
+<stdlib.h>   - Standard function prototypes.
+<setjmp.h>   - Error recovery function prototypes.
+<signal.h>   - ANSI signal function prototypes.
+<stdarg.h>   - \#Variable Argument Lists\# macro definitions.
+<assert.h>   - \link("%%GLOBAL%%")assert\#() macro definition.
+<ctype.h>    - Character type function prototypes.
+<stddef.h>   - Standard macro definitions.
+
+                         Atari Headers
+
+<tos.h>      - \link("%%GLOBAL%%")GEMDOS\#, \link("%%GLOBAL%%")BIOS\#, \link("%%GLOBAL%%")XBIOS\# and \link("%%GLOBAL%%")MiNT\# function prototypes.
+<aes.h>      - \link("%%GLOBAL%%")AES\# function prototypes.
+<vdi.h>      - \link("%%GLOBAL%%")VDI\# function prototypes.
+<screen.h>   - \link("%%GLOBAL%%")VT52\# Escape Codes macro definitions.
+<linea.h>    - \link("%%GLOBAL%%")Line A\# function prototypes.
+
+                        Pure C Headers
+
+<ext.h>      - UNIX function prototypes.
+<graphics.h> - Borland Graphics Interface (\link("%%GLOBAL%%")BGI\#) prototypes.
+<process.h>  - \link("%%GLOBAL%%")exec\#() function prototype.
+<limits.h>   - Special integer constants (macro definitions).
+<float.h>    - Special floating constants (macro definitions).
+<portab.h>   - Macros and \#typedef\#s for RSC.PRG output.
+
+See also \link("%%GLOBAL%%")Libraries\#.
+\end
+
+screen( capsensitive("#define") )
+#define
+----------------------------------------------------------------------
+  #define macro text
+  #define macro(arg, ...) text arg text
+  #define macro(arg, ...) text(arg)text
+  #define macro(arg, ...) text ## arg
+  #define macro(arg, ...) "text" # arg
+
+where 'macro' is a macro name, 'arg' is an argument name, and 'text'
+can be any combination of characters (except '#' and '\\').
+
+The '##' operator causes the surrounding blanks to be removed.
+The '#' operator causes the surrounding strings to be merged 
+  ('arg' must be a string constant).
+
+Wherever the 'macro' appears in the source code, it will be replaced
+by the 'text'.  Also, 'macro' will now satisfy the \##ifdef\# directive.
+
+Examples:
+
+  #define DEBUG
+  #define NULL 0
+  #define SQUARE(x) (x) * (x)
+  #define PACK_INT(a,b) ( ( ((int) (a)) << 8) | ((b) & 255) )
+  #define PATH(member) "C:\\FOLDER\\" # member
+
+Note: Because macros work by symbolic substitution, using '++' or
+      '--' in a macro argument can have unexpected results:
+
+      j = SQUARE(i++);   /* j = i * (i+1); i += 2; */
+
+See also \#Preprocessor\#, \#Names\#, \##undef\#, and \#Predefined Macros\#.
+\end
+
+screen( "Predefined Macros",
+		capsensitive("__DATE__"),
+		capsensitive("__FILE__"),
+		capsensitive("__LINE__"),
+		capsensitive("__PUREC__"),
+		capsensitive("__STDC__"),
+		capsensitive("__TIME__"),
+		capsensitive("__TOS__"),
+		capsensitive("__TURBOC__") )
+Pure C Predefined Macros
+----------------------------------------------------------------------
+__LINE__    current line number.
+__FILE__    current source code filename.
+__DATE__    current date
+__TIME__    current time
+__STDC__    TRUE if -A flag set in \link("%%GLOBAL%%")Compiler Options\#.
+
+__PUREC__   version number of compiler.
+__TURBOC__  same as __PUREC__ (indicates compatibility with TURBO C)
+__TOS__     always 1
+
+See also \#System Header Files\#.
+\end
+
+screen( capsensitive("#undef") )
+#undef
+----------------------------------------------------------------------
+Stops macro expansion, resets macro name to be undefined.  (Must be
+used before the macro name can be redefined.)  Syntax:
+
+  #undef 'macro'
+
+where 'macro' is a previously defined macro name.
+
+See also \#Preprocessor\#, \#Names\# and \##define\#.
+\end
+
+screen( capsensitive("#pragma") )
+#pragma - compiler specific directives.
+----------------------------------------------------------------------
+Pure C supports only one such directive: \##pragma warn\#.
+
+No error is generated for attempting an unsupported #pragma
+directive.
+
+See also \#Preprocessor\#.
+\end
+
+screen( capsensitive("#if") )
+#if
+----------------------------------------------------------------------
+  #if 'logical expression'
+
+where 'logical expression' can use any of the \#Logical Operators\#
+plus:
+
+  defined('macro')   /* TRUE if 'macro' name is defined */
+
+If the logical expression is TRUE (!0), then nothing happens.
+If the logical expression is FALSE (0), then compilations stops until
+the next '\##else\#' '\##elif\#' or '\##endif\#' directive.
+
+Example:
+
+  #if defined(__PUREC__) && __PUREC__ > 1
+  ...
+  #endif
+
+See also \#Preprocessor\#, \##ifdef\# and \##ifndef\#.
+\end
+
+screen( capsensitive("#ifdef") )
+#ifdef
+----------------------------------------------------------------------
+  #ifdef macro
+
+If 'macro' is a defined macro name, nothing happens,
+If 'macro' is NOT a defined macro name, compilation stops until the
+next '\##else\#' '\##elif\#' or '\##endif\#' directive.
+
+See also \#Preprocessor\#, \##if\# and \##ifndef\#.
+\end
+
+screen( capsensitive("#ifndef") )
+#ifndef
+----------------------------------------------------------------------
+  #ifndef macro
+
+If 'macro' is undefined, nothing happens.
+If 'macro' if a defined macro name, compilation stops until the
+next '\##else\#' '\##elif\#' or '\##endif\#' directive.
+
+
+See also \#Preprocessor\#, \##if\# and \##ifdef\#.
+\end
+
+screen( capsensitive("#else") )
+#else
+----------------------------------------------------------------------
+Must be used after an \##if\# \##ifdef\# \##ifndef\# or \##elif\# directive.
+
+Reverses the result of the previous conditional directive.  If the
+code is currently being compiled, it stops compilation until the next
+\##endif\# directive.  If the code is not currently being compiled, then
+compilaton will now resume.
+
+See also \#Preprocessor\#.
+\end
+
+screen( capsensitive("#elif") )
+#elif
+----------------------------------------------------------------------
+Must be used after an \##if\# \##ifdef\# \##ifndef\# or \##elif\# directive.
+
+  #elif 'logical expression'
+
+where 'logical expression' can use any of the \#Logical Operators\#
+plus:
+
+  defined('macro')   /* TRUE if 'macro' name is defined */
+
+If the logical expression is TRUE (!0), then compilation resumes.
+If the logical expression is FALSE (0), then compilation stops until
+the next '\##else\#' '\##elif\#' or '\##endif\#' directive.
+
+#elif acts like a combination of \##else\# and \##if\#, except that
+several of them can be used with only one \##endif\#; e.g.,
+
+#if            instead of          #if
+#elif                              #else
+#elif                              # if
+...                                # else
+#else                              ...
+#endif                             # endif
+                                   #endif
+
+See also \#Preprocessor\#.
+\end
+
+screen( capsensitive("#endif") )
+#endif
+----------------------------------------------------------------------
+Must be used after an \##if\# \##ifdef\# \##ifndef\# \##elif\# or \##else\# directive.
+
+Resumes compilation (if stopped by the previous directive).
+
+See also \#Preprocessor\#.
+\end
+
+screen( capsensitive("#line") )
+#line
+----------------------------------------------------------------------
+Stop compilation and resume at the given line number.  Syntax:
+
+  #line N
+
+where 'N' is a line number.
+
+See also \#Preprocessor\#.
+\end
+
+screen( capsensitive("#error") )
+#error
+----------------------------------------------------------------------
+Stops compilation.  Produces error message: 'text'.
+
+  #error text
+
+where 'text' is any combination of characters (except '\\').
+
+Example:
+
+  #ifndef __TOS__
+  #error Program is specific to Atari TOS!
+  #endif
+
+See also \#Preprocessor\#.
+\end
+
+screen( capsensitive("auto") )
+\#Storage Classes\#: auto
+----------------------------------------------------------------------
+Default class for all local variables (those defined inside a function
+or local block): 
+
+  {
+    int i;  /* i is auto /*
+    ...
+  }         /* i is no longer defined */
+
+Variables are stored on the stack, and are lost when the block ends.
+
+The variable name will only be defined within that block { }.
+See also \#Names\#.
+\end
+
+screen( capsensitive("break") )
+break
+----------------------------------------------------------------------
+When 'break' is encountered in a \#for\#, \#while\# or \#do\#-while loop,
+the loop will be terminated:
+
+  for(i=0; i<100; i++) {
+    ...
+    if( array[i] == 0 ) break;
+    ...
+   }
+  if(i < 100) ...       /* execution will continue here */
+
+When 'break' is encountered in a \#switch\# statement, execution jumps
+to the end of the block { }.  'break' MUST be used between \#case\#
+statements to prevent overlapping execution:
+
+  switch( i ) {
+    case 0:
+    case 1:
+      printf("Either 0 or 1 \\n");
+      break;
+    case 2:
+      printf("2 only \\n")
+   }
+\end
+
+screen( capsensitive("case"),
+		capsensitive("default"),
+		capsensitive("switch") )
+switch / case / default
+----------------------------------------------------------------------
+\#Syntax\#:
+              switch ( <int variable> )
+               {
+                case <constant> : <code> [ break; ]
+                case <constant> : <code> [ break; ]
+                ...
+                [ default: <code> ]
+               }
+
+<int variable> is compared to the list of <constant>'s, and if one is
+equal to <int variable> then the corresponding <code> is executed.
+
+If there is no <constant> which equals <int variable>, the <code>
+after 'default' is executed.
+
+The \#break\# statements make the cases mutually exclusive (otherwise
+execution would continue past subsequent 'case' statements until the
+end of the block }.
+
+The <constant>'s don't have to be in any sort of order or sequence.
+
+  switch( i ) {
+    case 0:
+    case 10:
+      printf("Either 0 or 10 \\n");
+      break;
+    case -1:
+      printf("-1 only \\n");
+      break;
+    default:
+      printf("Neither 0, 10, nor -1 \\n");
+   }
+
+is equivalent to
+
+  if(i == 0 || i == 10); printf("Either 0 or 10 \\n");
+  else if(i == -1) printf("-1 only \\n");
+  else printf("Neither 0, 10, nor -1 \\n");
+\end
+
+screen( capsensitive("cdecl") )
+\#Functions\#: cdecl
+----------------------------------------------------------------------
+... forces function parameters to be passed on the stack from right
+(high) to left (low) according to the C standard.
+(One could also set the -H flag of the \link("%%GLOBAL%%")Compiler Options\#.)
+
+If you want to link with object modules from another compiler (which
+follows the C standard) you should use 'cdecl' in the prototypes for
+those functions.
+
+If you want to create object modules to be linked elsewhere, it would
+be wise to use 'cdecl' in the function definition.
+
+See also \#Parameter Passing\#.
+\end
+
+screen( capsensitive("char") )
+\#Data Types\#: char  (1 byte / ASCII character)
+----------------------------------------------------------------------
+  \#signed\#   char   -128 through +127  (default)
+  \#unsigned\# char   0 through 255
+
+'char *' is a pointer to a 'char' variable or constant. 
+'(char)' is a type conversion operator (see \#casting\#).
+
+See also \#Constants\#, \#Variables\#, \#Arrays\# and \#Pointers\#.
+\end
+
+screen( capsensitive("const") )
+\#Type Qualifiers\#: const
+----------------------------------------------------------------------
+Informs the compiler that the defined variable will never have its
+value changed.
+
+Any attempt to change a 'const' variable will generate an error
+message.
+
+'const' variables must either be initialized or be function
+parameters.
+
+Note: (const char*) is a char pointer which never changes.
+      (char const*) is a pointer to a (const char) variable.
+
+See also \#Variables\#.
+\end
+
+screen( capsensitive("continue") )
+continue
+----------------------------------------------------------------------
+When 'continue' is encountered in a \#for\#, \#while\# or \#do\#-while loop,
+the execution returns to the beginning of the loop for the next
+iteration, ignoring the remaining code in the loop.
+
+  for(i=0; i<100; i++) {
+    ...
+    if( array[i] == 0 ) continue;
+    x = a / array[i];
+    ...
+   }
+
+is equivalent to
+
+  for(i=0; i<100; i++) {
+    ...
+    if( array[i] != 0 ) {
+      x = a / array[i];
+      ...
+     }
+   }
+\end
+
+screen( capsensitive("do") )
+do - while
+----------------------------------------------------------------------
+\#Syntax\#:
+               do <statement>; while( <test> );
+               do { <block> }  while( <test> );
+
+where <statement> is a single executable statement, <block> is one or
+more lines of executable code, and <test> is logical expression.
+
+Repeat <statement> or <block> until <test> fails.
+Perform <test> AFTER each iteration.
+
+See also \#for\#, \#while\# and \#Logical Operators\#.
+\end
+
+screen( capsensitive("double") )
+\#Data Types\#: double  (10 or 12 bytes)
+----------------------------------------------------------------------
+High precision floating point.  See also \#float\#.
+
+Normally, \#sizeof\#(double) = 10 bytes, but when the -8 option is used
+(see \link("%%GLOBAL%%")Compiler Options\#) \#sizeof\#(double) = 12 bytes.
+
+'double' has 18 significant digits and a dynamic range from 3.3E-4932
+to 1.2E+4932 (not counting 0.0).  Format is 80 bit IEEE extended
+precision (an extra 2 bytes are added for addressability).
+
+Both Pure C and the 68881 FPU performs all floating point operations
+in 'double'.
+
+Note: The standard for 'double' is 64 bit IEEE double precision,
+      whereas Pure C uses 80 bit IEEE extended precision (long double).
+      One can use functions \link("%%GLOBAL%%")dxcnv\# and \link("%%GLOBAL%%")xdcnv\# to convert between
+      the two formats.
+
+See also \#Constants\# and \#Variables\#.
+\end
+
+screen( capsensitive("else"),
+		capsensitive("if") )
+if / else
+----------------------------------------------------------------------
+\#Syntax\#:
+  if( <test> ) { <code> }        or         if( <test> ) <statement>;
+  else { <code> }                or         else <statement>;
+
+where <test> is a logical expression, <code> is one or more lines of
+executable C code, and <statement> is a single statement.
+
+The 'else' statement is optional, but must follow the 'if' block
+immediately when used.
+
+Note: Since 0 is FALSE and anything else is TRUE, it is common to use
+      'if(value)' in place of 'if(value != 0)' or use 'if(!value)'
+      instead of 'if(value == 0)' where 'value' can be almost any data
+      type expression.
+
+See also \#switch\# and \#Logical Operators\#.
+\end
+
+screen( capsensitive("enum") )
+\#Data Types\#: enum  (2 bytes)
+----------------------------------------------------------------------
+Defines a new data type, 'enum <name>'.  \#Syntax\#:
+
+  enum <name> { <list of names> };
+
+where <name> is the enum name and <list of names> is a list of items
+of the form
+
+  <cname> [ = <constant> ] , ...
+
+where <cname> is a new constant name and <constant> is an integer
+constant.
+
+This statement assigns values to the constant names in the list
+starting with 0 and incrementing by one.
+
+By using the '= <constant>' option one can change the starting number
+or put a gap in the series.
+
+Example:
+
+  enum numbers {One=1, Two, Three=4, Four};
+
+accomplishes the same thing as
+
+  const int One = 1, Two = 2, Three = 4, Four = 5;
+
+except that One...Four are of the type (enum numbers) rather than
+(\#const\# \#int\#).
+
+One can now define enum variables using
+
+  [<qualifier>] [<class>] enum <name> <variable> [= <enum constant> ]
+    [, ...] ;
+
+where <qualifier> is a \link("Type Qualifiers")type qualifier\#,
+<class> is a \link("global")storage class\#,
+<variable> is a new variable name, and
+<enum constant> is taken from <list of names>; e.g.,
+
+  enum numbers x = One;
+
+Once can also combine an enum definition and variable definition into
+one statement (in which case <name> is optional).  One can similarly
+combine an enum definition and a \#typedef\# statement.
+
+See also \#Names\#, \#Constants\# and \#Variables\#.
+\end
+
+screen( capsensitive("extern") )
+\#Storage Classes\#: extern
+----------------------------------------------------------------------
+Default class for all undefined/prototype functions.
+
+Used to share \#global\# variables and functions between different
+modules.  Addresses will be resolved by the linker, which will also
+detect duplicate global names.
+
+It is best to put extern prototypes in a shared header file (see
+\##include\#) to make sure the data types match.  An extern definition
+will not interfere with a global definition in the same module (so
+long as the data types match).
+
+Note: 'extern char *p;' and 'extern char p[];' are NOT equivalent.
+
+See also \#Variables\# and \#Functions\#.
+\end
+
+screen( capsensitive("float") )
+\#Data Types\#: float  (4 bytes)
+----------------------------------------------------------------------
+Low precision floating point.  See also \#double\#.
+
+'float' has 6 significant digits and a dynamic range from 3.4E-38
+to 3.4E+38 (not counting 0.0).  Format is IEEE single precision.
+
+Both Pure C and the 68881 FPU perform all floating point operations
+in \#double\#.
+
+See also \#Constants\# and \#Variables\#.
+\end
+
+screen( capsensitive("for") )
+for
+----------------------------------------------------------------------
+\#Syntax\#:
+  for( <initialization>; <test>; <increment> ) <statement>;
+  for( <initialization>; <test>; <increment> ) { <code> }
+
+where <initialization> and <increment> consist of one or more
+executable statements separated by commas, <test> is a logical
+expression, <statement> is a single statement and <code> is one or
+more lines of executable code.
+
+<initialization> is executed once at the start.
+<test> is performed at the start of each iteration.
+       If FALSE (0), iteration stops.
+<increment> is performed at the end of each iteration.
+<statement> or <code> are executed until the <test> fails.
+
+  for(i=0; i<100; i++) a[i] = 0.0;     /* zero a[0] through a[99] */
+  for(i=100, p=a; i--; *(p++) = 0.0);  /* p is (float*) */
+
+See also \#while\#, \#do\#-while and \#break\#.
+\end
+
+screen( capsensitive("goto") )
+goto
+----------------------------------------------------------------------
+\#Syntax\#:
+<label>:                    or                 goto <label>;
+  ...                                          ...
+  goto <label>;                              <label>:
+
+where <label> is a valid \link("Names")name\#.
+(Note the use of colon instead of semicolon).
+
+While the use 'goto' is discouraged, there are certain things which
+are almost impossible (or at least very repetitive) to do otherwise.
+The most common use is for error handling:
+
+  \#if\#( \link("%%GLOBAL%%")ferror\#(fd) ) goto error;
+  ...
+  if( ferror(fd) ) goto error;
+  ...
+  \#return\#(0);
+
+error:
+  err = ferror(fd);
+  \link("%%GLOBAL%%")fclose\#(fd);
+  \link("%%GLOBAL%%")printf\#("I/O error #%d \\n", err);
+  return(err);
+ }
+\end
+
+screen( capsensitive("int") )
+\#Data Types\#: int  (2 bytes)
+----------------------------------------------------------------------
+  \#signed\#   int   -32768 through +32767  (default)
+  \#unsigned\# int   0 through 65535
+
+'int *' is a pointer to an 'int' variable or constant. 
+'(int)' is a type conversion operator (see \#casting\#).
+
+'int' is used as as the "preferred" integer size, so on some computers
+'int' is '\#short\#' and on others 'int' is '\#long\#'.
+
+Note: Lattice C defaults to 'int' as 'long'.
+
+
+See also \#Constants\#, \#Variables\#, \#Arrays\# and \#Pointers\#.
+\end
+
+screen( capsensitive("long") )
+\#Data Types\#: long  (4 bytes)
+----------------------------------------------------------------------
+  \#signed\#   long   -2147483648 through +2147483648  (default)
+  \#unsigned\# long   0 through 4294967295
+
+'long *' is a pointer to a 'long' variable or constant.
+'(long)' is a type conversion operator (see \#casting\#).
+
+See also \#Constants\#, \#Variables\#, \#Arrays\# and \#Pointers\#.
+\end
+
+screen( capsensitive("pascal") )
+\#Functions\#: pascal
+----------------------------------------------------------------------
+... forces function parameters to be passed on the stack from left
+(high) to right (low) and to always use the D0 register for return
+vulues according to the Pascal standard.
+(One could also set the -Q flag of the \link("%%GLOBAL%%")Compiler Options\#.)
+
+If you want to link with object modules from a Pascal compiler, you
+should use 'pascal' in the prototypes for those functions.
+
+If you want to create object modules to be called by a Pascal program,
+you should use 'pascal' in the function definition.
+
+See also \#Parameter Passing\#.
+\end
+
+screen( capsensitive("register") )
+\#Storage Classes\#: register
+----------------------------------------------------------------------
+Use registers D0-D5 for data (\#char\#, \#short\#, \#int\# and \#long\#)
+registers A0-A4 for pointers and FPU registers FP0-FP5 for \#double\# or
+\#float\# (when available).
+
+When these registers are used up, revert to \#auto\# storage class (store
+on stack).
+
+Pure C passes function parameters as register variables.  (See \#cdecl\#).
+
+Register variables are primarily used with non-optimizing compilers
+for greater speed.  With Pure C, register variables are not needed.
+
+Note: Registers D0-D2, A0-A2, and FP0-FP2 (when used) will be saved to
+      the stack whenever a function is called.
+\end
+
+screen( capsensitive("return") )
+return
+----------------------------------------------------------------------
+\#Syntax\#:
+                         return( <value> );
+                         return <value> ;
+
+where <value> is an expression with the same data type as the
+function itself.  Causes the function to terminate and return <value>
+to the calling function.
+
+For void functions, one can use 'return;' or 'return(void);'.  There
+is an implied 'return(void)' at the end of the function definition
+(if reachable):
+
+  void function(char* p)
+   {
+    \link("%%GLOBAL%%")strcpy\#(p, "string");
+   }
+
+See also \#Functions\#.
+\end
+
+screen( capsensitive("short") )
+\#Data Types\#: short  (2 bytes)
+----------------------------------------------------------------------
+  \#signed\#   short   -32768 through +32767  (default)
+  \#unsigned\# short   0 through 65535
+
+'short *' is a pointer to a 'short' variable or constant. 
+'(short)' is a type conversion operator (see \#casting\#).
+
+See also \#Constants\#, \#Variables\#, \#Arrays\# and \#Pointers\#.
+\end
+
+screen( capsensitive("signed") )
+\#Data Types\#: signed
+----------------------------------------------------------------------
+  signed \#char\#    -128   through 127
+  signed \#short\#   -32768 through +32767
+  signed \#int\#     -32768 through +32767  (default)
+  signed \#long\#    -2147483648 through +2147483648
+
+Uses two's complement: the leftmost bit is set for all negative
+values, and every bit is set for -1.  Casting from shorter to longer
+types uses sign bit extension.  Casting from longer to shorter types
+chops off the leftmost bits.
+
+See also \#Variables\# and \#casting\#.
+\end
+
+screen( capsensitive("sizeof") )
+\#Unary Operators\#: sizeof
+----------------------------------------------------------------------
+\#Syntax\#:
+                     sizeof( <type> )
+                     sizeof( <name> )
+                     sizeof <name>
+
+where <type> is a data type and <name> is the name of a variable,
+structure, union, or array.  It returns the size of the operand in
+bytes as a long word.
+
+While sizeof looks like a function, it is actually a unary operator
+and will be pre-computed by the compiler along with any other constant
+expressions.
+
+sizeof(\#double\#) depends on whether the -8 option is used.
+(See \link("%%GLOBAL%%")Compiler Options\#).
+
+
+Note: To determine the number of elements in an array, use
+
+  sizeof(array_name) / sizeof(array_name[0]);
+\end
+
+screen( capsensitive("static") )
+\#Storage Classes\#: static
+----------------------------------------------------------------------
+Static \link("Variables")variables\# are stored in the Data (initialized) or BSS
+(un-initialized) segments of the program, rather than the stack.
+Their contents are therefore available to more than one function, and
+are preserved from one call to the next.
+
+Only static and \#global\# variables can be initialized.
+
+Static \link("Functions")functions\# and variables differ from \#global\# functions and
+variables in that their names are not passed to the linker.  This
+means that these functions and variables cannot be accessed from
+other source files.  It also means that one need not worry about
+duplicate function names from other modules.
+\end
+
+screen( capsensitive("struct") )
+struct
+----------------------------------------------------------------------
+Defines a new data type, 'struct <name>'.  \#Syntax\#:
+
+  struct <name> {
+    <type> <member> [: <number bits> ];
+    <type> <member> [: <number bits> ];
+    ...
+   };
+
+where <name> is the new structure name,
+<type> is a \link("Data Types")data type\#,
+<member> is member name, and
+<number bits> defines a \link("Bit Fields")bit field\#.
+
+One can now define structure variables using
+
+  [<qualifier>] [<class>] struct <name> <variable> [={ <constants> }]
+    [, ...] ;
+
+where <qualifier> is a \link("Type Qualifiers")type qualifier\#,
+<class> is a \link("global")storage class\#,
+<variable> is a new structure variable name,
+and <constants> is a list of \link("Constants")constants\# separated by commas, where the
+first constant initializes the first member, etc.
+
+One can combine a structure definition and variable definition into
+one statement (in which case <name> is optional).  One can similarly
+combine a structure definition and a \#typedef\# statement.
+
+See also \#Names\#, \#Structures\# and \#Variables\#.
+\end
+
+screen( capsensitive("typedef") )
+typedef
+----------------------------------------------------------------------
+Defines a new data type, <name>.  \#Syntax\#:
+
+  typedef <type> <name>;
+  typedef <definition> <name>;
+
+where <name> is the new type name, <type> is an existing data type
+(including structures, unions, and enums), and <definition> is a \#union\#,
+\#struct\# or \#enum\# definition.
+
+<name> can now be used for variable and function definitions and for
+\#casting\#.
+
+Examples:
+
+  typedef unsigned short WORD;       /* creates 'WORD' type */
+
+  typedef union obspecptr OBS;       /* obspecptr from AES.H */
+
+  typedef struct {
+    int error;
+    char *message;
+   } ERR_MSG;                       /* creates 'ERR_MSG' type */
+
+See also \#Names\#, \#Data Types\#, \#Structures\# and \#Unions\#.
+\end
+
+screen( capsensitive("union") )
+union
+----------------------------------------------------------------------
+Defines a new data type, 'union <name>'.  \#Syntax\#:
+
+  union <name> {
+    <type> <member>;
+    <type> <member>;
+    ...
+   };
+
+where <name> is the new union name,
+<type> is a \link("Data Types")data type\#, and
+<member> is member name.
+
+One can now define union variables using
+
+  [<qualifier>] [<class>] union <name> <variable> [= <constant> ]
+    [, ...] ;
+
+where <qualifier> is a \link("Type Qualifiers")type qualifier\#,
+<class> is a \link("global")storage class\#,
+<variable> is a new union variable name,
+and <constant> is a \link("Constants")constant\# of the same type as the first member.
+
+One can combine a union definition an variable definition into one
+statement (in which case <name> is optional).  One can similarly
+combine a union definition and a \#typedef\# statement.
+
+See also \#Names\#, \#Unions\# and \#Variables\#.
+\end
+
+screen( capsensitive("unsigned") )
+\#Data Types\#: unsigned
+----------------------------------------------------------------------
+  unsigned \#char\#    0 through 255
+  unsigned \#short\#   0 through 65535
+  unsigned \#int\#     0 through 65535  (default)
+  unsigned \#long\#    0 through 4294967295
+
+Casting from shorter to longer types pads zero's to left.  Casting
+from longer to shorter types chops off the leftmost bits.
+
+See also \#Variables\# and \#casting\#.
+\end
+
+screen( capsensitive("void") )
+\#Data Types\#: void  (0 bytes)
+----------------------------------------------------------------------
+Void \link("Functions")functions\# do not have \#return\# values:
+
+  void write_eof(FILE* fd)
+   {
+    putc(0x1a, fd);    /* writes end-of-file */
+   }
+
+\#Functions\# which have no parameters must use '(void)' instead of '()'
+in their \link("Prototyping")prototype\# and \link("ANSI Definition")definition\# (ANSI C):
+
+  long systime(void);  /* reads system clock */
+
+Void \link("Pointers")pointers\# can be converted to and from any other type of pointer
+with no warning messages or \#casting\#:
+
+  int copy_anything(int size, void *from, void *to);
+
+There is no such thing as a void variable, and void pointers cannot
+be incremented.  \#sizeof\#(void) == 0
+\end
+
+screen( capsensitive("volatile") )
+\#Type Qualifiers\#: volatile
+----------------------------------------------------------------------
+Informs the compiler that the defined variable may change value
+at any time (due to real time interrupts).  This prevents the variable
+from being kept on a register by an optimizing compiler.
+
+See also \#Variables\#.
+\end
+
+screen( capsensitive("while") )
+while
+----------------------------------------------------------------------
+\#Syntax\#:
+                  while( <test> ) <statement> ;
+                  while( <test> ) { <code> }
+
+where <test> is a logical expression, <statement> is a single
+executable statement, and <code> is one or more lines of executable
+code.
+
+Repeat <statement> or <code> until <test> is FALSE (0).
+Perform <test> BEFORE each iteration.
+
+See also \#do\#, \#for\# and \#Logical Operators\#.
+\end
+
+screen( "Syntax" )
+Syntax Nomenclature
+----------------------------------------------------------------------
+[ ] indicates an optional item.
+< > indicates a variable item.
+... indicates repetition.  For example '<name> [, ...]' could be
+    '<name>' '<name>,<name>' '<name>,<name>,<name>' etc.
+
+This can be somewhat confusing since C uses [ ] for \link("Arrays")array\# subscripts,
+< > for \##include\# statements, and '...' for \#Variable Argument Lists\#.
+
+However, it should be obvious from the examples when a [ ] is just a
+[ ], etc.
+\end
+
+screen( capsensitive("far"),
+		capsensitive("huge"),
+		capsensitive("near") )
+\#Pointers\#: far, huge, near
+----------------------------------------------------------------------
+... are ignored by Pure C.
+
+They are kept for compatibility with Turbo C, etc. where they are
+used to differentiate between 32 bit and 16 bit pointers (which are
+peculiar to Intel microprocessors).
+
+These keywords may NOT be used as \#Names\#.
+\end
+
+screen( "Operator Precedence" )
+Operator Precedence 
+----------------------------------------------------------------------
+()  []  .  ->                    left to right   \#Membership Operators\#
+! ~ - + ++ -- & * (type) sizeof  right to left   \#Unary Operators\#
+*  /  %                          left to right   \#Arithmetic Operators\#
++  -                             left to right       "         "
+<<  >>                           left to right   \#Bitwise Operators\#
+<  <=  >  >=                     left to right   \#Logical Operators\#
+==  !=                           left to right     "        "
+&                                left to right   \#Bitwise Operators\#
+^                                left to right     "        "
+|                                left to right     "        "
+&&                               left to right   \#Logical Operators\#
+||                               left to right     "        "
+?                                                \#Conditional Operator\#
+=  +=  -=  *= /= %= &= |= ^= ... right to left   \#Assignment Operators\#
+\end
+
+screen( "Backslash Sequences" )
+Backslash Sequences (decimal values)
+----------------------------------------------------------------------
+\\a   Alert (Bell)      7          \\\\   Backslash           92
+\\b   Backspace         8          \\'   Single Quote        39
+\\f   Formfeed         12          \\"   Double Quote        34
+\\n   Newline (CR/LF)  10          \\?   Question Mark       63
+\\r   Carriage Return  13          \\nnn Octal number
+\\t   Tab (horizontal)  9          \\xnn Hexadecimal number
+\\v   Vertical Tab     11          \\0   NULL Character       0
+\end
+
+screen( capsensitive("ASCII Character Set") )
+Dec Oct Hex ASCII | Dec Oct Hex ASCII | Dec Oct Hex ASCII | Dec Oct Hex ASCII |
+------------------|-------------------|-------------------|-------------------|
+  0   0   0 <NULL>|  64 100  40   @   | 128 200  80   Ä   | 192 300  c0   ¿   | 
+  1   1   1      |  65 101  41   A   | 129 201  81   Å   | 193 301  c1   ¡   | 
+  2   2   2      |  66 102  42   B   | 130 202  82   Ç   | 194 302  c2   ¬   | 
+  3   3   3      |  67 103  43   C   | 131 203  83   É   | 195 303  c3   √   | 
+  4   4   4      |  68 104  44   D   | 132 204  84   Ñ   | 196 304  c4   ƒ   | 
+  5   5   5      |  69 105  45   E   | 133 205  85   Ö   | 197 305  c5   ≈   | 
+  6   6   6      |  70 106  46   F   | 134 206  86   Ü   | 198 306  c6   ∆   | 
+  7   7   7      |  71 107  47   G   | 135 207  87   á   | 199 307  c7   «   | 
+  8  10   8      |  72 110  48   H   | 136 210  88   à   | 200 310  c8   »   | 
+  9  11   9 <TAB> |  73 111  49   I   | 137 211  89   â   | 201 311  c9   …   | 
+ 10  12   a   
+   |  74 112  4a   J   | 138 212  8a   ä   | 202 312  ca       | 
+ 11  13   b      |  75 113  4b   K   | 139 213  8b   ã   | 203 313  cb   À   | 
+ 12  14   c      |  76 114  4c   L   | 140 214  8c   å   | 204 314  cc   Ã   | 
+ 13  15   d  <CR> |  77 115  4d   M   | 141 215  8d   ç   | 205 315  cd   Õ   | 
+ 14  16   e      |  78 116  4e   N   | 142 216  8e   é   | 206 316  ce   Œ   | 
+ 15  17   f      |  79 117  4f   O   | 143 217  8f   è   | 207 317  cf   œ   | 
+ 16  20  10      |  80 120  50   P   | 144 220  90   ê   | 208 320  d0   –   | 
+ 17  21  11      |  81 121  51   Q   | 145 221  91   ë   | 209 321  d1   —   | 
+ 18  22  12      |  82 122  52   R   | 146 222  92   í   | 210 322  d2   “   | 
+ 19  23  13      |  83 123  53   S   | 147 223  93   ì   | 211 323  d3   ”   | 
+ 20  24  14      |  84 124  54   T   | 148 224  94   î   | 212 324  d4   ‘   | 
+ 21  25  15      |  85 125  55   U   | 149 225  95   ï   | 213 325  d5   ’   | 
+ 22  26  16      |  86 126  56   V   | 150 226  96   ñ   | 214 326  d6   ÷   | 
+ 23  27  17      |  87 127  57   W   | 151 227  97   ó   | 215 327  d7   ◊   | 
+ 24  30  18      |  88 130  58   X   | 152 230  98   ò   | 216 330  d8   ÿ   | 
+ 25  31  19      |  89 131  59   Y   | 153 231  99   ô   | 217 331  d9   Ÿ   | 
+ 26  32  1a      |  90 132  5a   Z   | 154 232  9a   ö   | 218 332  da   ⁄   | 
+ 27  33  1b      |  91 133  5b   [   | 155 233  9b   õ   | 219 333  db   €   | 
+ 28  34  1c      |  92 134  5c   \\   | 156 234  9c   ú   | 220 334  dc   ‹   | 
+ 29  35  1d  <GS> |  93 135  5d   ]   | 157 235  9d   ù   | 221 335  dd   ›   | 
+ 30  36  1e      |  94 136  5e   ^   | 158 236  9e   û   | 222 336  de   ﬁ   | 
+ 31  37  1f      |  95 137  5f   _   | 159 237  9f   ü   | 223 337  df   ﬂ   | 
+ 32  40  20       |  96 140  60   `   | 160 240  a0   †   | 224 340  e0   ‡   | 
+ 33  41  21   !   |  97 141  61   a   | 161 241  a1   °   | 225 341  e1   ·   | 
+ 34  42  22   "   |  98 142  62   b   | 162 242  a2   ¢   | 226 342  e2   ‚   | 
+ 35  43  23   #   |  99 143  63   c   | 163 243  a3   £   | 227 343  e3   „   | 
+ 36  44  24   $   | 100 144  64   d   | 164 244  a4   §   | 228 344  e4   ‰   | 
+ 37  45  25   %   | 101 145  65   e   | 165 245  a5   •   | 229 345  e5   Â   | 
+ 38  46  26   &   | 102 146  66   f   | 166 246  a6   ¶   | 230 346  e6   Ê   | 
+ 39  47  27   '   | 103 147  67   g   | 167 247  a7   ß   | 231 347  e7   Á   | 
+ 40  50  28   (   | 104 150  68   h   | 168 250  a8   ®   | 232 350  e8   Ë   | 
+ 41  51  29   )   | 105 151  69   i   | 169 251  a9   ©   | 233 351  e9   È   | 
+ 42  52  2a   *   | 106 152  6a   j   | 170 252  aa   ™   | 234 352  ea   Í   | 
+ 43  53  2b   +   | 107 153  6b   k   | 171 253  ab   ´   | 235 353  eb   Î   | 
+ 44  54  2c   ,   | 108 154  6c   l   | 172 254  ac   ¨   | 236 354  ec   Ï   | 
+ 45  55  2d   -   | 109 155  6d   m   | 173 255  ad   ≠   | 237 355  ed   Ì   | 
+ 46  56  2e   .   | 110 156  6e   n   | 174 256  ae   Æ   | 238 356  ee   Ó   | 
+ 47  57  2f   /   | 111 157  6f   o   | 175 257  af   Ø   | 239 357  ef   Ô   | 
+ 48  60  30   0   | 112 160  70   p   | 176 260  b0   ∞   | 240 360  f0      | 
+ 49  61  31   1   | 113 161  71   q   | 177 261  b1   ±   | 241 361  f1   Ò   | 
+ 50  62  32   2   | 114 162  72   r   | 178 262  b2   ≤   | 242 362  f2   Ú   | 
+ 51  63  33   3   | 115 163  73   s   | 179 263  b3   ≥   | 243 363  f3   Û   | 
+ 52  64  34   4   | 116 164  74   t   | 180 264  b4   ¥   | 244 364  f4   Ù   | 
+ 53  65  35   5   | 117 165  75   u   | 181 265  b5   µ   | 245 365  f5   ı   | 
+ 54  66  36   6   | 118 166  76   v   | 182 266  b6   ∂   | 246 366  f6   ˆ   | 
+ 55  67  37   7   | 119 167  77   w   | 183 267  b7   ∑   | 247 367  f7   ˜   | 
+ 56  70  38   8   | 120 170  78   x   | 184 270  b8   ∏   | 248 370  f8   ¯   | 
+ 57  71  39   9   | 121 171  79   y   | 185 271  b9   π   | 249 371  f9   ˘   | 
+ 58  72  3a   :   | 122 172  7a   z   | 186 272  ba   ∫   | 250 372  fa   ˙   | 
+ 59  73  3b   ;   | 123 173  7b   {   | 187 273  bb   ª   | 251 373  fb   ˚   | 
+ 60  74  3c   <   | 124 174  7c   |   | 188 274  bc   º   | 252 374  fc   ¸   | 
+ 61  75  3d   =   | 125 175  7d   }   | 189 275  bd   Ω   | 253 375  fd   ˝   | 
+ 62  76  3e   >   | 126 176  7e   ~   | 190 276  be   æ   | 254 376  fe   ˛   | 
+ 63  77  3f   ?   | 127 177  7f      | 191 277  bf   ø   | 255 377  ff   ˇ   | 
+
+  7   7   7  Alert (Bell)
+  8  10   8  Backspace
+  9  11   9  Tab (horizontal)
+ 10  12   A  Newline
+ 11  13   B  Vertical Tab
+ 12  14   C  Formfeed
+ 13  15   D  Carriage Return
+
+See also \link("%%GLOBAL%%")Scan Codes\#.
+\end
+
+screen( capsensitive("printf/scanf Formats") )
+printf/scanf Formats
+----------------------------------------------------------------------
+\link("%%GLOBAL%%")printf\# \#Syntax\#:  %[\link("%flags")<flags>\#][\link("%width")<width>\#][\link("%precision").<precision>\#][\link("%l")l\#]\link("%type")<type>\#
+
+The number of characters outputted varies, unless fixed by the
+"\link("%width")width\#.\link("%precision")precision\#" modifiers.
+
+Characters between % specifications will be outputted directly (except
+that one must use "%%" to output a percent symbol).
+Newlines must be explicitly entered.
+
+\link("%%GLOBAL%%")scanf\# \#Syntax\#:   %[\link("%*")*\#][\link("%[]")[<cset>]\#][\link("%width")<width>\#][\link("%l")l\#]\link("%type")<type>\#
+
+An input field is terminated by the first illegal character or
+by the "\link("%width")width\#" modifier (whichever comes first).
+
+Consecutive fields are generally separated by blanks, however one can
+use other character(s) by including them between the % specifications.
+For example, the two fields for "%g,%g" MUST be separated by a comma.
+
+Most fields ignore leading blanks, tabs and newlines, and therefore
+cannot be terminated until at least one legal character is entered
+(no blank default).
+
+A "%s" field is terminated by a newline, unless the legal character
+set is modified using the "\link("%[]")[cset]\#" modifier.
+\end
+
+screen( "%type" )
+\#printf/scanf Formats\# types
+----------------------------------------------------------------------
+  %c  Character   (\#char\#)
+  %s  String      (\#char\#*)            NULL terminated
+  %d  Decimal     (\#int\#)              also %i
+  %u  Unsigned    (\#unsigned\# \#int\#)
+  %o  Octal       (\#int\#)
+  %x  Hexadecimal (\#unsigned\# \#int\#)
+  %f  Floating    (\#float\#)            e.g. 100.0
+  %e  Exponent    (\#float\#)            e.g. 1.0e2
+  %g  %f or %e    (\#float\#)
+
+  %%  Percent Sign
+
+printf only:
+  %p  Address     (\#void\#*) Writes address in hex.
+  %n  Length      (\#int\#*)  Returns number characters output so far.
+
+See also \link("%l")length modifier\#.
+\end
+
+screen( "%l" )
+\#printf/scanf Formats\# length modifier
+----------------------------------------------------------------------
+%ld  \#long\#           (decimal)                also %li
+%lu  \#unsigned\# \#long\#  (decimal)
+%lo  \#long\#           (octal)
+%lx  \#unsigned\# \#long\#  (hexadecimal)
+%lf  \#double\#         (floating)
+%le  \#double\#         (exponent)
+%lg  \#double\#         (exponent optional)
+
+Note: Since floats are converted to doubles before being passed in
+      \#Variable Argument Lists\#, %f and %lf are indentical in printf()
+      but different in scanf().
+\end
+
+screen( "%flags" )
+\link("printf/scanf Formats")printf Formats\# Flags
+----------------------------------------------------------------------
+ -     left justified (relevant only when using \link("%width")width\# modifier).
+ 0     pad with zeros
+ +     add '+' to positive numbers
+ blank add ' ' to positive numbers (align with '-').
+ #     use alternate form ('0xnnn' for %#x, '0nnn' for %#o).
+\end
+
+screen( "%width" )
+\#printf/scanf Formats\# width modifier
+----------------------------------------------------------------------
+\link("%%GLOBAL%%")printf\#:
+  Minimum number of character to output.
+  Will normally output right justified with blank pad.
+  Output can be longer than width.
+  Use '*' to get width from argument list (\#int\#).
+  See also \#%precision\#.
+
+\link("%%GLOBAL%%")scanf\#:
+  Maximum number of characters to read.
+\end
+
+screen( "%precision" )
+\link("printf/scanf Formats")printf Formats\# precision modifier
+----------------------------------------------------------------------
+Maximum number characters (%f %e %g and %s only).
+Use '0' to use default value.
+Use '*' to get width from argument list (\#int\#).
+
+See also \#%width\#.
+\end
+
+screen( "%*" )
+\link("printf/scanf Formats")scanf Formats\# '*' modifier
+----------------------------------------------------------------------
+Skip input field.
+
+For example, "%*10s" means skip 10 characters.
+\end
+
+screen( "%[]" )
+\link("printf/scanf Formats")scanf Formats\# "[]" modifier
+----------------------------------------------------------------------
+Allowed character set (mostly used with %s format).
+When '^' is the first character, character set NOT allowed.
+
+Examples:
+  "%*[\\t \\n]s" will skip any number of tabs, blanks and newlines.
+  "%[^,]s" will terminate the string when the next ',' is reached.
+\end
+
+screen( capsensitive("Compiler Errors") )
+Compiler Error Messages    (in alphabetical order)
+----------------------------------------------------------------------
+(For more information, double-click [?] button.)
+
+\link("Error: # operator")[?]\#  # operator not followed by macro argument name
+\link("Error: K&R arguments")[?]\#  'XXXXXX' not an argument
+
+\link("Error: no argument")[?]\#  Argument # missing name
+\link("Error: argument syntax")[?]\#  Argument list syntax error
+\link("Arrays")[?]\#  Array bounds missing ]
+
+\link("#include")[?]\#  Bad file name format in include directive
+\link("#ifdef")[?]\#  Bad ifdef directive syntax
+\link("#ifndef")[?]\#  Bad ifndef directive syntax
+\link("#undef")[?]\#  Bad undef directive syntax
+\link("Error: bit fields")[?]\#  Bit field size syntax
+
+\link("Error: not a function")[?]\#  Call of non-function
+\link("const")[?]\#  Cannot modify const object
+\link("case")[?]\#  Case outside of switch
+\link("case")[?]\#  Case statement missing :
+\link("casting")[?\#]  Cast syntax error
+\link("Constants")[?]\#  Character constant too long
+\link("Error: missing }")[?]\#  Compound statement missing }
+\link("Error: conflict")[?]\#  Conflicting type modifiers
+\link("Constants")[?]\#  Constant expression required
+
+\link("Error: missing ;")[?]\#  Declaration missing ;
+\link("Variables")[?]\#  Declaration needs type or storage class
+\link("Variables")[?]\#  Declaration syntax error
+\link("case")[?]\#  Default outside of switch
+\link("#define")[?]\#  Define directive needs an identifier
+\link("Error: divide")[?]\#  Division by zero
+\link("do")[?]\#  Do statement must have while
+\link("do")[?]\#  Do-while statement missing (
+\link("do")[?]\#  Do-while statement missing )
+\link("do")[?]\#  Do-while statement missing ;
+\link("case")[?]\#  Duplicate case
+
+\link("enum")[?]\#  Enum syntax error
+\link("enum")[?]\#  Enumeration constant syntax error
+\link("#error")[?]\#  Error directive 'XXXXXX'
+\link("Error: write")[?]\#  Error writing output file
+\link("Error: syntax")[?]\#  Expression syntax
+\link("Error: too many parameters")[?]\#  Extra parameter in call to 'XXXXXX'
+
+\link("Error: filename too long")[?]\#  File name too long
+\link("for")[?]\#  For statement missing (
+\link("for")[?]\#  For statement missing )
+\link("for")[?]\#  For statement missing ;
+\link("Error: argument syntax")[?]\#  Function call missing )
+\link("Error: function definition")[?]\#  Function definition out of place
+\link("Error: function not variable")[?]\#  Function doesn't take variable number of arguments
+\link("Error: argument syntax")[?]\#  Function call missing )
+
+\link("goto")[?]\#  Goto statement missing label
+
+\link("Constants")[?]\#  Hexadecimal constant is too large
+
+\link("else")[?]\#  If statement missing (
+\link("else")[?]\#  If statement missing )
+\link("Error: bad character")[?]\#  Illegal character 'C' (0xXX)
+\link("Error: initialization")[?]\#  Illegal initialization
+\link("Constants")[?]\#  Illegal octal digit
+\link("Error: pointer subtraction")[?]\#  Illegal pointer subtraction
+\link("Error: structure operation")[?]\#  Illegal structure operation
+\link("Error: floating operation")[?]\#  Illegal use of floating point
+\link("Error: pointer operation")[?]\#  Illegal use of pointer
+\link("Error: typedef")[?]\#  Improper use of typedef symbol
+\link("Error: extern")[?]\#  Incompatible storage class
+\link("Error: conversion")[?]\#  Incompatible type conversion
+\link("Error: options")[?]\#  Incorrect ... option
+\link("Constants")[?]\#  Incorrect number format
+\link("case")[?]\#  Incorrect use of default
+\link("#define")[?]\#  Invalid macro argument separator
+\link("Error: indirection")[?]\#  Invalid indirection
+\link("Error: pointer addition")[?]\#  Invalid pointer addition
+\link("Structures")[?]\#  Invalid use of arrow
+\link("Structures")[?]\#  Invalid use of dot
+
+\link("Operators")[?]\#  Lvalue required
+
+\link("Error: macro arguments")[?]\#  Macro argument syntax error
+\link("Error: macro too long")[?]\#  Macro expansion too long
+\link("Error: number parameters")[?]\#  Mismatched number of parameters in definition.
+\link("break")[?]\#  Misplaced break
+\link("continue")[?]\#  Misplaced continue
+\link("else")[?]\#  Misplaced else
+\link("#elif")[?]\#  Misplaced elif directive
+\link("#else")[?]\#  Misplaced else directive
+\link("#endif")[?]\#  Misplaced endif directive
+\link("Error: address")[?]\#  Must take address of memory location
+
+\link("#include")[?]\#  No file name ending
+\link("Error: function type")[?]\#  Not an allowed type
+\link("Constants")[?]\#  Numeric constant too large
+
+\link("Error: RAM")[?]\#  Out of memory
+
+\link("Error: structure pointer")[?]\#  Pointer required on left side of ->
+
+\link("Error: duplicate variable")[?]\#  Redeclaration of 'XXXXXX'
+
+\link("Error: unknown size")[?]\#  Size of structure or array not known
+\link("Error: missing ;")[?]\#  Statement missing ;
+\link("Error: structure")[?]\#  Structure or union syntax error
+\link("Arrays")[?]\#  Subscripting missing ]
+\link("case")[?]\#  Switch statement missing (
+\link("case")[?]\#  Switch statement missing )
+
+\link("Error: too few parameters")[?]\#  Too few parameters in call to 'XXXXXX'
+\link("Error: too many cases")[?]\#  Too many cases
+\link("Constants")[?]\#  Too many decimal points
+\link("Error: too many defaults")[?]\#  Too many default cases
+\link("Error: too many errors")[?]\#  Too many error or warning messages
+\link("Constants")[?]\#  Too many exponents
+\link("Error: too many init")[?]\#  Too many initializers
+\link("Error: too many classes")[?]\#  Too many storage classes in declaration
+\link("Error: too many types")[?]\#  Too many types in declaration
+\link("Error: auto")[?]\#  Too much auto memory
+\link("Error: two dots")[?]\#  Two consecutive dots
+\link("Error: call type")[?]\#  Type mismatch in parameter 'XXXXXX' in call to function 'XXXXXX'
+\link("Error: function type")[?]\#  Type mismatch in redeclaration of 'XXXXXX'
+
+\link("Error: file")[?]\#  Unable to created output file 'XXXXXX'
+\link("Error: include file")[?]\#  Unable to open include file
+\link("goto")[?]\#  Undefined label 'XXXXXX'
+\link("struct")[?]\#  Undefined structure 'XXXXXX'
+\link("Error: symbol")[?]\#  Undefined symbol 'XXXXXX'
+\link("Error: no */")[?]\#  Unexpected end of file in comment started on line #
+\link("Error: no #endif")[?]\#  Unexpected end of file in condition started on line #
+\link("Error: bad directive")[?]\#  Unknown preprocessor directive 'XXXXXX'
+\link("Constants")[?]\#  Unterminated character constant
+\link("Constants")[?]\#  Unterminated string
+\link("Constants")[?]\#  Unterminated string or character constant
+
+\link("while")[?]\#  While statement missing (
+\link("while")[?]\#  While statement missing )
+\link("Error: macro arguments")[?]\#  Wrong number of arguments in call of 'XXXXXX'
+\end
+
+screen( "Error: # operator" )
+# operator not followed by macro argument name
+----------------------------------------------------------------------
+  The # operator is used to merge strings in a function macro; e.g.
+
+    \##define\# name(arg) "front-" # arg "-end"
+    char* test = name("middle");
+
+  is translated as
+
+    test = "front-middle-end";
+\end
+
+screen( "Error: K&R arguments" )
+'XXXXXX' not an argument 
+----------------------------------------------------------------------
+K&R function declaration only:
+
+  Argument name in type declaration does not match any name in
+  argument list:
+
+    function(argument)
+      int wrong_name;
+     { ...
+
+See \#Functions\#.
+\end
+
+screen( "Error: RAM" )
+Out of memory                                (Internal Compiler Error)
+----------------------------------------------------------------------
+  Compiler ran out of RAM.
+
+  Probably due to cache accumulation (see \link("%%GLOBAL%%")Shell Options\#), or a
+  very BIG source code file.
+\end
+
+screen( "Error: address" )
+Must take address of memory location
+----------------------------------------------------------------------
+  Attempted to use address '&' operator on a \#register\# or a computed
+  expression (stored on a \#register\#).
+
+See \#Operators\#.
+\end
+
+screen( "Error: argument syntax" )
+Argument list syntax error
+----------------------------------------------------------------------
+  Argument list must be enclosed in parenthesis ( ) and separated by
+  commas.
+
+  Check intervening comments and/or ANSI type declarations.
+
+See \#Functions\#.
+\end
+
+screen( "Error: auto" )
+Too much auto memory
+----------------------------------------------------------------------
+  Each function can have at most 32K bytes of local variables.
+
+See \#auto\#.
+\end
+
+screen( "Error: bad character" )
+Illegal character 'C' (0xXX)
+----------------------------------------------------------------------
+  Source code contains a non-ASCII character.
+
+Note: Use \#Backslash Sequences\# to create non-ASCII characters in
+      strings.
+\end
+
+screen( "Error: bad directive" )
+Unknown preprocessor directive 'XXXXXX'
+----------------------------------------------------------------------
+  Valid directives are \##define\#, \##undef\#, \##include\#, \##if\#, \##ifdef\#, \##ifndef\#,
+  \##else\#, \##elif\#, \##endif\#, \##error\# and \##pragma\#.
+\end
+
+screen( "Error: bit fields" )
+Bit field size syntax
+----------------------------------------------------------------------
+  The size of a \link("Bit Fields")bit field\# must be between 1 and 32 bits.
+\end
+
+screen( "Error: call type" )
+Type mismatch in parameter 'XXXXXX' in call to function 'XXXXXX'
+----------------------------------------------------------------------
+  Parameter in prototype does not match function call, nor can calling
+  parameter be converted to the right type.
+
+See \#Functions\#.
+\end
+
+screen( "Error: conflict" )
+Conflicting type modifiers
+----------------------------------------------------------------------
+  \#unsigned\# and \#signed\# conflict.
+  \#cdecl\# and \#pascal\# conflict.
+\end
+
+screen( "Error: conversion" )
+Incompatible type conversion
+----------------------------------------------------------------------
+The following type conversions are not allowed:
+
+  function() = variable
+  structure  = single variable
+  array      = single variable
+  pointer    = floating point
+\end
+
+screen( "Error: duplicate function" )
+Type mismatch in redeclaration of 'XXXXXX'
+----------------------------------------------------------------------
+  Prototype does not agree with function definition, or the function
+  name is already used for another function.
+
+See \#Functions\#.
+\end
+
+screen( "Error: duplicate variable" )
+Redeclaration of 'XXXXXX'
+----------------------------------------------------------------------
+  Variable name XXXXXX already used.
+
+  To legally redeclare a variable, do it inside a \#local block\#.
+
+See \#Variables\#.
+\end
+
+screen( "Error: extern" )
+Incompatible storage class
+----------------------------------------------------------------------
+  Function definitions cannot be \#extern\# (unlike prototypes).
+
+See \#Functions\#.
+\end
+
+screen( "Error: file" )
+Unable to created output file 'XXXXXX'       (Internal Compiler Error)
+----------------------------------------------------------------------
+  Diskette or file was write protected, or tried to use a non-existent
+  folder, or (rare) the directory was full.
+\end
+
+screen( "Error: filename too long" )
+File name too long
+----------------------------------------------------------------------
+  The filename in an \##include\# directive must be < 64 characters.
+\end
+
+screen( "Error: floating operation" )
+Illegal use of floating point
+----------------------------------------------------------------------
+  One cannot perform bitwise or modulus '%' operations on float's.
+  (Check for unintended '.' after a constant.)
+
+See \#float\#, \#double\#, \link("%%GLOBAL%%")fmod\#() and \#Operators\#.
+\end
+
+screen( "Error: function definition" )
+Function definition out of place
+----------------------------------------------------------------------
+  You cannot put a function definition inside another function
+  definition.
+
+  Check for unbalanced braces { } in the preceding function definition
+  using \link("%%GLOBAL%%")Check Braces\# or by double-clicking braces.
+
+See \#Functions\#.
+\end
+
+screen( "Error: function not variable" )
+Function doesn't take variable number of arguments
+----------------------------------------------------------------------
+  \link("%%GLOBAL%%")va_start\#, \link("%%GLOBAL%%")va_arg\# and \link("%%GLOBAL%%")va_end\# can only be used in a function
+  with a variable argument list (...).
+
+See \#Functions\#.
+\end
+
+screen( "Error: function type" )
+Not an allowed type
+----------------------------------------------------------------------
+  A function cannot return a function pointer or an entire array.
+  A \#void\# function cannot return anything.
+
+Note: A function CAN return a structure.
+
+See \#Functions\# and \#Parameter Passing\#.
+\end
+
+screen( "Error: include file" )
+Unable to open include file
+----------------------------------------------------------------------
+  File probably doesn't exist, or is in the wrong folder.
+\end
+
+screen( "Error: indirection" )
+Invalid indirection
+----------------------------------------------------------------------
+  Attempt to dereference '*' a \#void\# pointer or a non-pointer.
+
+See \#Pointers\#.
+\end
+
+screen( "Error: initialization" )
+Illegal initialization
+----------------------------------------------------------------------
+  A variable must be initialized with a constant expression.
+  Pointers can be initialized with the address of a \#global\#, \#static\#
+  or \#extern\# variable (+/- a constant).
+
+See \#Variables\# and \#Constants\#.
+\end
+
+screen( "Error: macro arguments" )
+Wrong number of arguments in call of 'XXXXXX'
+----------------------------------------------------------------------
+  Check macro definition (using \link("%%GLOBAL%%")Project Help\#) for correct number
+  of arguments, or check spelling of macro/function name.
+\end
+
+screen( "Error: macro too long" )
+Macro expansion too long
+----------------------------------------------------------------------
+  Macro expansion longer than 4096 characters.
+
+  (Probably an infinite recursive expansion.)
+\end
+
+screen( "Error: missing ;" )
+Statement missing ;
+----------------------------------------------------------------------
+  Statements must be separated by a semicolon ';'.
+\end
+
+screen( "Error: missing }" )
+Compound statement missing }
+----------------------------------------------------------------------
+  Check braces using \link("%%GLOBAL%%")Check Braces\#.
+
+See \#Not an Operator\#.
+\end
+
+screen( "Error: no #endif" )
+Unexpected end of file in condition started on line #
+----------------------------------------------------------------------
+  Missing an \##endif\# after an \##if\#, \##ifdef\#, \##ifndef\#, \##else\# or \##elif\#.
+
+  Note: \link("%%GLOBAL%%")Find Error\# will point to end of file.
+        Use \link("%%GLOBAL%%")Goto Line...\# to start search.
+\end
+
+screen( "Error: no */" )
+Unexpected end of file in comment started on line #
+----------------------------------------------------------------------
+  Missing a terminating '*/' after the \link("Comments")comment\# in question.
+
+  Note: \link("%%GLOBAL%%")Find Error\# will point to end of file.
+        Use \link("%%GLOBAL%%")Goto Line...\# to locate start of comment.
+
+  Also check the -C flag of \link("%%GLOBAL%%")Compiler Options\#.
+\end
+
+screen( "Error: no argument" )
+Argument # missing name
+----------------------------------------------------------------------
+  No name found between two commas in argument list for function
+  definition or prototype:
+
+    function(arg1,,arg3)  /* argument 2 missing */
+
+Note: When function has no arguments at all, use 'function(void)'
+      instead of 'function()'.
+
+See \#Functions\#.
+\end
+
+screen( "Error: not a function" )
+Call of non-function
+----------------------------------------------------------------------
+  Name used in function call defined as something else.
+
+  You probably used parenthesis where you should have used brackets:
+
+    array(i);  /* instead of */  array[i];
+
+  or left out an operator between the name and the parenthesis:
+
+    variable (a + b);  /* instead of  */  variable * (a + b);
+
+See also \#Arrays\#, \#Operators\# and \#Functions\#.
+\end
+
+screen( "Error: number parameters" )
+Mismatched number of parameters in definition.
+----------------------------------------------------------------------
+  Number of parameters in a function prototype is different from the
+  number of parameters in the corresponding function definition.
+
+See \#Functions\#.
+\end
+
+screen( "Error: options" )
+Incorrect ... option                         (Internal Compiler Error)
+----------------------------------------------------------------------
+  PC.PRG called CCP.TTP or PCC.TTP using bad options.
+
+  Check for blanks in the edit fields of \link("%%GLOBAL%%")Compiler Options\#.
+\end
+
+screen( "Error: pointer addition" )
+Invalid pointer addition
+----------------------------------------------------------------------
+  One cannot add a pointer to an address (or pointer).
+
+See \#Pointers\#.
+\end
+
+screen( "Error: pointer operation" )
+Illegal use of pointer
+----------------------------------------------------------------------
+  Pointers can only be added, subtracted, compared, or dereferenced
+  ('*' or '->').
+
+See \#Pointers\# and \#Operators\#.
+\end
+
+screen( "Error: pointer subtraction" )
+Illegal pointer subtraction
+----------------------------------------------------------------------
+  One cannot subtract a pointer from a non-pointer.
+
+See \#Pointers\#.
+\end
+
+screen( "Error: structure" )
+Structure or union syntax error
+----------------------------------------------------------------------
+  Probably mismatched braces, or using a comma instead of a ;
+
+See \#struct\# or \#union\# for syntax.
+\end
+
+screen( "Error: structure operation" )
+Illegal structure operation
+----------------------------------------------------------------------
+  The '.' operator can only be used with structures or unions.
+
+  Structures can only be used with the '.', '&' (unary address) and
+  '=' (replacement) operators.
+
+See \#Structures\# and \#Operators\#.
+\end
+
+screen( "Error: structure pointer" )
+Pointer required on left side of ->
+----------------------------------------------------------------------
+  Lvalue must be a STRUCTURE pointer.
+
+Note: '->' operator has higher precedence than \#casting\#, so use
+      '((struct name*) p)->member' not '(struct name*) p->member'.
+
+See \#Structures\# and \#Operators\#.
+\end
+
+screen( "Error: symbol" )
+Undefined symbol 'XXXXXX'
+----------------------------------------------------------------------
+  XXXXXX was used as a variable or type name, but was not defined.
+
+  A local definition may have been terminated by too many } braces.
+  A global definition may be been located later in the file.
+
+See \#Names\#, \#Variables\# and \#typedef\#.
+\end
+
+screen( "Error: syntax" )
+Expression syntax
+----------------------------------------------------------------------
+  Catch all error message.  Could be almost anything.
+
+See \#Names\#, \#Constants\#, \#Operators\# and \#Functions\#.
+\end
+
+screen( "Error: too few parameters" )
+Too few parameters in call to 'XXXXXX'
+----------------------------------------------------------------------
+  Function call used fewer parameters than in prototype or definition.
+
+See \#Functions\#.
+\end
+
+screen( "Error: too many cases" )
+Too many cases
+----------------------------------------------------------------------
+  The number of \#case\# statements in a \#switch\# block exceeded 255
+  (version 1.0) or 8191 (version 1.1).
+
+  The easiest way to overcome this problem is to break up the block
+  using:
+
+switch( test ) {
+  ...                        /* the first 255 cases */
+default: switch( test ) {
+  ...                        /* remaining cases */
+ } }
+\end
+
+screen( "Error: too many classes" )
+Too many storage classes in declaration
+----------------------------------------------------------------------
+  Only one storage class (\#extern\# \#static\# \#auto\# \#register\#) per
+  declaration.
+
+See \#Storage Classes\# and \#Variables\#.
+\end
+
+screen( "Error: too many defaults" )
+Too many default cases
+----------------------------------------------------------------------
+  Only one \#default\# statement per \#switch\# block.
+\end
+
+screen( "Error: too many init" )
+Too many initializers
+----------------------------------------------------------------------
+  Number of constants in list exceeds the array or structure size.
+
+See \#Arrays\# and \#Structures\#.
+\end
+
+screen( "Error: too many parameters" )
+Extra parameter in call to 'XXXXXX'
+----------------------------------------------------------------------
+  Function call used more parameters than in prototype or definition.
+
+See \#Functions\#.
+\end
+
+screen( "Error: too many types" )
+Too many types in declaration
+----------------------------------------------------------------------
+  Only a \#union\# can have more than one data type.
+
+See \#Data Types\# and \#Variables\#.
+\end
+
+screen( "Error: two dots" )
+Two consecutive dots
+----------------------------------------------------------------------
+  Structures and unions use single dots, and variable argument lists
+  use three dots.  Two is either too many or too few.
+\end
+
+screen( "Error: typedef" )
+Improper use of typedef symbol
+----------------------------------------------------------------------
+  Names declared using a \#typedef\# statement can only be used to cast
+  or declare data types.
+\end
+
+screen( "Error: unknown size" )
+Size of structure or array not known
+----------------------------------------------------------------------
+This error can be caused by...
+
+  using the 'array[]' definition without an initialization.
+  any arithmetic operation with a \#void\# pointer.
+  using an undefined structure name.
+
+See \#Arrays\# and \#Pointers\#.
+\end
+
+screen( "Error: write" )
+Error writing output file                    (Internal Compiler Error)
+----------------------------------------------------------------------
+  Out of disk space, or bad sector encountered.
+\end
+
+screen( "Error: too many errors" )
+Too many error or warning messages
+----------------------------------------------------------------------
+  Number of error or warning messages has exceeded the limit set by
+  the \link("%%GLOBAL%%")Compiler Options\#.
+
+    Compilation is terminated at this point.
+\end
+
+screen( "Error: divide" )
+Division by zero
+----------------------------------------------------------------------
+  Expressions involving only constants are pre-computed by the
+  compiler.
+
+  In this case, the expression resulted in a division by zero.
+\end
+
+screen( capsensitive("Warning") )
+Compiler Warning Messages   (in alphabetical order)
+----------------------------------------------------------------------
+(For more information, double-click [?] button.)
+
+\link("use")[?]\#  'XXXXXX' declared but never used
+\link("aus")[?]\#  'XXXXXX' is assigned a value which is never used
+\link("str")[?]\#  'XXXXXX' not part of structure
+\link("amb")[?]\#  Ambiguous operators need parenthesis
+\link("ret")[?]\#  Both return and return of a value used
+\link("pro")[?]\#  Call to function 'XXXXXX' with no prototype
+\link("eff")[?]\#  Code has no effect
+\link("cln")[?]\#  Constant is long
+\link("rng")[?]\#  Constant out of range in comparison
+\link("sig")[?]\#  Conversion may lose significant digits
+\link("rvl")[?]\#  Function should return a value
+\link("ucp")[?]\#  Mixing pointers to signed and unsigned char
+\link("nod")[?]\#  No declaration for function 'XXXXXX'
+\link("apt")[?]\#  Non-portable pointer assignment
+\link("cpt")[?]\#  Non-portable pointer comparison
+\link("rpt")[?]\#  Non-portable pointer conversion
+\link("par")[?]\#  Parameter 'XXXXXX' is never used
+\link("pia")[?]\#  Possible incorrect assignment
+\link("def")[?]\#  Possible use of 'XXXXXX' before definition
+\link("dup")[?]\#  Redefinition of 'XXXXXX' is not identical
+\link("stv")[?]\#  Structure passed by value
+\link("amp")[?]\#  Superfluous & with function or array
+\link("sus")[?]\#  Suspicious pointer conversion
+\link("stu")[?]\#  Undefined structure 'XXXXXX'
+\link("voi")[?]\#  Void functions may not return a value
+\link("rch")[?]\#  Unreachable code
+\link("zst")[?]\#  Zero length structure
+
+Warnings are not fatal (unless the total number exceeds the limit set
+in the \link("%%GLOBAL%%")Compiler Options\#).
+
+Warning messages can be turned on or off according to the warning
+level set in the \link("%%GLOBAL%%")Compiler Options\#, or individually using the
+\##pragma warn\# directive
+\end
+
+screen( capsensitive("#pragma warn") )
+\##pragma\# warn - Turn warning messages on or off
+----------------------------------------------------------------------
+Syntax:    #pragma warn +<code>    /* turn message on  */
+           #pragma warn -<code>    /* turn message off */
+           #pragma warn .<code>    /* reset to default */
+
+where <code> is one of the following:
+
+\#amb\# - Ambiguous operators need parenthesis
+\#amp\# - Superfluous & with function or array
+\#apt\# - Non-portable pointer conversion
+\#aus\# - 'XXXXXX' is assigned a value which is never used
+\#cln\# - Constant is long
+\#cpt\# - Non-portable pointer comparison
+\#def\# - Possible use of 'XXXXXX' before definition
+\#dup\# - Redefinition of 'XXXXXX' is not identical
+\#eff\# - Code has no effect
+\#nod\# - No declaration for function 'XXXXXX'
+\#par\# - Parameter 'XXXXXX' is never used
+\#pia\# - Possible incorrect assignment
+\#pro\# - Call to function 'XXXXXX' with no prototype
+\#rch\# - Unreachable code
+\#ret\# - Both return and return of a value used
+\#rng\# - Constant out of range in comparison
+\#rpt\# - Non-portable pointer assignment
+\#rvl\# - Function should return a value
+\#sig\# - Conversion may lose significant digits
+\#str\# - 'XXXXXX' not part of structure
+\#stu\# - Undefined structure 'XXXXXX'
+\#stv\# - Structure passed by value
+\#sus\# - Suspicious pointer conversion
+\#ucp\# - Mixing pointers to signed and unsigned char
+\#use\# - 'XXXXXX' declared but never used
+\#voi\# - Void functions may not return a value
+\#zst\# - Zero length structure
+\end
+
+screen( "dup" )
+Redefinition of 'XXXXXX' is not identical
+----------------------------------------------------------------------
+  A macro by that name was already defined (see \##define\#).
+  Use \##undef\# before new macro definition to remove warning.
+
+dup = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "ret" )
+Both return and return of a value used
+----------------------------------------------------------------------
+  \#return\# must use the same data type as the function.
+  \#void\# functions should use 'return;' or 'return(void);'
+
+  Note: Implied 'return(void)' at end of function definition { }.
+
+  See also:
+    \link("voi")Void functions may not return a value\#
+    \link("rvl")Function should return a value\#
+
+ret = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "str" )
+'XXXXXX' not part of structure
+----------------------------------------------------------------------
+  Code used <structure> .XXXXXX or <structure*> ->XXXXXX, but there is
+  no XXXXXX in the structure definition.
+
+str = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "stu" )
+Undefined structure 'XXXXXX'
+----------------------------------------------------------------------
+  Code used '\#struct\# XXXXXX' in a variable definition, \#casting\#, or
+  \#typedef\# statement, but XXXXXX  was never defined as a structure
+  name.
+
+  Note: \link("%%GLOBAL%%")Find Error\# points to end of function block.
+
+stu = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "sus" )
+Suspicious pointer conversion
+----------------------------------------------------------------------
+  Pointer conversion between incompatible data types.
+  Cast pointer to remove warning.
+
+sus = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "voi" )
+Void functions may not return a value
+----------------------------------------------------------------------
+  \link("void")Void\# \link("Functions")functions\# must use 'return;' or 'return(void);'
+  Either change \#return\# or change function type.
+
+voi = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "zst" )
+Zero length structure
+----------------------------------------------------------------------
+  \#struct\# definition contained nothing inside braces { }.
+  (Probably all member definitions were in error.)
+
+zst = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "aus" )
+'XXXXXX' is assigned a value which is never used
+----------------------------------------------------------------------
+  You probably deleted the code which used variable XXXXXX, or just
+  haven't got around to writing it yet.
+
+aus = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "def" )
+Possible use of 'XXXXXX' before definition
+----------------------------------------------------------------------
+  \#auto\# variables should be initialized during execution before
+  they are used in an operation.  However, it is possible that the
+  initialization was too obscure for the compiler to figure out.
+
+  For example,
+
+   for(i=0; i<100; i++) {
+     if(i == 0) sum = 0;
+     else sum = sum + i;
+    }
+
+  will produce this warning for 'sum'.
+
+def = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "eff" )
+Code has no effect
+----------------------------------------------------------------------
+  No syntax errors, but no variables were changed by this statement.
+  For example,
+
+   A = B;   /* changes A */
+
+   A + B;   /* changes nothing */
+
+  Note: If you hold down the shift key while typing '=' you will get
+  '+' instead.  This is a common typing error.
+
+eff = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "par" )
+Parameter 'XXXXXX' is never used
+----------------------------------------------------------------------
+  The function definition contains XXXXXX in its parameter list, but
+  never uses it in the code.
+
+  This is often done deliberately for future expansion or
+  compatibility with previous versions.
+
+  Note: \link("%%GLOBAL%%")Find Error\# will point to the end of the function.
+
+par = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "pia" )
+Possible incorrect assignment
+----------------------------------------------------------------------
+  While a statement of the form 'if( a = b )' is legal and useful,
+  more often the intended statement was of the form 'if( a == b )'
+  and the extra '=' was left out by mistake.
+
+ To remove this warning, use 'if( (a = b) != 0 )' instead.
+
+pia = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "rch" )
+Unreachable code
+----------------------------------------------------------------------
+  Executable code follows a \#return\# or \#goto\# statement.
+
+  Probably missing a \#goto\# label or have unbalanced braces.
+
+rch = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "rvl" )
+Function should return a value
+----------------------------------------------------------------------
+  Only a \#void\# function may use '\#return\#;' or 'return(void);'.
+
+  (There is an implied 'return(void)' at the end of a \link("Functions")function\#
+  definition if it is reachable.)
+
+  Either change the function type to void or use 'return( <value> );'
+  or 'return <value>;'.
+
+rvl = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "amb" )
+Ambiguous operators need parenthesis
+----------------------------------------------------------------------
+  Possible confusion between bitwise, arithmetic, and relational
+  operations:
+
+     a + b < c & d
+
+  Operator precedence establishes a unique calculation, but adding
+  parenthesis would certainly make the code more readable.
+
+amb = code for \##pragma warn\#.
+ 2  = \#warning level\# for message.
+\end
+
+screen( "amp" )
+Superfluous & with function or array
+----------------------------------------------------------------------
+  A function name without parenthesis ( ) or an array name without
+  brackets [ ] means the address of the function or array.
+  The unary & (address) operator is not needed.
+
+amp = code for \##pragma warn\#.
+ 2  = \#warning level\# for message.
+\end
+
+screen( "nod" )
+No declaration for function 'XXXXXX'
+----------------------------------------------------------------------
+  A function prototyped as \#static\# was never defined.
+
+  Note: \link("%%GLOBAL%%")Find Error\# will point to end of module.
+
+nod = code for \##pragma warn\#.
+ 2  = \#warning level\# for message.
+\end
+
+screen( "pro" )
+Call to function 'XXXXXX' with no prototype
+----------------------------------------------------------------------
+  Function definition or prototype should precede all calls to enable
+  parameter type checking.
+
+pro = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "stv" )
+Structure passed by value
+----------------------------------------------------------------------
+  Every element of the structure is copied to the registers and/or
+  stack (usually structures are passed by address).
+
+ To pass the structure by address, use the unary & (address) operator.
+
+ Note: the prototype parameter must be the same structure, not just a
+ list of variables with the same type as structure elements.
+
+stv = code for \##pragma warn\#.
+ 2  = \#warning level\# for message.
+\end
+
+screen( "use" )
+'XXXXXX' declared but never used
+----------------------------------------------------------------------
+  Probably an obsolete variable or goto label, ripe for deletion.
+
+  Note: \link("%%GLOBAL%%")Find Error\# will point to end of local block.
+
+use = code for \##pragma warn\#.
+ 2  = \#warning level\# for message.
+\end
+
+screen( "apt" )
+Non-portable pointer conversion
+----------------------------------------------------------------------
+  A non-pointer was used as a pointer function parameter.
+
+  Use \#casting\# to remove warning.
+
+apt = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "cln" )
+Constant is long
+----------------------------------------------------------------------
+  Integer constant exceeded the range of \#int\# (default) but was not
+  explicitly typed as \#long\#.  (Concatenate 'L' to remove warning.)
+
+cln = code for \##pragma warn\#.
+ 2  = \#warning level\# for message.
+\end
+
+screen( "cpt" )
+Non-portable pointer comparison
+----------------------------------------------------------------------
+  A pointer was compared to a non-pointer; e.g., 'p < l'
+
+  Use \#casting\# to remove the warning; e.g '(long) p < l'
+
+cpt = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "rng" )
+Constant out of range in comparison
+----------------------------------------------------------------------
+  The comparison will always fail or always succeed.
+
+    short i;
+    if(i < 1234567L) ...
+
+rng = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "rpt" )
+Non-portable pointer assignment
+----------------------------------------------------------------------
+  Either a pointer was set to a non-pointer, or a non-pointer was set
+  to a pointer: 'l = p' or 'p = l'  (l is long and p is a pointer)
+
+  Use \#casting\# to remove warning: 'l = (long) p' or 'p = (void *) l'
+
+rpt = code for \##pragma warn\#.
+ 1  = \#warning level\# for message.
+\end
+
+screen( "sig" )
+Conversion may lose significant digits
+----------------------------------------------------------------------
+  Conversion from \#long\# to \#short\# or \#short\# to \#char\#, etc.
+
+  Use \#casting\# to remove warning: 'i = (int) l'
+
+sig = code for \##pragma warn\#.
+ 2  = \#warning level\# for message.
+\end
+
+screen( "ucp" )
+Mixing pointers to signed and unsigned char
+----------------------------------------------------------------------
+  Using signed char pointers as unsigned char function parameters, or
+  using unsigned char pointers as signed char function parameters.
+
+  Use \#casting\# to remove warning, or change all \#char\# to either
+  \#signed\# or \#unsigned\#.  (See -K flag from \link("%%GLOBAL%%")Compiler Options\#.)
+
+ucp = code for \##pragma warn\#.
+ 2  = \#warning level\# for message.
+\end
+
+screen( "warning level" )
+Warning Level
+----------------------------------------------------------------------
+... is used in the \link("%%GLOBAL%%")Compiler Options\# as a crude implementation of
+the -W flag.
+
+  0 = Show no warning messages.
+  1 = Show some warning messages.
+  2 = Show all warning messages.
+\end
+
+screen( "Copyright" )
+This online documentation was created by John Kormylo
+    Ω1994,1995,1996 E.L.F. Software
+
+It uses information obtained from:
+
+C-Entwicklungssystem fÅr Atari ST/TT und Mega STE
+MC68040 Makro-Assembler fÅr Atari ST/TT und Mega STE
+Quelltextdebugger fÅr Atari ST/TT und Mega STE
+    Ω1991 Pure Software GmbH
+    Ω1988/1990 Borland International Inc.
+
+PureC-Update Version 1.1
+
+Harper Collins German Dictionary
+    Ω1991 HarperCollins Publishers
+
+Pure C English Overview - Dan Wilga
+    Ω1992 Gribnif Software
+
+Atari TOS Developer's Kit
+    Ω1991/1990/1987 Atari Corp.
+    Ω1985 Digital Research Inc.
+
+Atari Falcon030 Developer's Kit
+    Ω1993 Atari Corp.
+
+Atari ST Internals
+Atari ST GEM Programmer's Reference
+Atari ST Tricks & Tips
+ST Disk Drives: Inside & Out
+    Ω1985/1986/1987/1988 Data Becker GmbH
+    Ω1985/1986/1987/1988 Abacus Software
+
+The Atari Compendium
+    Ω1993,1994 Software Development Systems
+
+MiNT is Not TOS:
+A Multitasking Operating System Extension for the Atari ST
+    Ω1990,1991,1992 Eric R. Smith.
+    Ω1992,1993,1994 Atari Corporation
+
+C Quick Reference
+    Ω1988 Que Corp.
+
+Learning to Program in C
+    Ω1983 Plum Hall Inc.
+
+Using C on the UNIX System
+    Ω1985, 1987, 1988 Purdue Research Foundation
+    Ω1989 O'Reilly & Associates
+
+Power Graphics using Turbo Pascal
+    Ω1989 John Wiley & Sons
+
+68030 Assembly Language Reference
+    Ω1989 Steve Williams
+
+M68000 Microprocessors User's Manual (9th edition)
+    Ω1993 Motorola Inc.
+
+MC146818A/D Real Time Clock Plus RAM (RTC)
+    Ω1988 Motorola Inc.
+
+DSP46002 Digital Signal Processor User's Manual
+    Ω1993 Motorola Inc.
+
+SCC User's Manual
+    Ω1992 Zilog Inc.
+
+NCR 53C80 Family SCSI Protocol Controller
+    Ω1989/1994 by NCR Corp.
+
+The VMEbus Handbook
+    Ω1988, 1990, 1991, 1992 by Wade D. Peterson
+
+
+It was formatted as compressed hypertext by HC.TTP
+    Ω1990 Borland International, Inc.
+
+See also \#Registration\#.
+\end
+
+screen( "Registration" )
+**********************************************************************
+****************  THIS IS AN UNREGISTERED DEMO COPY  *****************
+**********************************************************************
+
+If you want to register your copy, send $20 to:
+
+     E.L.F. Software
+     9614 Oregano Circle
+     Houston, TX 77036
+     U.S.A.
+
+Now accepting DISCOVER (need card number and expiration date).
+
+If you have previously registered, contact me on how best to send you
+your key file.  (elfsoft@mindspring.com)
+\end

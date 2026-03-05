@@ -1,0 +1,1612 @@
+
+
+screen( capsensitive("Menu") )
+Drop-down Menus (For more information, double click text in boldface.)
+----------------------------------------------------------------------
+\link("Debugger Menu")Debugger\#  \#File\#  \#View\#  \#Action\#  \link("Run Menu")Run\#  \#Options\#  \#Help\#
+
+\end
+
+screen( "Debugger Menu" )
+Debugger
+----------------------------------------------------------------------
+About Pure Debugger - Copyright and version information.
+
+(Accessories are not available under Pure Debugger.)
+\end
+
+screen( "File" )
+File
+----------------------------------------------------------------------
+        \#Load...\#
+        \#Info...\#
+
+        \#Close Window\#
+        \#Cycle Windows\#
+
+        \#Quit\#
+\end
+
+screen( "View" )
+View
+----------------------------------------------------------------------
+        \#Function...\#
+        \#Breakpoints\#
+        \#Variables\#
+        \#Watches\#
+        \#Modules\#
+        \#Stack\#
+
+        \#Assembly...\#
+        \#Dump...\#
+        \#CPU\#
+
+        \#File...\#
+        \#Log\#
+        \#User Screen\#
+\end
+
+screen( "Action" )
+Action
+----------------------------------------------------------------------
+        \#Find...\#
+        \#Find Same\#
+        \#Goto Line...\#
+
+        \#Breakpoint...\#
+        \#Inspect...\#
+        \#Watch...\#
+        \#Log...\#
+
+        \#Change...\#
+        \#Edit...\#
+        \#Block...\#
+        \#Delete\#
+        \#Delete all\#
+\end
+
+screen( "Run Menu" )
+Run
+----------------------------------------------------------------------
+        \#Run\#
+        \#Trace into\#
+        \#Step over\#
+        \#Until return\#
+        \#Animate\#
+
+        \#Program reset\#
+\end
+
+screen( "Options" )
+Options
+----------------------------------------------------------------------
+        \#Environment\#
+        \#Directories\#
+        \#Arguments\#
+
+        \link("Load *.CFG")Load...\#
+        \#Save ''\#
+
+See also \#Configuration File\#.
+\end
+
+screen( "Help" )
+Help
+----------------------------------------------------------------------
+        \#Menu\#       - Information about drop down menus.
+        \#Debugger\#   - Information about debugger operation.
+        \link("%%GLOBAL%%")C Language\# - Information about C language.
+        \link("%%GLOBAL%%")Libraries\#  - Information about library subroutines.
+        \link("%%GLOBAL%%")Assembler\#  - Information about assembly language.
+        \#Index\#      - See \#Index Help\#
+
+See also \#Help Window\#.
+\end
+
+screen( "Load..." )
+\#File\#/Load...                                                 \#CONTROL\#-O
+----------------------------------------------------------------------
+... uses the \#File Selector\# with the '.PRG' extension set to open
+an executable file for debugging.
+
+For full functionality, one should have set the -Y flags of the
+compiler and/or assembler options and the -GLY flags of the linker
+options.
+
+Note: the 'Project/Debug' menu selection from Pure C automatically
+      loads a program.
+
+See also \#View\#/\#File...\#
+\end
+
+screen( "Info..." )
+\#File\#/Info...                                                 \#CONTROL\#-I
+----------------------------------------------------------------------
+... displays information about the program loaded.
+
+Debugging: shows program filename.
+
+Memory used: shows how much memory is used by the debugger and the
+             program, and how much free space remains.
+
+Program Segments: shows the starting adresses for the text, data and
+                  BSS segments for the program.
+\end
+
+screen( "Close Window" )
+\#File\#/Close Window                                            \#CONTROL\#-U
+----------------------------------------------------------------------
+... closes the active window.
+
+Equivalent to clicking the close window icon  (upper left corner).
+\end
+
+screen( "Cycle Windows" )
+\#File\#/Cycle Windows                                           \#CONTROL\#-W
+----------------------------------------------------------------------
+... moves the bottom-most window to the top, making it the active
+window.
+
+One can also swap windows by clicking the mouse on any exposed section
+of a partially obscured window, moving it to the top.
+\end
+
+screen( "Quit" )
+\#File\#/Quit                                 SHIFT-\#CONTROL\#-Q or \#CONTROL\#-Q
+----------------------------------------------------------------------
+... terminates Pure debugger.
+
+The SHIFT-\#CONTROL\#-Q key combination, or holding down the SHIFT key
+while clicking 'Quit' will terminate Pure Debugger without saving the
+\#Configuration File\#.
+\end
+
+screen( "Function..." )
+\#View\#/Function...                                             \#CONTROL\#-S
+----------------------------------------------------------------------
+... asks you for an absolute \#address\# or a function name, then opens
+a \#Source Window\# to show the chosen function definition.
+
+See also \#Modules\#.
+\end
+
+screen( "Breakpoints",
+		"Breakpoints Window" )
+\#View\#/Breakpoints                                             \#CONTROL\#-B
+----------------------------------------------------------------------
+... opens a window to show a list of all current breakpoints.
+
+Double clicking a breakpoint execute an \#Action\#/\#Breakpoint...\# command
+to modify or disable the selected breakpoint.
+
+One can also select breakpoints using the  and  keys then press the
+RETURN key to modify the breakpoint.
+
+Disabled breakpoints remain on the list and are marked with the
+outline of a 'stop sign' icon in a \#Source Window\# or \#Assembly Window\#.
+\end
+
+screen( "Variables",
+		"Variables Window" )
+\#View\#/Variables                                               \#CONTROL\#-V
+----------------------------------------------------------------------
+... opens a window to show a list of variable names along with their
+values, or function names along with their data types, or names from
+the symbol table along with their addresses.
+
+One can select subsets of these names using the buttons along the
+left-bottom edge of the window:
+
+G - global
+S - strings
+L - local
+F - function names / variable names
+A - assembly (symbol table) 
+
+Double clicking a function name will open a \#Source Window\# to show
+its definition.
+Double clicking a variable name will open an \#Inspect Window\# to show
+its value(s).
+Double clicking an assembly name will open the \#Dump Window\# to show
+its definition.
+
+One can also select names using the  and  keys then press the RETURN
+key to open the corresponding window.
+
+See also \#Action\#/\#Change...\#.
+\end
+
+screen( "Watches Window",
+		"Watches" )
+\#View\#/Watches                                                 \#CONTROL\#-E
+----------------------------------------------------------------------
+... opens a window showing a list a variables and/or expressions
+previously entered using the \#Action\#/\#Watch...\# command, showing
+their values.
+
+Double clicking any line executes a \#Action\#/\#Watch...\# command to replace
+the selected entry.
+
+One can also select watches using the  and  keys then press the
+RETURN key to modify the selected entry.
+
+See also \#Action\#/\#Delete\#, \#Delete all\#, \#Change...\# and \#Configuration File\#.
+\end
+
+screen( "Modules",
+		"Modules Window" )
+\#View\#/Modules                                                 \#CONTROL\#-M
+----------------------------------------------------------------------
+... a window showing a list of module names.  Double clicking any name
+will open the corresponding \#Source Window\#.
+
+One can also select names using the  and  keys then press the
+RETURN key to open a \#Source Window\#.
+\end
+
+screen( "Stack",
+		"Trace Window" )
+\#View\#/Stack                                                   \#CONTROL\#-T                  
+----------------------------------------------------------------------
+... opens a window showing a list of function names in the order in
+which they called one another to reach this position.  It also shows
+the depth to which a recursive routine has called itself.
+\end
+
+screen( "Assembly Window",
+		"Assembly..." )
+\#View\#/Assembly...                                             \#CONTROL\#-A
+----------------------------------------------------------------------
+... asks for an absolute \#address\# or a function (or variable) name,
+then opens a window showing the corresponding disassembled machine
+code by absolute address (with source code statements inserted).
+
+No editing can be done, but one can use the cursor and HELP key to get
+information about \link("%%GLOBAL%%")Assembler\# instructions.
+
+The 'arrow' icon marks the next statement to be executed.
+
+One can add or remove a breakpoint by clicking on the left edge of the
+window.  (\#Breakpoints\# will be marked with a 'stop sign' icon.)
+
+Clicking the buttons on the left-bottom edge is equivalent to \link("Run Menu")Run\#
+commands:
+
+R - \#Run\#
+T - \#Trace into\#
+S - \#Step over\#
+
+See also \#Source Window\# and \#Dump Window\#.
+\end
+
+screen( "Dump Window",
+		"Dump..." )
+\#View\#/Dump...                                                 \#CONTROL\#-D
+----------------------------------------------------------------------
+... asks for an absolute \#address\# or a variable (or function) name,
+then opens a window showing the corresponding memory contents.  The
+absolute memory addresses coresponding to the leftmost column are also
+shown.
+
+The buttons on the left-bottom edge control the display:
+
+B - hex bytes
+W - hex words (2 bytes)
+L - hex longs (4 bytes)
+A - ASCII characters
+ - shift display backward by one Byte, Word or Long (as selected).
+ - shift display foreward by one Byte, Word or Long (as selected).
+
+Double clicking a value executes an \#Action\#/\#Change...\# command to modify
+the contents.
+
+One can also move the cursor using the    and  keys then press
+the RETURN key to execute the \#Change...\# command.
+\end
+
+screen( "CPU",
+		"CPU Window" )
+\#View\#/CPU                                                     \#CONTROL\#-C
+----------------------------------------------------------------------
+... opens a window showing the contents of the registers.
+
+                  MC68000 registers
+\link("%%GLOBAL%%")PC\#   - program counter
+\link("%%GLOBAL%%")SR\#   - status (see \#SR Display\#)
+\link("%%GLOBAL%%")D0\# through \link("%%GLOBAL%%")D7\# - data
+\link("%%GLOBAL%%")A0\# through \link("%%GLOBAL%%")A7\# - address (A7 is stack pointer)
+\link("%%GLOBAL%%")SSP\#  - supervisor stack pointer
+
+                  MC68020+ registers
+\link("%%GLOBAL%%")ISP\#  - interupt stack pointer (replaces SSP)
+\link("%%GLOBAL%%")MSP\#  - master stack pointer
+\link("%%GLOBAL%%")SFC\#  - source function code
+\link("%%GLOBAL%%")DFC\#  - destination function code
+\link("%%GLOBAL%%")CAAR\# - cache address
+\link("%%GLOBAL%%")CACR\# - cache control
+\link("%%GLOBAL%%")VBR\#  - vector base
+
+                  MC68881+ registers
+\link("%%GLOBAL%%")FPSR\# - floating point status
+\link("%%GLOBAL%%")FP0\# through \link("%%GLOBAL%%")FP7\# - floating point data
+
+All registers are shown in hex except the SR.
+
+See also \#Action\#/\#Change...\#
+\end
+
+screen( "File Window",
+		"File..." )
+\#View\#/File...                                                 \#CONTROL\#-H
+----------------------------------------------------------------------
+... uses the \#File Selector\# with the '.*' extension set to open a file
+for examination.
+
+The buttons on the left-bottom edge control the display:
+
+A - ASCII
+H - Hex (plus ASCII)
+
+See also \#Action\#/\#Find...\#, \#Find Same\# and \#Goto Line...\#
+\end
+
+screen( "Log",
+		"Log Window" )
+\#View\#/Log                                                     \#CONTROL\#-J
+----------------------------------------------------------------------
+... opens a window showing a record of actions and events:
+
+Actions: \#Load...\#, \#Run\#, \#Step over\#, \#Trace into\#, \#Until return\# and
+         \#Program reset\#
+
+Events: error messages, breakpoints, aborts and/or program end.
+
+
+The buttons on the left-bottom edge turn the log on and off:
+
+L - turn log on.
+F - write log to file (see \#Options\#/\#Environment\#).
+
+See also \#Action\#/\#Log...\# and \#Delete all\#.
+\end
+
+screen( "User Screen" )
+\#View\#/User Screen                                                   ESC
+----------------------------------------------------------------------
+... shows the screen image corresponding to the program being
+debugged.  (Pure Debugger maintains two screen images in memory.)
+
+One can return to Pure Debugger by pressing any key.
+
+See also \#Options\#/\#Environment\#.
+\end
+
+screen( "Find..." )
+\#Action\#/Find...                                               \#CONTROL\#-F
+----------------------------------------------------------------------
+... locates the next occurrence of a text string starting from the
+current cursor location.  This command opens a dialog box where one
+can specify the string to be found and select search options
+\#Backwards\#, \#Ignore Case\#, and/or \#Whole Word\#.
+
+Applies only to the \#Source Window\#s and \#File Window\#s.
+\end
+
+screen( "Find Same" )
+\#Action\#/Find Same                                             \#CONTROL\#-G
+----------------------------------------------------------------------
+... locates the next occurrence of a text string starting from the
+current cursor location, using the string and options last specified
+by \#Action\#/\#Find...\#
+
+Note: the search direction is reversed each time a search fails.
+
+Applies only to \#Source Window\#s and \#File Window\#s.
+\end
+
+screen( capsensitive("Goto Line...") )
+\#Action\#/Goto Line...                                          \#CONTROL\#-L
+----------------------------------------------------------------------
+... locates a particular line by its line number. A dialog box is used
+to enter the desired line number.
+
+Applies only to \#Source Window\#s and \#File Window\#s.
+\end
+
+screen( "Breakpoint..." )
+\#Action\#/\#Breakpoint...\#                                     \#ALTERNATE\#-B
+----------------------------------------------------------------------
+... opens a dialog box where one can create a breakpoint, using the
+following options:
+
+    \#Breakpoint at\#
+    \#Variable changed\#
+    \#Memory changed at\#
+    \#Expression true\#
+    \#Pass count\#
+
+If more than one options is selected, then the break will occur only
+if ALL of the conditions are satisfied.
+
+See also \#Breakpoints Window\#, \#Source Window\# and \#Assembly Window\#.
+\end
+
+screen( "Inspect Window",
+		"Inspect..." )
+\#Action\#/Inspect...                                          \#ALTERNATE\#-I
+----------------------------------------------------------------------
+... asks for an \#expression\#, then opens a window showing the value,
+contents or definition of the requested item.
+
+The Inspect Window differs from the \#Watches Window\# in that one can
+display more than one window, there is only one item per window, and
+each element of an array, structure or union gets its own line.
+
+Double clicking any line in an Inspect Window will open another
+Inspect Window for that element.
+
+One can also move the cursor using the  and  keys then press the
+RETURN key to inspect that line.
+
+See also \#Action\#/\#Change...\#.
+\end
+
+screen( "Watch..." )
+\#Action\#/Watch...                                            \#ALTERNATE\#-W
+----------------------------------------------------------------------
+... asks for an \#expression\#, then adds that expression to the list in
+the \#Watches Window\#.
+
+If the window is not open, it will also open it.
+\end
+
+screen( "Log..." )
+\#Action\#/Log...                                              \#ALTERNATE\#-L
+----------------------------------------------------------------------
+... asks for an \#expression\#, then adds that expression to the list in
+the \#Log Window\#.
+\end
+
+screen( "Change..." )
+\#Action\#/Change...                                           \#ALTERNATE\#-C
+----------------------------------------------------------------------
+... changes a selected value in the \#CPU Window\#, \#Variables Window\#,
+\#Watches Window\# or \#Inspect Window\#, or a \#byte list\# in the
+\#File Window\# or \#Dump Window\#.
+\end
+
+screen( "Edit..." )
+\#Action\#/Edit...                                             \#ALTERNATE\#-E
+----------------------------------------------------------------------
+... executes an external edit program specified in the \#Options\#/
+\#Environment\# (usually PC.PRG).
+
+If you called PD.PRG from within PC.PRG, then it is easier to \#Quit\#
+Pure Debugger than to open another editor.
+\end
+
+screen( "Block..." )
+\#Action\#/Block...                                            \#ALTERNATE\#-K
+----------------------------------------------------------------------
+... allows you copy, clear or fill a block of memory.  One can also
+write a block to a file, or read a block from a file.
+
+It opens a dialog box where you can enter the following:
+
+    Source \#address\#        - copy & write
+    Destination \#address\#   - copy, clear, fill & read
+    Length                - all (number bytes)
+    Fill Pattern          - fill (\#byte list\#)
+    File name             - read & write
+\end
+
+screen( "Delete" )
+\#Action\#/Delete                                                   DELETE
+----------------------------------------------------------------------
+... removes a selected expression from the \#Watches Window\# or a
+breakpoint from the \#Breakpoints Window\#.
+
+See also \#Action\#/\#Delete all\#.
+\end
+
+screen( "Delete all" )
+\#Action\#/Delete all
+----------------------------------------------------------------------
+... removes all entries from the \#Watches Window\#, \#Breakpoints Window\# or
+\#Log Window\#.
+
+See also \#Action\#/\#Delete\#.
+\end
+
+screen( "Run" )
+\link("Run Menu")Run\#/Run                                                    \#ALTERNATE\#-R
+----------------------------------------------------------------------
+... executes the program until it ends or crashes, or a \link("Breakpoint...")breakpoint\#
+occurs or the \#ALTERNATE\#-HELP key combination is pressed.
+
+See also \#Source Window\# and \#Assembly Window\#.
+\end
+
+screen( "Trace into" )
+\link("Run Menu")Run\#/Trace into                                             \#ALTERNATE\#-T
+----------------------------------------------------------------------
+... executes one source statement, marked with the 'arrow' icon in
+\#Source Window\#s and \#Assembly Window\#s.
+
+Function calls are expanded and also executed one statement at a time.
+
+(If the \#Assembly Window\# is not active and no debug info exists for
+that function, the function call will NOT be expanded.)
+
+See also \link("Run Menu")Run\#/\#Step over\#.
+\end
+
+screen( "Step over" )
+\link("Run Menu")Run\#/Step over                                              \#ALTERNATE\#-S
+----------------------------------------------------------------------
+... executes one source statement, marked with the 'arrow' icon in
+\#Source Window\#s and \#Assembly Window\#s.
+
+Function calls are NOT expanded.
+
+See also \link("Run Menu")Run\#/\#Trace into\#.
+\end
+
+screen( "Until return" )
+\link("Run Menu")Run\#/Until return                                           \#ALTERNATE\#-U
+----------------------------------------------------------------------
+... executes the program until it reaches the 'return' for this
+function (unless it crashes, a \link("Breakpoint...")breakpoint\# occurs or the \#CONTROL\#-C
+key combination is pressed first).
+
+See also \link("Run Menu")Run\#/\#Trace into\#.
+\end
+
+screen( "Animate" )
+\link("Run Menu")Run\#/Animate                                                \#ALTERNATE\#-A
+----------------------------------------------------------------------
+... executes the program slowly, updating the debugger windows after
+each step, until the program ends, crashes, a \link("Breakpoint...")breakpoint\# occurs or the
+\#CONTROL\#-C key combination is pressed.
+\end
+
+screen( "Program reset" )
+\link("Run Menu")Run\#/Program reset                                          \#ALTERNATE\#-Z
+----------------------------------------------------------------------
+... moves the program counter back to the start of 'main',
+re-initializes all variables, closes all files and releases heap
+memory.
+
+Note: Certain operations like \link("%%GLOBAL%%")form_dial\# and \link("%%GLOBAL%%")v_hide_c\# can have a
+      cumulative effect if not properly terminated.
+\end
+
+screen( "Environment" )
+\#Options\#/Environment                                        \#ALTERNATE\#-N
+----------------------------------------------------------------------
+  \#Display swapping\#     - Always/Smart/Never
+  \#Display values in\#    - Decimal/Hex/Both
+  \#Default tab size\#     - see \#Source Window\#
+  \#Editor file name\#     - see \#Action\#/\#Edit...\#
+  \#Log file name\#        - see \#Log Window\#
+  \#Animate time step\#    - see \#Run\#/\#Animate\#
+  \#Use VDI graphics\#
+  \#Display swapping via\# - Address/Memcopy/Vdicopy
+\end
+
+screen( "Directories" )
+\#Options\#/Directories                                        \#ALTERNATE\#-D
+----------------------------------------------------------------------
+... enter three possible pathnames to search for source files.
+
+Default is to use the current directory (same as program).
+\end
+
+screen( "Arguments" )
+\#Options\#/Arguments                                          \#ALTERNATE\#-P
+----------------------------------------------------------------------
+... edit the command line used to execute program.
+
+Use \link("Run Menu")Run\#/\#Program reset\# to use the new command line.
+\end
+
+screen( "Load *.CFG" )
+\#Options\#/Load...                                            \#ALTERNATE\#-J
+----------------------------------------------------------------------
+... uses the \#File Selector\# to load a previously saved
+\#Configuration File\#, or create a new \#Configuration File\# with a
+different filename.
+
+Subsequent saves will use the new filename.
+
+File PD.CFG is loaded automatically when Pure Debugger starts.
+\end
+
+screen( "Save ''" )
+\#Options\#/Save ''                                            \#ALTERNATE\#-H
+----------------------------------------------------------------------
+... saves the current version of the \#Configuration File\#.
+
+The file is saved automatically when Pure Debugger \#Quit\#s.
+\end
+
+screen( "Index Help" )
+Index Help
+----------------------------------------------------------------------
+        Pure Debugger    - PD.HLP
+        C Language       - C.HLP
+        Libraries        - LIB.HLP
+        Assembler        - PASM.HLP
+        Userdefined Help - USR.HLP
+
+The index contains the list of all keywords for each of the help
+files.
+
+Keywords are arranged in alphabetical order and grouped by their
+first letter.
+\end
+
+screen( capsensitive("Debugger") )
+Pure Debugger   (For more information, double-click text in boldface.)
+----------------------------------------------------------------------
+Pure Debugger uses information contained in the symbol table and debug
+segment of a program (compiled and linked by Pure C) to help locate
+the cause for run time errors.
+
+It allows the user to execute the program one step at a time, or until
+a pre-selected statement is reached, or until a particular condition
+is satisfied, or until the \#ALTERNATE\#-HELP key combination is pressed.
+One can examine memory, register or file contents at every step.
+
+Pure Debugger also intercepts \#exception vectors\#.
+
+Pure Debugger displays information using 12 different type of windows:
+
+    \#Source Window\#      source code
+    \#Assembly Window\#    dis-assembled machine code
+    \#CPU Window\#         register values
+    \#Trace Window\#       parent function names
+    \#Log Window\#         log of debugger actions
+    \#Modules Window\#     list of source code files
+    \#Variables Window\#   list of variable or function names
+    \#Breakpoints Window\# list of selected breakpoints
+    \#Watches Window\#     list of selected variable contents
+    \#Inspect Window\#     variable contents
+    \#Dump Window\#        hex or ASCII memory contents
+    \#File Window\#        file contents
+
+These windows support all the standard GEM features: scroll bars,
+close icons , resize icons , full size icons , and title (drag)
+bars.  The title bar shows the window type plus file, variable, or
+module names or addresses (depending on the window type).
+\end
+
+screen( "CONTROL" )
+Control Codes for Pure Debugger
+----------------------------------------------------------------------
+Key(s)       Function
+----------------------------------------------------------------------
+ESC          View user screen image (\#View\#/\#User Screen\#).
+DELETE       Delete item from window (\#Action\#/\#Delete\#).
+
+CONTROL-A    View assembly window (\#View\#/\#Assembly...\#).
+CONTROL-B    View breakpoints window (\#View\#/\#Breakpoints\#).
+CONTROL-C    View CPU window (\#View\#/\#CPU\#). [Abort Animation]
+CONTROL-D    View dump window (\#View\#/\#Dump...\#).
+CONTROL-E    View watches window (\#View\#/\#Watches\#).
+CONTROL-F    Find next occurrence of string (\#Action\#/\#Find...\#).
+CONTROL-G    Repeat last search (\#Action\#/\#Find Same\#).
+CONTROL-H    View file window (\#View\#/\#File...\#).
+CONTROL-I    Show program info (\#File\#/\#Info...\#).
+CONTROL-J    View log window (\#View\#/\#Log\#).
+CONTROL-L    Locate line by number (\#Action\#/\#Goto Line...\#). 
+CONTROL-M    View modules window (\#View\#/\#Modules\#).
+CONTROL-O    Load program (\#File\#/\#Load...\#).
+CONTROL-Q    Exit Pure Debugger (\#File\#/\#Quit\#).
+CONTROL-S    View source window (\#View\#/\#Function...\#).
+CONTROL-T    View trace window (\#View\#/\#Stack\#).
+CONTROL-U    Close window (\#File\#/\#Close Window\#).
+CONTROL-V    View variables window (\#View\#/\#Variables\#).
+CONTROL-W    Move bottom window to top (\#File\#/\#Cycle Windows\#).
+
+CONTROL/SHIFT-Q  Quit without saving \#Configuration File\#.
+
+See also \#ALTERNATE\# keys.
+\end
+
+screen( "ALTERNATE" )
+'Alternate Codes' for Pure Debugger
+----------------------------------------------------------------------
+Key(s)       Function
+----------------------------------------------------------------------
+ALTERNATE-A  Animate program (\link("Run Menu")Run\#/\#Animate\#).
+ALTERNATE-B  Create breakpoint (\#Action\#/\#Breakpoint...\#).
+ALTERNATE-C  Change selected value (\#Action\#/\#Change...\#).
+ALTERNATE-D  Set source directories (\#Options\#/\#Directories\#).
+ALTERNATE-E  Execute external program (\#Action\#/\#Edit...\#).
+ALTERNATE-H  Save configuration file (\#Options\#/\#Save ''\#).
+ALTERNATE-I  View inspect window (\#Action\#/\#Inspect...\#).
+ALTERNATE-J  Load new configuration file (\#Options\#/\#Load...\#).
+ALTERNATE-K  Block operations (\#Action\#/\#Block...\#).
+ALTERNATE-L  Log entry (\#Action\#/\#Log...\#).
+ALTERNATE-N  Set debugger options (\#Options\#/\#Environment\#).
+ALTERNATE-P  Set command line (\#Options\#/\#Arguments\#).
+ALTERNATE-R  Run program (\link("Run Menu")Run\#/\#Run\#).
+ALTERNATE-S  Execute one step or function (\link("Run Menu")Run\#/\#Step over\#).
+ALTERNATE-T  Execute one step (\link("Run Menu")Run\#/\#Trace into\#).
+ALTERNATE-U  Run to end of function (\link("Run Menu")Run\#/\#Until return\#).
+ALTERNATE-W  Add watch to list (\#Action\#/\#Watch...\#).
+ALTERNATE-Z  Restart program (\link("Run Menu")Run\#/\#Program reset\#).
+
+ALTERNATE-HELP  Stop run (see \link("Run Menu")Run\#/\#Run\#).
+
+See also \#CONTROL\# codes.
+\end
+
+screen( "File Selector" )
+File Selector
+----------------------------------------------------------------------
+The small window displays a list of folders and files (which match the
+current extension) found in the current folder.  The selected file or
+folder is shown in reverse video (white letters on black background).
+One can select a file or folder by clicking it with the mouse, or by
+using the  and  keys and pressing RETURN, or by typing in the name.
+
+Double clicking a file name will 'Open' the file (see below).
+Double clicking a folder name will display its contents.
+
+Clicking the '' (close icon) will back up to the parent folder.
+
+One can select a new drive by clicking a button on the left
+(labelled 'A:', 'B:', etc.).
+
+One can change the extension by clicking a button in the middle
+(labelled '*.*', '*.C', etc.).
+
+'Open'       displays the selected folder or uses the selected file
+             for the calling function.
+
+'New'        creates an new file to be used for the calling function.
+             Another dialog box will appear to enter the new name.
+
+'Cancel'     returns without perform the calling function.
+
+Calling functions include \#File\#/\#Load...\#, \#View\#/\#File...\# and \#Options\#/\link("Load *.CFG")Load...\#
+
+The remaining buttons have nothing to do with the calling function:
+
+'New Folder' creates a new folder within the current folder.
+'Delete'     deletes the selected file.
+'Touch'      changes the file's creation time/date to the current
+              time/date.
+'Copy'       copies the file.  Another dialog box will appear to
+              enter the new file name.  (Will not change folders.)
+'Info'       displays the size, date, time, and write protection
+              status of a file.  One can also use this button to
+              rename the file or change its status.
+\end
+
+screen( "Configuration File",
+		"*.CFG" )
+Configuration File  (*.CFG)
+----------------------------------------------------------------------
+The configuration file contains essentially everything about the
+current status of PD.PRG, including the settings for all of the
+\#Options\#, which windows are open, the \#Watches\#, and even the \#Find...\#
+settings.
+
+\#Breakpoints\# are NOT saved.
+
+File PD.CFG is loaded automatically when PD.PRG is started, and is
+saved automatically when PD.PRG is terminated.
+
+\#Options\#/\#Save ''\# will save the configuration file on request.
+
+\#Options\#/\#Load...\# can be used to load a different configuration file,
+and/or change the filename used for subsequent saves.
+\end
+
+screen( "Source Window" )
+Source Window
+----------------------------------------------------------------------
+... contains the source code for the program being debugged.  The
+'arrow' icon marks the next statement to be executed.
+
+No editing can be done, but one can use the cursor and HELP key to get
+information about \link("%%GLOBAL%%")C Language\# keywords and \link("%%GLOBAL%%")Libraries\# functions.
+
+One can add or remove a breakpoint by clicking on the left edge of the
+window.  (\#Breakpoints\# will be marked with a 'stop sign' icon.)
+
+Clicking the buttons on the left-bottom edge is equivalent to \link("Run Menu")Run\#
+commands, or can be used to change the TAB expansion:
+
+R - \#Run\#
+T - \#Trace into\#
+S - \#Step over\#
+
+ - reduce TAB expansion by one space
+n - current size of TAB expansion
+ - increase TAB expansion by one space
+\end
+
+screen( "Help Window" )
+Help Window
+----------------------------------------------------------------------
+The help window can be initiated using the drop-down \#Help\# menu or by
+pressing the HELP key while the cursor is within a context sensitive
+keyword (such as \link("%%GLOBAL%%")C Language\# keywords or \link("%%GLOBAL%%")Libraries\# function names).
+
+Within the text of help window are keywords in boldface and
+underlined.  By double clicking the mouse on a keyword, or by
+placing the cursor within a keyword and pressing the HELP key,
+a different help window will appear with additional information.
+
+To return to the previous help window, press the UNDO key.
+
+To close the help window, press \#CONTROL\#-U or click the  (close icon)
+in the upper left-hand corner of the window.
+\end
+
+screen( "SR Display" )
+\#CPU Window\#: Status Register Display
+----------------------------------------------------------------------
+T/t  Trace mode on/off
+S/s  Supervisor mode on/off
+M/I  Master/interupt state (TT only)
+0-7  Interupt mask
+X/x  Extend bit set/clear
+N/n  Negative flag set/clear
+Z/z  Zero flag set/clear
+V/v  Overflow flag set/clear
+C/c  Carry bit set/clear
+\end
+
+screen( "address" )
+address
+----------------------------------------------------------------------
+Absolute addresses can be specified in decimal or hexadecimal.
+  The \#syntax\# for hex is either $<hex> 0x<hex> or 0X<hex> where <hex>
+  represents a hex number; e.g. $5A0  (\link("%%GLOBAL%%")_p_cookies\#).
+  (See \#File\#/\#Info...\# for segment addresses.)
+
+One can also use a function or variable name as an address.  See the
+  \#Variables Window\# for the list of defined symbols.
+
+One can also specify an address relative to its source code location.
+  The \#syntax\# is
+
+             #<module name>[.<ext>]#<line number>
+
+  where the <module name> can be found in the \#Modules Window\#;
+  e.g. #hello.c#5
+
+Note: Selecting an item in one window will cause its address to be
+      used as default in a subsequent command.
+\end
+
+screen( "syntax" )
+syntax
+----------------------------------------------------------------------
+Brackets [ ] indicate optional entry.
+Angle brackets < > indicate a variable quantity.
+\end
+
+screen( "byte list" )
+byte list
+----------------------------------------------------------------------
+... consists of numbers and/or ASCII characters separated by commas.
+
+Numbers can be entered in decimal or hexadecimal.
+  The \#syntax\# for hex is either $<hex> 0x<hex> or 0X<hex> where <hex>
+  represents the hex number; e.g. $5A0
+  Numbers between 0 and 255 will be typed as unsigned char (1 byte).
+  Numbers between -32768 and 32767 will be typed as int (2 bytes).
+  One can append u or U to type a number as unsigned int (2 bytes).
+  One can append l or L to type a number as long (4 bytes).
+
+ASCII characters must be enclosed in either single or double quotes;
+  Single quotes ('a') define a single byte, word, or long word.
+  Double quotes ("abc") define any number of bytes.
+    (There is NO implied terminating NULL.)
+
+byte list      hex dump
+---------      --------
+10             0a
+$10            10
+0U             00 00
+256            01 00
+-1             ff ff
+0L             00 00 00 00
+32768          00 01 00 00
+-32769         ff fe ff ff
+'a'            61
+'ab'           61 62
+'abc'          00 61 62 62
+"abc"          61 62 63
+1,2,3          01 02 03
+"string",0     73 74 72 69 6e 67 00
+\end
+
+screen( "Backwards" )
+Backwards
+----------------------------------------------------------------------
+Search through the active window for the PREVIOUS occurrence of a text
+string (starting from the cursor location).
+
+Note: this direction is reversed each time a search fails.
+\end
+
+screen( "Ignore Case" )
+Ignore Case
+----------------------------------------------------------------------
+Ignore the case of any of the characters in the text string being
+located.  For example 'TEXT' 'text' or even 'TeXt' would all be
+treated as equivalent.
+\end
+
+screen( "Whole Word" )
+Whole Word
+----------------------------------------------------------------------
+The string being located must be preceded and followed by word
+termination characters, such as Tab Space Comma Period ( ) [ ] { }
+' " + - * / = & | ! ^ ~ < > ? : ; % \\ or Newline.
+Characters _ and # will not work.
+
+For example, searching for 'test' will find ' test ' and '(test)' but
+not 'testify', 'test2' or 'error_test'.
+\end
+
+screen( "Breakpoint at" )
+\#Action\#/\#Breakpoint...\#/Breakpoint at
+----------------------------------------------------------------------
+Enter \#address\# of source code statement at which to stop execution.
+
+See also \#Source Window\# and \#Assembly Window\#.
+\end
+
+screen( "Variable changed" )
+\#Action\#/\#Breakpoint...\#/Variable changed
+----------------------------------------------------------------------
+Enter a variable name or \#address\# (see \#Variables Window\#).
+
+Stop execution if its value is changed.
+
+
+\end
+
+screen( "Memory changed at" )
+\#Action\#/\#Breakpoint...\#/Memory changed at
+----------------------------------------------------------------------
+Enter \#address\# and block length in bytes.
+
+Stop execution if any value in this block is changed.
+\end
+
+screen( "Expression true" )
+\#Action\#/\#Breakpoint...\#/Expression true
+----------------------------------------------------------------------
+Enter an \#expression\#.
+
+Stop execution if its value becomes TRUE (non-zero).
+\end
+
+screen( "Pass count" )
+\#Action\#/\#Breakpoint...\#/Pass count
+----------------------------------------------------------------------
+Stop execution after all other conditions have been satisfied a
+certain number of times.
+
+When used with \#Breakpoint at\#, stop execution when this statement
+has been reached for the nth time.
+
+Otherwise, stop after n steps.
+\end
+
+screen( "expression" )
+expression
+----------------------------------------------------------------------
+An expression can be a variable name, or any \link("%%GLOBAL%%")C Language\# expression
+involving two or more variables and/or operators.
+
+Note: Pointers are automatically dereferenced when displayed.
+      To see the actual address contained in a pointer, cast the
+      pointer as (long).
+\end
+
+screen( "Display swapping" )
+\#Options\#/\#Environment\#/Display swapping
+----------------------------------------------------------------------
+Pure Debugger maintains two screen images in memory: one for itself
+and one for the program being debugged.
+
+Always - Swap screens every time a program step is executed.
+Smart  - Only swap screens on system calls (\link("%%GLOBAL%%")TRAP\#).
+Never  - Manually swap screens using \#View\#/\#User Screen\# or ESC key.
+
+See also \#Display swapping via\#.
+\end
+
+screen( "Display values in" )
+\#Options\#/\#Environment\#/Display values in Hex/Decimal/Both
+----------------------------------------------------------------------
+Used by the \#Variables Window\#, \#Watches Window\# and \#Inspect Window\#s.
+\end
+
+screen( "Default tab size" )
+\#Options\#/\#Environment\#/Default tab size
+----------------------------------------------------------------------
+Expand TABs as 0-9 spaces.
+
+Used by \#Source Window\#s.
+\end
+
+screen( "Editor file name" )
+\#Options\#/\#Environment\#/Editor file name
+----------------------------------------------------------------------
+File name for external program to be executed by the \#Action\#/\#Edit...\#
+command.
+
+Default directory can vary, so use full pathname.
+\end
+
+screen( "Log file name" )
+\#Options\#/\#Environment\#/Log file name
+----------------------------------------------------------------------
+File name used by \#Log Window\# 'F' button to save debugger log.
+
+Default directory is the same as the program being debugged.
+\end
+
+screen( "Animate time step" )
+\#Options\#/\#Environment\#/Animate time step
+----------------------------------------------------------------------
+... adds an additional time delay between execution steps for the 
+\link("Run Menu")Run\#/\#Animate\# command.
+
+(Makes it easier to hit the \#ALTERNATE\#-HELP key at the right time.)
+\end
+
+screen( "Use VDI graphics" )
+\#Options\#/\#Environment\#/Use VDI graphics
+----------------------------------------------------------------------
+Required for all but monochrome display resolutions.
+\end
+
+screen( "Display swapping via" )
+\#Options\#/\#Environment\#/Display swapping via
+----------------------------------------------------------------------
+Pure Debugger maintains two screen images in memory: one for itself
+and one for the program being debugged.
+
+Address - switch system pointer to screen image (fastest).
+Memcopy - copy screen image.
+Vdicopy - copy one color plane at a time (most reliable).
+
+See also \#Display swapping\#.
+\end
+
+screen( "exception vectors" )
+exception vectors (intercepted by Pure Debugger)
+----------------------------------------------------------------------
+ 2 Bus Error (non-existant memory address)
+ 3 \#Address Error\#
+ 4 Illegal Instruction
+ 5 Divide by Zero Error
+ 6 \link("%%GLOBAL%%")CHK\# Instruction
+ 7 \link("%%GLOBAL%%")TRAPV\# Instruction
+ 8 Privilege Violation (see \link("%%GLOBAL%%")Super\#)
+ 9 Trace Trap (see \link("%%GLOBAL%%")Status Register\#)
+10 Line A Instruction
+14 Stack Frame Error
+24 Spurious Interrupt
+32 Trap 0
+33 Trap 1 (GEMDOS)
+34 Trap 2 (AES & VDI)
+35 Trap 3
+...
+44 Trap 12
+45 Trap 13 (BIOS)
+46 Trap 14 (XBIOS)
+47 Trap 15
+48 Unordered Condition (68881/2 error)
+49 Inexact Result (68881/2 error)
+50 Floating Point Divide by Zero (68881/2 error)
+51 Underflow (68881/2 error)
+52 Operand Error (68881/2 error)
+54 Not A Number (68881/2 error)
+\end
+
+screen( "Address Error" )
+Address Error
+----------------------------------------------------------------------
+Attempted to set Program Counter (PC) to an odd value.
+
+68000 only, attempted to access a Word or Long using a odd valued
+address.
+\end
+
+screen( capsensitive("Assembler Options"),
+		capsensitive("Compiler Options"),
+		capsensitive("Check Braces"),
+		capsensitive("Editor"),
+		capsensitive("Find Error"),
+		capsensitive("Linker Options"),
+		capsensitive("Project File"),
+		capsensitive("Shell Options") )
+The requested keyword is found in PC.HLP
+----------------------------------------------------------------------
+Assembler Options
+Check Braces
+Compiler Options
+Editor
+Find Error
+Goto Line...
+Linker Options
+Project File
+Shell Options
+
+You must \#Quit\# Pure Debugger and return to Pure C to see this
+information.
+\end
+
+screen( "Linker",
+		capsensitive("PLINK"),
+		capsensitive("_StkSize") )
+Linker
+----------------------------------------------------------------------
+... combines the text, data and BSS segments from several object files
+and resolves all global name references.  It reserves space in the BSS
+segment for the stack and defines global name _StkSize (which IS the
+stack size, not the address of a variable containing the stack size).
+
+Its output can be either an executable program or a library file.
+(Only those subsegments needed will be linked into an executable
+program.)
+
+    \#Program Extensions\#
+    \#Program Segments\#
+    \#Object File Format\#
+    \#Executable File Format\#
+    \#Absolute File Format\#
+    \#Linker Errors\#
+
+See Also: \link("%%GLOBAL%%")PCSTART\# and \link("%%GLOBAL%%")Libraries\#.
+\end
+
+screen( "Program Extensions" )
+Program Extensions
+----------------------------------------------------------------------
+TOS  Used for programs which perform terminal I/O using 'standard I/O'
+     functions, such as \link("%%GLOBAL%%")puts\# and \link("%%GLOBAL%%")Cconws\#.  See \#User Screen\#.
+
+TTP  Same as TOS except that the operating system will allow you to
+     enter a UNIX style command line.  See \link("%%GLOBAL%%")main\#.
+
+PRG  Used for programs which perform terminal I/O using \link("%%GLOBAL%%")AES\# and \link("%%GLOBAL%%")VDI\#
+     graphics.  Also used for programs in the \#AUTO folder\#.
+
+ACC  Used for accessories.  Accessories residing on the boot disk are
+     loaded automatically by GEMDOS at boot time and whenever the
+     resolution is changed.  They install themselves on the leftmost
+     drop-down menu using \link("%%GLOBAL%%")menu_register\# then wait for a \link("%%GLOBAL%%")MN_SELECTED\#
+     event using \link("%%GLOBAL%%")evnt_mesag\# or \link("%%GLOBAL%%")evnt_multi\#.
+
+LIB  Used for libraries (see the -J flag from \#Linker Options\#).
+     Libraries are simply an object file formed by linking several
+     object files together (used to reduce the number of entries in
+     the \#Project File\#).
+\end
+
+screen( "AUTO folder" )
+AUTO Folder
+----------------------------------------------------------------------
+During the boot process, all programs with a PRG extension which are
+located in the AUTO folder will be executed before any accessories are
+loaded or the desktop starts.
+
+They will be executed in the order in which they appear in the
+directory.  To change this order, one can move all the files out of
+the AUTO folder then move them back in the desired order.  There are
+also programs (such as AUTOSORT) which can perform this function.
+
+In most versions of TOS, AUTO programs cannot use \link("%%GLOBAL%%")AES\# or \link("%%GLOBAL%%")VDI\# graphics.
+
+See also \link("%%GLOBAL%%")_p_cookies\#.
+\end
+
+screen( "Program Segments" )
+Program Segments
+----------------------------------------------------------------------
+A program is loaded into memory in the following form:
+
+  \link("%%GLOBAL%%")BASPAG\#       - basepage (256 bytes)
+  text segment - program instructions
+  data segment - constants and initialized variables
+  BSS segment  - un-initialized variables
+  stack        - all remaining contiguous RAM
+
+Note: \link("%%GLOBAL%%")PCSTART\# reduces the stack and releases excess RAM to the
+      heap (see \link("%%GLOBAL%%")Malloc\# and \link("%%GLOBAL%%")malloc\#).
+\end
+
+screen( "Object File Format" )
+Object File Format
+----------------------------------------------------------------------
+  \#oheader\#         - 32 bytes
+  text segment    - program instructions
+  data segment    - constants and initialized variables
+  \#relocation code\# - used to link symbols with program
+  symbol table    - Pascal strings (first byte = length)
+  debug info
+
+The header contains the size of each section.
+
+Note: PLINK also supports DRI format object files (produced by other
+      compilers).
+\end
+
+screen( "oheader" )
+Object File Header Format
+----------------------------------------------------------------------
+struct oheader {
+  int magic;      /* magic number 0x4efa  */
+  int hsize;      /* length of remaining header = 28 */
+  long psize;     /* size of text + data segments */
+  long rsize;     /* size of relocation code */
+  long ssize;     /* size of symbol table */
+  long reserved1; /* must be zero */
+  long dbsize;    /* size of debug info */
+  long reserved2; /* must be zero */
+  long reserved3; /* must be zero */
+ };
+\end
+
+screen( "relocation code" )
+Relocation Code
+----------------------------------------------------------------------
+struct reloc {
+  unsigned char code;    /* type of operation */
+  unsigned char offset;  /* offset from last definition */
+  int           symbol;  /* index into symbol table, or -1 */
+ };
+
+Partial List of Codes:
+
+  1 - end of code (text + data + BSS).
+  2 - skip offset + (symbol * 256) bytes.
+  3 - start of text subsegment.
+  4 - start of data subsegment.
+  5 - start of BSS subsegment.
+  6 - end of library.
+  7 - define word aligned global address.
+  8 - define general global address.
+  9 - define word aligned local address.
+ 10 - define general local address.
+ 11 - relocate absolute.
+ 14 - relocate PC relative.
+
+To relate 'symbol' to the text in symbol table, create a pointer array
+for the strings and use 'symbol' as the array index.
+\end
+
+screen( "Executable File Format" )
+Executable File Format
+----------------------------------------------------------------------
+  \#drihdr\#               - 28 bytes
+  text segment         - program instructions
+  data segment         - constants and initialized variables
+  \#symbol table\#         - not used by loader
+  first fixup location - 4 bytes (0L means no fixups needed)
+  fixup codes          - 1 byte each, null terminated
+  debug info           - not used by loader
+
+The loader simply adds the address of the start of the text segment
+to every long word which needs a fixup.  The fixup codes are:
+
+     0 - end of fixup codes
+     1 - skip 254 bytes
+ 2-254 - (even) offset to next fixup
+ 3-255 - (odd) undefined
+\end
+
+screen( "drihdr" )
+Program Header Format
+----------------------------------------------------------------------
+struct drihdr {
+  int magic;      /* magic number 0x601a          */
+  long tsize;     /* size of text segment         */
+  long dsize;     /* size of data segment         */
+  long bsize;     /* size of BSS segment          */
+  long ssize;     /* size of symbol table         */
+  long reserved1; /* must be zero                 */
+  long flags;     /* bit flags for fastload, etc. */
+  int  absflag;   /* must be zero                 */
+ };
+
+When absflag is not zero, it indicates that there is no fixup code.
+However, early versions of TOS do not honor this.
+\end
+
+screen( "symbol table" )
+DRI Symbol Table Format
+----------------------------------------------------------------------
+struct table {
+  char name[8];        /* NULL padded - max 8 characters    */
+  unsigned int flags;  /* bit flags                         */
+  long addr;           /* location of symbol reference      */
+ };
+
+The bit flags are:
+
+0x8000  Label definition
+0x4000  Equated label
+0x2000  Global label
+0x1000  Register equate
+0x0800  External label
+0x0400  addr = offset from start of TEXT segment
+0x0200  addr = offset from start of DATA segment
+0x0100  addr = offset from start of BSS segment
+\end
+
+screen( "Absolute File Format" )
+Absolute File Format
+----------------------------------------------------------------------
+  \#abshdr\#               - 36 bytes
+  text segment         - program instructions
+  data segment         - constants and initialized variables
+  \#symbol table\#         - not used by loader
+  first fixup location - 4 bytes (0L means no fixups needed).
+  fixup codes          - 1 byte each, null terminated
+  debug info           - not used by loader
+
+The loader simply adds the address of the start of the text segment
+to every long word which needs a fixup.  The fixup codes are:
+
+     0 - end of fixup codes
+     1 - skip 254 bytes
+ 2-254 - (even) offset to next fixup
+ 3-255 - (odd) undefined
+
+Same as the \#Executable File Format\# except for the header.
+\end
+
+screen( "abshdr" )
+Absolute File Header Format
+----------------------------------------------------------------------
+struct abshdr {
+  int magic;      /* magic number 0x601b  */
+  long tsize;     /* size of text segment */
+  long dsize;     /* size of data segment */
+  long bsize;     /* size of BSS segment */
+  long ssize;     /* size of symbol table */
+  long reserved;  /* must be zero */
+  long textbase;  /* load address for text segment */
+  long relocflag; /* zero if fixup code needed */
+  long database;  /* load address for data segment */
+  long bssbase;   /* load address for BSS segment */
+ };
+\end
+
+screen( "Linker Errors" )
+Linker Error Messages                          (in alphabetical order)
+----------------------------------------------------------------------
+        (For more information, double click the [?] button.)
+
+\link("Linker PC overflow")[?]\#  16 bit PC relative overflow: 'XXXXXX'
+\link("Linker 16 bit relocation")[?]\#  16 bit relocation is not supported 
+\link("Linker input error")[?]\#  Cannot close file 'XXXXXX'
+\link("Linker output error")[?]\#  Cannot create file 'XXXXXX'
+\link("Linker input error")[?]\#  Cannot open file 'XXXXXX'
+\link("Linker duplicate error")[?]\#  Doubly defined symbol: 'XXXXXX'
+\link("Linker format error")[?]\#  Format error in object file 'XXXXXX'
+\link("Linker option error")[?]\#  Illegal option set
+\link("Linker option error")[?]\#  Missing argument in option 'XXXXXX'
+\link("Linker format error")[?]\#  Neither text nor data in input files
+\link("Linker RAM error")[?]\#  Not enough memory
+\link("Linker input error")[?]\#  Read error on file 'XXXXXX'
+\link("Linker output error")[?]\#  Seek error on file 'XXXXXX'
+\link("Linker undefined symbol")[?]\#  Undefined symbol: 'XXXXXX'
+\link("Linker unknown error")[?]\#  Unknown error: #
+\link("Linker unknown error")[?]\#  Unknown fatal error: #
+\link("Linker user break")[?]\#  User break: Linker aborted
+\link("Linker output error")[?]\#  Write error on file 'XXXXXX'
+\end
+
+screen( "Linker output error" )
+\#Linker\# Output Errors
+----------------------------------------------------------------------
+An I/O error occurred while writing the program to disk.
+
+Check for write protection, free disk space, bad sectors or (rarely)
+directory full.
+\end
+
+screen( "Linker input error" )
+\#Linker\# Input Errors
+----------------------------------------------------------------------
+An I/O error occurred while reading an object file.
+
+Check for bad sectors, re-compile object file or restore library from
+backup.
+\end
+
+screen( "Linker PC overflow" )
+\#Linker\# PC Relative Overflow Error
+----------------------------------------------------------------------
+\link("%%GLOBAL%%")BSR\# and other PC relative instructions can only access addresses
+Ò32 Kbytes and the address is located further away than that.
+
+Re-compile setting the -P flag from \#Compiler Options\# and/or replace
+\link("%%GLOBAL%%")BSR\# with \link("%%GLOBAL%%")JSR\# in assembly code (for global functions).
+\end
+
+screen( "Linker 16 bit relocation" )
+\#Linker\# 16 bit relocation is not supported 
+----------------------------------------------------------------------
+DRI object file created by some other compiler used 16 bit relocation.
+PLINK does not support 16 bit relocation.
+\end
+
+screen( "Linker duplicate error" )
+\#Linker\# Doubly defined symbol: 'XXXXXX'
+----------------------------------------------------------------------
+XXXXXX was used in two different function definitions, two different
+global variable definitions, or as both a function and a global
+variable name.  (Actually, it could be more than two.)
+
+If the definitions are identical, simply delete one of them.
+
+Otherwise you must either make one (or both) of the definitions \link("%%GLOBAL%%")static\#
+or rename one of the functions (or global variables) and all of its
+references.
+\end
+
+screen( "Linker RAM error" )
+\#Linker\# Not enough memory
+----------------------------------------------------------------------
+First, turn off and clear the cache using \#Shell Options\#.
+Second, turn off -Y flags from \#Compiler Options\# and \#Assembler Options\#.
+Third, remove all accessories and/or boot programs.
+
+If that doesn't work, either write smaller programs or get a bigger
+computer. 
+\end
+
+screen( "Linker undefined symbol" )
+\#Linker\# Undefined symbol: 'XXXXXX'
+----------------------------------------------------------------------
+XXXXXX was referenced as external but was never defined.
+
+Check your \#Project File\# to see if all the needed \link("%%GLOBAL%%")Libraries\#
+or modules are being linked.
+\end
+
+screen( "Linker unknown error" )
+\#Linker\# Unknown error: #
+----------------------------------------------------------------------
+Note down error number and call Gribnif to complain.
+\end
+
+screen( "Linker user break" )
+\#Linker\# User Break
+----------------------------------------------------------------------
+You used the 'SHIFT/SHIFT' abort key combination.
+\end
+
+screen( "Linker option error" )
+\#Linker\# Options Error
+----------------------------------------------------------------------
+Somehow PC.PRG constructed a bad command line for PLINK.TTP
+
+Check the edit fields in \#Linker Options\# for blanks or commas.
+\end
+
+screen( "Linker format error" )
+\#Linker\# Format Error
+----------------------------------------------------------------------
+Object file does not have a valid format.  (See \#Object File Format\#.)  
+
+Re-compile or restore from backup.
+\end
+
+screen( "Copyright" )
+This online documentation was created by John Kormylo
+    Ω1994,1995,1996 E.L.F. Software
+
+It uses information obtained from:
+
+C-Entwicklungssystem fÅr Atari ST/TT und Mega STE
+MC68040 Makro-Assembler fÅr Atari ST/TT und Mega STE
+Quelltextdebugger fÅr Atari ST/TT und Mega STE
+    Ω1991 Pure Software GmbH
+    Ω1988/1990 Borland International Inc.
+
+PureC-Update Version 1.1
+
+Harper Collins German Dictionary
+    Ω1991 HarperCollins Publishers
+
+Pure C English Overview - Dan Wilga
+    Ω1992 Gribnif Software
+
+Atari TOS Developer's Kit
+    Ω1991/1990/1987 Atari Corp.
+    Ω1985 Digital Research Inc.
+
+Atari Falcon030 Developer's Kit
+    Ω1993 Atari Corp.
+
+Atari ST Internals
+Atari ST GEM Programmer's Reference
+Atari ST Tricks & Tips
+ST Disk Drives: Inside & Out
+    Ω1985/1986/1987/1988 Data Becker GmbH
+    Ω1985/1986/1987/1988 Abacus Software
+
+The Atari Compendium
+    Ω1993,1994 Software Development Systems
+
+MiNT is Not TOS:
+A Multitasking Operating System Extension for the Atari ST
+    Ω1990,1991,1992 Eric R. Smith.
+    Ω1992,1993,1994 Atari Corporation
+
+C Quick Reference
+    Ω1988 Que Corp.
+
+Learning to Program in C
+    Ω1983 Plum Hall Inc.
+
+Using C on the UNIX System
+    Ω1985, 1987, 1988 Purdue Research Foundation
+    Ω1989 O'Reilly & Associates
+
+Power Graphics using Turbo Pascal
+    Ω1989 John Wiley & Sons
+
+68030 Assembly Language Reference
+    Ω1989 Steve Williams
+
+M68000 Microprocessors User's Manual (9th edition)
+    Ω1993 Motorola Inc.
+
+MC146818A/D Real Time Clock Plus RAM (RTC)
+    Ω1988 Motorola Inc.
+
+DSP46002 Digital Signal Processor User's Manual
+    Ω1993 Motorola Inc.
+
+SCC User's Manual
+    Ω1992 Zilog Inc.
+
+NCR 53C80 Family SCSI Protocol Controller
+    Ω1989/1994 by NCR Corp.
+
+The VMEbus Handbook
+    Ω1988, 1990, 1991, 1992 by Wade D. Peterson
+
+
+It was formatted as compressed hypertext by HC.TTP
+    Ω1990 Borland International, Inc.
+
+See also \#Registration\#.
+\end
+
+screen( "Registration" )
+**********************************************************************
+****************  THIS IS AN UNREGISTERED DEMO COPY  *****************
+**********************************************************************
+
+If you want to register your copy, send $20 to:
+
+     E.L.F. Software
+     9614 Oregano Circle
+     Houston, TX 77036
+     U.S.A.
+
+Now accepting DISCOVER (need card number and expiration date).
+
+If you have previously registered, contact me on how best to send you
+your key file.  (elfsoft@mindspring.com)
+\end

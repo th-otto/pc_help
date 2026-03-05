@@ -1,0 +1,11 @@
+hc
+help_rc
+*.hlp
+hc.log
+*.pdb
+*.lib
+*.o
+*.tos
+*.ttp
+*.prg
+aaa.cfg
