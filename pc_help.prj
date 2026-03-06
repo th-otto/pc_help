@@ -1,10 +1,8 @@
 pc_help.prg
 
-.C[-DWITH_FIXES=1]
-.S[-DWITH_FIXES=1]
+.C[-DWITH_FIXES=0]
+.S[-DWITH_FIXES=0]
 .S[-U-]
-
-.C[-I..\common]
 
 .C[-A-]
 
@@ -37,9 +35,6 @@ util5.s
 mmalloc.c
 util7.s
 
-
-..\pctoslib\nf_debug.o
-..\pctoslib\nf_ops.o
 
 ; pcstdlib.lib
 lib\fpuinit.s

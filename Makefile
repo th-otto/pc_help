@@ -4,7 +4,6 @@
 #
 CROSS=m68k-atari-mint-
 
-COMMON_DIR=-I../common/
 TEST_CODE?=0
 COUNTRY?=1
 

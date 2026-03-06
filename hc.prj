@@ -6,8 +6,6 @@ hc.ttp
 .S[-DTEST_CODE=0]
 .S[-U-]
 
-.C[-I..\common]
-
 .C[-A-]
 
 .C[-K-]
@@ -109,9 +107,6 @@ lib\_ldiv.s
 lib\_lmod.s
 lib\_filtab.c
 lib\_heaperr.c
-
-..\pctoslib\nf_debug.o
-..\pctoslib\nf_ops.o
 
 ;pcstdlib.lib
 pcextlib.lib
