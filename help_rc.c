@@ -116,7 +116,7 @@ static char form_feed[80];
 #define decomp_msg      "\n\tRekompiliere Screens..."
 #define decomp_err      "\n\nKann Helpdatei nicht recompilieren!\n\n"
 #define file_creat_err  "\n\nKann Datei %s nicht erzeugen!\n\n"
-#define final_msg       "\n\n%d Fehler. %d Warnungen. %d Verweise in andere HELP-Dateien."
+#define final_msg       "\n\n%d Fehler. %d Warnungen. %d Verweise in andere HELP-Dateien.\n"
 #define scr_cnt_msg     "\t%d Screens gefunden."
 #define idx_warn_msg    "\n\n*** Mehr als %d Eintr\204ge im Index! ***\n"
 #define wr_nt_msg       "\n\tSchreibe Namenstabelle..."
@@ -164,7 +164,7 @@ static char form_feed[80];
 #define decomp_msg      _("\n\tDecompiling screens...")
 #define decomp_err      _("\n\nCannot decompile help-file!\n\n")
 #define file_creat_err  _("\n\nCannot create file %s!\n\n")
-#define final_msg       _("\n\n%d Errors. %d Warnings. %d Cross-references to other HELP-files.")
+#define final_msg       _("\n\n%d Errors. %d Warnings. %d Cross-references to other HELP-files.\n")
 #define scr_cnt_msg     _("\t%d screens found.")
 #define idx_warn_msg    _("\n\n*** More than %d entries in index! ***\n")
 #define wr_nt_msg       _("\n\tWriting name-table...")
@@ -1053,9 +1053,19 @@ static char *transform_to_hlp(const char *source, int32_t length, char *d)
 			{
 				elem = name_array[found];
 				same_name = FALSE;
-				while (!same_name && found < name_cnt && name_array[found]->scr_code == code)
+				while (found < name_cnt && name_array[found]->scr_code == code)
 				{
-					same_name = strcmp(name, name_array[found]->name) == 0;
+					if (strncmp(name, name_array[found]->name, 29) == 0)
+					{
+						if (name_array[found]->name_attr == SCR_NAME)
+						{
+							g_free(name_array[found]->name);
+							name_array[found]->name = g_strdup(name);
+						}
+						elem = NULL;
+						same_name = TRUE;
+						break;
+					}
 					found++;
 				}
 			} else
@@ -1091,7 +1101,7 @@ static char *transform_to_hlp(const char *source, int32_t length, char *d)
 			} else
 			{
 				d = stpcpy(d, "\\#");
-				d = stpcpy(d, name);
+				d = stpcpy(d, elem ? elem->name : name);
 				d = stpcpy(d, "\\#");
 			}
 			break;

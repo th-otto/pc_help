@@ -792,10 +792,10 @@ Syntax  Modus
 
 -----------------------------------------------------------------
 
-Querverweis: \link("Beispiele der Adressierungsar")Beispiele der Adressierungsarten\#
+Querverweis: \#Beispiele der Adressierungsarten\#
 \end
 
-screen( "Beispiele der Adressierungsar" )
+screen( "Beispiele der Adressierungsarten" )
 Beispiele fÅr Standard-Adressierungsarten
 ----------------------------------------------------------------------
 2
@@ -1514,7 +1514,7 @@ Das CACR ist 32 Bit breit und hat folgenden Aufbau:
 \#Enable Data Cache\#-------------------+           |     |    |     |    |
 \#Instruction Burst Enable\#------------------------+     |    |     |    |
 \#Clear Instruction Cache\#-------------------------------+    |     |    |
-\link("Clear Entry in Instruction Ca")Clear Entry in Instruction Cache\#---------------------------+     |    |
+\#Clear Entry in Instruction Cache\#---------------------------+     |    |
 \#Freeze Instruction Cache\#-----------------------------------------+    |
 \#Enable Instruction Cache\#----------------------------------------------+
 
@@ -1607,7 +1607,7 @@ Wird das  Clear Instruction Cache  Bit des  Cache Control  Registers
 ses Bit wird immer als 0 gelesen.
 \end
 
-screen( "Clear Entry in Instruction Ca" )
+screen( "Clear Entry in Instruction Cache" )
 Clear Entry in Instruction Cache Bit
 ----------------------------------------------------------------------
 
@@ -2644,10 +2644,10 @@ BAD-Registers mit diesem ausgetauscht und mit diesem Befehl
 fortgefahren. D.h. ein BAD-Register sollte einen sinnvollen
 Opcode enthalten.
 
-Querverweis:   \link("Breakpoint Acknowledge Contro")Breakpoint Acknowledge Control Register\#
+Querverweis:   \#Breakpoint Acknowledge Control Register\#
 \end
 
-screen( "Breakpoint Acknowledge Contro",
+screen( "Breakpoint Acknowledge Control Register",
 		sensitive("BAC0"),
 		sensitive("BAC1"),
 		sensitive("BAC2"),
@@ -2668,7 +2668,7 @@ generiert. Die unteren 8 Bits geben an, nach dem wievieltem Male
 nach dem Treffen auf einen BKPT-Befehl die Ausnahmebehandlung
 begonnen werden soll (Voraussetzung: Bit 15 gesetzt).
 
-Querverweis:   \link("Breakpoint Acknowledge Datenr")Breakpoint Acknowledge Datenregister\#
+Querverweis:   \#Breakpoint Acknowledge Datenregister\#
 \end
 
 screen( "Exception",
@@ -2716,7 +2716,7 @@ Vektor | Offset  | Bedeutung
     57 |     228 | \#PMMU-Illegale Operation\#                  ( MC68851 )
     58 |     232 | \#PMMU-Zugriffsverletzung\#                  ( MC68851 )
  59-63 | 236-252 | reserviert
-64-255 |256-1020 | \link("Benutzerreservierte Exception")Benutzerreservierte Exceptions\#
+64-255 |256-1020 | \#Benutzerreservierte Exceptions\#
 \end
 
 screen( "Busfehler" )
@@ -2841,7 +2841,7 @@ Non-Autovektor-Interrupt
 Non-Autovektor-Interrupts sind Interruptanforderungen externer Hard-
 ware, bei der die CPU den \#Exception\#vektor von der externen  Hardware
 anfordert.  Non-Autovektor-Interrupts  werden  dazu  benutzt  um die
-\link("Benutzerreservierte Exception")Benutzerreservierte Exceptions\# zu erzeugen.
+\#Benutzerreservierte Exceptions\# zu erzeugen.
 
 Querverweis: \#Falscher Interrupt Vektor\# \#Interruptmaske\# 
              \#Autovektor-Interrupt\#
@@ -2969,7 +2969,7 @@ Wenn ein \#PVALID\#-Test einen Zeiger zurÅckweist, wird eine \#Exception\#
 mit der Nummer 58 ausgelîst.
 \end
 
-screen( "Benutzerreservierte Exception" )
+screen( "Benutzerreservierte Exceptions" )
 Benutzerreservierte Exceptions
 ----------------------------------------------------------------------
 
@@ -3160,7 +3160,7 @@ Die Benutzung von Makros im öberblick
  
 \#Rekursive Makroaufrufe\#
  
-\link("Verschachtelung von Makrodefi")Verschachtelung von Makrodefinitionen\#
+\#Verschachtelung von Makrodefinitionen\#
  
 \#Redefinieren von Makros\#
 \end
@@ -4406,7 +4406,7 @@ nur dann sinnvoll, wenn durch eine bedingte Direktive eine
 unendliche Rekursion verhindert wird.
 \end
 
-screen( "Verschachtelung von Makrodefi" )
+screen( "Verschachtelung von Makrodefinitionen" )
 Verschachtelung von Makrodefinitionen
 ----------------------------------------------------------------------
 
@@ -4440,7 +4440,7 @@ Redefinieren von Makros
 Makros kann man unter demselben Namen, aber mit anderem Makro-
 kîrper redefinieren. Im Extremfall kann sich ein Makro sogar
 selbst redefinieren.
-Hierbei macht man sich \link("Verschachtelung von Makrodefi")verschachtelte Definition\# zunutze. Sinnvoll
+Hierbei macht man sich \link("Verschachtelung von Makrodefinitionen")verschachtelte Definition\# zunutze. Sinnvoll
 sind solche Redefinitionen besonders im Zusammenhang mit
 Intialisierungen. Benîtigt ein Makro ein Unterprogramm, so kann
 dieses beim ersten Makroaufruf erzeugt werden. Danach redefiniert
@@ -10049,7 +10049,6 @@ screen( "PBcc",
 		sensitive("PBAS"),
 		sensitive("PBBC"),
 		sensitive("PBBS"),
-		sensitive("PBCC"),
 		sensitive("PBCS"),
 		sensitive("PBGC"),
 		sensitive("PBGS"),
@@ -10060,7 +10059,8 @@ screen( "PBcc",
 		sensitive("PBSC"),
 		sensitive("PBSS"),
 		sensitive("PBWC"),
-		sensitive("PBWS") )
+		sensitive("PBWS"),
+		sensitive("PBCC") )
 PBcc - Bedingte Verzweigung                                    MC68851
 ----------------------------------------------------------------------
 
@@ -10083,7 +10083,6 @@ screen( "PDBcc",
 		sensitive("PDBAS"),
 		sensitive("PDBBC"),
 		sensitive("PDBBS"),
-		sensitive("PDBCC"),
 		sensitive("PDBCS"),
 		sensitive("PDBGC"),
 		sensitive("PDBGS"),
@@ -10094,7 +10093,8 @@ screen( "PDBcc",
 		sensitive("PDBSC"),
 		sensitive("PDBSS"),
 		sensitive("PDBWC"),
-		sensitive("PDBWS") )
+		sensitive("PDBWS"),
+		sensitive("PDBCC") )
 PDBcc - PrÅfe Bedingung, dekrementiere und verzweige           MC68851
 ----------------------------------------------------------------------
 
@@ -10308,7 +10308,6 @@ screen( "PTRAPcc",
 		sensitive("PTRAPAS"),
 		sensitive("PTRAPBC"),
 		sensitive("PTRAPBS"),
-		sensitive("PTRAPCC"),
 		sensitive("PTRAPCS"),
 		sensitive("PTRAPGC"),
 		sensitive("PTRAPGS"),
@@ -10319,7 +10318,8 @@ screen( "PTRAPcc",
 		sensitive("PTRAPSC"),
 		sensitive("PTRAPSS"),
 		sensitive("PTRAPWC"),
-		sensitive("PTRAPWS") )
+		sensitive("PTRAPWS"),
+		sensitive("PTRAPCC") )
 PTRAPcc - Trap bei Bedingung                                   MC68851
 ----------------------------------------------------------------------
 

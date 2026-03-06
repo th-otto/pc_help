@@ -1243,7 +1243,7 @@ Kategorien unterteilen:
 
        \#grafische Textausgabe\#
 
-       \link("Farbmanipulation und Farb-Pal")Farbmanipulation und Farb-Paletten\#
+       \#Farbmanipulation und Farb-Paletten\#
 
        \#Fehlerbehandlung\#
 \end
@@ -1435,7 +1435,7 @@ unterdrÅckt, wenn sie die Grenzen des Zeichenfensters Åberschreiten;
 Ausgaben mit Vektor-ZeichensÑtzen enden an den Grenzen des Bildschirms.
 \end
 
-screen( "Farbmanipulation und Farb-Pal" )
+screen( "Farbmanipulation und Farb-Paletten" )
 Bildschirmfarben
 
 Das Grafikpaket definiert die folgenden Funktionen zur Festlegung von
@@ -2036,7 +2036,7 @@ Beispiel     #include <graphics.h>
              }
 PortabilitÑt Diese Funktion ist zu allen Systemen kompatibel, die
              BGI unterstÅtzen.
-Gruppe       \link("Farbmanipulation und Farb-Pal")Farbmanipulation und Farb-Paletten\#
+Gruppe       \#Farbmanipulation und Farb-Paletten\#
 Querverweis  \#getpalette\#, \#initgraph\#, \#setbkcolor\#
 \end
 
@@ -2092,7 +2092,7 @@ Beispiel     #include <graphics.h>
              }
 PortabilitÑt Auf allen  Systemen, die BGI unterstÅtzen, ist diese
              Funktion lauffÑhig.
-Gruppe       \link("Farbmanipulation und Farb-Pal")Farbmanipulation und Farb-Paletten\#
+Gruppe       \#Farbmanipulation und Farb-Paletten\#
 Querverweis  \#getbkcolor\#, \#getpalette\#, \#getmaxcolor\#, \#setcolor\#
 \end
 
@@ -2145,7 +2145,7 @@ Beispiel     #include <graphics.h>
              }
 PortabilitÑt Diese Funktion ist zu allen Systemen kompatibel, die
              BGI unterstÅtzen.
-Gruppe       \link("Farbmanipulation und Farb-Pal")Farbmanipulation und Farb-Paletten\#
+Gruppe       \#Farbmanipulation und Farb-Paletten\#
 Querverweis  \#getbkcolor\#,   \#getcolor\#,    \#getpalette\#,   \#setpalette\#,
              \#setallpalette\#
 \end
@@ -2446,7 +2446,7 @@ Ergebnis     Der zurÅckgelieferte  Wert entspricht  der Grî·e der
              Farb-Palette minus 1.
 PortabilitÑt Auf allen  Systemen die  BGI unterstÅtzen, ist diese
              Funktion lauffÑhig.
-Gruppe       \link("Farbmanipulation und Farb-Pal")Farbmanipulation und Farb-Paletten\#
+Gruppe       \#Farbmanipulation und Farb-Paletten\#
 Querverweis  \#getbkcolor\#, \#getcolor\#, \#getpalette\#
 \end
 
@@ -2639,7 +2639,7 @@ Beispiel     #include <graphics.h>
              }
 PortabilitÑt Auf allen  Systemen die  BGI unterstÅtzen, ist diese
              Funktion lauffÑhig.
-Gruppe       \link("Farbmanipulation und Farb-Pal")Farbmanipulation und Farb-Paletten\#
+Gruppe       \#Farbmanipulation und Farb-Paletten\#
 Querverweis  \#getbkcolor\#,       \#getcolor\#,       \#getdefaultpalette\#,
              \#setallpalette\#, \#setpalette\#, \#setrgbpalette\#
 \end
@@ -2660,7 +2660,7 @@ Ergebnis     getpalettesize liefert  die Anzahl  der EintrÑge als
              Integer zurÅck.
 PortabilitÑt Diese Funktion ist lauffÑhig auf allen Systemen, die
              BGI unterstÅtzen.
-Gruppe       \link("Farbmanipulation und Farb-Pal")Farbmanipulation und Farb-Paletten\#
+Gruppe       \#Farbmanipulation und Farb-Paletten\#
 Querverweis  \#setpalette\#
 \end
 
@@ -3793,7 +3793,7 @@ Ergebnis     setallpalette hat kein direktes Ergebnis.
 Beispiel     siehe \#getpalette\#
 PortabilitÑt Diese Funktion ist lauffÑhig auf allen Systemen, die
              BGI unterstÅtzen.
-Gruppe       \link("Farbmanipulation und Farb-Pal")Farbmanipulation und Farb-Paletten\#
+Gruppe       \#Farbmanipulation und Farb-Paletten\#
 Querverweis  \#getbkcolor\#, \#getcolor\#, \#getdefaultpalette\#, \#getpalette\#,
              \#setpalette\#
 \end
@@ -3848,7 +3848,7 @@ Ergebnis:    setbkcolor hat kein Funktionsergebnis.
 Beispiel     siehe \#setcolor\#
 PortabilitÑt Auf allen  Systemen die  BGI unterstÅtzen, ist diese
              Funktion lauffÑhig.
-Gruppe       \link("Farbmanipulation und Farb-Pal")Farbmanipulation und Farb-Paletten\#
+Gruppe       \#Farbmanipulation und Farb-Paletten\#
 Querverweis  \#getpalette\#, \#initgraph\#, \#setcolor\#
 \end
 
@@ -3891,7 +3891,7 @@ Beispiel     #include <graphics.h>
 
 PortabilitÑt Diese Funktion ist kompatibel zu allen Systemen, die
              BGI unterstÅtzen.
-Gruppe       \link("Farbmanipulation und Farb-Pal")Farbmanipulation und Farb-Paletten\#
+Gruppe       \#Farbmanipulation und Farb-Paletten\#
 Querverweis  \#getbkcolor\#, \#getpalette\#, \#getmaxcolor\#, \#setbkcolor\#
 \end
 
@@ -4114,7 +4114,7 @@ Beispiel     #include <graphics.h>
              }
 PortabilitÑt Auf allen  Systemen die  BGI unterstÅtzen, ist diese
              Funktion lauffÑhig.
-Gruppe       \link("Farbmanipulation und Farb-Pal")Farbmanipulation und Farb-Paletten\#
+Gruppe       \#Farbmanipulation und Farb-Paletten\#
 Querverweis  \#getbkcolor\#, \#getcolor\#, \#getdefaultpalette\#, \#getpalette\#,
              \#setallpalette\#
 \end
@@ -4132,7 +4132,7 @@ Prototyp in  graphics.h
 PortabiltÑt  Diese Funktion  ist nur  verfÅgbar, um kompatibel zu
              MS-DOS zu sein.
 Ergebnis     setpalette hat kein Ergebnis
-Gruppe       \link("Farbmanipulation und Farb-Pal")Farbmanipulation und Farb-Paletten\#
+Gruppe       \#Farbmanipulation und Farb-Paletten\#
 \end
 
 screen( capsensitive("settextjustify") )
@@ -10468,15 +10468,15 @@ Die Gruppen der Standard-Funktionen
 
      \#Datum und Uhrzeit\#
      \#Directory-Routinen\#
-     \link("Dynamische Verwaltung des Spe")Dynamische Verwaltung des Speichers\#
+     \#Dynamische Verwaltung des Speichers\#
      \#I/O-Routinen\#
-     \link("Behandlung variabler Argument")Behandlung variabler Argumente\#
-     \link("Zeichen-Klassifizierungs-Rout")Zeichen-Klassifizierungs-Routinen\#
+     \#Behandlung variabler Argumente\#
+     \#Zeichen-Klassifizierungs-Routinen\#
      \#Umwandlungsroutinen\#
      \#Mathematische Routinen\#
      \#Prozess-Routinen\#
      \#SprÅnge\#
-     \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+     \#String- und Speichermanipulation\#
      \#Verschiedene Routinen\#
 
 Querverweis    \#Libraries\#
@@ -10517,7 +10517,7 @@ Suche von Dateien in Verzeichnissen.
 Querverweis   \#Standard-Funktionen\#
 \end
 
-screen( "Dynamische Verwaltung des Spe" )
+screen( "Dynamische Verwaltung des Speichers" )
 Dynamische Verwaltung des Speichers
 ----------------------------------------------------------------------
 
@@ -10603,7 +10603,7 @@ Betriebssystems.
 Querverweis   \#Standard-Funktionen\#
 \end
 
-screen( "Behandlung variabler Argument" )
+screen( "Behandlung variabler Argumente" )
 Behandlung variabler Argumente
 ----------------------------------------------------------------------
 
@@ -10618,7 +10618,7 @@ mit variabler Parameter-Liste.
 Querverweis   \#Standard-Funktionen\#
 \end
 
-screen( "Zeichen-Klassifizierungs-Rout" )
+screen( "Zeichen-Klassifizierungs-Routinen" )
 Zeichen-Klassifizierungs-Routinen
 ----------------------------------------------------------------------
 
@@ -10763,7 +10763,7 @@ lassen.
 Querverweis   \#Standard-Funktionen\#
 \end
 
-screen( "String- und Speichermanipulat" )
+screen( "String- und Speichermanipulation" )
 String- und Speichermanipulation
 ----------------------------------------------------------------------
 
@@ -11209,7 +11209,7 @@ Ergebnis       calloc liefert einen typenlosen Zeiger, der explizit
                zur VerfÅgung steht, dann ist das Funktionsergebnis
                \link("%%GLOBAL%%")NULL\#, es findet keine Belegung statt.
 
-Gruppe         \link("Dynamische Verwaltung des Spe")Dynamische Verwaltung des Speichers\#
+Gruppe         \#Dynamische Verwaltung des Speichers\#
 
 Querverweis    \#free\#   \#malloc\#   \#size_t\#
 \end
@@ -12572,7 +12572,7 @@ Beschreibung   free gibt einen zuvor mit \#malloc\#, \#calloc\# oder
 
 Ergebnis       free hat kein direktes Funktionsergebnis.
 
-Gruppe         \link("Dynamische Verwaltung des Spe")Dynamische Verwaltung des Speichers\#
+Gruppe         \#Dynamische Verwaltung des Speichers\#
 
 Querverweis    \#setbuf\#
 \end
@@ -13101,7 +13101,7 @@ Ergebnis       Wenn die Bedingung zutrifft, wird ein Wert ungleich
                Das Ergebnis ist nur definiert, falls isascii( c )
                ungleich Null oder c gleich EOF ist.
 
-Gruppe         \link("Zeichen-Klassifizierungs-Rout")Zeichen-Klassifizierungs-Routinen\#
+Gruppe         \#Zeichen-Klassifizierungs-Routinen\#
 
 Querverweis    \#tolower\#   \#toupper\#
 \end
@@ -13122,7 +13122,7 @@ Ergebnis       Wenn die Bedingung zutrifft, wird ein Wert ungleich
                Das Ergebnis ist nur definiert, falls isascii( c )
                ungleich Null oder c gleich EOF ist.
 
-Gruppe         \link("Zeichen-Klassifizierungs-Rout")Zeichen-Klassifizierungs-Routinen\#
+Gruppe         \#Zeichen-Klassifizierungs-Routinen\#
 
 Querverweis    \#tolower\#   \#toupper\#
 \end
@@ -13140,7 +13140,7 @@ Beschreibung   Diese Funktion prÅft, ob das Åbergebene Zeichen c
 Ergebnis       Wenn die Bedingung zutrifft, wird ein Wert ungleich
                Null zurÅckgegeben, ansonsten Null.
 
-Gruppe         \link("Zeichen-Klassifizierungs-Rout")Zeichen-Klassifizierungs-Routinen\#
+Gruppe         \#Zeichen-Klassifizierungs-Routinen\#
 
 Querverweis    \#tolower\#   \#toupper\#
 \end
@@ -13160,7 +13160,7 @@ Ergebnis       Wenn die Bedingung zutrifft, wird ein Wert ungleich
                Das Ergebnis ist nur definiert, falls isascii( c )
                ungleich Null oder c gleich EOF ist.
 
-Gruppe         \link("Zeichen-Klassifizierungs-Rout")Zeichen-Klassifizierungs-Routinen\#
+Gruppe         \#Zeichen-Klassifizierungs-Routinen\#
 
 Querverweis    \#tolower\#   \#toupper\#
 \end
@@ -13180,7 +13180,7 @@ Ergebnis       Wenn die Bedingung zutrifft, wird ein Wert ungleich
                Das Ergebnis ist nur definiert, falls isascii( c )
                ungleich Null oder c gleich EOF ist.
 
-Gruppe         \link("Zeichen-Klassifizierungs-Rout")Zeichen-Klassifizierungs-Routinen\#
+Gruppe         \#Zeichen-Klassifizierungs-Routinen\#
 
 Querverweis    \#tolower\#   \#toupper\#
 \end
@@ -13200,7 +13200,7 @@ Ergebnis       Wenn die Bedingung zutrifft, wird ein Wert ungleich
                Das Ergebnis ist nur definiert, falls isascii( c )
                ungleich Null oder c gleich EOF ist.
 
-Gruppe         \link("Zeichen-Klassifizierungs-Rout")Zeichen-Klassifizierungs-Routinen\#
+Gruppe         \#Zeichen-Klassifizierungs-Routinen\#
 
 Querverweis    \#tolower\#   \#toupper\#
 \end
@@ -13220,7 +13220,7 @@ Ergebnis       Wenn die Bedingung zutrifft, wird ein Wert ungleich
                Das Ergebnis ist nur definiert, falls isascii( c )
                ungleich Null oder c gleich EOF ist.
 
-Gruppe         \link("Zeichen-Klassifizierungs-Rout")Zeichen-Klassifizierungs-Routinen\#
+Gruppe         \#Zeichen-Klassifizierungs-Routinen\#
 
 Querverweis    \#tolower\#   \#toupper\#
 \end
@@ -13239,7 +13239,7 @@ Ergebnis       Wenn die Bedingung zutrifft, wird ein Wert ungleich
                Null zurÅckgegeben, ansonsten Null.
                Das Ergebnis ist nur definiert, falls isascii( c )
                ungleich Null oder c gleich EOF ist.
-Gruppe         \link("Zeichen-Klassifizierungs-Rout")Zeichen-Klassifizierungs-Routinen\#
+Gruppe         \#Zeichen-Klassifizierungs-Routinen\#
 
 Querverweis    \#tolower\#   \#toupper\#
 \end
@@ -13262,7 +13262,7 @@ Ergebnis       Wenn die Bedingung zutrifft, wird ein Wert ungleich
                Das Ergebnis ist nur definiert, falls isascii( c )
                ungleich Null oder c gleich EOF ist.
 
-Gruppe         \link("Zeichen-Klassifizierungs-Rout")Zeichen-Klassifizierungs-Routinen\#
+Gruppe         \#Zeichen-Klassifizierungs-Routinen\#
 
 Querverweis    \#tolower\#   \#toupper\#
 \end
@@ -13283,7 +13283,7 @@ Ergebnis       Wenn die Bedingung zutrifft, wird ein Wert ungleich
                Das Ergebnis ist nur definiert, falls isascii( c )
                ungleich Null oder c gleich EOF ist.
 
-Gruppe         \link("Zeichen-Klassifizierungs-Rout")Zeichen-Klassifizierungs-Routinen\#
+Gruppe         \#Zeichen-Klassifizierungs-Routinen\#
 
 Querverweis    \#tolower\#   \#toupper\#
 \end
@@ -13304,7 +13304,7 @@ Ergebnis       Wenn die Bedingung zutrifft, wird ein Wert ungleich
                Das Ergebnis ist nur definiert, falls isascii( c )
                ungleich Null oder c gleich EOF ist.
 
-Gruppe         \link("Zeichen-Klassifizierungs-Rout")Zeichen-Klassifizierungs-Routinen\#
+Gruppe         \#Zeichen-Klassifizierungs-Routinen\#
 
 Querverweis    \#tolower\#   \#toupper\#
 \end
@@ -13324,7 +13324,7 @@ Ergebnis       Wenn die Bedingung zutrifft, wird ein Wert ungleich
                Das Ergebnis ist nur definiert, falls isascii( c )
                ungleich Null oder c gleich EOF ist.
 
-Gruppe         \link("Zeichen-Klassifizierungs-Rout")Zeichen-Klassifizierungs-Routinen\#
+Gruppe         \#Zeichen-Klassifizierungs-Routinen\#
 
 Querverweis    \#tolower\#   \#toupper\#
 \end
@@ -13344,7 +13344,7 @@ Ergebnis       Wenn die Bedingung zutrifft, wird ein Wert ungleich
                Das Ergebnis ist nur definiert, falls isascii( c )
                ungleich Null oder c gleich EOF ist.
 
-Gruppe         \link("Zeichen-Klassifizierungs-Rout")Zeichen-Klassifizierungs-Routinen\#
+Gruppe         \#Zeichen-Klassifizierungs-Routinen\#
 
 Querverweis    \#tolower\#   \#toupper\#
 \end
@@ -13643,7 +13643,7 @@ Ergebnis       malloc liefert einen typenlosen Zeiger, der explizit
                VerfÅgung steht, dann ist das Funktionsergebnis \link("%%GLOBAL%%")NULL\#,
                es findet keine Belegung statt.
 
-Gruppe         \link("Dynamische Verwaltung des Spe")Dynamische Verwaltung des Speichers\#
+Gruppe         \#Dynamische Verwaltung des Speichers\#
 
 Querverweis    \#setbuf\#   \#calloc\#   \#realloc\#   \#free\#   \#size_t\#
                \#Malloc\#
@@ -13703,7 +13703,7 @@ Ergebnis       memchr liefert die Adresse der ersten Fundstelle von c
                im Array s zurÅck - oder \link("%%GLOBAL%%")NULL\#, wenn c innerhalb der
                ersten len Bytes von s nicht vorkommt.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 
 Querverweis    \#size_t\#
 \end
@@ -13727,7 +13727,7 @@ Ergebnis       memcmp bricht den Vergleich beim ersten nicht
                 0 wenn die ersten n Zeichen von s1 und s2 gleich sind
                 >0  wenn s1 grîûer als s2 ist
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 
 Querverweis    \#size_t\#
 \end
@@ -13747,7 +13747,7 @@ Beschreibung   memmove kopiert len Bytes von src nach dest und
 Ergebnis       memmove liefert den Åbergebenen Parameter dest als
                Ergebnis zurÅck, d.h. einen Zeiger auf das Ziel-Array.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 
 Querverweis    \#size_t\#
 \end
@@ -13765,7 +13765,7 @@ Beschreibung   memset setzt die ersten len Bytes des Arrays s auf den
 Ergebnis       memset liefert den Åbergebenen Parameter s als Ergebnis
                zurÅck (d.h. ebenfalls einen Zeiger auf das Ziel-Array).
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 
 Querverweis    \#size_t\#
 \end
@@ -13784,7 +13784,7 @@ Beschreibung   memcpy kopiert len Bytes von src nach dest und
 Ergebnis       memcpy liefert den Åbergebenen Parameter dest als
                Ergebnis zurÅck, d.h. einen Zeiger auf das Ziel-Array.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 
 Querverweis    \#size_t\#
 \end
@@ -14376,7 +14376,7 @@ Ergebnis       Als Ergebnis erhÑlt man einen typenlosen Zeiger auf
                Grîûe zur VerfÅgung steht, dann ist das
                Funktionsergebnis \link("%%GLOBAL%%")NULL\#, es findet keine Belegung statt.
 
-Gruppe         \link("Dynamische Verwaltung des Spe")Dynamische Verwaltung des Speichers\#
+Gruppe         \#Dynamische Verwaltung des Speichers\#
 
 Querverweis    \#setbuf\#   \#malloc\#   \#calloc\#   \#size_t\#
 \end
@@ -15150,7 +15150,7 @@ Beschreibung   strcat hÑngt sÑmtliche Zeichen von src an die bereits
 Ergebnis       ZurÅckgeliefert wird ein Zeiger auf das erste Zeichen
                von dest.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 \end
 
 screen( capsensitive("strncat") )
@@ -15173,7 +15173,7 @@ Beschreibung   strncat hÑngt die ersten maxlen Zeichen von src an die
 Ergebnis       Danach wird ein Zeiger auf das erste Zeichen von dest
                zurÅckgeliefert.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 
 Querverweis    \#size_t\#
 \end
@@ -15197,7 +15197,7 @@ Ergebnis       strchr liefert einen Zeiger auf die erste Fundstelle
                Aufruf wie strchr( stringx, 0 ) liefert also einen
                Zeiger auf das Nullzeichen von stringx.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 \end
 
 screen( capsensitive("strrev") )
@@ -15213,7 +15213,7 @@ Beschreibung   strrev invertiert den Åber s angegebenen String.
 Ergebnis       ZurÅckgeliefert wird ein Zeiger auf das erste Zeichen
                von s.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 \end
 
 screen( capsensitive("strrchr") )
@@ -15237,7 +15237,7 @@ Ergebnis       strrchr liefert einen Zeiger auf die erste (ØrechtesteÆ)
                strrchr( stringx,0 ) liefert also einen Zeiger auf das
                Nullzeichen von stringx.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 \end
 
 screen( capsensitive("strcmp") )
@@ -15254,7 +15254,7 @@ Ergebnis       ZurÅckgeliefert wird ein Wert kleiner 0, wenn s1
                exakt gleich sind; und ein Wert grîûer 0, wenn s1
                grîûer als s2 ist. Das Ergebnis hat den Typ int.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 
 Querverweis    \#size_t\#  \#stricmp\#
 \end
@@ -15275,7 +15275,7 @@ Ergebnis       ZurÅckgeliefert wird ein Wert kleiner 0, wenn s1
                exakt gleich sind; und ein Wert grîûer 0, wenn s1
                grîûer als s2 ist. Das Ergebnis hat den Typ int.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 
 Querverweis    \#size_t\#  \#strnicmp\#
 \end
@@ -15303,7 +15303,7 @@ Ergebnis       ZurÅckgeliefert wird ein Wert kleiner 0, wenn s1
                exakt gleich sind; und ein Wert grîûer 0, wenn s1
                grîûer als s2 ist. Das Ergebnis hat den Typ int.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 
 Querverweis    \#size_t\#   \#strcmp\#   \#stricmp\#   \#strcmpi\#
                \#strncmp\#   \#strnicmp\#   \#strncmpi\#
@@ -15335,7 +15335,7 @@ Ergebnis       ZurÅckgeliefert wird ein Wert kleiner 0, wenn s1
                exakt gleich sind; und ein Wert grîûer 0, wenn s1
                grîûer als s2 ist. Das Ergebnis hat den Typ int.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 
 Querverweis    \#size_t\#   \#strncmp\#
 \end
@@ -15356,7 +15356,7 @@ Beschreibung   strcpy kopiert den Inhalt des Åber src angegebenen
 Ergebnis       die Startadresse von dest wird als Funktionsergebnis
                zurÅckgeliefert.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 \end
 
 screen( capsensitive("strncpy") )
@@ -15380,7 +15380,7 @@ Beschreibung   strncpy kopiert maxlen Zeichen des Åber src angegebenen
 Ergebnis       strncpy liefert in allen FÑllen einen Zeiger auf das
                erste Byte von dest zurÅck.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 Querverweis    \#size_t\#
 \end
 
@@ -15397,7 +15397,7 @@ Beschreibung   Der angegebene String wird nicht verÑndert.
 Ergebnis       strlen liefert die LÑnge des angegebenen Strings
                als unsigned long. Die Null wird nicht mitgezÑhlt.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 \end
 
 screen( capsensitive("strstr") )
@@ -15418,7 +15418,7 @@ Ergebnis       ZurÅckgeliefert wird ein Zeiger auf den Beginn von s2
                in s1 bzw. der Zeigerwert \link("%%GLOBAL%%")NULL\#, wenn s2 in s1 Åberhaupt
                nicht vorkommt.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 
 Querverweis    \#strcspn\#
 \end
@@ -15436,7 +15436,7 @@ Beschreibung   strlwr verÑndert sÑmtliche Groûbuchstaben des via s
                Umlaute werden nicht berÅcksichtigt).
 Ergebnis       strlwr liefert einen Zeiger auf das erste Zeichen
                dieses Strings zurÅck.
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 \end
 
 screen( capsensitive("strupr") )
@@ -15454,7 +15454,7 @@ Beschreibung   strupr verÑndert sÑmtliche Kleinbuchstaben des via s
 Ergebnis       strupr liefert einen Zeiger auf das erste Zeichen
                dieses Strings zurÅck.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 \end
 
 screen( capsensitive("strcspn") )
@@ -15478,7 +15478,7 @@ Beschreibung   strcspn vergleicht s1 ab dem ersten Zeichen mit
                der keines der Zeichen von s2 enthÑlt. Die Reihen-
                folge der Zeichen in s2 spielt keine Rolle.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 \end
 
 screen( capsensitive("strdup") )
@@ -15494,7 +15494,7 @@ Beschreibung   strdup dupliziert einen String an eine andere Adresse.
 Ergebnis       ZurÅckgeliefert wird ein Zeiger auf das erste Zeichen
                des duplizierten Strings.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 \end
 
 screen( capsensitive("strset") )
@@ -15511,7 +15511,7 @@ Beschreibung   strset Åberschreibt alle Zeichen des via s
 Ergebnis       ZurÅckgeliefert wird ein Zeiger auf das erste
                Zeichen von s.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 
 Querverweis    \#strnset\#
 \end
@@ -15532,7 +15532,7 @@ Beschreibung   strnset Åberschreibt die ersten n Zeichen des via
 Ergebnis       ZurÅckgeliefert wird ein Zeiger auf das erste
                Zeichen von s.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 
 Querverweis    \#strset\#
 \end
@@ -15553,7 +15553,7 @@ Ergebnis       ZurÅckgeliefert wird ein Zeiger auf die erste
                Fundstelle bzw. der Wert \link("%%GLOBAL%%")NULL\#, wenn keines der
                durch s2 festgelegten Zeichen in s1 enthalten ist.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 \end
 
 screen( capsensitive("strspn") )
@@ -15580,7 +15580,7 @@ Beschreibung   strspn ist das GegenstÅck zu \#strcspn\#:
                Wenn bereits das erste Zeichen von s1 nicht in s2
                enthalten ist, dann liefert strspn das Ergebnis 0.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 \end
 
 screen( capsensitive("strtok") )
@@ -15613,7 +15613,7 @@ Ergebnis       Der erste Aufruf von strtok liefert einen Zeiger auf
                Wenn kein (weiteres) ØTokenÆ gefunden wird, liefert
                strtok das Ergebnis \link("%%GLOBAL%%")NULL\#.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 \end
 
 screen( capsensitive("strtod") )
@@ -15648,7 +15648,7 @@ Ergebnis       strtod liefert das Ergebnis der Interpretation als
                Åberhaupt nicht analysieren lÑût, dann ist das
                Ergebnis HUGE_VAL und \#errno\# wird entsprechend gesetzt.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 
 Querverweis    \#strtol\#   \#strtoul\#
 \end
@@ -15701,7 +15701,7 @@ Ergebnis       strtol liefert das Ergebnis der Interpretation als long
                **endptr wird (soweit nicht als \link("%%GLOBAL%%")NULL\# angegeben) auf
                das erste Zeichen von s gesetzt.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 \end
 
 screen( capsensitive("strtoul") )
@@ -15752,7 +15752,7 @@ Ergebnis       strtoul liefert das Ergebnis der Interpretation als
                das Ergebnis 0L, **endptr wird (soweit nicht als \link("%%GLOBAL%%")NULL\#
                angegeben) auf das erste Zeichen von s gesetzt.
 
-Gruppe         \link("String- und Speichermanipulat")String- und Speichermanipulation\#
+Gruppe         \#String- und Speichermanipulation\#
 \end
 
 screen( capsensitive("strftime") )
@@ -16266,7 +16266,7 @@ Ergebnis       va_arg liefert den jeweils nÑchsten variablen
                Parameter der Funktion in dem durch type angegebenen
                Format zurÅck.
 
-Gruppe         \link("Behandlung variabler Argument")Behandlung variabler Argumente\#
+Gruppe         \#Behandlung variabler Argumente\#
 
 Querverweis    \#va_...\#   \#va_start\#   \#va_end\#   \#va_list\#
 \end
@@ -16286,7 +16286,7 @@ Beschreibung   va_end setzt den als param angegebenen Zeiger des Typs
 
 Ergebnis       va_end hat kein direktes Funktionsergebnis
 
-Gruppe         \link("Behandlung variabler Argument")Behandlung variabler Argumente\#
+Gruppe         \#Behandlung variabler Argumente\#
 
 Querverweis    \#va_...\#   \#va_arg\#   \#va_start\#  \#va_list\#
 \end
@@ -16307,7 +16307,7 @@ Beschreibung   va_start erwartet die Angabe eines Zeigers des Typs
 
 Ergebnis       va_start hat kein direktes Funktionsergebnis
 
-Gruppe         \link("Behandlung variabler Argument")Behandlung variabler Argumente\#
+Gruppe         \#Behandlung variabler Argumente\#
 
 Querverweis    \#va_...\#   \#va_arg\#   \#va_end\#
 \end

@@ -270,9 +270,9 @@ PSR       \#PMMU Status Register\# (16 bits)
 68881 Registers:
 
 FP0 - FP7 \#Floating Point Data Registers\# (96 bits)
-FPCR      \link("Floating Point Control Regist")Floating Point Control Register\# (16 bits)
-FPSR      \link("Floating Point Status Registe")Floating Point Status Register\# (32 bits)
-FPIAR     \link("Floating Point Instruction Ad")Floating Point Instruction Address Register\# (32 bits)
+FPCR      \#Floating Point Control Register\# (16 bits)
+FPSR      \#Floating Point Status Register\# (32 bits)
+FPIAR     \#Floating Point Instruction Address Register\# (32 bits)
 \end
 
 screen( "Addressing" )
@@ -1306,7 +1306,7 @@ OPerand ERRor
 ----------------------------------------------------------------------
 Flag is set for improper operand; e.g. sqrt(-1.0)
 
-See also \link("Floating Point Status Registe")Floating Point Status Register\#.
+See also \#Floating Point Status Register\#.
 \end
 
 screen( "PMMU Condition Codes" )
@@ -2025,7 +2025,7 @@ is automatically converted when moved into or out of these registers.
 See also \#FPU\#.
 \end
 
-screen( "Floating Point Control Regist",
+screen( "Floating Point Control Register",
 		sensitive("FPCR") )
 Floating Point Control Register  (FPCR)            -- Atari TT Only --
 ----------------------------------------------------------------------
@@ -2057,7 +2057,7 @@ Bits 4-5 Control the rounding mode:
 See also \#FPSR\#, \#FPU\# and \#Exceptions\#.
 \end
 
-screen( "Floating Point Status Registe",
+screen( "Floating Point Status Register",
 		sensitive("FPSR") )
 Floating Point Status Register  (FPSR)             -- Atari TT Only --
 ----------------------------------------------------------------------
@@ -2088,7 +2088,7 @@ See also \#FPCR\#, \#FPIAR\# and \#FPU\#.
 \end
 
 screen( "Condition Code Byte" )
-\link("Floating Point Status Registe")Floating Point Status Register\# - Condition Code Byte
+\#Floating Point Status Register\# - Condition Code Byte
 ----------------------------------------------------------------------
 These bit flags determine the \#FPU Condition Codes\# used by the
 \#FBcc\#, \#FDBcc\#, \#FScc\# and \#FTRAPcc\# instructions.
@@ -2104,7 +2104,7 @@ NAN - Not a Number.
 \end
 
 screen( "Quotient Byte" )
-\link("Floating Point Status Registe")Floating Point Status Register\# - Quotient Byte
+\#Floating Point Status Register\# - Quotient Byte
 ----------------------------------------------------------------------
 ... is set by \#FMOD\# and \#FREM\# instructions.  It consists of a
 sign bit and the low order seven bits of the quotient.
@@ -2115,7 +2115,7 @@ Flag |sign |              quotient                   |
 \end
 
 screen( "Exception Status Byte" )
-\link("Floating Point Status Registe")Floating Point Status Register\# - Exception Status Byte
+\#Floating Point Status Register\# - Exception Status Byte
 ----------------------------------------------------------------------
 If the corresponding bits are set in the \#FPCR\#, an exception will
 occur.
@@ -2153,7 +2153,7 @@ See also \#FPU\# and \#Exceptions\#.
 \end
 
 screen( "Accrued Exception Byte" )
-\link("Floating Point Status Registe")Floating Point Status Register\# - Accrued Exception Byte
+\#Floating Point Status Register\# - Accrued Exception Byte
 ----------------------------------------------------------------------
 These bits remain set until cleared (by an \#FMOVE (Control Register)\# or
 RESET).  This is particularly useful when the \#FPCR\# is set to NOT
@@ -2173,7 +2173,7 @@ DZ   | DZ
 INEX | INEX1, INEX2 or OVFL
 \end
 
-screen( "Floating Point Instruction Ad",
+screen( "Floating Point Instruction Address Register",
 		sensitive("FPIAR") )
 Floating Point Instruction Address Register (FPIAR)  - Atari TT Only -
 ----------------------------------------------------------------------
@@ -7574,7 +7574,7 @@ $FF8900  \#DMA Sound Control\#
 $FF8960  \#Real Time Clock\#
 $FF8A00  \#Blitter Chip\#
 $FF8C00  \#SCC DMA Control\# (Serial 2)
-$FF8C80  \link("Serial Communications Control")Serial Communications Controller\#
+$FF8C80  \#Serial Communications Controller\#
 $FF8E00  \#System Control Unit\#
 $FF9200  \#Configuration Switches\# and \#Enhanced Joystick Ports\#
 $FF9800  Falcon VIDEL Palette Registers
@@ -8776,7 +8776,7 @@ XBIOS: \link("%%GLOBAL%%")Giaccess\#, \link("%%GLOBAL%%")Offgibit\#, \link("%%GL
 screen( "DMA Sound Control" )
 DMA Sound Control
 ----------------------------------------------------------------------
-$FF8090  \link("DMA Interrupt Control Registe")DMA Interrupt Control Register\# (Byte)
+$FF8090  \#DMA Interrupt Control Register\# (Byte)
 $FF8091  \#DMA Sound Control Register\# (Byte)
 
 $FF8903 - $FF8907  Frame Base Address   (High/Mid/Low) Odd bytes.
@@ -8791,8 +8791,8 @@ $FF8924  MICROWIRE Mask Register (Word)
 
 $FF8930  \#DMA Crossbar Output Select\# (Word)
 $FF8932  \#DMA Crossbar Input Select\# (Word)
-$FF8934  \link("Frequency Divider External Sy")Frequency Divider External Sync\# (Byte)
-$FF8935  \link("Frequency Divider Internal Sy")Frequency Divider Internal Sync\# (Byte)
+$FF8934  \#Frequency Divider External Sync\# (Byte)
+$FF8935  \#Frequency Divider Internal Sync\# (Byte)
 $FF8936  \#Record Tracks Select\# (Byte)
 $FF8937  \#CODEC Input Source\# (Byte)
 $FF8938  \#CODEC ADC Input\# (Byte)
@@ -8804,7 +8804,7 @@ $FF8943  GPIO Data Register (Byte)
 See also \#DMA Sound Chip\# and \#LMC1992\#.
 \end
 
-screen( "DMA Interrupt Control Registe" )
+screen( "DMA Interrupt Control Register" )
 DMA Interrupt Control Register              -- Falcon only --
 ----------------------------------------------------------------------
 Bits  | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
@@ -8915,7 +8915,7 @@ ds: DMA input from DSP (0)
 XBIOS: \link("%%GLOBAL%%")devconnect\#()
 \end
 
-screen( "Frequency Divider External Sy" )
+screen( "Frequency Divider External Sync" )
 Frequency Divider External Sync               -- Falcon only --
 ----------------------------------------------------------------------
 0    = STE/TT compatible prescaler
@@ -8924,7 +8924,7 @@ Frequency Divider External Sync               -- Falcon only --
 XBIOS: \link("%%GLOBAL%%")devconnect\#().
 \end
 
-screen( "Frequency Divider Internal Sy" )
+screen( "Frequency Divider Internal Sync" )
 Frequency Divider Internal Sync               -- Falcon only --
 ----------------------------------------------------------------------
  0 = STe compatible     6 = 14049 Hz          12 =  7565 Hz
@@ -9142,7 +9142,7 @@ RAM.  Check the DMA pointer on completion to see if this happened.
 See also \#Z8530\# and \#TT MFP Interrupt Registers\#.
 \end
 
-screen( "Serial Communications Control" )
+screen( "Serial Communications Controller" )
 Serial Communications Controller      -- TT, Falcon and Mega STE --
 ----------------------------------------------------------------------
 $FF8C81  A (Serial 2) control
@@ -9176,7 +9176,7 @@ $FF8E0F  VME Interrupt State (read only)
 screen( "ST MFP" )
 ST Multi Functional Peripheral
 ----------------------------------------------------------------------
-$FFFA01  GPIP    \link("ST General Purpose Interrupt ")ST General Purpose Interrupt Port\#
+$FFFA01  GPIP    \#ST General Purpose Interrupt Port\#
 $FFFA03  AER     Active Edge Register
 $FFFA05  DDR     Data Direction Register
 $FFFA07  IERA    Interrupt Enable Register A
@@ -9211,7 +9211,7 @@ See also \#ST MFP Interrupt Registers\# and \#MK68901\#.
 XBIOS: \link("%%GLOBAL%%")Mfpint\#, \link("%%GLOBAL%%")Rsconf\#, \link("%%GLOBAL%%")Jdisint\#, \link("%%GLOBAL%%")Jenabint\# and \link("%%GLOBAL%%")Xbtimer\#.
 \end
 
-screen( "ST General Purpose Interrupt " )
+screen( "ST General Purpose Interrupt Port" )
 \#ST MFP\# General Purpose Interrupt Port
 ----------------------------------------------------------------------
   Bit 7  Monochrome Monitor Detect (also DMA sound)
@@ -9224,7 +9224,7 @@ screen( "ST General Purpose Interrupt " )
          Centronix printer port acknoledge (Falcon)
   Bit 0  Centronix printer port busy
 
-See also \link("TT General Purpose Interrupt ")TT General Purpose Interrupt Port\#.
+See also \#TT General Purpose Interrupt Port\#.
 \end
 
 screen( "ST MFP Interrupt Registers" )
@@ -9256,7 +9256,7 @@ See also \#TT MFP Interrupt Registers\# and \#Exception Vectors\#.
 screen( "TT MFP" )
 TT (second) Multi Functional Peripheral
 ----------------------------------------------------------------------
-$FFFA81  GPIP    \link("TT General Purpose Interrupt ")TT General Purpose Interrupt Port\#
+$FFFA81  GPIP    \#TT General Purpose Interrupt Port\#
 $FFFA83  AER     Active Edge Register
 $FFFA85  DDR     Data Direction Register
 $FFFA87  IERA    Interrupt Enable Register A
@@ -9289,7 +9289,7 @@ Timer D    Serial 1 baud rate generator
 See also \#TT MFP Interrupt Registers\# and \#MK68901\#.
 \end
 
-screen( "TT General Purpose Interrupt " )
+screen( "TT General Purpose Interrupt Port" )
 \#TT MFP\# General Purpose Interrupt Port
 ----------------------------------------------------------------------
   Bit 7  SCSI Controller IRQ
@@ -9301,7 +9301,7 @@ screen( "TT General Purpose Interrupt " )
   Bit 1  not used
   Bit 0  not used
 
-See also \link("ST General Purpose Interrupt ")ST General Purpose Interrupt Port\#.
+See also \#ST General Purpose Interrupt Port\#.
 \end
 
 screen( "TT MFP Interrupt Registers" )
@@ -9683,8 +9683,8 @@ screen( "MFP Interrupt Registers" )
 MFP Interrupt Registers
 ----------------------------------------------------------------------
 General Purpose Interrupt Port (GPIP)
-  See \link("ST General Purpose Interrupt ")ST General Purpose Interrupt Port\#
-  and \link("TT General Purpose Interrupt ")TT General Purpose Interrupt Port\# for bit layout.
+  See \#ST General Purpose Interrupt Port\#
+  and \#TT General Purpose Interrupt Port\# for bit layout.
 
 Active Edge Register (AER)
   Same bit layout as GPIP.
@@ -10094,7 +10094,7 @@ VRT = Valid RAM and Time.
 \end
 
 screen( capsensitive("Z8530") )
-Z8530 \link("Serial Communications Control")Serial Communications Controller\#          -- TT, Falcon & STE --
+Z8530 \#Serial Communications Controller\#          -- TT, Falcon & STE --
 ----------------------------------------------------------------------
 ... provides 2 serial channels.  SCC A is used for either Serial 2 or
 the LAN port.  SCC B is used for Modem 2.
@@ -10122,13 +10122,13 @@ WR0       \#SCC Command\#
 WR1       \#SCC Interrupt Enable\#
 WR2/RR2   \#SCC Interrupt Vector\# 
 WR3       \#SCC Receive Parameters\#
-WR4       \link("SCC Transmit and Receive Para")SCC Transmit and Receive Parameters\#
+WR4       \#SCC Transmit and Receive Parameters\#
 WR5       \#SCC Transmit Parameters\#
 WR6       SCC Transmit Sync Character/SDLC Address
 WR7       SCC Receive Sync Character/SDLC Flag
 WR8/RR8   SCC Data Buffer
 WR9       \#SCC Master Interrupt Control\#
-WR10      \link("SCC Misc. Transmit and Receiv")SCC Misc. Transmit and Receive Control Bits\#
+WR10      \#SCC Misc. Transmit and Receive Control Bits\#
 WR11      \#SCC Clock Mode\#
 WR12/RR12 SCC Baud Rate Generator (Low Byte)
 WR13/RR13 SCC Baud Rate Generator (High Byte)
@@ -10230,7 +10230,7 @@ I    Ignore Sync character (1).  Sync only.
 E    Receiver Enable (1).
 \end
 
-screen( "SCC Transmit and Receive Para" )
+screen( "SCC Transmit and Receive Parameters" )
 WR4/RR4   SCC Transmit and Receive Parameters
 ----------------------------------------------------------------------
 Bits  | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
@@ -10298,7 +10298,7 @@ VIS  Vector (WR2/RR2) Includes Status (1).
 See also \#SCC Interrupt Vector\#.
 \end
 
-screen( "SCC Misc. Transmit and Receiv" )
+screen( "SCC Misc. Transmit and Receive Control Bits" )
 WR10      SCC Misc. Transmit and Receive Control Bits
 ----------------------------------------------------------------------
 Bits  | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
@@ -10476,7 +10476,7 @@ mode = 1, 16, 32 or 64 (default = 16)
       4       | 12.8 K  |  19.1 K  | 41.7 K
       6       |  9.6 K  |  14.3 K  | 31.3 K
 
-clock mode set by \link("SCC Transmit and Receive Para")R4\#.
+clock mode set by \link("SCC Transmit and Receive Parameters")R4\#.
 clock rate set by \link("SCC Misc. Control Bits")R14\#.
 \end
 
@@ -10491,7 +10491,7 @@ which are all directly accessable.
 Address | Read/Write Register
 --------+-------------------------------------------------------------
 $FF8781 | \#SCSI Data Register\#
-$FF8783 | \link("SCSI Initiator Command Regist")SCSI Initiator Command Register\#
+$FF8783 | \#SCSI Initiator Command Register\#
 $FF8785 | \#SCSI Mode Register\#
 $FF8787 | \#SCSI Target Command Register\#
 --------+----------------------------+--------------------------------
@@ -10587,12 +10587,12 @@ Pins  | 13 | 12 | 11 | 23 | 10 | 22 | 21 |  8 |
 ------+----+----+----+----+----+----+----+----+
 
 These values are sent to the bus when then DB bit is set on the 
-\link("SCSI Initiator Command Regist")SCSI Initiator Command Register\#.
+\#SCSI Initiator Command Register\#.
 
 See also \#SCSI Input Data Register\#.
 \end
 
-screen( "SCSI Initiator Command Regist" )
+screen( "SCSI Initiator Command Register" )
 SCSI Initiator Command Register (read/write)
 ----------------------------------------------------------------------
 Bits  |  7 |  6 |  5 |  4 |  3 |  2 |  1 |  0 |
@@ -10662,7 +10662,7 @@ DMA  - Direct Memory Access: Enables DMA transfers.  This bit must be
 ARB  - Arbitration: Initiates arbitration processs when bus free.
        \#SCSI Data Register\# must contain desired device ID before
        starting arbitration.  Status of arbitration reported in ARB
-       and/or LARB bits of \link("SCSI Initiator Command Regist")SCSI Initiator Command Register\#.
+       and/or LARB bits of \#SCSI Initiator Command Register\#.
 \end
 
 screen( "SCSI Target Command Register" )
@@ -10709,7 +10709,7 @@ Signal|RST |BSY |REQ |MSG |C_D |I_O |SEL |DBP |
 Pins  |  4 |  6 |  1 |  2 | 15 |  3 | 19 | 20 |
 ------+----+----+----+----+----+----+----+----+
 
-RST, BSY and SEL are driven by the \link("SCSI Initiator Command Regist")SCSI Initiator Command Register\#.
+RST, BSY and SEL are driven by the \#SCSI Initiator Command Register\#.
 
 REQ, MSG, C_D and I_O are driven by the \#SCSI Target Command Register\#.
 
@@ -10871,7 +10871,7 @@ See also \#DSP Host Interface\# and \#DSP Expansion Port\#.
 screen( "DSP Host Interface" )
 DSP Host Interface                        -- Falcon only --
 ----------------------------------------------------------------------
-$FFA200  \link("DSP Interrupt Control Registe")DSP Interrupt Control Register\#
+$FFA200  \#DSP Interrupt Control Register\#
 $FFA201  \#DSP Command Vector Register\#
 $FFA202  \#DSP Interrupt Status Register\# (read only)
 $FFA203  DSP Interrupt Vector Register (default unknown)
@@ -10881,7 +10881,7 @@ $FFA205 - $FFA207  DSP Transmit/Receive Register (High, Middle, Low)
 See also \#DSP56001\# and \#Exception Vectors\#
 \end
 
-screen( "DSP Interrupt Control Registe" )
+screen( "DSP Interrupt Control Register" )
 DSP Interrupt Control Register            -- Falcon only --
 ----------------------------------------------------------------------
 Bits  | 7  | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
@@ -11079,7 +11079,7 @@ Returns $F6-$FF for special multi-byte report headers:
 Commands (sent to keyboard):
   $07  \#IKBD Set Mouse Button Action\#
   $08  Set Relative Mouse Position Reporting (default)
-  $09  \link("IKBD Set Absolute Mouse Posit")IKBD Set Absolute Mouse Positioning\#
+  $09  \#IKBD Set Absolute Mouse Positioning\#
   $0A  \#IKBD Set Mouse Keycode Mode\#
   $0B  \#IKBD Set Mouse Threshold\#
   $0C  \#IKBD Set Mouse Scale\#
@@ -11095,8 +11095,8 @@ Commands (sent to keyboard):
   $15  Set Joystick Interrogation Mode (no reports unless asked)
   $16  Interrogate Joysticks (see \#IKBD Joystick Report\#)
   $17  \#IKBD Set Joystick Monitoring\#
-  $18  \link("IKBD Set Fire Button Monitori")IKBD Set Fire Button Monitoring\#
-  $19  \link("IKBD Set Joystick Keycode Mod")IKBD Set Joystick Keycode Mode\#
+  $18  \#IKBD Set Fire Button Monitoring\#
+  $19  \#IKBD Set Joystick Keycode Mode\#
   $1A  Disable Joysticks (re-enabled by commands $14-$19)
 
   $1B  \#IKBD Set Time of Day Clock\#
@@ -11129,8 +11129,8 @@ Report type:
   $00  Mouse or joystick enabled
   $07  \#IKBD Mouse Button Action\#
   $08  Relative Mouse Position Reporting
-  $09  \link("IKBD Absolute Mouse Position ")IKBD Absolute Mouse Position Reporting\#
-  $0A  \link("IKBD Keycode Mouse Position R")IKBD Keycode Mouse Position Reporting\#
+  $09  \#IKBD Absolute Mouse Position Reporting\#
+  $0A  \#IKBD Keycode Mouse Position Reporting\#
   $0B  \#IKBD Mouse Threshold\#
   $0C  \#IKBD Mouse Scale\#
   $0F  Y=0 at Bottom
@@ -11159,7 +11159,7 @@ Button action code:
 Zero Pad (5 bytes)
 \end
 
-screen( "IKBD Absolute Mouse Position " )
+screen( "IKBD Absolute Mouse Position Reporting" )
 \#IKBD Status Report\# - Absolute Mouse Position Reporting (8 bytes)
 ----------------------------------------------------------------------
 Header byte ($F6)
@@ -11169,7 +11169,7 @@ Maximum Y value (high, low) unsigned int
 Zero Pad (2 bytes)
 \end
 
-screen( "IKBD Keycode Mouse Position R" )
+screen( "IKBD Keycode Mouse Position Reporting" )
 \#IKBD Status Report\# - Keycode Mouse Position Reporting (8 bytes)
 ----------------------------------------------------------------------
 Header byte ($F6)
@@ -11312,7 +11312,7 @@ In relative position mode, an \#IKBD Relative Mouse Position\# report
 is generated on any button event, unless action code 4 is used.
 \end
 
-screen( "IKBD Set Absolute Mouse Posit" )
+screen( "IKBD Set Absolute Mouse Positioning" )
 \#IKBD\# Set Absolute Mouse Positioning (5 bytes)
 ----------------------------------------------------------------------
 Command ($09)
@@ -11357,7 +11357,7 @@ X value (high, low) in mouse units.
 Y value (high, low) in mouse units.
 \end
 
-screen( "IKBD Set Joystick Keycode Mod" )
+screen( "IKBD Set Joystick Keycode Mode" )
 \#IKBD\# Set Joystick Keycode Mode (7 bytes)
 ----------------------------------------------------------------------
 Command ($19)
@@ -11384,7 +11384,7 @@ rate (time between samples in hundredths of a second)
   interrogation mode.
 \end
 
-screen( "IKBD Set Fire Button Monitori" )
+screen( "IKBD Set Fire Button Monitoring" )
 \#IKBD\# Set Fire Button Monitoring (1 byte)
 ----------------------------------------------------------------------
 Command ($18)

@@ -177,8 +177,8 @@ Der MenÅtitel 'Options'
         \#Save ''\#
 \end
 
-screen( "Help",
-		"Hilfesystem",
+screen( "Hilfesystem",
+		"Help",
 		"Kontextsensitive Hilfe" )
 Help
 ----------------------------------------------------------------------
@@ -628,8 +628,8 @@ o "List only first occurrence" trÑgt nur das erste Vorkommen
   des Suchbegriffs in das Messages-Fenster ein.
 \end
 
-screen( "Compile/Compile...",
-		"Compile...",
+screen( "Compile...",
+		"Compile/Compile...",
 		"Quelldatei compilieren",
 		"Quelldatei Åbersetzen" )
 \#Compile\#/Compile...                                         \#ALTERNATE\#-V
@@ -965,7 +965,7 @@ Die Warnungen der Compilers kînnen in 4 Gruppen eingeteilt werden:
 \#Verletzung des ANSI-Standards\#
 \#HÑufig auftretende Fehler\#
 \#Weniger hÑufige Fehler\#
-\link("Warnungen vor PortabilitÑtspr")Warnungen vor PortabilitÑtsproblemen\#
+\#Warnungen vor PortabilitÑtsproblemen\#
 \end
 
 screen( "Verletzung des ANSI-Standards",
@@ -1076,7 +1076,7 @@ use [2] 'XXXXXX' declared but never used.
         \#Warnungen\#
 \end
 
-screen( "Warnungen vor PortabilitÑtspr",
+screen( "Warnungen vor PortabilitÑtsproblemen",
 		capsensitive("apt"),
 		capsensitive("cln"),
 		capsensitive("cpt"),
@@ -1119,9 +1119,9 @@ Compilers der Projektlauf IMMER abgebrochen.
 \#Fehlermeldungen des PrÑprozessors\#
 \#Fehlermeldungen bei Funktionsdeklarationen\#
 \#Fehlermeldungen bei Funktionsaufrufen\#
-\link("Deklarationen, Fehlermeldunge")Fehlermeldungen bei Deklarationen\#
+\#Fehlermeldungen bei Deklarationen\#
 \#Fehlermeldungen bei Schleifen\#
-\link("Fehlermeldungen bei If-/Switc")Fehlermeldungen bei If-/Switch-statements\#
+\#Fehlermeldungen bei If-/Switch-statements\#
 \#Fehlermeldungen in Statements\#
 \#Fehlermeldungen bei Konstanten\#
 \#Diverse Fehlermeldungen\#
@@ -1262,7 +1262,7 @@ Fehlermeldungen bei Funktionsaufrufen
 \end
 
 screen( "Deklarationen, Fehlermeldunge",
-		"Fehlermeldungen bei Deklarati" )
+		"Fehlermeldungen bei Deklarationen" )
 Fehlermeldungen bei Deklarationen
 ---------------------------------
 
@@ -1358,7 +1358,7 @@ Fehlermeldungen bei Schleifen
   Die Klammer im \link("%%GLOBAL%%")while\#-statement wurde nicht gefunden.
 \end
 
-screen( "Fehlermeldungen bei If-/Switc",
+screen( "Fehlermeldungen bei If-/Switch-statements",
 		"if, Fehlermeldungen",
 		"switch, Fehlermeldungen" )
 Fehlermeldungen bei If-/Switch-statements
@@ -1981,7 +1981,7 @@ Der Aufruf des Help-Compilers geschieht mit der Kommandozeile
 
 Als einziges Argument wird der Name einer \link("Befehlsdateien (Help-Compiler")Befehlsdatei\# Åbergeben.
 Diese enthÑlt die Optionen, den Namen der zu erzeugenden Help-
-Datei und eine Liste der \link("Help-Language")Quelldateien\#.
+Datei und eine Liste der \link("Help-Quelltext")Quelldateien\#.
 \end
 
 screen( "Befehlsdateien (Help-Compiler",
@@ -2050,9 +2050,9 @@ Hinweis: Der Name der benutzerdefinierten Help-Datei muû USR.HLP
          sind.
 \end
 
-screen( "Help-Language",
-		"Help-Quelltext",
+screen( "Help-Quelltext",
 		"Help-Sprache",
+		"Help-Language",
 		"Kontextsensitives Help",
 		"Querverweise (Help)",
 		capsensitive("capsensitive"),
