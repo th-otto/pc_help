@@ -20,7 +20,6 @@
 #include <gem.h>
 #include <osbind.h>
 extern short _app;
-#define getche() Cconin()
 #endif
 #include <stdlib.h>
 #include <stdint_.h>

@@ -49,6 +49,7 @@ PROGRAMS += hc$(EXE)
 PROGRAMS += help_rc$(EXE)
 ifneq ($(CROSS),)
 PROGRAMS += pc_help.prg
+LIBS=-liio
 endif
 
 all:  $(PROGRAMS)
