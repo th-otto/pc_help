@@ -5,13 +5,12 @@
 CROSS=m68k-atari-mint-
 
 TEST_CODE?=0
-COUNTRY?=1
 
 CC=$(CROSS)gcc
 AS=$(CC)
 WARN = -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wundef -Werror
 OPTS=-O2 -fomit-frame-pointer
-CFLAGS=-I. $(COMMON_DIR) $(OPTS) $(WARN) -DTEST_CODE=$(TEST_CODE) -DCOUNTRY=$(COUNTRY)
+CFLAGS=-I. $(COMMON_DIR) $(OPTS) $(WARN) -DTEST_CODE=$(TEST_CODE)
 LDFLAGS=-s
 
 ifeq ($(CROSS),)
@@ -29,6 +28,7 @@ OBJS = \
 	hclog.o \
 	hcindex.o \
 	hccompr.o \
+	country.o \
 	\
 	$(empty)
 

@@ -764,9 +764,11 @@ _WORD win_get_handle(void)
 /* ---------------------------------------------------------------------- */
 /* ********************************************************************** */
 
+#ifndef BYTE
 #define BYTE char
 #define LONG long
 #define WORD _WORD
+#endif
 #include "pchlprsc.h"
 #include "pchlprsc.rsh"
 

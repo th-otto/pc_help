@@ -1,4 +1,5 @@
 #include "hc.h"
+#include "country.h"
 
 FILE *hc_infile;
 FILE *hc_outfile;
@@ -177,7 +178,7 @@ void log_open(void)
 		"-------------------------------------------------------------------------------\n"
 		"\n",
 		outfile_name,
-		tm.tm_mday, month_names[tm.tm_mon], tm.tm_year + 1900);
+		tm.tm_mday, get_month_name(COUNTRY_US, tm.tm_mon), tm.tm_year + 1900);
 }
 
 /* ---------------------------------------------------------------------- */

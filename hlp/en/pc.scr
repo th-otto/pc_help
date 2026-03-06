@@ -1811,6 +1811,10 @@ T=n  Translate TABs as "n" blanks, where 0 < n < 10.  Default is 4.
      (Does not use tab stops.)
 V    Verbose message output.
 W    Break on warning.
+G=n  Adjust texts in index pages for lang x
+     Currently supported:
+     G=0 english texts
+     G=1 german texts
 
 0    Create new PC.HLP or PD.HLP file.
 1    Create new C.HLP file.

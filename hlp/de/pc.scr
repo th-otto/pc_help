@@ -2007,7 +2007,7 @@ N           Wenn Sie diesen Schalter setzen, prÅft der Help-
             Help-Datei wird nicht erzeugt.
 T=n         Der Help-Compiler expandiert alle Tabulatoren
             in Leerzeichenfolgen. Die Zahl n gibt an,
-            wieviel Leerzeichen fur einen Tabulator erzeugt
+            wieviel Leerzeichen fÅr einen Tabulator erzeugt
             werden sollen. Voreingestellt sind 4 Leerzeichen.
             FÅr n gilt: 0 < n <= 9.
 V           Diese Option fÅhrt zur Ausgabe von Meldungen zum 
@@ -2015,6 +2015,11 @@ V           Diese Option fÅhrt zur Ausgabe von Meldungen zum
 W           Dieser Schalter veranlaût den Help-Compiler die 
             öbersetzung beim Auftreten von Warnungen
             abzubrechen.
+G=n         Passt die Texte in den Index-Seiten fÅr Sprache
+            x an.
+            Momentan unterstÅtzt:
+            G=0 Englische Texte
+            G=1 Deutsche Texte
 --------------------------------------------------------------
 
 Danach folgt der Name der zu erzeugenden Help-Datei. Schlieûlich

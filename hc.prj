@@ -28,6 +28,7 @@ hcparse.c
 hclex.c
 hchash.c
 hcindex.c
+country.c
 hccompr.c
 
 pcstdlib.lib

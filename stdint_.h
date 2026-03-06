@@ -12,12 +12,14 @@ typedef unsigned short uint16_t;
 typedef signed short int16_t;
 typedef unsigned long uint32_t;
 typedef signed long int32_t;
-typedef long off_t;
 typedef long ssize_t;
 typedef long intptr_t;
 typedef unsigned long uintptr_t;
 #else
 #include <stdint.h>
+#endif
+#ifdef __PUREC__
+typedef long off_t;
 #endif
 
 #if !defined(__attribute__) && !defined(__GNUC__)

@@ -14,6 +14,9 @@
 #define DTA _DTA
 #define d_fname dta_name
 #include <tos.h>
+#ifndef SuperToUser
+#define SuperToUser(sp) Super(sp)
+#endif
 #else
 #include <time.h>
 #include <unistd.h>

@@ -74,6 +74,7 @@ struct options {
 	bool allow_braces; /* nowhere set */
 	bool break_make;
 	int tabsize;
+	int country;
 };
 
 enum token {
@@ -112,14 +113,6 @@ typedef struct name_entry {
 	struct name_entry *next;
 } NAME_ENTRY;
 
-#ifndef __SIZEOF_POINTER__
-#ifdef __PUREC__
-#define __SIZEOF_POINTER__ 4
-#endif
-#endif
-#ifndef __SIZEOF_POINTER__
-#error "unknown sizeof(void *)"
-#endif
 
 
 typedef struct {
@@ -146,7 +139,6 @@ extern int file_index;
 extern struct options options;
 
 char *xbasename(const char *path);
-void compile_files(int nfiles, char **names);
 
 
 /*
@@ -253,7 +245,6 @@ void do_references(const char *tmpname);
 /*
  * hcindex.c
  */
-extern const char *month_names[];
 extern INTERNAL_SRCHKEY_ENTRY *caps_table;
 extern size_t caps_cnt;
 extern INTERNAL_SRCHKEY_ENTRY *sens_table;
@@ -263,13 +254,19 @@ extern long sens_size;
 
 
 void generate_index(void);
-void get_localtime(struct tm *tm);
 void add_index_entry(const char *s, int screen_no, int attr);
 int16_t get_index_screen_code(const char *s);
 void generate_index_page(void);
 void clear_index(void);
 void free_index(void);
 void generate_copyright_page(void);
+
+
+/*
+ * country.c
+ */
+const char *get_month_name(int country, int month);
+void get_localtime(struct tm *tm);
 
 
 /*

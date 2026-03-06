@@ -520,9 +520,9 @@ static void scrap_init(void)
 {
 	char scrap_path[FNAME_MAX];
 	char *env;
-	long sp;
 	_DTA dta;
-	
+	char bootdrv;
+
 	if (scrp_read(scrap_path) != 0 && scrap_path[0] != '\0')
 		return;
 	env = getenv("CLIPBRD");
@@ -531,9 +531,8 @@ static void scrap_init(void)
 		scrp_write(env);
 		return;
 	}
-	sp = (long)Super(0);
-	scrap_path[0] = *((char *)0x447) + 'A';
-	Super((void *)sp);
+	bootdrv = (char)(long)Setexc(0x444 / 4, (void (*)(void))-1);
+	scrap_path[0] = bootdrv + 'A';
 	strcpy(&scrap_path[1], ":\\CLIPBRD");
 	if (scrap_path[0] > 'B')
 	{

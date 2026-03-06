@@ -7,10 +7,7 @@ int brace_level = 0;
 #else
 #define RIGHT_S "\302\273"
 #endif
-#if !defined(ENABLE_NLS) && defined(NLS_LANG_GERMAN) && NLS_LANG_GERMAN
-#else
 #define msg_continue " do you want to continue, [y]es or [n]o ? "
-#endif
 
 static bool next_parameter(bool one_only);
 static bool parse_parameters(bool one_only);
