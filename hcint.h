@@ -54,6 +54,20 @@ typedef struct {
 	uint32_t sens_cnt;     			/* No. of search-words */
 } HLPHDR;
 
+/*------ Header structure of old DOS helpfiles ---------*/
+
+typedef struct {
+	uint32_t magic;
+	uint32_t search_tab_size;
+	uint32_t str_size;
+	uint32_t scr_tab_size;
+	uint32_t compr_tab_size;
+	uint32_t reserved_20;
+	uint32_t reserved_24;
+	uint32_t reserved_28;
+} PPHDR;
+#define PP_MAGIC 0x50504831L /* 'PPH1' */
+
 /*--------- Structure of the Keyword-Tables ---------*/
 typedef struct {
 	uint32_t pos; 					/* Word-start for current position+pos */

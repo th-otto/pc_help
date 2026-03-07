@@ -1,5 +1,6 @@
 hc
 help_rc
+helpcomp
 *.hlp
 hc.log
 *.pdb

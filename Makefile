@@ -48,6 +48,7 @@ PCHELP_OBJS = \
 PROGRAMS =
 PROGRAMS += hc$(EXE)
 PROGRAMS += help_rc$(EXE)
+PROGRAMS += helpcomp$(EXE)
 ifneq ($(CROSS),)
 PROGRAMS += pc_help.prg
 endif
@@ -58,6 +59,9 @@ hc$(EXE): $(OBJS)
 	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBS)
 
 help_rc$(EXE): help_rc.o
+	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $< $(LIBS)
+
+helpcomp$(EXE): helpcomp.o
 	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $< $(LIBS)
 
 pc_help.prg: $(PCHELP_OBJS)
@@ -72,4 +76,4 @@ gccstub.o: gccstub.s
 	$(AS) -c -o $@ $<
 
 clean::
-	$(RM) *.o *.pdb hc hc$(EXE) help_rc help_rc$(EXE) pc_help.prg
+	$(RM) *.o *.pdb hc hc$(EXE) help_rc helpcomp help_rc$(EXE) pc_help.prg
