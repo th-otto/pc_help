@@ -58,8 +58,8 @@ beziehen.
 \end
 
 screen( "Aufruf",
-		"Kommandozeilenparameter",
-		"Optionen" )
+        "Kommandozeilenparameter",
+        "Optionen" )
 Aufruf und Optionen
 ----------------------------------------------------------------------
 
@@ -170,7 +170,7 @@ Option           Bedeutung
 \end
 
 screen( "Listing",
-		"Listing-Datei" )
+        "Listing-Datei" )
 Listing
 ----------------------------------------------------------------------
 
@@ -255,7 +255,7 @@ unterteilt:
 \end
 
 screen( "Fehler, Kommandozeilen-",
-		"Kommandozeilen-Fehler" )
+        "Kommandozeilen-Fehler" )
 Kommandozeilen-Fehler
 ----------------------------------------------------------------------
 
@@ -298,8 +298,8 @@ ist jedoch nur eine erlaubt.
 \end
 
 screen( "Assemblierungsfehler",
-		"Fehler im Quelltext",
-		"Fehler, Assemblierungs-" )
+        "Fehler im Quelltext",
+        "Fehler, Assemblierungs-" )
 Assemblierungsfehler
 ----------------------------------------------------------------------
 
@@ -483,7 +483,7 @@ zugelassenen Bereich.
 \end
 
 screen( "Fatale Fehler",
-		"Fehler, Fatale" )
+        "Fehler, Fatale" )
 Fatale Fehler
 ----------------------------------------------------------------------
 
@@ -551,7 +551,7 @@ Eine Zeile darf maximal 512 Zeichen lang sein.
 \end
 
 screen( "Operatoren, PrioritÑten der",
-		"PrioritÑten der Operatoren" )
+        "PrioritÑten der Operatoren" )
 PrioritÑten der Operatoren
 ----------------------------------------------------------------------
 
@@ -572,7 +572,7 @@ Operator                    PrioritÑt
 \end
 
 screen( "Bezeichner",
-		"Identifier" )
+        "Identifier" )
 Bezeichner
 ----------------------------------------------------------------------
 
@@ -627,7 +627,7 @@ gleichlautende Labelnamen sind nicht zulÑssig.
 \end
 
 screen( "Labels, Lokale",
-		"Lokale Labels" )
+        "Lokale Labels" )
 Lokale Labels
 ----------------------------------------------------------------------
 
@@ -656,8 +656,8 @@ Routine2:
 \end
 
 screen( "Label",
-		"Sprungziel",
-		"Symbole" )
+        "Sprungziel",
+        "Symbole" )
 Labels ( Spungziele )
 ----------------------------------------------------------------------
 
@@ -706,7 +706,7 @@ Namen   Typ     Grîûe                           Grîûe in Bits
 \end
 
 screen( "Konstanten, Numerische",
-		"Numerische Konstanten" )
+        "Numerische Konstanten" )
 Numerische Konstanten
 ----------------------------------------------------------------------
 
@@ -725,7 +725,7 @@ Zur besseren Lesbarkeit darf innerhalb der Konstanten der Unterstrich
 \end
 
 screen( "Konstanten, String-",
-		"Stringkonstanten" )
+        "Stringkonstanten" )
 Stringkonstanten
 ----------------------------------------------------------------------
 
@@ -906,7 +906,7 @@ behandelt werden und ihre voreingestellte Grîûe Word ist.
 \end
 
 screen( "AusdrÅcke",
-		"Operatoren" )
+        "Operatoren" )
 AusdrÅcke und Operatoren
 ----------------------------------------------------------------------
 
@@ -918,7 +918,7 @@ fÅr Ausdrucke orientiert sich an der der Programmiersprache C.
 \end
 
 screen( "Operatoren, UnÑre",
-		"UnÑre Operatoren" )
+        "UnÑre Operatoren" )
 UnÑre Operatoren
 ----------------------------------------------------------------------
 
@@ -934,7 +934,7 @@ Operator   Operation
 \end
 
 screen( "BinÑre Operatoren",
-		"Operatoren, BinÑre" )
+        "Operatoren, BinÑre" )
 BinÑre Operatoren
 ----------------------------------------------------------------------
 
@@ -984,11 +984,11 @@ Operator   Operation
 \end
 
 screen( "AusdrÅcke, Flieûkomma-",
-		"Flieûkomma Operatoren",
-		"Flieûkomma-AusdrÅcke",
-		"Flieûkomma-Konstanten",
-		"Konstanten, Flieûkomma-",
-		"Operator, Flieûkomma-" )
+        "Flieûkomma Operatoren",
+        "Flieûkomma-AusdrÅcke",
+        "Flieûkomma-Konstanten",
+        "Konstanten, Flieûkomma-",
+        "Operator, Flieûkomma-" )
 Flieûkomma-AusdrÅcke
 ----------------------------------------------------------------------
 
@@ -1033,23 +1033,23 @@ Zeilenanfang und Doppelkreuz Leerzeichen oder Tabulatoren stehen.
 \end
 
 screen( "Datenregister",
-		"dn",
-		sensitive("D0"),
-		sensitive("D1"),
-		sensitive("D2"),
-		sensitive("D3"),
-		sensitive("D4"),
-		sensitive("D5"),
-		sensitive("D6"),
-		sensitive("D7"),
-		sensitive("R0"),
-		sensitive("R1"),
-		sensitive("R2"),
-		sensitive("R3"),
-		sensitive("R4"),
-		sensitive("R5"),
-		sensitive("R6"),
-		sensitive("R7") )
+        "dn",
+        sensitive("D0"),
+        sensitive("D1"),
+        sensitive("D2"),
+        sensitive("D3"),
+        sensitive("D4"),
+        sensitive("D5"),
+        sensitive("D6"),
+        sensitive("D7"),
+        sensitive("R0"),
+        sensitive("R1"),
+        sensitive("R2"),
+        sensitive("R3"),
+        sensitive("R4"),
+        sensitive("R5"),
+        sensitive("R6"),
+        sensitive("R7") )
 Datenregister
 ----------------------------------------------------------------------
 
@@ -1065,21 +1065,21 @@ Querverweis: \#Register-Spezifikationen\#
 \end
 
 screen( "Adreûregister",
-		"an",
-		sensitive("A0"),
-		sensitive("A1"),
-		sensitive("A2"),
-		sensitive("A3"),
-		sensitive("A4"),
-		sensitive("A5"),
-		sensitive("A6"),
-		sensitive("R10"),
-		sensitive("R11"),
-		sensitive("R12"),
-		sensitive("R13"),
-		sensitive("R14"),
-		sensitive("R8"),
-		sensitive("R9") )
+        "an",
+        sensitive("A0"),
+        sensitive("A1"),
+        sensitive("A2"),
+        sensitive("A3"),
+        sensitive("A4"),
+        sensitive("A5"),
+        sensitive("A6"),
+        sensitive("R10"),
+        sensitive("R11"),
+        sensitive("R12"),
+        sensitive("R13"),
+        sensitive("R14"),
+        sensitive("R8"),
+        sensitive("R9") )
 Adreûregister
 ----------------------------------------------------------------------
 
@@ -1101,9 +1101,9 @@ Querverweis: \#Register-Spezifikationen\#
 \end
 
 screen( "Stackpointer",
-		sensitive("A7"),
-		sensitive("R15"),
-		sensitive("SP") )
+        sensitive("A7"),
+        sensitive("R15"),
+        sensitive("SP") )
 SP - Stackpointer
 ----------------------------------------------------------------------
 
@@ -1130,7 +1130,7 @@ Querverweis: \link("Supervisor Stackpointer")ssp\#, \link("User Stack Pointer")u
 \end
 
 screen( "Statusregister",
-		sensitive("SR") )
+        sensitive("SR") )
 SR - Statusregister
 ----------------------------------------------------------------------
 
@@ -1169,7 +1169,7 @@ der CPU:
 \end
 
 screen( "Condition Codes, CPU",
-		sensitive("CCR") )
+        sensitive("CCR") )
 CCR - Condition Code Register
 ----------------------------------------------------------------------
 
@@ -1280,7 +1280,7 @@ Querverweis: \#Mîgliche VerÑnderungen\#
 \end
 
 screen( "Overflow",
-		"öberlauf" )
+        "öberlauf" )
 öberlaufflag
 ----------------------------------------------------------------------
 
@@ -1306,7 +1306,7 @@ Querverweis: \#Mîgliche VerÑnderungen\#
 \end
 
 screen( "User Stack Pointer",
-		sensitive("USP") )
+        sensitive("USP") )
 USP - User Stack Pointer
 ----------------------------------------------------------------------
 
@@ -1317,7 +1317,7 @@ terbezeichnungen A7 bzw. SP verwendet wird.
 \end
 
 screen( "Supervisor Stackpointer",
-		sensitive("SSP") )
+        sensitive("SSP") )
 SSP - Supervisor Stackpointer
 ----------------------------------------------------------------------
 
@@ -1327,7 +1327,7 @@ unterscheiden dabei zwischen dem \link("Master Stack Pointer")msp\# und dem \lin
 \end
 
 screen( "Program Counter",
-		sensitive("PC") )
+        sensitive("PC") )
 PC - Program Counter
 ----------------------------------------------------------------------
 
@@ -1345,7 +1345,7 @@ Der PC darf nie auf eine ungerade Adresse zeigen.
 \end
 
 screen( "CPU-Kontrollregister",
-		"Kontrollregister, CPU" )
+        "Kontrollregister, CPU" )
 Die Kontrollregister
 ----------------------------------------------------------------------
 
@@ -1362,7 +1362,7 @@ Querverweis: \#MOVEC\#, \#Register-Spezifikationen\#
 \end
 
 screen( "Vector Base",
-		sensitive("VBR") )
+        sensitive("VBR") )
 VBR - Vector Base Register                                     MC68010
 ----------------------------------------------------------------------
 
@@ -1372,7 +1372,7 @@ anlegen.
 \end
 
 screen( "Source Function Code",
-		sensitive("SFC") )
+        sensitive("SFC") )
 SFC - Source Function Code Register                            MC68010
 ----------------------------------------------------------------------
 
@@ -1381,7 +1381,7 @@ Zugriff auf den Arbeitsspeicher.
 \end
 
 screen( "Destination Function Code",
-		sensitive("DFC") )
+        sensitive("DFC") )
 DFC - Destination Function Code Register                       MC68010
 ----------------------------------------------------------------------
 
@@ -1484,7 +1484,7 @@ zu holen ).
 \end
 
 screen( "Cache Address",
-		sensitive("CAAR") )
+        sensitive("CAAR") )
 CAAR - Cache Address Register                                  MC68020
 ----------------------------------------------------------------------
 
@@ -1494,7 +1494,7 @@ fÅr zukÅnftige Versionen reserviert und sollten nicht verÑndert werden.
 \end
 
 screen( "Cache Control",
-		sensitive("CACR") )
+        sensitive("CACR") )
 CACR - Cache Control Register                                  MC68020
 ----------------------------------------------------------------------
 
@@ -1636,7 +1636,7 @@ lîscht, werden Befehle immer Åber das externe RAM geholt.
 \end
 
 screen( "Interrupt Stack Pointer",
-		sensitive("ISP") )
+        sensitive("ISP") )
 ISP - Interrupt Stack Pointer                                  MC68020
 ----------------------------------------------------------------------
 
@@ -1650,7 +1650,7 @@ Querveweis: \link("Master Stack Pointer")msp\#, \link("Supervisor Stackpointer")
 \end
 
 screen( "Master Stack Pointer",
-		sensitive("MSP") )
+        sensitive("MSP") )
 MSP - Master Stack Pointer                                     MC68020
 ----------------------------------------------------------------------
 
@@ -1668,15 +1668,15 @@ siehe auch: \link("pc (Abk.)")\#
 \end
 
 screen( "FPn",
-		"Flieûkomma-Datenregister",
-		sensitive("FP0"),
-		sensitive("FP1"),
-		sensitive("FP2"),
-		sensitive("FP3"),
-		sensitive("FP4"),
-		sensitive("FP5"),
-		sensitive("FP6"),
-		sensitive("FP7") )
+        "Flieûkomma-Datenregister",
+        sensitive("FP0"),
+        sensitive("FP1"),
+        sensitive("FP2"),
+        sensitive("FP3"),
+        sensitive("FP4"),
+        sensitive("FP5"),
+        sensitive("FP6"),
+        sensitive("FP7") )
 FPn - Flieûkomma-Datenregister                                 MC68881
 ----------------------------------------------------------------------
 
@@ -1693,7 +1693,7 @@ Querverweis: \#Register-Spezifikationen\#
 \end
 
 screen( "FPU-Kontrollregister",
-		"Kontrollregister, FPU" )
+        "Kontrollregister, FPU" )
 Neben den 8 Datenregister \#FPn\# enthÑlt die  FPU
 noch einige zusÑtzliche Register:
 
@@ -1705,7 +1705,7 @@ Querverweis: \#FMOVE FPcr\#, \#FMOVEM FPcr\#, \#Register-Spezifikationen\#
 \end
 
 screen( "Flieûkomma-Kontrollregister",
-		sensitive("FPCR") )
+        sensitive("FPCR") )
 FPCR Flieûkomma-Kontrollregister                               MC68881
 ----------------------------------------------------------------------
 
@@ -1777,7 +1777,7 @@ Rounding Precision    Rounding Mode
 \end
 
 screen( "Flieûkomma-Statusregister",
-		sensitive("FPSR") )
+        sensitive("FPSR") )
 FPSR - Flieûkomma-Statusregister                               MC68881
 ----------------------------------------------------------------------
 
@@ -1974,7 +1974,7 @@ Unordered-Bedingung ( \#BSUN\# ), ein ungÅltiges Ergebnis oder ein
 \end
 
 screen( "Flieûkomma-Befehlsadreûregist",
-		sensitive("FPIAR") )
+        sensitive("FPIAR") )
 FPIAR - Flieûkomma-Befehlsadreûregister                        MC68881
 ----------------------------------------------------------------------
 
@@ -1987,7 +1987,7 @@ Stelle der aktuelle Befehl der FPU steht.
 \end
 
 screen( "Kontrollregister, PMMU",
-		"PMMU-Kontrollregister" )
+        "PMMU-Kontrollregister" )
 Die Kontrolregister der PMMU
 ----------------------------------------------------------------------
 
@@ -2006,30 +2006,30 @@ Die Kontrolregister der PMMU
 \link("Transparent Translation")tt0\#     TT0     Transparent Translation Register 0 ( MC68030 )
 \link("Transparent Translation")tt1\#     TT1     Transparent Translation Register 1 ( MC68030 )
 -----------------------------------------------------------------
-\link("Breakpoint Acknowledge Datenr")bad0\#    BAD0
-\link("Breakpoint Acknowledge Datenr")bad1\#    BAD1
-\link("Breakpoint Acknowledge Datenr")bad2\#    BAD2
-\link("Breakpoint Acknowledge Datenr")bad3\#    BAD3    Breakpoint Acknowledge Datenregister
-\link("Breakpoint Acknowledge Datenr")bad4\#    BAD4    ( MC68851 )
-\link("Breakpoint Acknowledge Datenr")bad5\#    BAD5
-\link("Breakpoint Acknowledge Datenr")bad6\#    BAD6
-\link("Breakpoint Acknowledge Datenr")bad7\#    BAD7
+\#bad0\#    BAD0
+\#bad1\#    BAD1
+\#bad2\#    BAD2
+\#bad3\#    BAD3    Breakpoint Acknowledge Datenregister
+\#bad4\#    BAD4    ( MC68851 )
+\#bad5\#    BAD5
+\#bad6\#    BAD6
+\#bad7\#    BAD7
 -----------------------------------------------------------------
-\link("Breakpoint Acknowledge Contro")bac0\#    BAC0
-\link("Breakpoint Acknowledge Contro")bac1\#    BAC1
-\link("Breakpoint Acknowledge Contro")bac2\#    BAC2
-\link("Breakpoint Acknowledge Contro")bac3\#    BAC3    Breakpoint Acknowledge Control Register
-\link("Breakpoint Acknowledge Contro")bac4\#    BAC4    ( MC68851 )
-\link("Breakpoint Acknowledge Contro")bac5\#    BAC5
-\link("Breakpoint Acknowledge Contro")bac6\#    BAC6
-\link("Breakpoint Acknowledge Contro")bac7\#    BAC7
+\#bac0\#    BAC0
+\#bac1\#    BAC1
+\#bac2\#    BAC2
+\#bac3\#    BAC3    Breakpoint Acknowledge Control Register
+\#bac4\#    BAC4    ( MC68851 )
+\#bac5\#    BAC5
+\#bac6\#    BAC6
+\#bac7\#    BAC7
 -----------------------------------------------------------------
 
 Querverweis: \#PMOVE\#, \#Register-Spezifikationen\#
 \end
 
 screen( "CPU Root Pointer",
-		sensitive("CRP") )
+        sensitive("CRP") )
 CRP - CPU Root Pointer                                MC68851, MC68030
 ----------------------------------------------------------------------
 
@@ -2039,7 +2039,7 @@ geschaltet ist.
 \end
 
 screen( "Supervisor Root Pointer",
-		sensitive("SRP") )
+        sensitive("SRP") )
 SRP - Supervisor Root Pointer                         MC68851, MC68030
 ----------------------------------------------------------------------
 
@@ -2050,7 +2050,7 @@ ist.
 \end
 
 screen( "DMA Root Pointer",
-		sensitive("DRP") )
+        sensitive("DRP") )
 DRP - DMA Root Pointer                                     Nur MC68851
 ----------------------------------------------------------------------
 
@@ -2145,7 +2145,7 @@ fÅr die \#AdreûÅbersetzung\#.
 \end
 
 screen( "Translation Control",
-		sensitive("TC") )
+        sensitive("TC") )
 TC - Translation Control Register                     MC68851, MC68030
 ----------------------------------------------------------------------
 
@@ -2173,7 +2173,7 @@ Das PMMU-Enable Bit des \#Translation Control\# Registers schaltet die
 \end
 
 screen( "Supervisior Root Pointer Enab",
-		"SRP Enable" )
+        "SRP Enable" )
 Supervisior Root Pointer Enable
 ----------------------------------------------------------------------
 
@@ -2231,7 +2231,7 @@ ausgelîst.
 \end
 
 screen( "TIx",
-		"Table Indices" )
+        "Table Indices" )
 Table Indices TIx
 ----------------------------------------------------------------------
 
@@ -2252,7 +2252,7 @@ ausgelîst.
 \end
 
 screen( "PMMU-Statusregister",
-		sensitive("PSR") )
+        sensitive("PSR") )
 PSR - PMMU-Statusregister                             MC68851, MC68030
 ----------------------------------------------------------------------
 
@@ -2319,7 +2319,7 @@ Task Aliases --------------------------------+
 \end
 
 screen( "Current Access Level",
-		sensitive("CAL") )
+        sensitive("CAL") )
 CAL - Current Access Level Register                            MC68851
 ----------------------------------------------------------------------
 
@@ -2330,7 +2330,7 @@ MC68020 wird CAL automatisch durch \#CALLM\# und \#RTM\# gesetzt.
 \end
 
 screen( "Validate Access Level",
-		sensitive("VAL") )
+        sensitive("VAL") )
 VAL - Validate Access Level Register                           MC68851
 ----------------------------------------------------------------------
 
@@ -2341,7 +2341,7 @@ geladen wird.
 \end
 
 screen( "Access Control",
-		sensitive("AC") )
+        sensitive("AC") )
 AC - Access Control Register                               Nur MC68851
 ----------------------------------------------------------------------
 
@@ -2352,8 +2352,8 @@ Descriptors.
 \end
 
 screen( "Transparent Translation",
-		sensitive("TT0"),
-		sensitive("TT1") )
+        sensitive("TT0"),
+        sensitive("TT1") )
 TTn - Transparent Translation Register 0 bzw. Register 1       MC68030
 ----------------------------------------------------------------------
 
@@ -2386,7 +2386,7 @@ Das TT0 und das TT1 sind 32 Bit breit und haben folgenden Aufbau:
 \end
 
 screen( "Logical Address Base",
-		"Logical Address Mask" )
+        "Logical Address Mask" )
 Logical Address Base / Mask
 ----------------------------------------------------------------------
 
@@ -2406,7 +2406,7 @@ gesetzt ) bzw. ausgeschaltet ( Flag gelîscht ).
 \end
 
 screen( "Read/Write",
-		"Read/Write Mask" )
+        "Read/Write Mask" )
 Read/Write (Mask)
 ----------------------------------------------------------------------
 
@@ -2417,7 +2417,7 @@ oder Lesezugriffe ( Read/Write-Flag gesetzt ) transparen öbersetzt.
 \end
 
 screen( "Function Code Base",
-		"Function Code Mask" )
+        "Function Code Mask" )
 Function Code Base / Mask
 ----------------------------------------------------------------------
 
@@ -2428,7 +2428,7 @@ tion Register ( \link("Transparent Translation")TTn\# verglichen.
 \end
 
 screen( "AdreûÅbersetzung",
-		"PMMU" )
+        "PMMU" )
 AdreûÅbersetzung mit der PMMU
 ----------------------------------------------------------------------
 
@@ -2483,7 +2483,7 @@ Adresse, PA fÅr physikalische Adresse:
 \end
 
 screen( "ATC",
-		"Address Translation Cache" )
+        "Address Translation Cache" )
 ATC - Address Translation Cache
 ------ ----------------------------------------------------------------
 
@@ -2623,15 +2623,16 @@ gefunden oder ein Tabellen  Index das Limit  Åbersteigt bzw. unter-
 schreitet, wird ein \#Busfehler\# ausgelîst.
 \end
 
-screen( "Breakpoint Acknowledge Datenr",
-		sensitive("BAD0"),
-		sensitive("BAD1"),
-		sensitive("BAD2"),
-		sensitive("BAD3"),
-		sensitive("BAD4"),
-		sensitive("BAD5"),
-		sensitive("BAD6"),
-		sensitive("BAD7") )
+screen( "Breakpoint Acknowledge Datenregister",
+        "BAD",
+        sensitive("BAD0"),
+        sensitive("BAD1"),
+        sensitive("BAD2"),
+        sensitive("BAD3"),
+        sensitive("BAD4"),
+        sensitive("BAD5"),
+        sensitive("BAD6"),
+        sensitive("BAD7") )
 BADn - Breakpoint Acknowledge Datenregister                Nur MC68851
 ----------------------------------------------------------------------
 
@@ -2648,20 +2649,20 @@ Querverweis:   \#Breakpoint Acknowledge Control Register\#
 \end
 
 screen( "Breakpoint Acknowledge Control Register",
-		sensitive("BAC0"),
-		sensitive("BAC1"),
-		sensitive("BAC2"),
-		sensitive("BAC3"),
-		sensitive("BAC4"),
-		sensitive("BAC5"),
-		sensitive("BAC6"),
-		sensitive("BAC7") )
+        sensitive("BAC0"),
+        sensitive("BAC1"),
+        sensitive("BAC2"),
+        sensitive("BAC3"),
+        sensitive("BAC4"),
+        sensitive("BAC5"),
+        sensitive("BAC6"),
+        sensitive("BAC7") )
 BACn - Breakpoint Acknowledge Control Register             Nur MC68851
 ----------------------------------------------------------------------
 
 BACn ( 0 <= n <= 7 )
 
-Die BAC-Register korrespondieren mit den entsprechenden \link("Breakpoint Acknowledge Datenr")BAD\#-
+Die BAC-Register korrespondieren mit den entsprechenden \#BAD\#-
 Registern. Wenn das oberste Bit (15) nicht gesetzt ist, wird beim
 Auslîsen eines Breakpoints mittels des \#BKPT\#-Befehls ein Bus-Fehler
 generiert. Die unteren 8 Bits geben an, nach dem wievieltem Male 
@@ -2672,7 +2673,7 @@ Querverweis:   \#Breakpoint Acknowledge Datenregister\#
 \end
 
 screen( "Exception",
-		"Exceptiontabelle" )
+        "Exceptiontabelle" )
 Die Exceptiontabelle der Motorola CPUs
 ----------------------------------------------------------------------
 
@@ -2691,7 +2692,7 @@ Vektor | Offset  | Bedeutung
      4 |      16 | \#Illegaler Befehl\#
      5 |      20 | \#Division durch 0\#
      6 |      24 | \#CHK\#-, \#CHK2\#-Befehle
-     7 |      28 | \#TRAPV\#-, \link("TRAPPL")TRAPcc\#, \#FTRAPcc\#, \#PTRAPcc\#-Befehle
+     7 |      28 | \#TRAPV\#-, \#TRAPcc\#, \#FTRAPcc\#, \#PTRAPcc\#-Befehle
      8 |      32 | \link("SUPER")Privilegsverletzung\#
      9 |      36 | \#Trace\#
     10 |      40 | \#Line-A-Vektor\#
@@ -2848,7 +2849,7 @@ Querverweis: \#Falscher Interrupt Vektor\# \#Interruptmaske\#
 \end
 
 screen( "BSUN",
-		"Branch/Set on Unordered" )
+        "Branch/Set on Unordered" )
 Branch/Set on Unordered                               MC68881, MC68040
 ----------------------------------------------------------------------
 
@@ -2864,8 +2865,8 @@ zeigt.
 \end
 
 screen( "Inexact Decimal Input",
-		"Inexact Operation",
-		"Inexact Result" )
+        "Inexact Operation",
+        "Inexact Result" )
 Inexact Result/Decimal Input                          MC68881, MC68040
 ----------------------------------------------------------------------
 
@@ -2882,7 +2883,7 @@ zeigt.
 \end
 
 screen( "Divide by Zero",
-		"Division durch 0.0" )
+        "Division durch 0.0" )
 Division durch 0.0                                    MC68881, MC68040
 ----------------------------------------------------------------------
 
@@ -2912,7 +2913,7 @@ zeigt.
 \end
 
 screen( "Operand Error",
-		"Operandenfehler" )
+        "Operandenfehler" )
 Operandenfehler                                       MC68881, MC68040
 ----------------------------------------------------------------------
 
@@ -3711,14 +3712,14 @@ Querverweis     \#ALINE\#
 \end
 
 screen( "Befehlssatz",
-		"MC68nnn",
-		sensitive("MC68000"),
-		sensitive("MC68010"),
-		sensitive("MC68020"),
-		sensitive("MC68030"),
-		sensitive("MC68040"),
-		sensitive("MC68851"),
-		sensitive("MC68881") )
+        "MC68nnn",
+        sensitive("MC68000"),
+        sensitive("MC68010"),
+        sensitive("MC68020"),
+        sensitive("MC68030"),
+        sensitive("MC68040"),
+        sensitive("MC68851"),
+        sensitive("MC68881") )
 Name            Select Instruction Set - AuswÑhlen des Befehlssatzes
 
 Syntax          MC68000
@@ -3900,18 +3901,18 @@ Querverweis     \#LIST\#, \#PAGE\#, \#TTL\#
 \end
 
 screen( "IFcc",
-		sensitive("IF"),
-		sensitive("IF1"),
-		sensitive("IF2"),
-		sensitive("IFB"),
-		sensitive("IFEQ"),
-		sensitive("IFF"),
-		sensitive("IFGE"),
-		sensitive("IFGT"),
-		sensitive("IFLE"),
-		sensitive("IFLT"),
-		sensitive("IFNB"),
-		sensitive("IFNE") )
+        sensitive("IF"),
+        sensitive("IF1"),
+        sensitive("IF2"),
+        sensitive("IFB"),
+        sensitive("IFEQ"),
+        sensitive("IFF"),
+        sensitive("IFGE"),
+        sensitive("IFGT"),
+        sensitive("IFLE"),
+        sensitive("IFLT"),
+        sensitive("IFNB"),
+        sensitive("IFNE") )
 Name            If Condition - Bedingte Assemblierung
 
 Syntax          IFcc expression
@@ -4060,7 +4061,7 @@ Beispiel        ...
 \end
 
 screen( "Makrodefinition",
-		sensitive("MACRO") )
+        sensitive("MACRO") )
 Name            Define Macro - Makrodefinition
 
 Syntax          MACRO name[.formal0] [[formal1],formal2...]
@@ -4395,7 +4396,7 @@ rekursionen vermieden.
 \end
 
 screen( "Makrorekursion",
-		"Rekursive Makroaufrufe" )
+        "Rekursive Makroaufrufe" )
 Rekursive Makroaufrufe
 ----------------------------------------------------------------------
 
@@ -4495,7 +4496,7 @@ Pure Assembler BefehlsÅbersicht
 \end
 
 screen( "Befehle, Transfer-",
-		"Transfer-Befehle" )
+        "Transfer-Befehle" )
 Transfer-Befehle im öberblick
 ----------------------------------------------------------------------
 
@@ -4520,7 +4521,7 @@ Transfer-Befehle im öberblick
 \end
 
 screen( "Arithmetische Befehle",
-		"Befehle, Arithmetische" )
+        "Befehle, Arithmetische" )
 Arithmetische Befehle im öberblick
 ----------------------------------------------------------------------
 
@@ -4554,7 +4555,7 @@ Arithmetische Befehle im öberblick
 \end
 
 screen( "Befehle, Logische",
-		"Logische Befehle" )
+        "Logische Befehle" )
 Logische Befehle im öberblick
 ----------------------------------------------------------------------
 
@@ -4568,8 +4569,8 @@ Logische Befehle im öberblick
 \end
 
 screen( "Befehle, Einzelbit-",
-		"Bit-Befehle",
-		"Einzelbit-Befehle" )
+        "Bit-Befehle",
+        "Einzelbit-Befehle" )
 Bit-Befehle im öberblick
 ----------------------------------------------------------------------
 
@@ -4589,9 +4590,9 @@ Bit-Befehle im öberblick
 \end
 
 screen( "Befehle, Bitschiebe-",
-		"Befehle, Rotier-",
-		"Bitschiebe- und Rotierbefehle",
-		"Rotierbefehle" )
+        "Befehle, Rotier-",
+        "Bitschiebe- und Rotierbefehle",
+        "Rotierbefehle" )
 Bitschiebe- und Rotierbefehle im öberblick
 ----------------------------------------------------------------------
 
@@ -4606,7 +4607,7 @@ Bitschiebe- und Rotierbefehle im öberblick
 \end
 
 screen( "Befehle, Programmstruktur-",
-		"Programmstruktur-Befehle" )
+        "Programmstruktur-Befehle" )
 Programmstruktur-Befehle im öberblick
 ----------------------------------------------------------------------
 
@@ -4634,12 +4635,12 @@ Programmstruktur-Befehle im öberblick
 \link("SCC")Scc\#     Setze ein Byte in AnhÑngigkeit von einer Bedingung
 \#STOP\#    Lade Status Register und stoppe ProgrammausfÅhrung
 \#TRAP\#    Gehe in Ausnahmebehandlung
-\link("TRAPPL")TRAPcc\#  Trap bei Bedingung                                   ( MC68020 )
+\#TRAPcc\#  Trap bei Bedingung                                   ( MC68020 )
 \#TRAPV\#   Trap bei öberlauf
 \end
 
 screen( "Befehle, Flieûkomma",
-		"Flieûkomma-Befehle" )
+        "Flieûkomma-Befehle" )
 Flieûkomma-Befehle im öberblick ( MC68040, MC68881 )
 ----------------------------------------------------------------------
 
@@ -4718,7 +4719,7 @@ Transfer- und Strukturbefehle:
 \end
 
 screen( "Befehle, Memory Managment",
-		"PMMU-Befehle" )
+        "PMMU-Befehle" )
 PMMU-Befehle im öberblick ( MC68030, MC68851 )
 ----------------------------------------------------------------------
 
@@ -4761,7 +4762,7 @@ dies dem Assembler mit der Direktive \#SUPER\# anzeigen.
 \end
 
 screen( "BefehlslÑnge",
-		"Verarbeitungszeit" )
+        "Verarbeitungszeit" )
 Die Verarbeitungszeit ist, wenn nichts anderes angegeben ist, die Anzahl 
 der Taktzyklen fÅr das Holen der Operanden, AusfÅhrung des Befehls, Ablegen 
 des Ergebnisses und Holen des nÑchsten Opcodes. Sie gelten nur fÅr den 
@@ -5175,7 +5176,7 @@ Querverweis: \#AND\#, \#ANDI\#, \#ANDI to CCR\#
 \end
 
 screen( sensitive("ASL"),
-		sensitive("LSL") )
+        sensitive("LSL") )
 ASL - Arithmetische Verschiebung nach links
 LSL - Logische Verschiebung nach links
 ----------------------------------------------------------------------
@@ -5292,19 +5293,19 @@ Querverweis: \#ASL\#, \#LSL\#, \#LSR\#
 \end
 
 screen( sensitive("BLT"),
-		sensitive("BMI"),
-		sensitive("BNE"),
-		sensitive("BPL"),
-		sensitive("BVC"),
-		sensitive("BVS"),
-		sensitive("BCC"),
-		sensitive("BCS"),
-		sensitive("BEQ"),
-		sensitive("BGE"),
-		sensitive("BGT"),
-		sensitive("BHI"),
-		sensitive("BLE"),
-		sensitive("BLS") )
+        sensitive("BMI"),
+        sensitive("BNE"),
+        sensitive("BPL"),
+        sensitive("BVC"),
+        sensitive("BVS"),
+        sensitive("BCC"),
+        sensitive("BCS"),
+        sensitive("BEQ"),
+        sensitive("BGE"),
+        sensitive("BGT"),
+        sensitive("BHI"),
+        sensitive("BLE"),
+        sensitive("BLS") )
 Bcc - Bedingte Verzweigung
 ----------------------------------------------------------------------
 
@@ -5605,7 +5606,7 @@ Querverweis: \#ILLEGAL\#
 \end
 
 screen( sensitive("BRA"),
-		sensitive("BT") )
+        sensitive("BT") )
 BRA - Verzweige immer
 BT
 ----------------------------------------------------------------------
@@ -6146,20 +6147,20 @@ Querverweis: \#CMP\#, \#CMPA\#, \#CMPI\#, \#CMPM\#
 \end
 
 screen( sensitive("DBVS"),
-		sensitive("DBCC"),
-		sensitive("DBCS"),
-		sensitive("DBEQ"),
-		sensitive("DBGE"),
-		sensitive("DBGT"),
-		sensitive("DBHI"),
-		sensitive("DBLE"),
-		sensitive("DBLS"),
-		sensitive("DBLT"),
-		sensitive("DBMI"),
-		sensitive("DBNE"),
-		sensitive("DBPL"),
-		sensitive("DBT"),
-		sensitive("DBVC") )
+        sensitive("DBCC"),
+        sensitive("DBCS"),
+        sensitive("DBEQ"),
+        sensitive("DBGE"),
+        sensitive("DBGT"),
+        sensitive("DBHI"),
+        sensitive("DBLE"),
+        sensitive("DBLS"),
+        sensitive("DBLT"),
+        sensitive("DBMI"),
+        sensitive("DBNE"),
+        sensitive("DBPL"),
+        sensitive("DBT"),
+        sensitive("DBVC") )
 DBcc - PrÅfe Bedingung, dekrementiere und verzweige
 ----------------------------------------------------------------------
 
@@ -6202,7 +6203,7 @@ Querverweis: \link("BLT")Bcc\#, \#BRA\#, \#DBRA\#, \#JMP\#
 \end
 
 screen( sensitive("DBF"),
-		sensitive("DBRA") )
+        sensitive("DBRA") )
 DBRA - Dekrementiere und verzweige
 DBF
 ----------------------------------------------------------------------
@@ -6237,7 +6238,7 @@ Querverweis: \link("BLT")Bcc\#, \#BRA\#, \link("DBVS")DBcc\#, \#JMP\#
 \end
 
 screen( sensitive("DIVS"),
-		sensitive("DIVSL") )
+        sensitive("DIVSL") )
 DIVS - Division mit Vorzeichen
 ----------------------------------------------------------------------
 
@@ -6292,7 +6293,7 @@ Querverweis: \#DIVU\#, \#MULS\#, \#MULU\#
 \end
 
 screen( sensitive("DIVU"),
-		sensitive("DIVUL") )
+        sensitive("DIVUL") )
 DIVU - Division ohne Vorzeichen
 ----------------------------------------------------------------------
 
@@ -6495,7 +6496,7 @@ Gruppe: \#Transfer-Befehle\#
 \end
 
 screen( sensitive("EXT"),
-		sensitive("EXTB") )
+        sensitive("EXTB") )
 EXT - Vorzeichenrichtige Erweiterung eines Datenregisters
 ----------------------------------------------------------------------
 
@@ -6650,7 +6651,7 @@ d(PC,Rx)  | 12,4
 
 Hiweis:
 LEA d(An), An sollte durch \#ADDQ\# #d, An ersetzt werden, wenn das
-Displacement im Bereich von 0 bis 7 liegt.
+Displacement im Bereich von 1 bis 8 liegt.
 
 Gruppe: \#Transfer-Befehle\#
 \end
@@ -6970,7 +6971,7 @@ Querverweis: \#MOVE\#, \#MOVE to CCR\#, \#MOVE from CCR\#, \#MOVE to SR\#,
 \end
 
 screen( "MOVE from USP",
-		"MOVE to USP" )
+        "MOVE to USP" )
 MOVE USP - öbertrage Inhalt des User Stack Pointers
 ----------------------------------------------------------------------
 
@@ -7140,7 +7141,7 @@ d(PC,Rx)  | 18+4n/18+8n,6 |
 
 Quelle    | Ziel
           +---------------+---------------+---------------
-          | d(An,Rx)      | $xxxx         | -(An)
+          | d(An,Rx)      | $xxxx         | $xxxxxxxx
 ----------+---------------+---------------+---------------
 Dn/An     | 14+4n/14+8n,6 | 12+4n/12+8n,6 | 16+4n/16+8n,8
 
@@ -8015,7 +8016,7 @@ Achtung: Dieser Befehl ist privilegiert, d.h. der Prozessor muû sich im
           
 Gruppe: \#Programmstruktur-Befehle\#
 
-Querverweis: \#TRAP\#, \#TRAPV\#, \link("TRAPPL")TRAPcc\#, \#RTD\#, \#RTM\#, \#RTR\#, \#RTS\#
+Querverweis: \#TRAP\#, \#TRAPV\#, \#TRAPcc\#, \#RTD\#, \#RTM\#, \#RTR\#, \#RTS\#
 \end
 
 screen( sensitive("RTM") )
@@ -8138,21 +8139,21 @@ Gruppe: \#Arithmetische Befehle\#
 \end
 
 screen( sensitive("SCC"),
-		sensitive("SCS"),
-		sensitive("SEQ"),
-		sensitive("SF"),
-		sensitive("SVC"),
-		sensitive("SGE"),
-		sensitive("SVS"),
-		sensitive("SGT"),
-		sensitive("SHI"),
-		sensitive("SLE"),
-		sensitive("SLS"),
-		sensitive("SLT"),
-		sensitive("SMI"),
-		sensitive("SNE"),
-		sensitive("SPL"),
-		sensitive("ST") )
+        sensitive("SCS"),
+        sensitive("SEQ"),
+        sensitive("SF"),
+        sensitive("SVC"),
+        sensitive("SGE"),
+        sensitive("SVS"),
+        sensitive("SGT"),
+        sensitive("SHI"),
+        sensitive("SLE"),
+        sensitive("SLS"),
+        sensitive("SLT"),
+        sensitive("SMI"),
+        sensitive("SNE"),
+        sensitive("SPL"),
+        sensitive("ST") )
 Scc - Setze ein Byte in AnhÑngigkeit von einer Bedingung
 ----------------------------------------------------------------------
 
@@ -8481,10 +8482,10 @@ Assembler Syntax: TAS <ea>
 
 Beschreibung:
 Das durch die effektive Adresse spezifizierte Byte wird getestet
-und und das Ergebnis im CCR abgelegt. Anschlieûend wird das obeste
-Bit des Zieloperanden gesetzt. Die Operation wird in einem einzigen 
-Read-Modify-Write Speicherzyklus ausgefÅhrt um Prozesskommunikation  
-Åber Semaphoren sicherzustellen.
+und das Ergebnis im CCR abgelegt. Anschlieûend wird das oberste
+Bit des Zieloperanden gesetzt. Die Operation wird in einem einzigen
+Read-Modify-Write Speicherzyklus ausgefÅhrt, um die Prozesskommuni-
+kation Åber Semaphoren sicherzustellen.
 
 Grîûe: Byte
 
@@ -8547,24 +8548,25 @@ BefehlslÑnge     :  2
 
 Gruppe: \#Programmstruktur-Befehle\#
 
-Querverweis: \#RTE\#, \link("TRAPPL")TRAPcc\#, \#TRAPV\#
+Querverweis: \#RTE\#, \#TRAPcc\#, \#TRAPV\#
 \end
 
-screen( sensitive("TRAPPL"),
-		sensitive("TRAPT"),
-		sensitive("TRAPVC"),
-		sensitive("TRAPVS"),
-		sensitive("TRAPCC"),
-		sensitive("TRAPCS"),
-		sensitive("TRAPEQ"),
-		sensitive("TRAPGE"),
-		sensitive("TRAPGT"),
-		sensitive("TRAPHI"),
-		sensitive("TRAPLE"),
-		sensitive("TRAPLS"),
-		sensitive("TRAPLT"),
-		sensitive("TRAPMI"),
-		sensitive("TRAPNE") )
+screen( "TRAPcc",
+        sensitive("TRAPCC"),
+        sensitive("TRAPCS"),
+        sensitive("TRAPEQ"),
+        sensitive("TRAPGE"),
+        sensitive("TRAPGT"),
+        sensitive("TRAPHI"),
+        sensitive("TRAPLE"),
+        sensitive("TRAPLS"),
+        sensitive("TRAPLT"),
+        sensitive("TRAPMI"),
+        sensitive("TRAPNE"),
+        sensitive("TRAPPL"),
+        sensitive("TRAPT"),
+        sensitive("TRAPVC"),
+        sensitive("TRAPVS") )
 TRAPcc - Trap bei Bedingung                                    MC68020
 ----------------------------------------------------------------------
 
@@ -8619,7 +8621,7 @@ BefehlslÑnge     : 2
           
 Gruppe: \#Programmstruktur-Befehle\#
 
-Querverweis: \#RTE\#, \#TRAP\#, \link("TRAPPL")TRAPcc\#
+Querverweis: \#RTE\#, \#TRAP\#, \#TRAPcc\#
 \end
 
 screen( sensitive("TST") )
@@ -8714,7 +8716,7 @@ Querverweis: \#PACK\#
 \end
 
 screen( "Definitionsmenge",
-		"Wertemenge" )
+        "Wertemenge" )
 Definitions- und Wertemenge
 ----------------------------------------------------------------------
 
@@ -8751,7 +8753,7 @@ Gruppe: \#Flieûkomma-Befehle\#
 \end
 
 screen( sensitive("FSABS"),
-		sensitive("FDABS") )
+        sensitive("FDABS") )
 FDABS - Absolutwert                                            MC68040
 FSABS
 ----------------------------------------------------------------------
@@ -8814,7 +8816,7 @@ Gruppe: \#Flieûkomma-Befehle\#
 \end
 
 screen( sensitive("FSADD"),
-		sensitive("FDADD") )
+        sensitive("FDADD") )
 FSADD - Flieûkommaaddition                                     MC68040
 FDADD
 ----------------------------------------------------------------------
@@ -8899,38 +8901,38 @@ Gruppe: \#Flieûkomma-Befehle\#
 \end
 
 screen( "FBcc",
-		sensitive("FBEQ"),
-		sensitive("FBF"),
-		sensitive("FBGE"),
-		sensitive("FBGL"),
-		sensitive("FBGLE"),
-		sensitive("FBGT"),
-		sensitive("FBLE"),
-		sensitive("FBLT"),
-		sensitive("FBNE"),
-		sensitive("FBNGE"),
-		sensitive("FBNGL"),
-		sensitive("FBNGLE"),
-		sensitive("FBNGT"),
-		sensitive("FBNLE"),
-		sensitive("FBNLT"),
-		sensitive("FBOGE"),
-		sensitive("FBOGL"),
-		sensitive("FBOGT"),
-		sensitive("FBOLE"),
-		sensitive("FBOLT"),
-		sensitive("FBOR"),
-		sensitive("FBSEQ"),
-		sensitive("FBSF"),
-		sensitive("FBSNE"),
-		sensitive("FBST"),
-		sensitive("FBT"),
-		sensitive("FBUEQ"),
-		sensitive("FBUGE"),
-		sensitive("FBUGT"),
-		sensitive("FBULE"),
-		sensitive("FBULT"),
-		sensitive("FBUN") )
+        sensitive("FBEQ"),
+        sensitive("FBF"),
+        sensitive("FBGE"),
+        sensitive("FBGL"),
+        sensitive("FBGLE"),
+        sensitive("FBGT"),
+        sensitive("FBLE"),
+        sensitive("FBLT"),
+        sensitive("FBNE"),
+        sensitive("FBNGE"),
+        sensitive("FBNGL"),
+        sensitive("FBNGLE"),
+        sensitive("FBNGT"),
+        sensitive("FBNLE"),
+        sensitive("FBNLT"),
+        sensitive("FBOGE"),
+        sensitive("FBOGL"),
+        sensitive("FBOGT"),
+        sensitive("FBOLE"),
+        sensitive("FBOLT"),
+        sensitive("FBOR"),
+        sensitive("FBSEQ"),
+        sensitive("FBSF"),
+        sensitive("FBSNE"),
+        sensitive("FBST"),
+        sensitive("FBT"),
+        sensitive("FBUEQ"),
+        sensitive("FBUGE"),
+        sensitive("FBUGT"),
+        sensitive("FBULE"),
+        sensitive("FBULT"),
+        sensitive("FBUN") )
 FBcc - Bedingte Verzweigung                           MC68881, MC68040
 ----------------------------------------------------------------------
 
@@ -9007,38 +9009,38 @@ Gruppe: \#Flieûkomma-Befehle\#
 \end
 
 screen( "FDBcc",
-		sensitive("FDBEQ"),
-		sensitive("FDBF"),
-		sensitive("FDBGE"),
-		sensitive("FDBGL"),
-		sensitive("FDBGLE"),
-		sensitive("FDBGT"),
-		sensitive("FDBLE"),
-		sensitive("FDBLT"),
-		sensitive("FDBNE"),
-		sensitive("FDBNGE"),
-		sensitive("FDBNGL"),
-		sensitive("FDBNGLE"),
-		sensitive("FDBNGT"),
-		sensitive("FDBNLE"),
-		sensitive("FDBNLT"),
-		sensitive("FDBOGE"),
-		sensitive("FDBOGL"),
-		sensitive("FDBOGT"),
-		sensitive("FDBOLE"),
-		sensitive("FDBOLT"),
-		sensitive("FDBOR"),
-		sensitive("FDBSEQ"),
-		sensitive("FDBSF"),
-		sensitive("FDBSNE"),
-		sensitive("FDBST"),
-		sensitive("FDBT"),
-		sensitive("FDBUEQ"),
-		sensitive("FDBUGE"),
-		sensitive("FDBUGT"),
-		sensitive("FDBULE"),
-		sensitive("FDBULT"),
-		sensitive("FDBUN") )
+        sensitive("FDBEQ"),
+        sensitive("FDBF"),
+        sensitive("FDBGE"),
+        sensitive("FDBGL"),
+        sensitive("FDBGLE"),
+        sensitive("FDBGT"),
+        sensitive("FDBLE"),
+        sensitive("FDBLT"),
+        sensitive("FDBNE"),
+        sensitive("FDBNGE"),
+        sensitive("FDBNGL"),
+        sensitive("FDBNGLE"),
+        sensitive("FDBNGT"),
+        sensitive("FDBNLE"),
+        sensitive("FDBNLT"),
+        sensitive("FDBOGE"),
+        sensitive("FDBOGL"),
+        sensitive("FDBOGT"),
+        sensitive("FDBOLE"),
+        sensitive("FDBOLT"),
+        sensitive("FDBOR"),
+        sensitive("FDBSEQ"),
+        sensitive("FDBSF"),
+        sensitive("FDBSNE"),
+        sensitive("FDBST"),
+        sensitive("FDBT"),
+        sensitive("FDBUEQ"),
+        sensitive("FDBUGE"),
+        sensitive("FDBUGT"),
+        sensitive("FDBULE"),
+        sensitive("FDBULT"),
+        sensitive("FDBUN") )
 FDBcc - PrÅfe Bedingung, dekrementiere und verzweige  MC68881, MC68040
 ----------------------------------------------------------------------
 
@@ -9081,7 +9083,7 @@ Gruppe: \#Flieûkomma-Befehle\#
 \end
 
 screen( sensitive("FSDIV"),
-		sensitive("FDDIV") )
+        sensitive("FDDIV") )
 FSDIV - Division                                               MC68040
 FDDIV
 ----------------------------------------------------------------------
@@ -9358,7 +9360,7 @@ Gruppe: \#Flieûkomma-Befehle\#
 \end
 
 screen( sensitive("FSMOVE"),
-		sensitive("FDMOVE") )
+        sensitive("FDMOVE") )
 FSMOVE - öbertrage Daten und runde                             MC68040
 FDMOVE
 ----------------------------------------------------------------------
@@ -9492,7 +9494,7 @@ Gruppe: \#Flieûkomma-Befehle\#
 \end
 
 screen( sensitive("FSMUL"),
-		sensitive("FDMUL") )
+        sensitive("FDMUL") )
 FDMUL - Multiplikation                                         MC68040
 FSMUL
 ----------------------------------------------------------------------
@@ -9535,7 +9537,7 @@ Gruppe: \#Flieûkomma-Befehle\#
 \end
 
 screen( sensitive("FSNEG"),
-		sensitive("FDNEG") )
+        sensitive("FDNEG") )
 FDNEG - Negation                                               MC68040
 FSNEG
 ----------------------------------------------------------------------
@@ -9661,38 +9663,38 @@ Gruppe: \#Flieûkomma-Befehle\#
 \end
 
 screen( "FScc",
-		sensitive("FSEQ"),
-		sensitive("FSF"),
-		sensitive("FSGE"),
-		sensitive("FSGL"),
-		sensitive("FSGLE"),
-		sensitive("FSGT"),
-		sensitive("FSLE"),
-		sensitive("FSLT"),
-		sensitive("FSNE"),
-		sensitive("FSNGE"),
-		sensitive("FSNGL"),
-		sensitive("FSNGLE"),
-		sensitive("FSNGT"),
-		sensitive("FSNLE"),
-		sensitive("FSNLT"),
-		sensitive("FSOGE"),
-		sensitive("FSOGL"),
-		sensitive("FSOGT"),
-		sensitive("FSOLE"),
-		sensitive("FSOLT"),
-		sensitive("FSOR"),
-		sensitive("FSSEQ"),
-		sensitive("FSSF"),
-		sensitive("FSSNE"),
-		sensitive("FSST"),
-		sensitive("FST"),
-		sensitive("FSUEQ"),
-		sensitive("FSUGE"),
-		sensitive("FSUGT"),
-		sensitive("FSULE"),
-		sensitive("FSULT"),
-		sensitive("FSUN") )
+        sensitive("FSEQ"),
+        sensitive("FSF"),
+        sensitive("FSGE"),
+        sensitive("FSGL"),
+        sensitive("FSGLE"),
+        sensitive("FSGT"),
+        sensitive("FSLE"),
+        sensitive("FSLT"),
+        sensitive("FSNE"),
+        sensitive("FSNGE"),
+        sensitive("FSNGL"),
+        sensitive("FSNGLE"),
+        sensitive("FSNGT"),
+        sensitive("FSNLE"),
+        sensitive("FSNLT"),
+        sensitive("FSOGE"),
+        sensitive("FSOGL"),
+        sensitive("FSOGT"),
+        sensitive("FSOLE"),
+        sensitive("FSOLT"),
+        sensitive("FSOR"),
+        sensitive("FSSEQ"),
+        sensitive("FSSF"),
+        sensitive("FSSNE"),
+        sensitive("FSST"),
+        sensitive("FST"),
+        sensitive("FSUEQ"),
+        sensitive("FSUGE"),
+        sensitive("FSUGT"),
+        sensitive("FSULE"),
+        sensitive("FSULT"),
+        sensitive("FSUN") )
 FScc - Setze Byte in AnhÑngigkeit von Bedingung       MC68881, MC68040
 ----------------------------------------------------------------------
 
@@ -9831,7 +9833,7 @@ Gruppe: \#Flieûkomma-Befehle\#
 \end
 
 screen( sensitive("FSSQRT"),
-		sensitive("FDSQRT") )
+        sensitive("FDSQRT") )
 FDSQRT - Quadratwurzel                                         MC68040
 FSSORT
 ----------------------------------------------------------------------
@@ -9874,7 +9876,7 @@ Gruppe: \#Flieûkomma-Befehle\#
 \end
 
 screen( sensitive("FSSUB"),
-		sensitive("FDSUB") )
+        sensitive("FDSUB") )
 FDSUB - Substraktion                                           MC68040
 FSSUB
 ----------------------------------------------------------------------
@@ -9958,38 +9960,38 @@ Gruppe: \#Flieûkomma-Befehle\#
 \end
 
 screen( "FTRAPcc",
-		sensitive("FTRAPEQ"),
-		sensitive("FTRAPF"),
-		sensitive("FTRAPGE"),
-		sensitive("FTRAPGL"),
-		sensitive("FTRAPGLE"),
-		sensitive("FTRAPGT"),
-		sensitive("FTRAPLE"),
-		sensitive("FTRAPLT"),
-		sensitive("FTRAPNE"),
-		sensitive("FTRAPNGE"),
-		sensitive("FTRAPNGL"),
-		sensitive("FTRAPNGLE"),
-		sensitive("FTRAPNGT"),
-		sensitive("FTRAPNLE"),
-		sensitive("FTRAPNLT"),
-		sensitive("FTRAPOGE"),
-		sensitive("FTRAPOGL"),
-		sensitive("FTRAPOGT"),
-		sensitive("FTRAPOLE"),
-		sensitive("FTRAPOLT"),
-		sensitive("FTRAPOR"),
-		sensitive("FTRAPSEQ"),
-		sensitive("FTRAPSF"),
-		sensitive("FTRAPSNE"),
-		sensitive("FTRAPST"),
-		sensitive("FTRAPT"),
-		sensitive("FTRAPUEQ"),
-		sensitive("FTRAPUGE"),
-		sensitive("FTRAPUGT"),
-		sensitive("FTRAPULE"),
-		sensitive("FTRAPULT"),
-		sensitive("FTRAPUN") )
+        sensitive("FTRAPEQ"),
+        sensitive("FTRAPF"),
+        sensitive("FTRAPGE"),
+        sensitive("FTRAPGL"),
+        sensitive("FTRAPGLE"),
+        sensitive("FTRAPGT"),
+        sensitive("FTRAPLE"),
+        sensitive("FTRAPLT"),
+        sensitive("FTRAPNE"),
+        sensitive("FTRAPNGE"),
+        sensitive("FTRAPNGL"),
+        sensitive("FTRAPNGLE"),
+        sensitive("FTRAPNGT"),
+        sensitive("FTRAPNLE"),
+        sensitive("FTRAPNLT"),
+        sensitive("FTRAPOGE"),
+        sensitive("FTRAPOGL"),
+        sensitive("FTRAPOGT"),
+        sensitive("FTRAPOLE"),
+        sensitive("FTRAPOLT"),
+        sensitive("FTRAPOR"),
+        sensitive("FTRAPSEQ"),
+        sensitive("FTRAPSF"),
+        sensitive("FTRAPSNE"),
+        sensitive("FTRAPST"),
+        sensitive("FTRAPT"),
+        sensitive("FTRAPUEQ"),
+        sensitive("FTRAPUGE"),
+        sensitive("FTRAPUGT"),
+        sensitive("FTRAPULE"),
+        sensitive("FTRAPULT"),
+        sensitive("FTRAPUN") )
 FTRAPcc - Trap bei Bedingung                          MC68881, MC68040
 ----------------------------------------------------------------------
 
@@ -10045,22 +10047,22 @@ Gruppe: \#Flieûkomma-Befehle\#
 \end
 
 screen( "PBcc",
-		sensitive("PBAC"),
-		sensitive("PBAS"),
-		sensitive("PBBC"),
-		sensitive("PBBS"),
-		sensitive("PBCS"),
-		sensitive("PBGC"),
-		sensitive("PBGS"),
-		sensitive("PBIC"),
-		sensitive("PBIS"),
-		sensitive("PBLC"),
-		sensitive("PBLS"),
-		sensitive("PBSC"),
-		sensitive("PBSS"),
-		sensitive("PBWC"),
-		sensitive("PBWS"),
-		sensitive("PBCC") )
+        sensitive("PBAC"),
+        sensitive("PBAS"),
+        sensitive("PBBC"),
+        sensitive("PBBS"),
+        sensitive("PBCC"),
+        sensitive("PBCS"),
+        sensitive("PBGC"),
+        sensitive("PBGS"),
+        sensitive("PBIC"),
+        sensitive("PBIS"),
+        sensitive("PBLC"),
+        sensitive("PBLS"),
+        sensitive("PBSC"),
+        sensitive("PBSS"),
+        sensitive("PBWC"),
+        sensitive("PBWS") )
 PBcc - Bedingte Verzweigung                                    MC68851
 ----------------------------------------------------------------------
 
@@ -10079,22 +10081,22 @@ Gruppe: \#PMMU-Befehle\#
 \end
 
 screen( "PDBcc",
-		sensitive("PDBAC"),
-		sensitive("PDBAS"),
-		sensitive("PDBBC"),
-		sensitive("PDBBS"),
-		sensitive("PDBCS"),
-		sensitive("PDBGC"),
-		sensitive("PDBGS"),
-		sensitive("PDBIC"),
-		sensitive("PDBIS"),
-		sensitive("PDBLC"),
-		sensitive("PDBLS"),
-		sensitive("PDBSC"),
-		sensitive("PDBSS"),
-		sensitive("PDBWC"),
-		sensitive("PDBWS"),
-		sensitive("PDBCC") )
+        sensitive("PDBAC"),
+        sensitive("PDBAS"),
+        sensitive("PDBBC"),
+        sensitive("PDBBS"),
+        sensitive("PDBCC"),
+        sensitive("PDBCS"),
+        sensitive("PDBGC"),
+        sensitive("PDBGS"),
+        sensitive("PDBIC"),
+        sensitive("PDBIS"),
+        sensitive("PDBLC"),
+        sensitive("PDBLS"),
+        sensitive("PDBSC"),
+        sensitive("PDBSS"),
+        sensitive("PDBWC"),
+        sensitive("PDBWS") )
 PDBcc - PrÅfe Bedingung, dekrementiere und verzweige           MC68851
 ----------------------------------------------------------------------
 
@@ -10120,10 +10122,10 @@ Gruppe: \#PMMU-Befehle\#
 \end
 
 screen( sensitive("PFLUSH"),
-		sensitive("PFLUSH.N"),
-		sensitive("PFLUSHA"),
-		sensitive("PFLUSHA.N"),
-		sensitive("PFLUSHS") )
+        sensitive("PFLUSH.N"),
+        sensitive("PFLUSHA"),
+        sensitive("PFLUSHA.N"),
+        sensitive("PFLUSHS") )
 PFLUSH - Lîsche Address Translation Cache              MC68030/MC68851
 ----------------------------------------------------------------------
 
@@ -10153,8 +10155,8 @@ Gruppe: \#PMMU-Befehle\#
 \end
 
 screen( "PLOAD",
-		sensitive("PLOADR"),
-		sensitive("PLOADW") )
+        sensitive("PLOADR"),
+        sensitive("PLOADW") )
 PLOAD - Lade Address Translation Cache                 MC68030/MC68851
 ----------------------------------------------------------------------
 
@@ -10177,7 +10179,7 @@ Gruppe: \#PMMU-Befehle\#
 \end
 
 screen( sensitive("PMOVE"),
-		sensitive("PMOVEFD") )
+        sensitive("PMOVEFD") )
 PMOVE - öbertrage Daten in/aus einem PMMU-Register     MC68030/MC68851
 ----------------------------------------------------------------------
 
@@ -10240,22 +10242,22 @@ Gruppe: \#PMMU-Befehle\#
 \end
 
 screen( "PScc",
-		sensitive("PSAC"),
-		sensitive("PSAS"),
-		sensitive("PSBC"),
-		sensitive("PSBS"),
-		sensitive("PSCC"),
-		sensitive("PSCS"),
-		sensitive("PSGC"),
-		sensitive("PSGS"),
-		sensitive("PSIC"),
-		sensitive("PSIS"),
-		sensitive("PSLC"),
-		sensitive("PSLS"),
-		sensitive("PSSC"),
-		sensitive("PSSS"),
-		sensitive("PSWC"),
-		sensitive("PSWS") )
+        sensitive("PSAC"),
+        sensitive("PSAS"),
+        sensitive("PSBC"),
+        sensitive("PSBS"),
+        sensitive("PSCC"),
+        sensitive("PSCS"),
+        sensitive("PSGC"),
+        sensitive("PSGS"),
+        sensitive("PSIC"),
+        sensitive("PSIS"),
+        sensitive("PSLC"),
+        sensitive("PSLS"),
+        sensitive("PSSC"),
+        sensitive("PSSS"),
+        sensitive("PSWC"),
+        sensitive("PSWS") )
 PScc - Setze ein Byte in AnhÑngigkeit von einer Bedingung      MC68851
 ----------------------------------------------------------------------
 
@@ -10269,8 +10271,8 @@ Gruppe: \#PMMU-Befehle\#
 \end
 
 screen( "PTEST",
-		sensitive("PTESTR"),
-		sensitive("PTESTW") )
+        sensitive("PTESTR"),
+        sensitive("PTESTW") )
 PTEST - PrÅfe logische Adresse                         MC68030/MC68851
 ----------------------------------------------------------------------
 
@@ -10304,22 +10306,22 @@ Gruppe: \#PMMU-Befehle\#
 \end
 
 screen( "PTRAPcc",
-		sensitive("PTRAPAC"),
-		sensitive("PTRAPAS"),
-		sensitive("PTRAPBC"),
-		sensitive("PTRAPBS"),
-		sensitive("PTRAPCS"),
-		sensitive("PTRAPGC"),
-		sensitive("PTRAPGS"),
-		sensitive("PTRAPIC"),
-		sensitive("PTRAPIS"),
-		sensitive("PTRAPLC"),
-		sensitive("PTRAPLS"),
-		sensitive("PTRAPSC"),
-		sensitive("PTRAPSS"),
-		sensitive("PTRAPWC"),
-		sensitive("PTRAPWS"),
-		sensitive("PTRAPCC") )
+        sensitive("PTRAPAC"),
+        sensitive("PTRAPAS"),
+        sensitive("PTRAPBC"),
+        sensitive("PTRAPBS"),
+        sensitive("PTRAPCC"),
+        sensitive("PTRAPCS"),
+        sensitive("PTRAPGC"),
+        sensitive("PTRAPGS"),
+        sensitive("PTRAPIC"),
+        sensitive("PTRAPIS"),
+        sensitive("PTRAPLC"),
+        sensitive("PTRAPLS"),
+        sensitive("PTRAPSC"),
+        sensitive("PTRAPSS"),
+        sensitive("PTRAPWC"),
+        sensitive("PTRAPWS") )
 PTRAPcc - Trap bei Bedingung                                   MC68851
 ----------------------------------------------------------------------
 

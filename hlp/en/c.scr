@@ -148,7 +148,7 @@ See also \#typedef\#, \#struct\#, and \#union\#.
 \end
 
 screen( "global",
-		"Storage Classes" )
+        "Storage Classes" )
 Storage Classes
 ----------------------------------------------------------------------
 Determine where \link("Variables")variables\# and \link("Functions")functions\# are to be stored in RAM.
@@ -960,9 +960,9 @@ Examples:
 \end
 
 screen( capsensitive("argv"),
-		capsensitive("argc"),
-		capsensitive("envp"),
-		capsensitive("main") )
+        capsensitive("argc"),
+        capsensitive("envp"),
+        capsensitive("main") )
 main()
 ----------------------------------------------------------------------
 Function main() is called by \link("%%GLOBAL%%")PCSTART\#, \link("%%GLOBAL%%")PCXSTART\# or \link("%%GLOBAL%%")PCVSTART\#.
@@ -1003,7 +1003,7 @@ Note: Calling \link("%%GLOBAL%%")Fsfirst\#() will overwrite the command line!
 \end
 
 screen( "Variable Argument Lists",
-		sensitive("...") )
+        sensitive("...") )
 Variable Argument Lists
 ----------------------------------------------------------------------
 ... allow you to define functions where the number and type of the
@@ -1249,14 +1249,14 @@ See also \#Preprocessor\#, \#Names\#, \##undef\#, and \#Predefined Macros\#.
 \end
 
 screen( "Predefined Macros",
-		capsensitive("__DATE__"),
-		capsensitive("__FILE__"),
-		capsensitive("__LINE__"),
-		capsensitive("__PUREC__"),
-		capsensitive("__STDC__"),
-		capsensitive("__TIME__"),
-		capsensitive("__TOS__"),
-		capsensitive("__TURBOC__") )
+        capsensitive("__DATE__"),
+        capsensitive("__FILE__"),
+        capsensitive("__LINE__"),
+        capsensitive("__PUREC__"),
+        capsensitive("__STDC__"),
+        capsensitive("__TIME__"),
+        capsensitive("__TOS__"),
+        capsensitive("__TURBOC__") )
 Pure C Predefined Macros
 ----------------------------------------------------------------------
 __LINE__    current line number.
@@ -1472,8 +1472,8 @@ statements to prevent overlapping execution:
 \end
 
 screen( capsensitive("case"),
-		capsensitive("default"),
-		capsensitive("switch") )
+        capsensitive("default"),
+        capsensitive("switch") )
 switch / case / default
 ----------------------------------------------------------------------
 \#Syntax\#:
@@ -1628,7 +1628,7 @@ See also \#Constants\# and \#Variables\#.
 \end
 
 screen( capsensitive("else"),
-		capsensitive("if") )
+        capsensitive("if") )
 if / else
 ----------------------------------------------------------------------
 \#Syntax\#:
@@ -2121,8 +2121,8 @@ However, it should be obvious from the examples when a [ ] is just a
 \end
 
 screen( capsensitive("far"),
-		capsensitive("huge"),
-		capsensitive("near") )
+        capsensitive("huge"),
+        capsensitive("near") )
 \#Pointers\#: far, huge, near
 ----------------------------------------------------------------------
 ... are ignored by Pure C.

@@ -1,17 +1,17 @@
 
 
-screen( capsensitive("OBJECT"),
-		capsensitive("ob_flags"),
-		capsensitive("ob_head"),
-		capsensitive("ob_height"),
-		capsensitive("ob_next"),
-		capsensitive("ob_spec"),
-		capsensitive("ob_state"),
-		capsensitive("ob_tail"),
-		capsensitive("ob_type"),
-		capsensitive("ob_width"),
-		capsensitive("ob_x"),
-		capsensitive("ob_y") )
+screen( capsensitive("ob_height"),
+        capsensitive("ob_next"),
+        capsensitive("ob_spec"),
+        capsensitive("ob_state"),
+        capsensitive("ob_tail"),
+        capsensitive("ob_type"),
+        capsensitive("ob_width"),
+        capsensitive("ob_x"),
+        capsensitive("OBJECT"),
+        capsensitive("ob_y"),
+        capsensitive("ob_flags"),
+        capsensitive("ob_head") )
 Die Objektstruktur:
 ===================
 
@@ -34,17 +34,17 @@ typedef struct
 \end
 
 screen( capsensitive("TEDINFO"),
-		capsensitive("te_color"),
-		capsensitive("te_font"),
-		capsensitive("te_junk1"),
-		capsensitive("te_junk2"),
-		capsensitive("te_just"),
-		capsensitive("te_ptext"),
-		capsensitive("te_ptmplt"),
-		capsensitive("te_pvalid"),
-		capsensitive("te_thickness"),
-		capsensitive("te_tmplen"),
-		capsensitive("te_txtlen") )
+        capsensitive("te_color"),
+        capsensitive("te_font"),
+        capsensitive("te_junk1"),
+        capsensitive("te_junk2"),
+        capsensitive("te_just"),
+        capsensitive("te_ptext"),
+        capsensitive("te_ptmplt"),
+        capsensitive("te_pvalid"),
+        capsensitive("te_thickness"),
+        capsensitive("te_tmplen"),
+        capsensitive("te_txtlen") )
 Die Tedinfostruktur:
 ====================
 
@@ -72,12 +72,12 @@ Querverweis: \#OBJECT\#
 \end
 
 screen( capsensitive("BITBLK"),
-		capsensitive("bi_color"),
-		capsensitive("bi_hl"),
-		capsensitive("bi_pdata"),
-		capsensitive("bi_wb"),
-		capsensitive("bi_x"),
-		capsensitive("bi_y") )
+        capsensitive("bi_color"),
+        capsensitive("bi_hl"),
+        capsensitive("bi_pdata"),
+        capsensitive("bi_wb"),
+        capsensitive("bi_x"),
+        capsensitive("bi_y") )
 Die Bitblkstruktur:
 ===================
 
@@ -99,21 +99,21 @@ typedef struct
 Querverweis: \#OBJECT\#
 \end
 
-screen( capsensitive("ICONBLK"),
-		capsensitive("ib_char"),
-		capsensitive("ib_hicon"),
-		capsensitive("ib_htext"),
-		capsensitive("ib_pdata"),
-		capsensitive("ib_pmask"),
-		capsensitive("ib_ptext"),
-		capsensitive("ib_wicon"),
-		capsensitive("ib_wtext"),
-		capsensitive("ib_xchar"),
-		capsensitive("ib_xicon"),
-		capsensitive("ib_xtext"),
-		capsensitive("ib_ychar"),
-		capsensitive("ib_yicon"),
-		capsensitive("ib_ytext") )
+screen( capsensitive("ib_char"),
+        capsensitive("ib_hicon"),
+        capsensitive("ib_htext"),
+        capsensitive("ib_pdata"),
+        capsensitive("ib_pmask"),
+        capsensitive("ib_ptext"),
+        capsensitive("ib_wicon"),
+        capsensitive("ib_wtext"),
+        capsensitive("ib_xchar"),
+        capsensitive("ib_xicon"),
+        capsensitive("ib_xtext"),
+        capsensitive("ib_ychar"),
+        capsensitive("ib_yicon"),
+        capsensitive("ib_ytext"),
+        capsensitive("ICONBLK") )
 Die Iconblkstruktur:
 ====================
 
@@ -148,9 +148,9 @@ typedef struct
 Querverweis: \#OBJECT\#
 \end
 
-screen( capsensitive("USERBLK"),
-		capsensitive("ub_code"),
-		capsensitive("ub_parm") )
+screen( capsensitive("ub_code"),
+        capsensitive("ub_parm"),
+        capsensitive("USERBLK") )
 Die Userblockstruktur:
 ======================
 
@@ -173,20 +173,20 @@ auf eine \#PARMBLK\#-struktur Åbergeben.
 Querverweis: \#OBJECT\#
 \end
 
-screen( capsensitive("pb_wc"),
-		capsensitive("pb_x"),
-		capsensitive("PARMBLK"),
-		capsensitive("pb_xc"),
-		capsensitive("pb_y"),
-		capsensitive("pb_yc"),
-		capsensitive("pb_currstate"),
-		capsensitive("pb_h"),
-		capsensitive("pb_hc"),
-		capsensitive("pb_obj"),
-		capsensitive("pb_parm"),
-		capsensitive("pb_prevstate"),
-		capsensitive("pb_tree"),
-		capsensitive("pb_w") )
+screen( capsensitive("PARMBLK"),
+        capsensitive("pb_currstate"),
+        capsensitive("pb_h"),
+        capsensitive("pb_hc"),
+        capsensitive("pb_obj"),
+        capsensitive("pb_parm"),
+        capsensitive("pb_prevstate"),
+        capsensitive("pb_tree"),
+        capsensitive("pb_w"),
+        capsensitive("pb_wc"),
+        capsensitive("pb_x"),
+        capsensitive("pb_xc"),
+        capsensitive("pb_y"),
+        capsensitive("pb_yc") )
 Die Paramblkstruktur:
 =====================
 
@@ -212,13 +212,13 @@ Die Clipping-Koordinaten sind die, bei einem \#objc_draw\# und
 \end
 
 screen( capsensitive("MFORM"),
-		capsensitive("mf_bg"),
-		capsensitive("mf_data"),
-		capsensitive("mf_fg"),
-		capsensitive("mf_mask"),
-		capsensitive("mf_nplanes"),
-		capsensitive("mf_xhot"),
-		capsensitive("mf_yhot") )
+        capsensitive("mf_bg"),
+        capsensitive("mf_data"),
+        capsensitive("mf_fg"),
+        capsensitive("mf_mask"),
+        capsensitive("mf_nplanes"),
+        capsensitive("mf_xhot"),
+        capsensitive("mf_yhot") )
 Die Struktur MFORM legt das Aussehen des Mauszeigers fest.
 
 typedef struct mfstr
@@ -260,15 +260,15 @@ Querverweis: \#vro_cpyfm\#, \#vrt_cpyfm\#, \#vr_trnfm\#
 \end
 
 screen( capsensitive("addrin"),
-		capsensitive("addrout"),
-		capsensitive("contrl"),
-		capsensitive("GEMPARBLK"),
-		capsensitive("global"),
-		capsensitive("intin"),
-		capsensitive("intout"),
-		capsensitive("ptsin"),
-		capsensitive("ptsout"),
-		capsensitive("_GemParBlk") )
+        capsensitive("addrout"),
+        capsensitive("contrl"),
+        capsensitive("GEMPARBLK"),
+        capsensitive("global"),
+        capsensitive("intin"),
+        capsensitive("intout"),
+        capsensitive("ptsin"),
+        capsensitive("ptsout"),
+        capsensitive("_GemParBlk") )
 Name            Gemparameterblockpointer
 
 Deklaration:    extern  GEMPARBLK _GemParBlk;
@@ -319,10 +319,10 @@ typedef struct orect
 \end
 
 screen( capsensitive("GRECT"),
-		capsensitive("g_h"),
-		capsensitive("g_w"),
-		capsensitive("g_x"),
-		capsensitive("g_y") )
+        capsensitive("g_h"),
+        capsensitive("g_w"),
+        capsensitive("g_x"),
+        capsensitive("g_y") )
 GRECT ist in aes.h wie folgt definiert:
 
 typedef struct
@@ -335,13 +335,13 @@ typedef struct
 \end
 
 screen( capsensitive("bfobspec"),
-		capsensitive("character"),
-		capsensitive("framecol"),
-		capsensitive("framesize"),
-		capsensitive("fillpattern"),
-		capsensitive("interiorcol"),
-		capsensitive("textcol"),
-		capsensitive("textmode") )
+        capsensitive("character"),
+        capsensitive("framecol"),
+        capsensitive("framesize"),
+        capsensitive("fillpattern"),
+        capsensitive("interiorcol"),
+        capsensitive("textcol"),
+        capsensitive("textmode") )
 bfobspec ist in aes.h wie folgt definiert:
 
 typedef struct
@@ -359,14 +359,14 @@ Querverweis: \#OBSPEC\#
 \end
 
 screen( capsensitive("bitblk"),
-		capsensitive("free_string"),
-		capsensitive("index"),
-		capsensitive("indirect"),
-		capsensitive("iconblk"),
-		capsensitive("OBSPEC"),
-		capsensitive("obspec"),
-		capsensitive("tedinfo"),
-		capsensitive("userblk") )
+        capsensitive("free_string"),
+        capsensitive("iconblk"),
+        capsensitive("index"),
+        capsensitive("indirect"),
+        capsensitive("OBSPEC"),
+        capsensitive("obspec"),
+        capsensitive("tedinfo"),
+        capsensitive("userblk") )
 Da ob_spec je nach Typ des Objekts verschiede Bedeutungen und Datentypen
 haben kann, erhielt es den TYP OBSPEC.
 
@@ -431,12 +431,12 @@ typedef struct rshdr
 Mit dieser Structur wird der Header eines Resourcefiles beschrieben.
 \end
 
-screen( capsensitive("ff_attrib"),
-		capsensitive("ff_fdate"),
-		capsensitive("ff_fsize"),
-		capsensitive("ff_ftime"),
-		capsensitive("ff_name"),
-		capsensitive("ffblk") )
+screen( capsensitive("ffblk"),
+        capsensitive("ff_attrib"),
+        capsensitive("ff_fdate"),
+        capsensitive("ff_fsize"),
+        capsensitive("ff_ftime"),
+        capsensitive("ff_name") )
 ffblk ist in ext.h wie folgt definiert:
 
 struct ffblk
@@ -452,10 +452,10 @@ struct ffblk
 Querverweis: \#findfirst\#, \#findnext\#
 \end
 
-screen( capsensitive("da_day"),
-		capsensitive("da_mon"),
-		capsensitive("da_year"),
-		capsensitive("date") )
+screen( capsensitive("date"),
+        capsensitive("da_day"),
+        capsensitive("da_mon"),
+        capsensitive("da_year") )
 date ist in ext.h wie folgt definiert:
 
 struct date
@@ -469,10 +469,10 @@ Querverweis: \#getdate\#, \#setdate\#
 \end
 
 screen( "time, struct time",
-		capsensitive("ti_sec"),
-		capsensitive("ti_hour"),
-		capsensitive("ti_hund"),
-		capsensitive("ti_min") )
+        capsensitive("ti_hour"),
+        capsensitive("ti_hund"),
+        capsensitive("ti_min"),
+        capsensitive("ti_sec") )
 time ist in ext.h wie folgt definiert:
 
 struct time
@@ -486,11 +486,11 @@ struct time
 Querverweis: \#gettime\#, \#settime\#
 \end
 
-screen( capsensitive("df_avail"),
-		capsensitive("df_bsec"),
-		capsensitive("df_sclus"),
-		capsensitive("df_total"),
-		capsensitive("dfree") )
+screen( capsensitive("dfree"),
+        capsensitive("df_avail"),
+        capsensitive("df_bsec"),
+        capsensitive("df_sclus"),
+        capsensitive("df_total") )
 dfree ist in ext.h wie folgt definiert:
 
 struct dfree
@@ -504,13 +504,13 @@ struct dfree
 Querverweis: \#getdfree\#
 \end
 
-screen( capsensitive("ft_day"),
-		capsensitive("ft_hour"),
-		capsensitive("ft_min"),
-		capsensitive("ft_month"),
-		capsensitive("ft_tsec"),
-		capsensitive("ft_year"),
-		capsensitive("ftime") )
+screen( capsensitive("ftime"),
+        capsensitive("ft_day"),
+        capsensitive("ft_hour"),
+        capsensitive("ft_min"),
+        capsensitive("ft_month"),
+        capsensitive("ft_tsec"),
+        capsensitive("ft_year") )
 ftime ist in ext.h wie folgt definiert:
 
 struct ftime
@@ -526,18 +526,18 @@ struct ftime
 Querverweis: \#getftime\#, \#setftime\#
 \end
 
-screen( capsensitive("st_atime"),
-		capsensitive("st_ctime"),
-		capsensitive("st_dev"),
-		capsensitive("st_gid"),
-		capsensitive("st_ino"),
-		capsensitive("st_mode"),
-		capsensitive("st_mtime"),
-		capsensitive("st_nlink"),
-		capsensitive("st_rdev"),
-		capsensitive("st_size"),
-		capsensitive("st_uid"),
-		capsensitive("stat, struct stat") )
+screen( capsensitive("stat, struct stat"),
+        capsensitive("st_atime"),
+        capsensitive("st_ctime"),
+        capsensitive("st_dev"),
+        capsensitive("st_gid"),
+        capsensitive("st_ino"),
+        capsensitive("st_mode"),
+        capsensitive("st_mtime"),
+        capsensitive("st_nlink"),
+        capsensitive("st_rdev"),
+        capsensitive("st_size"),
+        capsensitive("st_uid") )
 stat ist in ext.h wie folgt definiert:
 
 struct stat
@@ -559,11 +559,11 @@ Querverweis: \#stat\#, \#fstat\#
 \end
 
 screen( capsensitive("arg1"),
-		capsensitive("arg2"),
-		capsensitive("exception"),
-		capsensitive("name"),
-		capsensitive("retval"),
-		capsensitive("type") )
+        capsensitive("arg2"),
+        capsensitive("exception"),
+        capsensitive("name"),
+        capsensitive("retval"),
+        capsensitive("type") )
 exception ist in math.h wie folgt definiert:
 
 struct exception
@@ -631,8 +631,8 @@ Querverweis: \#ctime\#, \#gmtime\#, \#localtime\#, \#time\#, \#mktime\#, \#difft
 \end
 
 screen( capsensitive("div_t"),
-		capsensitive("quot"),
-		capsensitive("rem") )
+        capsensitive("quot"),
+        capsensitive("rem") )
 div_t ist in stdlib.h wie folgt definiert:
 
 typedef struct
@@ -645,9 +645,9 @@ Querverweis: \#ldiv_t\#
 \end
 
 screen( capsensitive("actuallen"),
-		capsensitive("buffer"),
-		capsensitive("LINE"),
-		capsensitive("maxlen") )
+        capsensitive("buffer"),
+        capsensitive("LINE"),
+        capsensitive("maxlen") )
 LINE ist in tos.h wie folgt definiert:
 
 typedef struct
@@ -661,11 +661,11 @@ Querverweis: \#Cconrs\#
 \end
 
 screen( capsensitive("DTA"),
-		capsensitive("d_attrib"),
-		capsensitive("d_date"),
-		capsensitive("d_fname"),
-		capsensitive("d_length"),
-		capsensitive("d_time") )
+        capsensitive("d_attrib"),
+        capsensitive("d_date"),
+        capsensitive("d_fname"),
+        capsensitive("d_length"),
+        capsensitive("d_time") )
 DTA ist in tos.h wie folgt definiert:
 
 typedef struct
@@ -682,10 +682,10 @@ Querverweis    \#Fsetdta\#   \#Fgetdta\#
 \end
 
 screen( capsensitive("b_clsiz"),
-		capsensitive("b_free"),
-		capsensitive("b_secsiz"),
-		capsensitive("b_total"),
-		capsensitive("DISKINFO") )
+        capsensitive("b_free"),
+        capsensitive("b_secsiz"),
+        capsensitive("b_total"),
+        capsensitive("DISKINFO") )
 DISKINFO ist in tos.h wie folgt definiert:
 
 typedef struct
@@ -699,13 +699,13 @@ typedef struct
 Querverweis    \#Dfree\#
 \end
 
-screen( capsensitive("IOREC"),
-		capsensitive("ibuf"),
-		capsensitive("ibufhd"),
-		capsensitive("ibufhi"),
-		capsensitive("ibuflow"),
-		capsensitive("ibufsiz"),
-		capsensitive("ibuftl") )
+screen( capsensitive("ibuf"),
+        capsensitive("ibufhd"),
+        capsensitive("ibufhi"),
+        capsensitive("ibuflow"),
+        capsensitive("ibufsiz"),
+        capsensitive("ibuftl"),
+        capsensitive("IOREC") )
 IOREC ist in tos.h wie folgt definiert:
 
 typedef struct
@@ -722,15 +722,15 @@ Querverweis    \#Iorec\#
 \end
 
 screen( capsensitive("KBDVBASE"),
-		capsensitive("kb_vkbderr"),
-		capsensitive("kb_vmiderr"),
-		capsensitive("kb_clockvec"),
-		capsensitive("kb_joyvec"),
-		capsensitive("kb_kbdsys"),
-		capsensitive("kb_midisys"),
-		capsensitive("kb_midivec"),
-		capsensitive("kb_mousevec"),
-		capsensitive("kb_statvec") )
+        capsensitive("kb_midivec"),
+        capsensitive("kb_mousevec"),
+        capsensitive("kb_statvec"),
+        capsensitive("kb_vkbderr"),
+        capsensitive("kb_vmiderr"),
+        capsensitive("kb_clockvec"),
+        capsensitive("kb_joyvec"),
+        capsensitive("kb_kbdsys"),
+        capsensitive("kb_midisys") )
 KBDVBASE ist in tos.h wie folgt definiert:
 
 typedef struct
@@ -750,22 +750,22 @@ Querverweis    \#Kbdvbase\#
 \end
 
 screen( capsensitive("BASPAG"),
-		capsensitive("p_bbase"),
-		capsensitive("p_blen"),
-		capsensitive("p_cmdlin"),
-		capsensitive("p_curdrv"),
-		capsensitive("p_dbase"),
-		capsensitive("p_dlen"),
-		capsensitive("p_dta"),
-		capsensitive("p_env"),
-		capsensitive("p_hitpa"),
-		capsensitive("p_lowtpa"),
-		capsensitive("p_parent"),
-		capsensitive("p_resrvd0"),
-		capsensitive("p_stdfh"),
-		capsensitive("p_tbase"),
-		capsensitive("p_tlen"),
-		capsensitive("_BasPag") )
+        capsensitive("p_bbase"),
+        capsensitive("p_blen"),
+        capsensitive("p_cmdlin"),
+        capsensitive("p_curdrv"),
+        capsensitive("p_dbase"),
+        capsensitive("p_dlen"),
+        capsensitive("p_dta"),
+        capsensitive("p_env"),
+        capsensitive("p_hitpa"),
+        capsensitive("p_lowtpa"),
+        capsensitive("p_parent"),
+        capsensitive("p_resrvd0"),
+        capsensitive("p_stdfh"),
+        capsensitive("p_tbase"),
+        capsensitive("p_tlen"),
+        capsensitive("_BasPag") )
 Name            Basepagepointer
 
 Deklaration:    extern BASPAG *_BasPag;
@@ -798,16 +798,16 @@ typedef struct baspag
 Querverweis: \#Pexec\#
 \end
 
-screen( capsensitive("bflags"),
-		capsensitive("BPB"),
-		capsensitive("clsiz"),
-		capsensitive("clsizb"),
-		capsensitive("datrec"),
-		capsensitive("fatrec"),
-		capsensitive("fsiz"),
-		capsensitive("numcl"),
-		capsensitive("rdlen"),
-		capsensitive("recsiz") )
+screen( capsensitive("BPB"),
+        capsensitive("bflags"),
+        capsensitive("clsiz"),
+        capsensitive("clsizb"),
+        capsensitive("datrec"),
+        capsensitive("fatrec"),
+        capsensitive("fsiz"),
+        capsensitive("numcl"),
+        capsensitive("rdlen"),
+        capsensitive("recsiz") )
 BPB ist in tos.h wie folgt definiert:
 
 typedef struct
@@ -827,8 +827,8 @@ Querverweis: \#Getbpb\#
 \end
 
 screen( "date (DOSTIME)",
-		"time (DOSTIME)",
-		capsensitive("DOSTIME") )
+        "time (DOSTIME)",
+        capsensitive("DOSTIME") )
 DOSTIME ist in tos.h wie folgt definiert;
 
 typedef struct
@@ -854,8 +854,8 @@ Querverweis: \#Fdatime\#
 \end
 
 screen( capsensitive("COMMAND"),
-		capsensitive("command_tail"),
-		capsensitive("length") )
+        capsensitive("command_tail"),
+        capsensitive("length") )
 COMMAND ist in tos.h wie folgt definiert:
 
 typedef struct
@@ -868,14 +868,14 @@ Querverweis: \#Pexec\#
 \end
 
 screen( capsensitive("buttons"),
-		capsensitive("MOUSE"),
-		capsensitive("topmode"),
-		capsensitive("x_max"),
-		capsensitive("x_scale"),
-		capsensitive("x_start"),
-		capsensitive("y_max"),
-		capsensitive("y_start"),
-		capsensitive("y_scale") )
+        capsensitive("MOUSE"),
+        capsensitive("topmode"),
+        capsensitive("x_max"),
+        capsensitive("x_scale"),
+        capsensitive("x_start"),
+        capsensitive("y_max"),
+        capsensitive("y_start"),
+        capsensitive("y_scale") )
 typedef struct
 {
         char    topmode;
@@ -931,13 +931,13 @@ typedef struct          /* used by Getmpb */
 Querverweis: \#Getmpb\#
 \end
 
-screen( capsensitive("bcostat"),
-		capsensitive("bconin"),
-		capsensitive("bconout"),
-		capsensitive("bconstat"),
-		capsensitive("iorec"),
-		capsensitive("MAPTAB"),
-		capsensitive("rsconf") )
+screen( capsensitive("bconin"),
+        capsensitive("bconout"),
+        capsensitive("bconstat"),
+        capsensitive("bcostat"),
+        capsensitive("iorec"),
+        capsensitive("MAPTAB"),
+        capsensitive("rsconf") )
 MAPTAB ist in tos.h wie folgt definiert:
 
 typedef struct
@@ -954,8 +954,8 @@ Querverweis: \#Bconmap\#, \#BCONMAP\#
 \end
 
 screen( capsensitive("BCONMAP"),
-		capsensitive("maptab"),
-		capsensitive("maptabsize") )
+        capsensitive("maptab"),
+        capsensitive("maptabsize") )
 BCONMAP ist in tos.h wie folgt definiert:
         
 typedef struct
@@ -1018,15 +1018,15 @@ Querverweis    \#Prtblk\#
 \end
 
 screen( capsensitive("tm"),
-		capsensitive("tm_hour"),
-		capsensitive("tm_isdst"),
-		capsensitive("tm_mday"),
-		capsensitive("tm_min"),
-		capsensitive("tm_mon"),
-		capsensitive("tm_sec"),
-		capsensitive("tm_wday"),
-		capsensitive("tm_yday"),
-		capsensitive("tm_year") )
+        capsensitive("tm_hour"),
+        capsensitive("tm_isdst"),
+        capsensitive("tm_mday"),
+        capsensitive("tm_min"),
+        capsensitive("tm_mon"),
+        capsensitive("tm_sec"),
+        capsensitive("tm_wday"),
+        capsensitive("tm_yday"),
+        capsensitive("tm_year") )
 tm ist in time.h wie folgt definiert:
 
 struct    tm
@@ -1045,11 +1045,11 @@ struct    tm
 Querverweis: \#ctime\#
 \end
 
-screen( capsensitive("SIG_DFL"),
-		capsensitive("SIG_ERR"),
-		capsensitive("SIG_IGN"),
-		capsensitive("SIG_SYS"),
-		capsensitive("sigfunc_t") )
+screen( capsensitive("sigfunc_t"),
+        capsensitive("SIG_DFL"),
+        capsensitive("SIG_ERR"),
+        capsensitive("SIG_IGN"),
+        capsensitive("SIG_SYS") )
 typedef void (*sigfunc_t)( int );
 
  SIG_SYS  =>   (sigfunc_t)0L
@@ -1078,9 +1078,9 @@ Querverweis: \#div_t\#
 \end
 
 screen( capsensitive("fsm_component_t"),
-		capsensitive("fsm_data_fpoint_t"),
-		capsensitive("fsm_fpoint_t"),
-		capsensitive("fsm_int") )
+        capsensitive("fsm_data_fpoint_t"),
+        capsensitive("fsm_fpoint_t"),
+        capsensitive("fsm_int") )
 Die Strukturen fsm_int, fsm_fpoint_t, fsm_data_fpoint_t und
 fsm_component_t sind in VDI.H definiert:
 
@@ -1181,8 +1181,8 @@ zusammengefaût.
 \end
 
 screen( "Startup",
-		sensitive("PCSTART"),
-		sensitive("PCXSTART") )
+        sensitive("PCSTART"),
+        sensitive("PCXSTART") )
 pcstart.o ist der Standard Startup Code. Es werden folgende Schritte
 ausgefÅhrt:
 
@@ -3304,7 +3304,7 @@ Querverweis  \#installuserdriver\#
 \end
 
 screen( capsensitive("line"),
-		capsensitive("line (BGI)") )
+        capsensitive("line (BGI)") )
 Name         ØlineÆ - zeichnet eine Linie.
 
 Definition   void line(int x0, int y0, int x1, int y1);
@@ -4873,27 +4873,27 @@ Gruppe         \#Ereignisverwaltung\#
 \end
 
 screen( capsensitive("AC_CLOSE"),
-		capsensitive("AC_OPEN"),
-		capsensitive("ev_mgpbuff"),
-		capsensitive("MN_SELECTED"),
-		capsensitive("WA_DNLINE"),
-		capsensitive("WM_TOPPED"),
-		capsensitive("WA_DNPAGE"),
-		capsensitive("WM_VSLID"),
-		capsensitive("WA_LFLINE"),
-		capsensitive("WA_LFPAGE"),
-		capsensitive("WA_RTLINE"),
-		capsensitive("WA_RTPAGE"),
-		capsensitive("WA_UPLINE"),
-		capsensitive("WA_UPPAGE"),
-		capsensitive("WM_ARROWED"),
-		capsensitive("WM_CLOSED"),
-		capsensitive("WM_FULLED"),
-		capsensitive("WM_HSLID"),
-		capsensitive("WM_MOVED"),
-		capsensitive("WM_NEWTOP"),
-		capsensitive("WM_REDRAW"),
-		capsensitive("WM_SIZED") )
+        capsensitive("AC_OPEN"),
+        capsensitive("ev_mgpbuff"),
+        capsensitive("MN_SELECTED"),
+        capsensitive("WA_DNLINE"),
+        capsensitive("WA_DNPAGE"),
+        capsensitive("WA_LFLINE"),
+        capsensitive("WM_ARROWED"),
+        capsensitive("WA_LFPAGE"),
+        capsensitive("WM_CLOSED"),
+        capsensitive("WA_RTLINE"),
+        capsensitive("WM_FULLED"),
+        capsensitive("WA_RTPAGE"),
+        capsensitive("WM_HSLID"),
+        capsensitive("WA_UPLINE"),
+        capsensitive("WM_MOVED"),
+        capsensitive("WA_UPPAGE"),
+        capsensitive("WM_NEWTOP"),
+        capsensitive("WM_REDRAW"),
+        capsensitive("WM_SIZED"),
+        capsensitive("WM_TOPPED"),
+        capsensitive("WM_VSLID") )
 Die Standardmessages des Screenmanagers sind wie folgt aufgebaut:
 
 ev_mgpbuff[0]  Art der Message
@@ -5420,10 +5420,10 @@ Querverweis    \#wind_get\#
 \end
 
 screen( capsensitive("BEG_MCTRL"),
-		capsensitive("BEG_UPDATE"),
-		capsensitive("END_MCTRL"),
-		capsensitive("END_UPDATE"),
-		capsensitive("wind_update") )
+        capsensitive("BEG_UPDATE"),
+        capsensitive("END_MCTRL"),
+        capsensitive("END_UPDATE"),
+        capsensitive("wind_update") )
 Name           Update Window - bestimmt das Neuzeichnen eines Fensters.
 
 Definition     int wind_update( int wi_ubegend );
@@ -5446,9 +5446,9 @@ Ergebnis       Ein Fehler ist nur dann aufgetreten, wenn als Ergebnis
 Gruppe         \#Fenster\#
 \end
 
-screen( capsensitive("wind_calc"),
-		capsensitive("WC_BORDER"),
-		capsensitive("WC_WORK") )
+screen( capsensitive("WC_BORDER"),
+        capsensitive("WC_WORK"),
+        capsensitive("wind_calc") )
 Name           Window Calculation - berechnet die Grenzen oder den
                gesamten Platzbedarf eines Fensters.
 
@@ -5822,7 +5822,7 @@ Sie finden diese Konstanten in der Datei AES.H definiert.
 \end
 
 screen( "Manipulationsflags",
-		"Objektflags" )
+        "Objektflags" )
 Objektflags
 ----------------------------------------------------------------------
 
@@ -6345,7 +6345,7 @@ STs mit diesen Funktionen ausgeliefert worden.
 \end
 
 screen( capsensitive("graf_rubberbox"),
-		capsensitive("graf_rubbox") )
+        capsensitive("graf_rubbox") )
 Name           Graphics Rubberbox - zeichnet eine 'Rubberbox'
                (Gummirechteck) auf den Bildschirm.
 
@@ -6406,7 +6406,7 @@ Gruppe         \#Grafikfunktionen\#
 \end
 
 screen( capsensitive("graf_mbox"),
-		capsensitive("graf_movebox") )
+        capsensitive("graf_movebox") )
 Name           Graphics move Box - verschiebt ein Rechteck mit
                der Maus.
 
@@ -6747,7 +6747,7 @@ Querverweis    \#appl_tplay\#
 \end
 
 screen( "Clipboardfunktionen",
-		"Zwischenspeicher" )
+        "Zwischenspeicher" )
 Clipboardfunktionen
 
 Unter \#GEM\# gibt es die Mîglichkeit, Informationen in einem Zwischen-
@@ -7046,7 +7046,7 @@ ist. Einige Funktionen sollten nicht ohne GDOS benutzt werden:
 \end
 
 screen( "FSM",
-		"FSMGDOS" )
+        "FSMGDOS" )
 Das FSMGDOS
 ----------------------------------------------------------------------
 
@@ -7963,7 +7963,6 @@ Querverweis    \#v_pline\#      \#v_pmarker\#      \#v_gtext\#   \#v_fillarea\#
                \#v_arc\#        \#v_pieslice\#     \#v_circle\#  \#v_ellarc\#
                \#v_ellpie\#     \#v_ellipse\#      \#v_rbox\#    \#v_rfbox\#
                \#v_justified\#  \#vq_color\#
-
 \end
 
 screen( capsensitive("vsl_type") )
@@ -8196,7 +8195,7 @@ Querverweis    \#v_gtext\#   \#v_justified\#
 \end
 
 screen( "Textattribute",
-		capsensitive("vst_effects") )
+        capsensitive("vst_effects") )
 Name           Set Graphic Text Special Effects - legt Spezialeffekte
                fÅr Textausgaben fest.
 
@@ -9266,8 +9265,8 @@ Gruppe         \#Escapefunktionen\#
 Querverweis    \#v_enter_cur\#
 \end
 
-screen( capsensitive("v_curaddress"),
-		capsensitive("vs_curaddress") )
+screen( capsensitive("vs_curaddress"),
+        capsensitive("v_curaddress") )
 Name           Direct Alpha Cursor Address - setzt den Alphacursor an
                die angegebene Position.
 
@@ -11617,7 +11616,7 @@ Querverweis    \#abort\#   \#atexit\#   \#exit\#   \#system\#
 \end
 
 screen( capsensitive("exit"),
-		capsensitive("_exit") )
+        capsensitive("_exit") )
 Name           ØexitÆ - beendet das laufende Programm
 
 Definition     void  exit( int status );
@@ -11964,12 +11963,12 @@ screen( capsensitive("stat") )
 Name           ØstatusÆ - liefert Informationen Åber eine Datei oder
                ein Directory.
 
-Definition     int  stat( char *path, \link("st_atime")struct stat\# *statbuf );
+Definition     int  stat( char *path, \link("stat, struct stat")struct stat\# *statbuf );
 
 Prototyp in    ext.h
 
 Beschreibung   stat setzt die Mitglieder einer Struktur des Typs
-               \link("st_atime")stat\# mit Informationen Åber die durch path ange-
+               \link("stat, struct stat")stat\# mit Informationen Åber die durch path ange-
                gebene Datei und ist auch auf Directories anwendbar.
 
 Ergebnis       stat liefert bei fehlerfreier AusfÅhrung den Wert 0
@@ -11987,7 +11986,7 @@ Definition     int  fstat( int handle, struct \#stat\# *statbuf );
 Prototyp in    ext.h
 
 Beschreibung   fstat setzt die Mitglieder einer Struktur des Typs
-               \link("st_atime")stat\# mit Informationen Åber die durch handle ange-
+               \link("stat, struct stat")stat\# mit Informationen Åber die durch handle ange-
                gebene Datei und ist nur auf offene Dateien anwendbar.
 
 Ergebnis       fstat liefert bei fehlerfreier AusfÅhrung den Wert 0
@@ -12110,7 +12109,7 @@ screen( capsensitive("getdfree") )
 Name           get disk free - ermittelt den freien Platz auf einer
                Diskette/Festplatte.
 
-Definition     void  getdfree( unsigned char drive, \link("df_avail")struct dfree\# *dtable );
+Definition     void  getdfree( unsigned char drive, \link("dfree")struct dfree\# *dtable );
 
 Prototyp in    ext.h
 
@@ -12446,7 +12445,7 @@ Querverweis     \#fopen\#   \#freopen\#
 \end
 
 screen( "BinÑrmodus",
-		"Textmodus" )
+        "Textmodus" )
 StandardmÑûig ist bei \#fopen\# der Textmodus eingestellt.
 Wenn im String der zusÑtzliche Parameter b erscheint,
 wird die Datei im BinÑrmodus erîffnet. Das bedeutet, daû die
@@ -14101,7 +14100,7 @@ werden, dann muû die Parameterliste folgendermaûen aussehen:
 \end
 
 screen( "Format",
-		"Typ (printf)" )
+        "Typ (printf)" )
 Typ Parameter Ausgabe
 
     numerische Werte
@@ -15281,7 +15280,7 @@ Querverweis    \#size_t\#  \#strnicmp\#
 \end
 
 screen( capsensitive("strcmpi"),
-		capsensitive("stricmp") )
+        capsensitive("stricmp") )
 Name           Østring compare ignore caseÆ - Vergleicht zwei Strings
                ohne Unterscheidung zwischen Groû- und Kleinschreibung.
 
@@ -15310,7 +15309,7 @@ Querverweis    \#size_t\#   \#strcmp\#   \#stricmp\#   \#strcmpi\#
 \end
 
 screen( capsensitive("strncmpi"),
-		capsensitive("strnicmp") )
+        capsensitive("strnicmp") )
 Name           Østring number compare ignore caseÆ - Vergleicht eine
                bestimmte Anzahl von Zeichen miteinander ohne
                Unterscheidung zwischen Groû- und Kleinschreibung.
@@ -16571,7 +16570,7 @@ Querverweis     \#VT-52-Terminal\#
 \end
 
 screen( "VT-52-Terminal",
-		capsensitive("screen") )
+        capsensitive("screen") )
 Die Ausgabefunktionen des \link("GEMDOS")Gemdos\# bzw. \link("BIOS")Bios\# kînnen ein
 VT-52 Videoterminal emulieren. Dabei stehen folgende Steuercodes 
 in der \link("%%GLOBAL%%")#include\#-datei screen.h zur VerfÅgung:
@@ -16979,8 +16978,8 @@ Querverweis    \link("%%GLOBAL%%")Escapesequenzen\#     \#VT-52-Terminal\#
                \link("%%GLOBAL%%")Funktionen-Makros\#
 \end
 
-screen( capsensitive("NEXT_LINE"),
-		capsensitive("Next_line") )
+screen( capsensitive("Next_line"),
+        capsensitive("NEXT_LINE") )
 Name           ØCR/LFÆ - Cursor in eine neue Zeile.
 
 Definition     #define NEXT_LINE   "\\r\\n"
@@ -16999,7 +16998,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("CUR_UP"),
-		capsensitive("Cur_up") )
+        capsensitive("Cur_up") )
 Name           ØCursor upÆ - Cursor eine Zeile nach oben.
 
 Definition     #define CUR_UP   "\\33A"
@@ -17020,7 +17019,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("SCROLL_UP"),
-		capsensitive("Scroll_up") )
+        capsensitive("Scroll_up") )
 Name           ØCursor up and insertÆ - Cursor eine Zeile nach oben und
                scrollen.
 
@@ -17043,7 +17042,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("CUR_DOWN"),
-		capsensitive("Cur_down") )
+        capsensitive("Cur_down") )
 Name           ØCursor downÆ - Cursor eine Zeile nach unten.
 
 Definition     #define CUR_DOWN   "\\33B"
@@ -17064,7 +17063,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("CUR_RIGHT"),
-		capsensitive("Cur_right") )
+        capsensitive("Cur_right") )
 Name           ØCursor rightÆ - Cursor eine Spalte nach rechts.
 
 Definition     #define CUR_RIGHT   "\\33C"
@@ -17085,7 +17084,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("CUR_LEFT"),
-		capsensitive("Cur_left") )
+        capsensitive("Cur_left") )
 Name           ØCursor leftÆ - Cursor eine Spalte nach links.
 
 Definition     #define CUR_LEFT   "\\33D"
@@ -17106,7 +17105,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("CUR_HOME"),
-		capsensitive("Cur_home") )
+        capsensitive("Cur_home") )
 Name           ØCursor homeÆ - Cursor in die obere linke Ecke.
 
 Definition     #define CUR_HOME   "\\33H"
@@ -17126,7 +17125,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("CLEAR_HOME"),
-		capsensitive("Clear_home") )
+        capsensitive("Clear_home") )
 Name           ØClear screenÆ - Bildschirm lîschen.
 
 Definition     #define CLEAR_HOME   "\\33E"
@@ -17146,7 +17145,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("CLEAR_DOWN"),
-		capsensitive("Clear_down") )
+        capsensitive("Clear_down") )
 Name           ØClear to end of screenÆ - Bildschirm ab Cursor lîschen.
 
 Definition     #define CLEAR_DOWN   "\\33J"
@@ -17165,7 +17164,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("Clear_up"),
-		capsensitive("CLEAR_UP") )
+        capsensitive("CLEAR_UP") )
 Name           ØClear to start of screenÆ - Bildschirm bis Cursor lîschen.
 
 Definition     #define CLEAR_UP   "\\33d"
@@ -17184,7 +17183,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("Clear_line"),
-		capsensitive("CLEAR_LINE") )
+        capsensitive("CLEAR_LINE") )
 Name           ØClear lineÆ - Aktuelle Zeile lîschen.
 
 Definition     #define CLEAR_LINE   "\\33l"
@@ -17205,7 +17204,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("CLEAR_EOL"),
-		capsensitive("Clear_eol") )
+        capsensitive("Clear_eol") )
 Name           ØClear to end of lineÆ - Aktuelle Zeile ab Cursor lîschen.
 
 Definition     #define CLEAR_EOL   "\\33K"
@@ -17224,7 +17223,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("Clear_sol"),
-		capsensitive("CLEAR_SOL") )
+        capsensitive("CLEAR_SOL") )
 Name           ØClear to start of lineÆ - Aktuelle Zeile ab Cursor lîschen.
 
 Definition     #define CLEAR_SOL   "\\33o"
@@ -17243,7 +17242,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("INS_LINE"),
-		capsensitive("Ins_line") )
+        capsensitive("Ins_line") )
 Name           ØInsert lineÆ - Zeile einfÅgen.
 
 Definition     #define INS_LINE   "\\33k"
@@ -17263,7 +17262,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("DEL_LINE"),
-		capsensitive("Del_line") )
+        capsensitive("Del_line") )
 Name           ØDelete lineÆ - Zeile entfernen.
 
 Definition     #define DEL_LINE   "\\33M"
@@ -17284,7 +17283,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("SAVE_POS"),
-		capsensitive("Save_pos") )
+        capsensitive("Save_pos") )
 Name           ØSave cursor positionÆ - Cursor "merken".
 
 Definition     #define SAVE_POS   "\\33j"
@@ -17305,7 +17304,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("LOAD_POS"),
-		capsensitive("Load_pos") )
+        capsensitive("Load_pos") )
 Name           ØRestore cursor positionÆ - Cursor restaurieren.
 
 Definition     #define LOAD_POS   "\\33k"
@@ -17325,7 +17324,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("GOTO_POS"),
-		capsensitive("Goto_pos") )
+        capsensitive("Goto_pos") )
 Name           ØSet cursor positionÆ - Cursor positionieren.
 
 Definition     #define GOTO_POS         "\\33Y"
@@ -17347,7 +17346,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("INK"),
-		capsensitive("Ink") )
+        capsensitive("Ink") )
 Name           ØForeground colorÆ - Textfarbe setzen.
 
 Definition     #define INK      "\\33b"
@@ -17367,7 +17366,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("PAPER"),
-		capsensitive("Paper") )
+        capsensitive("Paper") )
 Name           ØBackground colorÆ - Hintergrundfarbe setzen.
 
 Definition     #define PAPER      "\\33c"
@@ -17387,7 +17386,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("REV_ON"),
-		capsensitive("Rev_on") )
+        capsensitive("Rev_on") )
 Name           ØReverse videoÆ - Reverse Schrift einschalten.
 
 Definition     #define REV_ON    "\\33p"
@@ -17408,7 +17407,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("REV_OFF"),
-		capsensitive("Rev_off") )
+        capsensitive("Rev_off") )
 Name           ØNormal videoÆ - Reverse Schrift ausschalten.
 
 Definition     #define REV_OFF    "\\33q"
@@ -17427,7 +17426,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("CUR_ON"),
-		capsensitive("Cur_on") )
+        capsensitive("Cur_on") )
 Name           ØShow cursorÆ - Cursor einschalten.
 
 Definition     #define CUR_ON    "\\33e"
@@ -17446,7 +17445,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("CUR_OFF"),
-		capsensitive("Cur_off") )
+        capsensitive("Cur_off") )
 Name           ØHide cursorÆ - Cursor einschalten.
 
 Definition     #define CUR_OFF    "\\33f"
@@ -17465,7 +17464,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("WRAP_ON"),
-		capsensitive("Wrap_on") )
+        capsensitive("Wrap_on") )
 Name           ØWrap onÆ - Zeilenumbruch einschalten.
 
 Definition     #define WRAP_ON    "\\33v"
@@ -17486,7 +17485,7 @@ Querverweis    \link("%%GLOBAL%%")Funktionen-Makros\#   \link("%%GLOBAL%%")Konst
 \end
 
 screen( capsensitive("WRAP_OFF"),
-		capsensitive("Wrap_off") )
+        capsensitive("Wrap_off") )
 Name           ØWrap offÆ - Zeilenumbruch ausschalten.
 
 Definition     #define WRAP_OFF    "\\33w"
@@ -18732,19 +18731,19 @@ Querverweise      \#Dsp_Hf0\#            \#Dsp_Hf1\#
 \end
 
 screen( capsensitive("BPS1"),
-		capsensitive("BPS16"),
-		capsensitive("BPS2"),
-		capsensitive("BPS4"),
-		capsensitive("BPS8"),
-		capsensitive("COL40"),
-		capsensitive("COL80"),
-		capsensitive("FALC_VGA"),
-		capsensitive("NUMCOLS"),
-		capsensitive("OVERSCAN"),
-		capsensitive("PAL"),
-		capsensitive("STMODES"),
-		capsensitive("TV"),
-		capsensitive("VERTFLAG") )
+        capsensitive("BPS16"),
+        capsensitive("BPS2"),
+        capsensitive("BPS4"),
+        capsensitive("BPS8"),
+        capsensitive("COL40"),
+        capsensitive("COL80"),
+        capsensitive("FALC_VGA"),
+        capsensitive("NUMCOLS"),
+        capsensitive("OVERSCAN"),
+        capsensitive("PAL"),
+        capsensitive("STMODES"),
+        capsensitive("TV"),
+        capsensitive("VERTFLAG") )
 Konstanten zur Videohardware des Falcons              PCTOSLIB.LIB
 ------------------------------------------------------------------
 

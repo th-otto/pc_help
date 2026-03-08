@@ -1,8 +1,8 @@
 
 
 screen( "HauptmenÅ",
-		"MenÅleiste",
-		capsensitive("Menu") )
+        "MenÅleiste",
+        capsensitive("Menu") )
 Die MenÅleiste
 ----------------------------------------------------------------------
 
@@ -10,7 +10,7 @@ Die MenÅleiste
 \end
 
 screen( "MenÅ, Pure-C-",
-		"Pure-C-MenÅ" )
+        "Pure-C-MenÅ" )
 Der MenÅtitel 'Pure C'
 ----------------------------------------------------------------------
 
@@ -67,7 +67,7 @@ Hinweis:     Durch DrÅcken eines Buchstabens werden alle Dateien
 \end
 
 screen( "File-MenÅ",
-		"MenÅ, File-" )
+        "MenÅ, File-" )
 Der MenÅtitel 'File'
 ----------------------------------------------------------------------
 
@@ -91,8 +91,8 @@ Der MenÅtitel 'File'
 \end
 
 screen( "Edit",
-		"Edit-MenÅ",
-		"MenÅ, Edit-" )
+        "Edit-MenÅ",
+        "MenÅ, Edit-" )
 Der MenÅtitel 'Edit'
 ----------------------------------------------------------------------
 
@@ -112,8 +112,8 @@ Der MenÅtitel 'Edit'
 \end
 
 screen( "MenÅ, Search-",
-		"Search",
-		"Search-MenÅ" )
+        "Search",
+        "Search-MenÅ" )
 Der MenÅtitel 'Search'
 ----------------------------------------------------------------------
 
@@ -133,8 +133,8 @@ Der MenÅtitel 'Search'
 \end
 
 screen( "Compile",
-		"Compile-MenÅ",
-		"MenÅ, Compile-" )
+        "Compile-MenÅ",
+        "MenÅ, Compile-" )
 Der MenÅtitel 'Compile'
 ----------------------------------------------------------------------
 
@@ -147,8 +147,8 @@ Der MenÅtitel 'Compile'
 \end
 
 screen( "MenÅ, Project-",
-		"Project",
-		"Project-MenÅ" )
+        "Project",
+        "Project-MenÅ" )
 Der MenÅtitel 'Project'
 ----------------------------------------------------------------------
 
@@ -163,8 +163,8 @@ Der MenÅtitel 'Project'
 \end
 
 screen( "MenÅ, Options-",
-		"Options-MenÅ",
-		capsensitive("Options") )
+        "Options-MenÅ",
+        capsensitive("Options") )
 Der MenÅtitel 'Options'
 ----------------------------------------------------------------------
 
@@ -178,8 +178,8 @@ Der MenÅtitel 'Options'
 \end
 
 screen( "Hilfesystem",
-		"Help",
-		"Kontextsensitive Hilfe" )
+        "Help",
+        "Kontextsensitive Hilfe" )
 Help
 ----------------------------------------------------------------------
 
@@ -209,7 +209,7 @@ Fenster oder durch DrÅcken der Tastenkombination \#CONTROL\#-U.
 \end
 
 screen( "File/Open  .C",
-		"Open .C" )
+        "Open .C" )
 \link("File-MenÅ")File\#/Open  .C                                                \#CONTROL\#-O
 ----------------------------------------------------------------------
 
@@ -218,7 +218,7 @@ screen( "File/Open  .C",
 \end
 
 screen( "File/Open  .H",
-		"Open .H" )
+        "Open .H" )
 \link("File-MenÅ")File\#/Open  .H
 ----------------------------------------------------------------------
 
@@ -227,7 +227,7 @@ screen( "File/Open  .H",
 \end
 
 screen( "File/Open  .S",
-		"Open .S" )
+        "Open .S" )
 \link("File-MenÅ")File\#/Open  .S
 ----------------------------------------------------------------------
 
@@ -236,7 +236,7 @@ screen( "File/Open  .S",
 \end
 
 screen( "File/Open  .PRJ",
-		"Open .PRJ" )
+        "Open .PRJ" )
 \link("File-MenÅ")File\#/Open  .PRJ
 ----------------------------------------------------------------------
 
@@ -245,9 +245,9 @@ screen( "File/Open  .PRJ",
 \end
 
 screen( "Datei drucken",
-		"Drucken einer Datei",
-		"File/Print",
-		"Print" )
+        "Drucken einer Datei",
+        "File/Print",
+        "Print" )
 \link("File-MenÅ")File\#/Print                                                   \#CONTROL\#-P
 ----------------------------------------------------------------------
 
@@ -255,9 +255,9 @@ screen( "Datei drucken",
 \end
 
 screen( "Drucken eines Textauschnitts",
-		"File/Print Selection",
-		"Print Selection",
-		"Textausschnitt drucken" )
+        "File/Print Selection",
+        "Print Selection",
+        "Textausschnitt drucken" )
 \link("File-MenÅ")File\#/Print Selection                                         \#CONTROL\#-D
 ----------------------------------------------------------------------
 
@@ -266,8 +266,8 @@ Nachdem ein Textabschnitt \link("Blockmarkierung")selektiert\# wurde, kann er mi
 \end
 
 screen( "Close",
-		"File/Close",
-		"Fenster schlieûen" )
+        "File/Close",
+        "Fenster schlieûen" )
 \link("File-MenÅ")File\#/Close                                                   \#CONTROL\#-U
 ----------------------------------------------------------------------
 
@@ -277,7 +277,7 @@ oder nicht.
 \end
 
 screen( "Abandon",
-		"File/Abandon" )
+        "File/Abandon" )
 \link("File-MenÅ")File\#/Abandon                                                 \#CONTROL\#-H
 ----------------------------------------------------------------------
 
@@ -287,9 +287,9 @@ VerÑnderungen wieder rÅckgÑngig gemacht werden.
 \end
 
 screen( "Datei speichern",
-		"File/Save",
-		"Save",
-		"Speichern einer Datei" )
+        "File/Save",
+        "Save",
+        "Speichern einer Datei" )
 \link("File-MenÅ")File\#/Save                                                    \#CONTROL\#-S
 ----------------------------------------------------------------------
 
@@ -298,7 +298,7 @@ namen im Titelbalken ab.
 \end
 
 screen( "File/Save as...",
-		"Save as..." )
+        "Save as..." )
 \link("File-MenÅ")File\#/Save as...                                              \#CONTROL\#-M
 ----------------------------------------------------------------------
 
@@ -308,9 +308,9 @@ im aktuellen Fenster angegebenen Namen ab. Dieser Name wird Åber die
 \end
 
 screen( "Aufruf eines Kommandozeilenin",
-		"File/TOS Shell",
-		"Kommandozeileninterpreter",
-		"TOS Shell" )
+        "File/TOS Shell",
+        "Kommandozeileninterpreter",
+        "TOS Shell" )
 \link("File-MenÅ")File\#/TOS Shell                                               \#CONTROL\#-Z
 ----------------------------------------------------------------------
 
@@ -327,8 +327,8 @@ einer Shell.
 \end
 
 screen( "File/Quit",
-		"Programmende",
-		"Quit" )
+        "Programmende",
+        "Quit" )
 \link("File-MenÅ")File\#/Quit                                                    \#CONTROL\#-Q
 ----------------------------------------------------------------------
 
@@ -339,8 +339,8 @@ den sollen.
 \end
 
 screen( "Editieroperationen rÅckgÑngig",
-		"Edit/Undo",
-		"Undo" )
+        "Edit/Undo",
+        "Undo" )
 \#Edit\#/Undo                                                         UNDO
 ----------------------------------------------------------------------
 
@@ -359,9 +359,9 @@ hang mit grîûeren, unabsichtlich gelîschten Textabschnitten.
 \end
 
 screen( "Block auschneiden",
-		"Cut",
-		"Edit/Cut",
-		"Textauschnitt ausschneiden" )
+        "Cut",
+        "Edit/Cut",
+        "Textauschnitt ausschneiden" )
 \#Edit\#/Cut                                                     \#CONTROL\#-X
 ----------------------------------------------------------------------
 
@@ -373,9 +373,9 @@ oder gleicher Stelle wieder eingefÅgt werden.
 \end
 
 screen( "Block kopieren",
-		"Copy",
-		"Edit/Copy",
-		"Textauschnitt kopieren" )
+        "Copy",
+        "Edit/Copy",
+        "Textauschnitt kopieren" )
 \#Edit\#/Copy                                                    \#CONTROL\#-C
 ----------------------------------------------------------------------
 
@@ -387,9 +387,9 @@ oder gleicher Stelle wieder eingefÅgt werden.
 \end
 
 screen( "Block einfÅgen",
-		"Edit/Paste",
-		"Paste",
-		"Textausschnitt einfÅgen" )
+        "Edit/Paste",
+        "Paste",
+        "Textausschnitt einfÅgen" )
 \#Edit\#/Paste                                       INSERT oder \#CONTROL\#-V
 ----------------------------------------------------------------------
 
@@ -401,9 +401,9 @@ Zwischenspeicher befindlichen Text ersetzt werden.
 \end
 
 screen( "Dateiinhalt markieren",
-		"Dateiinhalt selektieren",
-		"Edit/Select All",
-		"Select All" )
+        "Dateiinhalt selektieren",
+        "Edit/Select All",
+        "Select All" )
 \#Edit\#/Select All                                              \#CONTROL\#-N
 ----------------------------------------------------------------------
 
@@ -415,8 +415,8 @@ gefÅgt werden.
 \end
 
 screen( "Edit/Shift Left",
-		"Shift Left",
-		"TextausrÅcken" )
+        "Shift Left",
+        "TextausrÅcken" )
 \#Edit\#/Shift Left                                              \#CONTROL\#-J
 ----------------------------------------------------------------------
 
@@ -425,8 +425,8 @@ um eine Tabulatorstelle nach links verschoben werden.
 \end
 
 screen( "Edit/Shift Right",
-		"Shift Right",
-		"TexteinrÅcken" )
+        "Shift Right",
+        "TexteinrÅcken" )
 \#Edit\#/Shift Right                                             \#CONTROL\#-K
 ----------------------------------------------------------------------
 
@@ -435,7 +435,7 @@ um eine Tabulatorstelle nach rechts verschoben werden.
 \end
 
 screen( "Cycle Windows",
-		"Fensterwechsel" )
+        "Fensterwechsel" )
 \#Edit\#/Cycle Windows                                           \#CONTROL\#-W
 ----------------------------------------------------------------------
 
@@ -445,9 +445,9 @@ hat der Befehl keine Wirkung.
 \end
 
 screen( "Benutzerausgaben",
-		"Benutzerbildschirm",
-		"Edit/User Screen",
-		"User Screen" )
+        "Benutzerbildschirm",
+        "Edit/User Screen",
+        "User Screen" )
 \#Edit\#/User Screen                                                   ESC
 ----------------------------------------------------------------------
 
@@ -458,8 +458,8 @@ ausgaben von Programmen kontrollieren.
 \end
 
 screen( "Find...",
-		"Search/Find...",
-		"Suchen" )
+        "Search/Find...",
+        "Suchen" )
 \#Search\#/Find...                                               \#CONTROL\#-F
 ----------------------------------------------------------------------
 
@@ -471,8 +471,8 @@ logbox per Mausklick schaltbar.
 \end
 
 screen( "Find Same",
-		"Search/Find Same",
-		"Suche wiederholen" )
+        "Search/Find Same",
+        "Suche wiederholen" )
 \#Search\#/Find Same                                             \#CONTROL\#-G
 ----------------------------------------------------------------------
 
@@ -482,7 +482,7 @@ ausgefÅhrt wurde.
 \end
 
 screen( "Find Selection",
-		"Search/Find Selection" )
+        "Search/Find Selection" )
 \#Search\#/Find Selection                                        \#CONTROL\#-I
 ----------------------------------------------------------------------
 
@@ -499,9 +499,9 @@ nochmals nach 'printf' gesucht werden.
 \end
 
 screen( "Ersetzen",
-		"Replace...",
-		"Search/Replace...",
-		"Suchen und Ersetzen" )
+        "Replace...",
+        "Search/Replace...",
+        "Suchen und Ersetzen" )
 \#Search\#/Replace...                                            \#CONTROL\#-R
 ----------------------------------------------------------------------
 
@@ -515,8 +515,8 @@ schaltbar.
 \end
 
 screen( "Ersetzen wiederholen",
-		"Replace Same",
-		"Search/Replace Same" )
+        "Replace Same",
+        "Search/Replace Same" )
 \#Search\#/Replace Same                                          \#CONTROL\#-T
 ----------------------------------------------------------------------
 
@@ -525,9 +525,9 @@ screen( "Ersetzen wiederholen",
 \end
 
 screen( "Check Braces",
-		"Hierarchie-Test",
-		"Klammertest",
-		"Search/Check Braces" )
+        "Hierarchie-Test",
+        "Klammertest",
+        "Search/Check Braces" )
 \#Search\#/Check Braces                                          \#CONTROL\#-B
 ----------------------------------------------------------------------
 
@@ -539,9 +539,9 @@ dann zur schlieûenden Klammer '}'.
 \end
 
 screen( "Fehlermeldung",
-		"Find Error",
-		"Fehlersuche",
-		"Search/Find Error" )
+        "Find Error",
+        "Fehlersuche",
+        "Search/Find Error" )
 \#Search\#/Find Error                                            \#CONTROL\#-E
 ----------------------------------------------------------------------
 
@@ -556,10 +556,10 @@ die Fehlermeldung.
 \end
 
 screen( "Aktuelle Zeilennummer",
-		"Goto Line...",
-		"Search/Goto Line",
-		"Zeile suchen",
-		"Zeilennummer erfragen" )
+        "Goto Line...",
+        "Search/Goto Line",
+        "Zeile suchen",
+        "Zeilennummer erfragen" )
 \#Search\#/Goto Line...                                          \#CONTROL\#-L
 ----------------------------------------------------------------------
 
@@ -570,7 +570,7 @@ der Zeile eingeben kînnen, die Sie anspringen wollen.
 \end
 
 screen( "Search project...",
-		"Search/Search project..." )
+        "Search/Search project..." )
 \#Search\#/Search project...
 ----------------------------------------------------------------------
 
@@ -598,7 +598,7 @@ o "List only first occurrence" trÑgt nur das erste Vorkommen
 \end
 
 screen( "Search multiple...",
-		"Search/Search multiple..." )
+        "Search/Search multiple..." )
 \#Search\#/Search multiple...
 ----------------------------------------------------------------------
 
@@ -629,9 +629,9 @@ o "List only first occurrence" trÑgt nur das erste Vorkommen
 \end
 
 screen( "Compile...",
-		"Compile/Compile...",
-		"Quelldatei compilieren",
-		"Quelldatei Åbersetzen" )
+        "Compile/Compile...",
+        "Quelldatei compilieren",
+        "Quelldatei Åbersetzen" )
 \#Compile\#/Compile...                                         \#ALTERNATE\#-V
 ----------------------------------------------------------------------
 
@@ -644,9 +644,9 @@ aber nicht linken will.
 \end
 
 screen( "Compile ''",
-		"Compile/Compile ''",
-		"Quelltext compilieren",
-		"Quelltext Åbersetzen" )
+        "Compile/Compile ''",
+        "Quelltext compilieren",
+        "Quelltext Åbersetzen" )
 \#Compile\#/Compile ''                                         \#ALTERNATE\#-C
 ----------------------------------------------------------------------
 
@@ -656,8 +656,8 @@ Syntax-Checks compilieren, aber nicht linken will.
 \end
 
 screen( "Assemble...",
-		"Compile/Assemble...",
-		"Quelldatei assemblieren" )
+        "Compile/Assemble...",
+        "Quelldatei assemblieren" )
 \#Compile\#/Assemble...                                        \#ALTERNATE\#-S
 ----------------------------------------------------------------------
 
@@ -670,8 +670,8 @@ ren, aber nicht linken will.
 \end
 
 screen( "Assemble ''",
-		"Compile/Assemble ''",
-		"Quelltext assemblieren" )
+        "Compile/Assemble ''",
+        "Quelltext assemblieren" )
 \#Compile\#/Assemble ''                                        \#ALTERNATE\#-A
 ----------------------------------------------------------------------
 
@@ -681,8 +681,8 @@ Syntax-Checks assemblieren, aber nicht linken will.
 \end
 
 screen( "Compile/Execute...",
-		"Execute...",
-		"Programm starten" )
+        "Execute...",
+        "Programm starten" )
 \#Compile\#/Execute...                                         \#ALTERNATE\#-E
 ----------------------------------------------------------------------
 
@@ -696,8 +696,8 @@ Hinweis: Mit der Option ( \#Project\#/\#Run ''\# ) kann man ein C-Programm
 \end
 
 screen( "Project/Select...",
-		"Projektdatei auswÑhlen",
-		"Select..." )
+        "Projektdatei auswÑhlen",
+        "Select..." )
 \#Project\#/Select...                                          \#ALTERNATE\#-P
 ----------------------------------------------------------------------
 
@@ -705,9 +705,9 @@ screen( "Project/Select...",
 \end
 
 screen( "Compilieren und Debuggen",
-		"Debug ''",
-		"Pure Debugger",
-		"Project/Debug ''" )
+        "Debug ''",
+        "Pure Debugger",
+        "Project/Debug ''" )
 \#Project\#/Debug ''                    SHIFT-\#ALTERNATE\#-D oder \#ALTERNATE\#-D
 ----------------------------------------------------------------------
 
@@ -726,8 +726,8 @@ SHIFT-Taste den MenÅeintrag \#Project\#/Debug '' anklicken.
 \end
 
 screen( "Compilieren und starten",
-		"Project/Run ''",
-		"Run ''" )
+        "Project/Run ''",
+        "Run ''" )
 \#Project\#/Run ''                                             \#ALTERNATE\#-R
 ----------------------------------------------------------------------
 
@@ -737,8 +737,8 @@ direkt im Anschluû daran ausgefÅhrt.
 \end
 
 screen( "Compilieren geÑnderter Dateie",
-		"Make ''",
-		"Project/Make ''" )
+        "Make ''",
+        "Project/Make ''" )
 \#Project\#/Make ''                                            \#ALTERNATE\#-M
 ----------------------------------------------------------------------
 
@@ -747,8 +747,8 @@ benen und verÑnderten Dateien.
 \end
 
 screen( "Compilieren aller Dateien",
-		"Make all ''",
-		"Project/Make all ''" )
+        "Make all ''",
+        "Project/Make all ''" )
 \#Project\#/Make all ''                                        \#ALTERNATE\#-X
 ----------------------------------------------------------------------
 
@@ -757,8 +757,8 @@ benen Dateien.
 \end
 
 screen( "Link ''",
-		"Linken eines Projekts",
-		"Project/Link ''" )
+        "Linken eines Projekts",
+        "Project/Link ''" )
 \#Project\#/Link ''                                            \#ALTERNATE\#-L
 ----------------------------------------------------------------------
 
@@ -812,9 +812,9 @@ Querverweis    \#Warnungen\#  \#Editorfunktionen\# im öberblick
 \end
 
 screen( "Finden von Deklarationen",
-		"Projekt-Datenbank",
-		"Project Help",
-		"*.PDB" )
+        "Projekt-Datenbank",
+        "Project Help",
+        "*.PDB" )
 Die Projekt-Datenbank: Project Help
 ----------------------------------------------------------------------
 
@@ -844,10 +844,10 @@ Durch Undo gelangt man wieder an die urspÅngliche Editierposition.
 \end
 
 screen( "Cache",
-		"Header-File Caching",
-		"Include-File Caching",
-		"Lîschen des Cache",
-		"Object-File Caching" )
+        "Header-File Caching",
+        "Include-File Caching",
+        "Lîschen des Cache",
+        "Object-File Caching" )
 File Caching
 ----------------------------------------------------------------------
 
@@ -953,7 +953,7 @@ length), und die Warnstufe kann von 0 bis 2 vorgegeben werden
 \end
 
 screen( capsensitive("Warning"),
-		capsensitive("Warnungen") )
+        capsensitive("Warnungen") )
 Warnungen
 ----------------------------------------------------------------------
 
@@ -969,13 +969,13 @@ Die Warnungen der Compilers kînnen in 4 Gruppen eingeteilt werden:
 \end
 
 screen( "Verletzung des ANSI-Standards",
-		capsensitive("dup"),
-		capsensitive("ret"),
-		capsensitive("str"),
-		capsensitive("stu"),
-		capsensitive("sus"),
-		capsensitive("voi"),
-		capsensitive("zst") )
+        capsensitive("dup"),
+        capsensitive("ret"),
+        capsensitive("str"),
+        capsensitive("stu"),
+        capsensitive("sus"),
+        capsensitive("voi"),
+        capsensitive("zst") )
 Verletzung des ANSI-Standards
 -----------------------------
 
@@ -1003,13 +1003,13 @@ zst [1] Zero length structure.
 \end
 
 screen( "HÑufig auftretende Fehler",
-		capsensitive("aus"),
-		capsensitive("def"),
-		capsensitive("eff"),
-		capsensitive("par"),
-		capsensitive("pia"),
-		capsensitive("rch"),
-		capsensitive("rvl") )
+        capsensitive("aus"),
+        capsensitive("def"),
+        capsensitive("eff"),
+        capsensitive("par"),
+        capsensitive("pia"),
+        capsensitive("rch"),
+        capsensitive("rvl") )
 HÑufig auftretende Fehler
 -------------------------
 
@@ -1036,13 +1036,13 @@ rvl [1] Function should return a value.
 \end
 
 screen( "Weniger hÑufige Fehler",
-		capsensitive("amb"),
-		capsensitive("amp"),
-		capsensitive("mlt"),
-		capsensitive("nod"),
-		capsensitive("pro"),
-		capsensitive("stv"),
-		capsensitive("use") )
+        capsensitive("amb"),
+        capsensitive("amp"),
+        capsensitive("mlt"),
+        capsensitive("nod"),
+        capsensitive("pro"),
+        capsensitive("stv"),
+        capsensitive("use") )
 Weniger hÑufige Fehler
 ----------------------
 
@@ -1077,13 +1077,13 @@ use [2] 'XXXXXX' declared but never used.
 \end
 
 screen( "Warnungen vor PortabilitÑtsproblemen",
-		capsensitive("apt"),
-		capsensitive("cln"),
-		capsensitive("cpt"),
-		capsensitive("rng"),
-		capsensitive("rpt"),
-		capsensitive("sig"),
-		capsensitive("ucp") )
+        capsensitive("apt"),
+        capsensitive("cln"),
+        capsensitive("cpt"),
+        capsensitive("rng"),
+        capsensitive("rpt"),
+        capsensitive("sig"),
+        capsensitive("ucp") )
 Warnungen vor PortabilitÑtsproblemen
 ------------------------------------
 
@@ -1108,8 +1108,8 @@ rpt [1] Non portable pointer assignement.
 \end
 
 screen( "Fehler",
-		"Fehlermeldungen des Compilers",
-		capsensitive("Error") )
+        "Fehlermeldungen des Compilers",
+        capsensitive("Error") )
 Fehlermeldungen des Compilers
 -----------------------------
 
@@ -1128,7 +1128,7 @@ Compilers der Projektlauf IMMER abgebrochen.
 \end
 
 screen( "Fehlermeldungen des PrÑprozessors",
-		"PrÑprozessor, Fehler" )
+        "PrÑprozessor, Fehler" )
 Fehlermeldungen des PrÑprozessors
 ---------------------------------
 
@@ -1262,7 +1262,7 @@ Fehlermeldungen bei Funktionsaufrufen
 \end
 
 screen( "Deklarationen, Fehlermeldunge",
-		"Fehlermeldungen bei Deklarationen" )
+        "Fehlermeldungen bei Deklarationen" )
 Fehlermeldungen bei Deklarationen
 ---------------------------------
 
@@ -1326,9 +1326,9 @@ Fehlermeldungen bei Deklarationen
 \end
 
 screen( "do-while, Fehlermeldungen",
-		"Fehlermeldungen bei Schleifen",
-		"for, Fehlermeldungen",
-		"while, Fehlermeldungen" )
+        "Fehlermeldungen bei Schleifen",
+        "for, Fehlermeldungen",
+        "while, Fehlermeldungen" )
 Fehlermeldungen bei Schleifen
 -----------------------------
 
@@ -1359,8 +1359,8 @@ Fehlermeldungen bei Schleifen
 \end
 
 screen( "Fehlermeldungen bei If-/Switch-statements",
-		"if, Fehlermeldungen",
-		"switch, Fehlermeldungen" )
+        "if, Fehlermeldungen",
+        "switch, Fehlermeldungen" )
 Fehlermeldungen bei If-/Switch-statements
 -----------------------------------------
 
@@ -1409,7 +1409,7 @@ Fehlermeldungen bei If-/Switch-statements
 \end
 
 screen( "Fehlermeldungen in Statements",
-		"Statements, Fehlermeldungen" )
+        "Statements, Fehlermeldungen" )
 Fehlermeldungen in Statements
 -----------------------------
 
@@ -1508,7 +1508,7 @@ Fehlermeldungen in Statements
 \end
 
 screen( "Fehlermeldungen bei Konstanten",
-		"Konstanten, Fehlermeldungen" )
+        "Konstanten, Fehlermeldungen" )
 Fehlermeldungen bei Konstanten
 ------------------------------
 
@@ -1611,7 +1611,7 @@ ein Makro definieren.
 \end
 
 screen( "Linkeroptionen",
-		"Linker" )
+        "Linker" )
 Linkeroptionen                                             \#ALTERNATE\#-O
 ----------------------------------------------------------------------
 
@@ -1655,9 +1655,9 @@ zusammen.
 \end
 
 screen( "Konfiguration laden",
-		"Load...",
-		"Optionen laden",
-		"Options/Load..." )
+        "Load...",
+        "Optionen laden",
+        "Options/Load..." )
 \#Options\#/Load...                                            \#ALTERNATE\#-J
 ----------------------------------------------------------------------
 
@@ -1671,9 +1671,9 @@ ursprÅnglichen Zustand wieder herstellen.
 \end
 
 screen( "Konfiguration sichern",
-		"Optionen sichern",
-		"Options/Save",
-		"Save ''" )
+        "Optionen sichern",
+        "Options/Save",
+        "Save ''" )
 \#Options\#/Save ''                                            \#ALTERNATE\#-H
 ----------------------------------------------------------------------
 
@@ -1690,7 +1690,7 @@ sich NICHTS verÑndert! Lediglich Help-Windows werden geschlossen.
 \end
 
 screen( "ALTERNATE",
-		"Hotkeys (ALTERNATE)" )
+        "Hotkeys (ALTERNATE)" )
 'Alternate Codes' in Pure C (Project Kommandos)
 ----------------------------------------------------------------------
 
@@ -1810,11 +1810,11 @@ Mit \#Undo\# lassen sich Blockoperationen rÅckgÑngig machen.
 \end
 
 screen( "Blockmarkierung",
-		"Blockselektierung",
-		"Markierung",
-		"Selektierung",
-		"Textmarkierung",
-		"Textselektierung" )
+        "Blockselektierung",
+        "Markierung",
+        "Selektierung",
+        "Textmarkierung",
+        "Textselektierung" )
 Blockselektierung
 ----------------------------------------------------------------------
 
@@ -1840,7 +1840,7 @@ Querverweis   \#Blockoperationen\#
 \end
 
 screen( "CONTROL",
-		"Hotkeys (CONTROL)" )
+        "Hotkeys (CONTROL)" )
 'Control Codes' in Pure C (Editor Kommandos)
 ----------------------------------------------------------------------
 
@@ -1889,10 +1889,10 @@ screen( "CONTROL",
 \end
 
 screen( "DateiabhÑngigkeiten",
-		"File Dependences",
-		"Projektmanager",
-		"Projektmanager (rekursiver Au",
-		capsensitive("Projektdatei") )
+        "File Dependences",
+        "Projektmanager",
+        "Projektmanager (rekursiver Au",
+        capsensitive("Projektdatei") )
 Projektdateien
 ----------------------------------------------------------------------
 
@@ -1967,8 +1967,8 @@ HINWEIS:  Da der Projektmanager das Datum und die Uhrzeit der Dateien
 \end
 
 screen( "Benutzerdefiniertes Help",
-		"HC",
-		"Help-Compiler" )
+        "HC",
+        "Help-Compiler" )
 Der Help-Compiler
 ----------------------------------------------------------------------
 
@@ -1985,9 +1985,9 @@ Datei und eine Liste der \link("Help-Quelltext")Quelldateien\#.
 \end
 
 screen( "Befehlsdateien (Help-Compiler",
-		"Name des benutzerdef. Help",
-		"Optionen (Help-Compiler)",
-		"USR.HLP" )
+        "Name des benutzerdef. Help",
+        "Optionen (Help-Compiler)",
+        "USR.HLP" )
 Befehlsdateien fÅr den Help-Compiler
 ----------------------------------------------------------------------
 
@@ -2030,7 +2030,7 @@ hîren am Zeilenende auf. Eine mîgliche Befehlsdatei fÅr ein
 benutzerdefiniertes Help kînnte wie folgt aussehen:
 
 ; -----------------------------------------
-; Beispiel fur benutzerdefiniertes Help
+; Beispiel fÅr benutzerdefiniertes Help
 ; -----------------------------------------
 
 -LT=8V          ; Log-File anlegen
@@ -2051,16 +2051,16 @@ Hinweis: Der Name der benutzerdefinierten Help-Datei muû USR.HLP
 \end
 
 screen( "Help-Quelltext",
-		"Help-Sprache",
-		"Help-Language",
-		"Kontextsensitives Help",
-		"Querverweise (Help)",
-		capsensitive("capsensitive"),
-		capsensitive("end"),
-		capsensitive("link"),
-		capsensitive("screen"),
-		capsensitive("sensitive"),
-		capsensitive("#") )
+        "Help-Sprache",
+        "Help-Language",
+        "Kontextsensitives Help",
+        "Querverweise (Help)",
+        capsensitive("capsensitive"),
+        capsensitive("end"),
+        capsensitive("link"),
+        capsensitive("screen"),
+        capsensitive("sensitive"),
+        capsensitive("#") )
 Aufbau eines Help-Quelltextes
 ----------------------------------------------------------------------
 
@@ -2154,7 +2154,7 @@ nicht mîglich.
 \end
 
 screen( "Fehlermeldungen (Help-Compile",
-		"Warnungen (Help-Compiler)" )
+        "Warnungen (Help-Compiler)" )
 Fehlermeldungen und Warnungen des Help Compilers
 ----------------------------------------------------------------------
 
@@ -2201,7 +2201,7 @@ Illegal option character
 Die angegebene \link("Befehlsdateien (Help-Compiler")Option\# existiert nicht.
 
 Missing end of screen
-Fur einen Screen wurde kein \\end gefunden. Dieser Fehler wird erst
+FÅr einen Screen wurde kein \\end gefunden. Dieser Fehler wird erst
 am Ende eines Quelltextes erkannt.
 
 Pending end of string

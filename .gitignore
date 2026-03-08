@@ -1,5 +1,6 @@
 hc
 help_rc
+helpcomp
 *.hlp
 hc.log
 *.pdb
@@ -8,4 +9,5 @@ hc.log
 *.tos
 *.ttp
 *.prg
+*.exe
 aaa.cfg

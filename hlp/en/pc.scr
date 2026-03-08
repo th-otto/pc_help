@@ -240,7 +240,7 @@ The remaining buttons have nothing to do with the calling function:
 \end
 
 screen( "*.PRJ",
-		capsensitive("Project File") )
+        capsensitive("Project File") )
 Project File  (*.PRJ)
 ----------------------------------------------------------------------
 The project file is used by the \#Project\# commands to define which files
@@ -336,7 +336,7 @@ PCTOSLIB.LIB
 \end
 
 screen( "Configuration File",
-		"*.CFG" )
+        "*.CFG" )
 Configuration File  (*.CFG)
 ----------------------------------------------------------------------
 The configuration file contains essentially everything about the
@@ -356,8 +356,8 @@ and/or change the filename used for subsequent saves.
 \end
 
 screen( "Project Database",
-		"Project Help",
-		"*.PDB" )
+        "Project Help",
+        "*.PDB" )
 Project Help  (*.PDB)
 ----------------------------------------------------------------------
 By setting the Project Help flag of the \#Shell Options\#, Pure C will
@@ -525,7 +525,7 @@ When you \#Close\# the Messages window, its contents are erased.
 \end
 
 screen( "Resource File",
-		"*.RSC" )
+        "*.RSC" )
 Resource File  (*.RSC)
 ----------------------------------------------------------------------
 A resource file defines drop-down menus, dialog boxes, icons, and
@@ -1139,7 +1139,7 @@ files to be re-linked.
 \end
 
 screen( "Shell...",
-		capsensitive("Shell Options") )
+        capsensitive("Shell Options") )
 \link("Options Menu")Options\#/Shell                                              \#ALTERNATE\#-Z
 ----------------------------------------------------------------------
 Windows:    \#Auto indent\#       \#Use Clipboard\#
@@ -1212,7 +1212,7 @@ screen( "Standard file selector" )
 \end
 
 screen( "Compiler...",
-		capsensitive("Compiler Options") )
+        capsensitive("Compiler Options") )
 \link("Options Menu")Options\#/Compiler...                                        \#ALTERNATE\#-U
 ----------------------------------------------------------------------
 -A  Generate errors on non-ANSI keywords, like \link("%%GLOBAL%%")cdecl\# or \link("%%GLOBAL%%")pascal\#.
@@ -1272,7 +1272,7 @@ Warning level (0..2) _  (-W option)
 \end
 
 screen( "Assembler...",
-		capsensitive("Assembler Options") )
+        capsensitive("Assembler Options") )
 \link("Options Menu")Options\#/Assembler...                                       \#ALTERNATE\#-I
 ----------------------------------------------------------------------
 -1  Use 68010 instructions; e.g. \link("%%GLOBAL%%")MOVE\# from SR & \link("%%GLOBAL%%")MOVEC\#
@@ -1307,7 +1307,7 @@ Output directory:  (-O option)
 \end
 
 screen( "Linker...",
-		capsensitive("Linker Options") )
+        capsensitive("Linker Options") )
 \link("Options Menu")Options\#/Linker...                                          \#ALTERNATE\#-O
 ----------------------------------------------------------------------
 -G  Add global symbols to symbol table.   (See \#Debug ''\#).
@@ -1365,7 +1365,7 @@ See also Autosave/Configuration flag from \#Shell Options\#.
 \end
 
 screen( "Options Help",
-		capsensitive("Options") )
+        capsensitive("Options") )
 Options Help    (For more information, double-click text in boldface.)
 ----------------------------------------------------------------------
 \#Shell Options\#         - Windows, Autosave, Project Help, Cache
@@ -1396,8 +1396,8 @@ first letter.
 \end
 
 screen( "Linker",
-		capsensitive("PLINK"),
-		capsensitive("_StkSize") )
+        capsensitive("PLINK"),
+        capsensitive("_StkSize") )
 Linker
 ----------------------------------------------------------------------
 ... combines the text, data and BSS segments from several object files
@@ -1876,8 +1876,8 @@ a context sensitive keyword from another help file.
 \end
 
 screen( "Help Compiler - keywords",
-		capsensitive("capsensitive"),
-		capsensitive("sensitive") )
+        capsensitive("capsensitive"),
+        capsensitive("sensitive") )
 Help Compiler - keywords
 ----------------------------------------------------------------------
 The 'screen( )' command argument list consists are one or more

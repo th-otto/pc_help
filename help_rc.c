@@ -7,10 +7,11 @@
 /*     7507 Pfinztal 2                           */
 /*                                               */
 /*  Last changes: 31.01.1992                     */
+/*  Updated to support newer format used by      */
+/*  Pure-Pascal 2026 Thorsten Otto               */
 /*************************************************/
 
 #undef ENABLE_NLS
-#define _GNU_SOURCE 1
 
 #include <stdio.h>
 #include <stddef.h>
@@ -29,7 +30,6 @@
 #endif
 
 #include "help_rc.h"
-#undef fclose
 
 #define _(x) x
 #define g_malloc(n) malloc(n)
@@ -84,6 +84,22 @@ static HLPHDR hlphdr;					/* Header of help-file   */
 static int glbref_cnt;					/* Number of external references */
 static int warnings;					/* Number of warnings issued     */
 static int errors;						/* Number of errors              */
+static int help_format;
+
+/* for old PPH1 style help files */
+#define COMPRESS_CHUNK_SIZE 8192
+
+struct offset {
+	uint16_t offset;
+	int16_t scr_code;
+};
+
+static PPHDR pphdr;						/* Header of help-file   */
+static struct offset *pp_search_table;
+static char *pp_string_table;
+static uint16_t *pp_screen_size_table;
+static uint16_t *pp_compressed_size_table;
+static unsigned int pp_name_cnt;
 
 /*------------- Some flags for control ----------*/
 static unsigned char log_flag;
@@ -91,6 +107,8 @@ static unsigned char txt_flag;
 static unsigned char scr_flag;
 static unsigned char stg_flag;
 static unsigned char with_index;
+static unsigned char keep_cr = TRUE;
+static char const output_nl[] = "\r\n";
 
 static char bold_on[80];
 static char bold_off[80];
@@ -195,9 +213,9 @@ static char form_feed[80];
 #define toomany_files   _("too many files!\n")
 #endif
 
-#define hlp_rc1			_("\n                        HELPFILE DECOMPILER  Ver. 1.1 ")
-#define hlp_rc2         _("\n                        =============================\n")
-#define hlp_rc3         _("\n                                (c) Volker Reichel\n\n")
+#define hlp_rc1			_("                        HELPFILE DECOMPILER  Ver. 1.2%s%s\n")
+#define hlp_rc2         _("                        =============================%s\n")
+#define hlp_rc3         _("                                (c) Volker Reichel\n\n")
 
 /*----- 'get_nibble()' gets its data from here ------*/
 static unsigned char *code_buffer = NULL;
@@ -417,8 +435,7 @@ static void read_info(void)
 	char *s;
 	const char *sp;
 	const char *lp;
-
-	char line[180];
+	char line[256];
 
 	info_file = fopen("help_rc.inf", "r");
 	if (info_file == NULL)
@@ -478,19 +495,30 @@ static uint16_t screen_index(uint16_t scr_code)
 {
 	uint16_t index;
 
-	if ((scr_code & 0x0004) > 0x0004)
+	if (scr_code == LINK_EXTERNAL)
+		return scr_code;
+	switch (help_format)
 	{
-		wr_msg(TO_ALL, ill_code_msg, scr_code);
-		wr_msg(TO_ALL, abort_msg);
-		errors++;
-		exit(EXIT_FAILURE);
+	case 1:
+		if ((scr_code & 0x0004) > 0x0004)
+		{
+			wr_msg(TO_ALL, ill_code_msg, scr_code);
+			wr_msg(TO_ALL, abort_msg);
+			errors++;
+			exit(EXIT_FAILURE);
+		}
+		index = ((scr_code >> 3) & 0xfff) - 1;
+		return index;
+	case 2:
+		return scr_code & ~SCR_SENSITIVE_FLAG;
 	}
-	index = ((scr_code >> 3) & 0xfff) - 1;
-	return index;
+	abort();
+	return 0;
 }
 
 
-static int write_names(NAME_ENTRY *namelist)
+
+static void write_name(NAME_ENTRY *name)
 {
 	static const char *const attr_str[ATTR_CNT] = {
 		"SCRN",
@@ -498,33 +526,57 @@ static int write_names(NAME_ENTRY *namelist)
 		"SENS",
 		"LINK",
 	};
-	int i = 0;
 
-	fprintf(logfile, _("Attr   Code Screen Name\n"));
+	fprintf(logfile, "%s 0x%04x ", attr_str[name->name_attr], name->scr_code);
+	if (name->name_attr == LINK)
+		fprintf(logfile, "0x%04x", name->link_index);
+	else
+		fprintf(logfile, "0x%04x", screen_index(name->scr_code));
+	fprintf(logfile, " %s\n", name->name);
+}
 
-	while (namelist != NULL)
+
+static void wr_screentable(void)
+{
+	char bar[81];
+	int i;
+	unsigned long filepos;
+	
+	wr_msg(TO_SCREEN, _("\n\tWriting screen-table..."));
+	strfill(bar, '=', 80);
+	fprintf(logfile, _("\n\t\n\n%s\n\t\tScreen-table...\n%s\n"), bar, bar);
+	fprintf(logfile, _("Screen  Offset    Length\n"));
+	filepos = 0;
+	for (i = 0; i < screen_cnt; i++)
 	{
-		fprintf(logfile, "%s 0x%04X ", attr_str[namelist->name_attr], namelist->scr_code);
-		if (namelist->name_attr == LINK)
-			fprintf(logfile, "0x%04X", namelist->link_index);
-		else
-			fprintf(logfile, "0x%04X", screen_index(namelist->scr_code));
-		fprintf(logfile, " %s\n", namelist->name);
-		namelist = namelist->next;
-		i++;
+		switch (help_format)
+		{
+		case 1:
+			fprintf(logfile, "  %04x  %08lx  %08lx\n", i, (unsigned long)screen_table[i], (unsigned long)(screen_table[i + 1] - screen_table[i]));
+			break;
+		case 2:
+			fprintf(logfile, "  %04x  %08lx  %08lx\n", i, (unsigned long)filepos, (unsigned long)pp_screen_size_table[i]);
+			filepos += pp_screen_size_table[i];
+			break;
+		}
 	}
-	return i;
 }
 
 
 static void wr_nametable(void)
 {
 	char bar[81];
+	int i;
 
 	wr_msg(TO_SCREEN, wr_nt_msg);
 	strfill(bar, '=', 80);
 	fprintf(logfile, nt_head_msg, bar, bar);
-	write_names(namelist);
+	fprintf(logfile, _("Attr   Code Screen Name\n"));
+
+	for (i = 0; i < name_cnt; i++)
+	{
+		write_name(name_array[i]);
+	}
 	fprintf(logfile, name_cnt_msg, name_cnt);
 }
 
@@ -532,18 +584,20 @@ static void wr_nametable(void)
 static void wr_linktable(void)
 {
 	char bar[81];
+	NAME_ENTRY *name;
 
 	wr_msg(TO_SCREEN, wr_lk_msg);
 	strfill(bar, '=', 80);
 	fprintf(logfile, lk_head_msg, bar, bar);
-	write_names(link_list);
+	for (name = link_list; name != NULL; name = name->next)
+		write_name(name);
 	fprintf(logfile, lk_cnt_msg, link_cnt);
 }
 
 
 static void wr_options(void)
 {
-	wr_msg(TO_ALL, option_msg, log_flag ? 'l' : ' ', txt_flag ? 't' : ' ', scr_flag ? 's' : ' ', stg_flag ? 'g' : ' ', with_index ? 'i' : ' ');
+	wr_msg(TO_LOG, option_msg, log_flag ? 'l' : ' ', txt_flag ? 't' : ' ', scr_flag ? 's' : ' ', stg_flag ? 'g' : ' ', with_index ? 'i' : ' ');
 }
 
 
@@ -554,14 +608,16 @@ static void open_log(void)
 		logfile = fopen(logname, "w");
 		if (logfile == NULL)
 		{
+			/* Log-file cannot be created */
 			fprintf(stderr, log_opn_err, logname);
 			errors++;
 			log_flag = FALSE;
-		} /* Log-file cannot be created */
-		else
+		} else
 		{
 			setvbuf(logfile, NULL, _IOFBF, 32 * 1024L);
-			fprintf(logfile, "%s%s%s%s", hlp_rc1, __DATE__, hlp_rc2, hlp_rc3);
+			fprintf(logfile, hlp_rc1, " ", __DATE__);
+			fprintf(logfile, hlp_rc2, "============");
+			fprintf(logfile, hlp_rc3);
 		}
 	}
 }
@@ -608,22 +664,99 @@ static unsigned char get_byte(void)
 }
 
 
+/*-----------------------------------------------*/
+/*  find_name:                                   */
+/*-----------------------------------------------*/
+/*  Searches in the name-list 'namelist' for the */
+/*  name 'sname' and if successfull returns a    */
+/*  pointer '*pelem' to the found entry.         */
+/*-----------------------------------------------*/
+static NAME_ENTRY *find_name(NAME_ENTRY *namelist, const char *sname)
+{
+	while (namelist != NULL)
+	{
+		if (strcmp(namelist->name, sname) == 0)
+			return namelist;
+		namelist = namelist->next;
+	}
+
+	return NULL;
+}
+
+static NAME_ENTRY *find_screencode(NAME_ENTRY *namelist, uint16_t code)
+{
+	code &= ~SCR_SENSITIVE_FLAG;
+	while (namelist != NULL)
+	{
+		if ((namelist->scr_code & ~SCR_SENSITIVE_FLAG) == code)
+			return namelist;
+		namelist = namelist->next;
+	}
+
+	return NULL;
+}
+
+
+/*-----------------------------------------------*/
+/* ins_name:                                     */
+/*-----------------------------------------------*/
+/*  Inserts the name 'sname' with its attributes */
+/*  code 'attr' and 'lnk_idx' into the name-list */
+/*  '*namelist'. During this the number of       */
+/*  insertions will be counted in '*name_cnt'.   */
+/*-----------------------------------------------*/
+static void ins_name(NAME_ENTRY **namelist, int *name_cnt, const char *sname, uint16_t code, unsigned char attr, uint16_t lnk_idx)
+{
+	NAME_ENTRY *newentry;
+
+	newentry = g_new(NAME_ENTRY, 1);
+	if (!newentry)
+	{
+		wr_msg(TO_ALL, "%s\n", strerror(errno));
+		wr_msg(TO_ALL, abort_msg);
+		errors++;
+		exit(EXIT_FAILURE);
+	}
+	/* Insert at start of list */
+	newentry->next = *namelist;
+	newentry->name_attr = attr;
+	newentry->scr_code = code;
+	newentry->name = g_strdup(sname);
+	newentry->link_index = 0;
+	if (attr == LINK)
+		newentry->link_index = lnk_idx;
+	newentry->name_idx = *name_cnt;
+	*namelist = newentry;
+	(*name_cnt)++;
+}
+
+
 static void wr_header(void)
 {
 	char char_string[sizeof(hlphdr.char_table) * 4 + 1];
 
-	trans_bstr(char_string, hlphdr.char_table, (int)sizeof(hlphdr.char_table));
 	fprintf(logfile, _("\nHeader of Helpfile %s\n\n"), hlpname);
-	fprintf(logfile, _("    Screens                      : %4ld\n"), (long)hlphdr.scr_tab_size >> 2);
-	fprintf(logfile, start_string_msg, (long)hlphdr.str_offset, (long)hlphdr.str_offset);
-	fprintf(logfile, length_msg, (long)hlphdr.str_size, (long)hlphdr.str_size);
-	fprintf(logfile, most_msg, char_string);
-	fprintf(logfile, start_sens_msg, (long)hlphdr.sens_offset, (long)hlphdr.sens_offset);
-	fprintf(logfile, length_msg, (long)hlphdr.sens_size, (long)hlphdr.sens_size);
-	fprintf(logfile, sens_words_msg, (long)hlphdr.sens_cnt, (long)hlphdr.sens_cnt);
-	fprintf(logfile, start_cap_msg, (long)hlphdr.caps_offset, (long)hlphdr.caps_offset);
-	fprintf(logfile, length_msg, (long)hlphdr.caps_size, (long)hlphdr.caps_size);
-	fprintf(logfile, cap_words_msg, (long)hlphdr.caps_cnt, (long)hlphdr.caps_cnt);
+	switch (help_format)
+	{
+	case 1:
+		trans_bstr(char_string, hlphdr.char_table, (int)sizeof(hlphdr.char_table));
+		fprintf(logfile, _("    Screens                      : %4d\n"), screen_cnt);
+		fprintf(logfile, start_string_msg, (long)hlphdr.str_offset, (long)hlphdr.str_offset);
+		fprintf(logfile, length_msg, (long)hlphdr.str_size, (long)hlphdr.str_size);
+		fprintf(logfile, most_msg, char_string);
+		fprintf(logfile, start_sens_msg, (long)hlphdr.sens_offset, (long)hlphdr.sens_offset);
+		fprintf(logfile, length_msg, (long)hlphdr.sens_size, (long)hlphdr.sens_size);
+		fprintf(logfile, sens_words_msg, (long)hlphdr.sens_cnt, (long)hlphdr.sens_cnt);
+		fprintf(logfile, start_cap_msg, (long)hlphdr.caps_offset, (long)hlphdr.caps_offset);
+		fprintf(logfile, length_msg, (long)hlphdr.caps_size, (long)hlphdr.caps_size);
+		fprintf(logfile, cap_words_msg, (long)hlphdr.caps_cnt, (long)hlphdr.caps_cnt);
+		break;
+	case 2:
+		fprintf(logfile, _("    Screens                      : %4d\n"), screen_cnt);
+		fprintf(logfile, _("    Length string table          : %ld (0x%lx)\n"), (long)pphdr.str_size, (long)pphdr.str_size);
+		fprintf(logfile, _("    Number of key words          : %ld (0x%lx)\n"), (long)pp_name_cnt, (long)pp_name_cnt);
+		break;
+	}
 }
 
 
@@ -653,14 +786,70 @@ static int read_key_table(SRCHKEY_ENTRY **ptable, int which)
 	if (size != 0)
 	{
 		table = (SRCHKEY_ENTRY *)g_malloc(size);
-		if (table != NULL)
-			if ((int32_t)fread(table, 1, size, hlpfile) != size)
-				return FALSE;
+		if (table == NULL)
+		{
+			wr_msg(TO_ALL, "%s\n", strerror(errno));
+			wr_msg(TO_ALL, abort_msg);
+			errors++;
+			exit(EXIT_FAILURE);
+		}
+		if ((int32_t)fread(table, 1, size, hlpfile) != size)
+		{
+			wr_msg(TO_ALL, rd_str_err);
+			errors++;
+			exit(EXIT_FAILURE);
+			return FALSE;
+		}
 	}
 	*ptable = table;
 	return table != NULL;
 }
 
+
+static void pp_read_key_table(void)
+{
+	fseek(hlpfile, sizeof(pphdr), SEEK_SET);
+	if (pp_name_cnt != 0)
+	{
+		pp_search_table = g_new(struct offset, pp_name_cnt);
+		if (pp_search_table == NULL)
+		{
+			wr_msg(TO_ALL, "%s\n", strerror(errno));
+			wr_msg(TO_ALL, abort_msg);
+			errors++;
+			exit(EXIT_FAILURE);
+		}
+		if ((uint32_t)fread(pp_search_table, 1, pphdr.search_tab_size, hlpfile) != pphdr.search_tab_size)
+		{
+			wr_msg(TO_ALL, rd_str_err);
+			errors++;
+			exit(EXIT_FAILURE);
+		}
+#ifdef MUST_SWAP
+		{
+			unsigned int i;
+			
+			for (i = 0; i < pp_name_cnt; i++)
+			{
+				pp_search_table[i].offset = be16_to_cpu(pp_search_table[i].offset);
+				pp_search_table[i].scr_code = be16_to_cpu(pp_search_table[i].scr_code);
+			}
+		}
+#endif
+		{
+			unsigned int i;
+			
+			for (i = 0; i < pp_name_cnt; i++)
+			{
+				const char *name = pp_string_table + pp_search_table[i].offset;
+				if (find_name(namelist, name) == NULL)
+				{
+					ins_name(&namelist, &name_cnt, name, pp_search_table[i].scr_code, pp_search_table[i].scr_code & SCR_SENSITIVE_FLAG ? SENSITIVE : CAP_SENS, 0);
+				}
+			}
+		}
+	}
+}
 
 /*---------------------------------------------*/
 /*  read_coded:                                */
@@ -708,42 +897,39 @@ static void wr_keytable(SRCHKEY_ENTRY *table, int cnt)
 static void wr_keytables(void)
 {
 	char bar[81];
+	unsigned int i;
 
-	if (hlphdr.caps_cnt > 0)
+	switch (help_format)
 	{
-		strfill(bar, 'c', 80);
-		fprintf(logfile, capstab_msg, bar, bar);
-		wr_keytable(c_key_table, (int) hlphdr.caps_cnt);
+	case 1:
+		if (hlphdr.caps_cnt > 0)
+		{
+			strfill(bar, 'c', 80);
+			fprintf(logfile, capstab_msg, bar, bar);
+			wr_keytable(c_key_table, (int) hlphdr.caps_cnt);
+		}
+	
+		if (hlphdr.sens_cnt > 0)
+		{
+			strfill(bar, 's', 80);
+			fprintf(logfile, senstab_msg, bar, bar);
+			wr_keytable(key_table, (int) hlphdr.sens_cnt);
+		}
+		break;
+	
+	case 2:
+		if (pp_name_cnt > 0)
+		{
+			strfill(bar, 'k', 80);
+			fprintf(logfile, _("\n\n%s\n        Keyword table\n%s\n"), bar, bar);
+			for (i = 0; i < pp_name_cnt; i++)
+			{
+				char *p = pp_string_table + pp_search_table[i].offset;
+				fprintf(logfile, "        0x%08lx   %04x  \"%s\"\n", (long)pp_search_table[i].offset, (uint16_t)pp_search_table[i].scr_code, p);
+			}
+		}
+		break;
 	}
-
-	if (hlphdr.sens_cnt > 0)
-	{
-		strfill(bar, 's', 80);
-		fprintf(logfile, senstab_msg, bar, bar);
-		wr_keytable(key_table, (int) hlphdr.sens_cnt);
-	}
-}
-
-
-/*-----------------------------------------------*/
-/*  find_name:                                   */
-/*-----------------------------------------------*/
-/*  Searches in the name-list 'namelist' for the */
-/*  name 'sname' and if successfull returns a    */
-/*  pointer '*pelem' to the found entry.         */
-/*-----------------------------------------------*/
-static int find_name(NAME_ENTRY *namelist, char *sname, NAME_ENTRY **pelem)
-{
-	unsigned char found = FALSE;
-
-	while (namelist != NULL && !found)
-	{
-		found = strcmp(namelist->name, sname) == 0;
-		*pelem = namelist;
-		namelist = namelist->next;
-	}
-
-	return found;
 }
 
 
@@ -762,23 +948,140 @@ static void corr_attrs(NAME_ENTRY *namelist)
 	NAME_ENTRY *elem = NULL;
 
 	wr_msg(TO_SCREEN, set_attr_msg);
-	/*----- First the sensitive names ------*/
-	for (i = 0; i < hlphdr.sens_cnt; i++)
+	switch (help_format)
 	{
-		search_name = get_keyword(key_table, i);
-		if (find_name(namelist, search_name, &elem))
-			elem->name_attr = SENSITIVE;
-	}
+	case 1:
+		/*----- First the sensitive names ------*/
+		for (i = 0; i < hlphdr.sens_cnt; i++)
+		{
+			search_name = get_keyword(key_table, i);
+			if ((elem = find_name(namelist, search_name)) != NULL)
+				elem->name_attr = SENSITIVE;
+		}
+	
+		/*----- Now for the capsensitive names */
+		for (i = 0; i < hlphdr.caps_cnt; i++)
+		{
+			search_name = get_keyword(c_key_table, i);
+			if ((elem = find_name(namelist, search_name)) != NULL)
+				elem->name_attr = CAP_SENS;
+		}
+		break;
 
-	/*----- Now for the capsensitive names */
-	for (i = 0; i < hlphdr.caps_cnt; i++)
-	{
-		search_name = get_keyword(c_key_table, i);
-		if (find_name(namelist, search_name, &elem))
-			elem->name_attr = CAP_SENS;
+	case 2:
+		for (i = 0; i < pp_name_cnt; i++)
+		{
+			search_name = pp_string_table + pp_search_table[i].offset;
+			if ((elem = find_name(namelist, search_name)) != NULL)
+			{
+				if (pp_search_table[i].scr_code & SCR_SENSITIVE_FLAG)
+					elem->name_attr = SENSITIVE;
+				else
+					elem->name_attr = CAP_SENS;
+			}
+		}
+		break;
 	}
 }
 
+
+static void help_decompress(FILE *fp, char *buf, size_t size)
+{
+	char *end = buf + size;
+	int c;
+	int len;
+	
+	while (buf < end)
+	{
+		c = fgetc(fp);
+		if ((signed char)c >= 0)
+		{
+			if ((unsigned char)c == 0x7f)
+				c = fgetc(fp);
+			*buf++ = c;
+		} else
+		{
+			char *src;
+			
+			c = (signed char)c << 8;
+			c += fgetc(fp);
+			if ((len = (c & 7)) == 0)
+			{
+				if ((len = fgetc(fp)) == 0)
+				{
+					len = fgetc(fp);
+					len += fgetc(fp) << 8;
+				}
+			}
+			src = &buf[c >> 3];
+			if (end < &buf[len + 2])
+			{
+				len += 2;
+				while (--len >= 0 && buf < end)
+					*buf++ = *src++;
+			} else
+			{
+				*buf++ = *src++;
+				*buf++ = *src++;
+				do
+				{
+					*buf++ = *src++;
+				} while (--len > 0);
+			}
+		}
+	}
+}
+
+
+static int32_t decode_pp(int index, char *buf)
+{
+	short screen_no;
+	uint16_t *screen_table;
+	uint16_t *compressed_table;
+	unsigned long screen_pos;
+	int screen_len;
+	int i;
+	short chunk;
+	long filepos;
+
+	if (index >= MAX_SCREENS || index >= screen_cnt)
+		return 0;
+	screen_no = (short)index;
+	screen_pos = 0;
+	screen_table = pp_screen_size_table;
+	while (--screen_no >= 0)
+	{
+		screen_pos += *screen_table++;
+	}
+	screen_len = *screen_table;
+	if ((unsigned int)screen_len > TXTBUFSIZE || TXTBUFSIZE < COMPRESS_CHUNK_SIZE)
+		return 0;
+	chunk = (short)(screen_pos / COMPRESS_CHUNK_SIZE);
+
+	filepos = sizeof(pphdr) + pphdr.search_tab_size + pphdr.str_size + pphdr.scr_tab_size + pphdr.compr_tab_size;
+	compressed_table = pp_compressed_size_table;
+	while (--chunk >= 0)
+	{
+		filepos += *compressed_table++;
+	}
+
+	fseek(hlpfile, filepos, SEEK_SET);
+	for (i = 0; i < screen_len; )
+	{
+		short offset = (short)screen_pos & (COMPRESS_CHUNK_SIZE - 1);
+		short len = COMPRESS_CHUNK_SIZE - offset;
+		if (len > screen_len - i)
+			len = screen_len - i;
+		help_decompress(hlpfile, buf, offset + len);
+		memmove(buf, &buf[offset], len);
+		buf += len;
+		i += len;
+		screen_pos += len;
+	}
+	*buf = '\0';
+
+	return screen_len;
+}
 
 /*--------------------------------------------------*/
 /*  decode:                                         */
@@ -798,7 +1101,7 @@ static int32_t decode(int index, char *plain_text)
 	int32_t size = 0;
 
 	/*------------- Read the screen -------*/
-	if (index >= MAX_SCREENS || (index + 1) >= screen_cnt || !read_coded(index, code_buffer))
+	if (index >= MAX_SCREENS || index >= screen_cnt || !read_coded(index, code_buffer))
 		return 0;
 
 	curr_coded_text = code_buffer;
@@ -910,50 +1213,13 @@ char *g_strdup(const char *str)
 
 /*** ---------------------------------------------------------------------- ***/
 
-#ifdef __PUREC__
-#undef stpcpy
 /* Copy SRC to DEST, returning the address of the terminating '\0' in DEST.  */
-char *stpcpy(char *dest, const char *src)
+static char *mystpcpy(char *dest, const char *src)
 {
 	while ((*dest++ = *src++) != '\0')
 		;
 	return dest - 1;
 }
-#endif
-
-/*-----------------------------------------------*/
-/* ins_name:                                     */
-/*-----------------------------------------------*/
-/*  Inserts the name 'sname' with its attributes */
-/*  code 'attr' and 'lnk_idx' into the name-list */
-/*  '*namelist'. During this the number of       */
-/*  insertions will be counted in '*name_cnt'.   */
-/*-----------------------------------------------*/
-static void ins_name(NAME_ENTRY **namelist, int *name_cnt, char *sname, uint16_t code, unsigned char attr, uint16_t lnk_idx)
-{
-	NAME_ENTRY *newentry;
-
-	newentry = g_new(NAME_ENTRY, 1);
-	if (!newentry)
-	{
-		wr_msg(TO_ALL, "%s\n", strerror(errno));
-		wr_msg(TO_ALL, abort_msg);
-		errors++;
-		exit(EXIT_FAILURE);
-	}
-	/* Insert at start of list */
-	newentry->next = *namelist;
-	newentry->name_attr = attr;
-	newentry->scr_code = code;
-	newentry->name = g_strdup(sname);
-	newentry->link_index = 0;
-	if (attr == LINK)
-		newentry->link_index = lnk_idx;
-	newentry->name_idx = *name_cnt;
-	*namelist = newentry;
-	(*name_cnt)++;
-}
-
 
 /*-----------------------------------------------*/
 /*  attr_cmp:                                    */
@@ -1024,12 +1290,12 @@ static char *transform_to_hlp(const char *source, int32_t length, char *d)
 	const char *s;
 	const char *limit;
 	NAME_ENTRY *elem;
-	char name[80];
+	char name[128];
 	uint16_t code;
 	int global = FALSE;				/* Global reference */
 	int found;
 	int same_name;
-	
+
 	s = source;
 	limit = source + length;
 	while (s < limit)
@@ -1037,11 +1303,11 @@ static char *transform_to_hlp(const char *source, int32_t length, char *d)
 		switch (*s)
 		{
 		case ESC_CHR:
-			code = (*(unsigned char *) (s + 1)) << 8;
-			code += *(unsigned char *) (s + 2);
-			s += 3;						/* Point to name */
+			s++;
+			code = ((unsigned char)*s++) << 8;
+			code += (unsigned char)*s++;
 			s += get_name(s, limit, name, sizeof(name));
-			if (code == 0xFFFF)
+			if (code == LINK_EXTERNAL)
 			{
 				wr_msg(TO_ALL, glb_ref_msg, name);
 				warnings++;
@@ -1077,16 +1343,16 @@ static char *transform_to_hlp(const char *source, int32_t length, char *d)
 			{
 				const char *namep;
 
-				d = stpcpy(d, "\\link(\"");
+				d = mystpcpy(d, "\\link(\"");
 				if (global)
 				{
-					d = stpcpy(d, "%%GLOBAL%%");
+					d = mystpcpy(d, "%%GLOBAL%%");
 					global = FALSE;
 				} else
 				{
-					d = stpcpy(d, elem->name);
+					d = mystpcpy(d, elem->name);
 				}
-				d = stpcpy(d, "\")");
+				d = mystpcpy(d, "\")");
 				/*
 				 * must quote backslashes here
 				 */
@@ -1097,28 +1363,49 @@ static char *transform_to_hlp(const char *source, int32_t length, char *d)
 						*d++ = BACKSLASH;
 					*d++ = *namep++;
 				}
-				d = stpcpy(d, "\\#");
+				d = mystpcpy(d, "\\#");
 			} else
 			{
-				d = stpcpy(d, "\\#");
-				d = stpcpy(d, elem ? elem->name : name);
-				d = stpcpy(d, "\\#");
+				d = mystpcpy(d, "\\#");
+				d = mystpcpy(d, elem ? elem->name : name);
+				d = mystpcpy(d, "\\#");
 			}
 			break;
 
 		case CR:
-			*d++ = '\n';
-			s++;						/* Jump over LF */
-			if (s < limit && *s == NL)
-				s++;
+			/* Jump over CR/LF */
+			if (keep_cr)
+			{
+				*d++ = '\r';
+			} else
+			{
+				*d++ = '\n';
+			}
+			s++;
+			if (s < limit)
+			{
+				if (*s == NL)
+				{
+					s++;
+					if (keep_cr)
+						*d++ = '\n';
+				}
+			} else
+			{
+				if (keep_cr)
+					*d++ = '\n';
+			}
 			break;
 
 		case NL:
+			/* Jump over LF */
+			if (keep_cr)
+				*d++ = '\r';
 			*d++ = '\n';
-			s++;						/* Jump over LF */
+			s++;
 			break;
 
-		case BACKSLASH:				/* Must be doubled up */
+		case BACKSLASH:						/* Must be doubled up */
 			*d++ = *s++;
 			*d++ = '\\';
 			break;
@@ -1134,6 +1421,38 @@ static char *transform_to_hlp(const char *source, int32_t length, char *d)
 }
 
 
+static void decompile_hlp_screen(uint16_t screen_no, char *textbuffer, char *result)
+{
+	char *end;
+	char *p;
+	int32_t textlength;
+	
+	if (help_format == 2)
+		textlength = decode_pp(screen_no, textbuffer);
+	else
+		textlength = decode(screen_no, textbuffer);
+	end = transform_to_hlp(textbuffer, textlength, result);
+	/*
+	 * spaces at the start of a screen would be skipped by hc,
+	 * we must quote them to get the same output again
+	 */
+	p = result;
+	if (p[0] == ' ')
+	{
+		fputc('\\', scrfile);
+		fputc(' ', scrfile);
+	}
+	fputs(p, scrfile);
+	/*
+	 * hc will always add a newline, do not add another one
+	 */
+	if (end != textbuffer && end[-1] != '\n')
+	{
+		fputs(output_nl, scrfile);
+	}
+	fputs("\\end", scrfile);
+}
+
 /*----------------------------------------------*/
 /*  decompile_to_hlp:                           */
 /*----------------------------------------------*/
@@ -1144,9 +1463,10 @@ static int decompile_to_hlp(void)
 	int i;
 	char *result;
 	char *textbuffer;
-	int32_t textlength;
+	uint16_t last_screen_no;
 
 	wr_msg(TO_SCREEN, decomp_msg);
+	glbref_cnt = 0;
 	result = g_new(char, TXTBUFSIZE);
 	if (!result)
 	{
@@ -1163,11 +1483,7 @@ static int decompile_to_hlp(void)
 		return FALSE;
 	}
 
-	/*----- Sort by attributes -----*/
-	setup_namearr(namelist);
-	qsort(name_array, name_cnt, sizeof(NAME_ENTRY *), attr_cmp);
-
-	scrfile = fopen(scrname, "w");
+	scrfile = fopen(scrname, "wb");
 	if (!scrfile)
 	{
 		wr_msg(TO_ALL, file_creat_err, scrname);
@@ -1175,17 +1491,27 @@ static int decompile_to_hlp(void)
 		return FALSE;
 	}
 
-	setvbuf(scrfile, NULL, _IOFBF, 32 * 1024L);
-
 	i = 0;
+	last_screen_no = -1;
 	while (i < name_cnt)
 	{
 		unsigned char new_screen = TRUE;
 		unsigned char skip_screen = FALSE;
-		uint16_t last_code;
+		uint16_t screen_no;
 
-		last_code = name_array[i]->scr_code;
-		while (i < name_cnt && name_array[i]->scr_code == last_code)
+		screen_no = screen_index(name_array[i]->scr_code);
+		++last_screen_no;
+		if (last_screen_no != screen_no)
+		{
+			/*
+			 * We missed a screen.
+			 * This can still happen if a screen was nowhere referenced.
+			 */
+			fprintf(scrfile, "%s%sscreen( \"page%d\" )%s", output_nl, output_nl, last_screen_no, output_nl);
+			decompile_hlp_screen(last_screen_no, textbuffer, result);
+			continue;
+		}
+		while (i < name_cnt && screen_index(name_array[i]->scr_code) == screen_no)
 		{
 			if (new_screen)
 			{
@@ -1194,19 +1520,21 @@ static int decompile_to_hlp(void)
 				 * "Copyright" and "Index" will be automatically generated by hc,
 				 * so we must skip them in output to avoid getting duplicate names
 				 */
-				if (!with_index && name_array[i]->name_attr == SCR_NAME)
+				if (!with_index && help_format == 1 && name_array[i]->name_attr == SCR_NAME)
 				{
-					if (screen_index(last_code) == 0 || screen_index(last_code) == 1)
+					if (screen_no == 0 || screen_no == 1)
 					{
 						skip_screen = TRUE;
 					}
 				}
 				if (!skip_screen)
-					fprintf(scrfile, "\n\nscreen( ");
+				{
+					fprintf(scrfile, "%s%sscreen( ", output_nl, output_nl);
+				}
 			} else
 			{
 				if (!skip_screen)
-					fprintf(scrfile, ",\n\t\t");
+					fprintf(scrfile, ",%s        ", output_nl);
 			}
 
 			if (!skip_screen)
@@ -1214,27 +1542,7 @@ static int decompile_to_hlp(void)
 				switch (name_array[i]->name_attr)
 				{
 				case SCR_NAME:
-					{
-#if 0
-						NAME_ENTRY *link;
-				
-						/*
-						 * See if there is a link to that screen.
-						 */
-						for (link = link_list; link != NULL; link = link->next)
-						{
-							if (link->scr_code == last_code &&
-								strlen(link->name) > strlen(name_array[i]->name) &&
-								strncmp(link->name, name_array[i]->name, strlen(name_array[i]->name)) == 0)
-							{
-								fprintf(scrfile, "\"%s\"", link->name);
-								break;
-							}
-						}
-						if (link == NULL)
-#endif
-							fprintf(scrfile, "\"%s\"", name_array[i]->name);
-					}
+					fprintf(scrfile, "\"%s\"", name_array[i]->name);
 					break;
 				case SENSITIVE:
 					fprintf(scrfile, "sensitive(\"%s\")", name_array[i]->name);
@@ -1248,32 +1556,12 @@ static int decompile_to_hlp(void)
 		}
 		if (!skip_screen)
 		{
-			char *end;
-			char *p;
-			
-			fprintf(scrfile, " )\n");
-			textlength = decode(screen_index(last_code), textbuffer);
-			end = transform_to_hlp(textbuffer, textlength, result);
-			/*
-			 * spaces at the start of a screen would be skipped by hc,
-			 * we must quote them to get the same output again
-			 */
-			p = result;
-			if (p[0] == ' ')
-			{
-				fputc('\\', scrfile);
-				fputc(' ', scrfile);
-			}
-			fputs(p, scrfile);
-			/*
-			 * hc will always add a newline, do not add another one
-			 */
-			if (end != textbuffer && end[-1] != '\n')
-				fputc('\n', scrfile);
-			fputs("\\end", scrfile);
+			fprintf(scrfile, " )%s", output_nl);
+			decompile_hlp_screen(screen_no, textbuffer, result);
 		}
+		last_screen_no = screen_no;
 	}
-	fprintf(scrfile, "\n");
+	fputs(output_nl, scrfile);
 
 	fclose(scrfile);
 	
@@ -1294,7 +1582,7 @@ static char *transform_to_stg(const char *source, int32_t length, char *d)
 	const char *s;
 	const char *limit;
 	NAME_ENTRY *elem;
-	char name[80];
+	char name[128];
 	uint16_t code;
 	int global = FALSE;				/* Global reference */
 	int found;
@@ -1307,11 +1595,11 @@ static char *transform_to_stg(const char *source, int32_t length, char *d)
 		switch (*s)
 		{
 		case ESC_CHR:
-			code = (*(unsigned char *) (s + 1)) << 8;
-			code += *(unsigned char *) (s + 2);
-			s += 3;						/* Point to name */
+			s++;
+			code = ((unsigned char)*s++) << 8;
+			code += (unsigned char)*s++;
 			s += get_name(s, limit, name, sizeof(name));
-			if (code == 0xFFFF)
+			if (code == LINK_EXTERNAL)
 			{
 				wr_msg(TO_ALL, glb_ref_msg, name);
 				warnings++;
@@ -1337,7 +1625,7 @@ static char *transform_to_stg(const char *source, int32_t length, char *d)
 			{
 				const char *namep;
 
-				d = stpcpy(d, "@{\"");
+				d = mystpcpy(d, "@{\"");
 				/*
 				 * must quote some characters here
 				 */
@@ -1350,7 +1638,7 @@ static char *transform_to_stg(const char *source, int32_t length, char *d)
 						*d++ = '\\';
 					*d++ = *namep++;
 				}
-				d = stpcpy(d, "\" LINK \"");
+				d = mystpcpy(d, "\" LINK \"");
 				/*
 				 * must quote some characters here
 				 */
@@ -1363,7 +1651,7 @@ static char *transform_to_stg(const char *source, int32_t length, char *d)
 						*d++ = '\\';
 					*d++ = *namep++;
 				}
-				d = stpcpy(d, "\"}");
+				d = mystpcpy(d, "\"}");
 				global = FALSE;
 			} else
 			{
@@ -1381,7 +1669,7 @@ static char *transform_to_stg(const char *source, int32_t length, char *d)
 
 		case CR:
 			*d++ = '\n';
-			s++;						/* Jump over LF */
+			s++;						/* Jump over CR/LF */
 			if (s < limit && *s == NL)
 				s++;
 			break;
@@ -1391,7 +1679,7 @@ static char *transform_to_stg(const char *source, int32_t length, char *d)
 			s++;						/* Jump over LF */
 			break;
 
-		case '@':				/* Must be doubled up */
+		case '@':						/* Must be doubled up */
 			*d++ = *s++;
 			*d++ = '@';
 			break;
@@ -1407,6 +1695,22 @@ static char *transform_to_stg(const char *source, int32_t length, char *d)
 }
 
 
+static void decompile_stg_node(uint16_t screen_no, char *textbuffer, char *result)
+{
+	char *end;
+	int32_t textlength;
+	
+	if (help_format == 2)
+		textlength = decode_pp(screen_no, textbuffer);
+	else
+		textlength = decode(screen_no, textbuffer);
+	end = transform_to_stg(textbuffer, textlength, result);
+	fputs(result, scrfile);
+	if (end != textbuffer && end[-1] != '\n')
+		fputc('\n', scrfile);
+	fputs("@endnode\n", scrfile);
+}
+
 /*----------------------------------------------*/
 /*  decompile_to_stg:                           */
 /*----------------------------------------------*/
@@ -1417,9 +1721,10 @@ static int decompile_to_stg(void)
 	int i;
 	char *result;
 	char *textbuffer;
-	int32_t textlength;
+	uint16_t last_screen_no;
 
 	wr_msg(TO_SCREEN, decomp_msg);
+	glbref_cnt = 0;
 	result = g_new(char, TXTBUFSIZE);
 	if (!result)
 	{
@@ -1436,10 +1741,6 @@ static int decompile_to_stg(void)
 		return FALSE;
 	}
 
-	/*----- Sort by attributes -----*/
-	setup_namearr(namelist);
-	qsort(name_array, name_cnt, sizeof(NAME_ENTRY *), attr_cmp);
-
 	scrfile = fopen(stgname, "w");
 	if (!scrfile)
 	{
@@ -1448,8 +1749,6 @@ static int decompile_to_stg(void)
 		return FALSE;
 	}
 
-	setvbuf(scrfile, NULL, _IOFBF, 32 * 1024L);
-
 	fputs("@if VERSION >= 6\n", scrfile);
 	fputs("@charset atarist\n", scrfile);
 	fputs("@inputenc atarist\n", scrfile);
@@ -1457,14 +1756,26 @@ static int decompile_to_stg(void)
 	fputs("@options \"+i -s +z -t4\"\n", scrfile);
 
 	i = 0;
+	last_screen_no = -1;
 	while (i < name_cnt)
 	{
 		unsigned char new_screen = TRUE;
 		unsigned char skip_screen = FALSE;
-		uint16_t last_code;
+		uint16_t screen_no;
 
-		last_code = name_array[i]->scr_code;
-		while (i < name_cnt && name_array[i]->scr_code == last_code)
+		screen_no = screen_index(name_array[i]->scr_code);
+		++last_screen_no;
+		if (last_screen_no != screen_no)
+		{
+			/*
+			 * We missed a screen.
+			 * This can still happen if a screen was nowhere referenced.
+			 */
+			fprintf(scrfile, "\n\nnode \"page%d\"\n", last_screen_no);
+			decompile_stg_node(last_screen_no, textbuffer, result);
+			continue;
+		}
+		while (i < name_cnt && screen_index(name_array[i]->scr_code) == screen_no)
 		{
 			if (new_screen)
 			{
@@ -1472,9 +1783,9 @@ static int decompile_to_stg(void)
 				 * "Copyright" and "Index" will be automatically generated by hc,
 				 * so we must skip them in output to avoid getting duplicate names
 				 */
-				if (!with_index && name_array[i]->name_attr == SCR_NAME)
+				if (!with_index && help_format == 1 && name_array[i]->name_attr == SCR_NAME)
 				{
-					if (screen_index(last_code) == 0 || screen_index(last_code) == 1)
+					if (screen_no == 0 || screen_no == 1)
 					{
 						skip_screen = TRUE;
 					}
@@ -1493,15 +1804,9 @@ static int decompile_to_stg(void)
 		}
 		if (!skip_screen)
 		{
-			char *end;
-			
-			textlength = decode(screen_index(last_code), textbuffer);
-			end = transform_to_stg(textbuffer, textlength, result);
-			fputs(result, scrfile);
-			if (end != textbuffer && end[-1] != '\n')
-				fputc('\n', scrfile);
-			fputs("@endnode\n", scrfile);
+			decompile_stg_node(screen_no, textbuffer, result);
 		}
+		last_screen_no = screen_no;
 	}
 
 	fclose(scrfile);
@@ -1511,6 +1816,54 @@ static int decompile_to_stg(void)
 	
 	return TRUE;
 }
+
+
+#if 0
+static unsigned char const uppercase_table[256] =
+{
+	0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
+	0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
+	0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27,
+	0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f,
+	0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37,
+	0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f,
+	0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47,
+	0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f,
+	0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57,
+	0x58, 0x59, 0x5a, 0x5b, 0x5c, 0x5d, 0x5e, 0x5f,
+	0x60, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47,
+	0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f,
+	0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57,
+	0x58, 0x59, 0x5a, 0x7b, 0x7c, 0x7d, 0x7e, 0x7f,
+	0x80, 0x55, 0x82, 0x83, 0x41, 0x85, 0x86, 0x87,
+	0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x41, 0x8f,
+	0x90, 0x91, 0x92, 0x93, 0x4f, 0x95, 0x96, 0x97,
+	0x98, 0x4f, 0x55, 0x9b, 0x9c, 0x9d, 0x9e, 0x9f,
+	0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7,
+	0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf,
+	0xb0, 0xb1, 0xb2, 0xb3, 0xb4, 0xb5, 0xb6, 0xb7,
+	0xb8, 0xb9, 0xba, 0xbb, 0xbc, 0xbd, 0xbe, 0xbf,
+	0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7,
+	0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf,
+	0xd0, 0xd1, 0xd2, 0xd3, 0xd4, 0xd5, 0xd6, 0xd7,
+	0xd8, 0xd9, 0xda, 0xdb, 0xdc, 0xdd, 0xde, 0xdf,
+	0xe0, 0xe1, 0xe2, 0xe3, 0xe4, 0xe5, 0xe6, 0xe7,
+	0xe8, 0xe9, 0xea, 0xeb, 0xec, 0xed, 0xee, 0xef,
+	0xf0, 0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7,
+	0xf8, 0xf9, 0xfa, 0xfb, 0xfc, 0xfd, 0xfe, 0xff
+};
+
+static void atari_strupr(char *s)
+{
+	while (*s != '\0')
+	{
+		*s = uppercase_table[(unsigned char)*s];
+		s++;
+	}
+}
+#endif
 
 
 /*----------------------------------------------*/
@@ -1528,7 +1881,7 @@ static int is_dir_screen(int32_t offset)
 		uint16_t screen_idx;
 		
 		screen_idx = screen_index(subidx_scrs[i]);
-		if (screen_idx < MAX_SCREENS && (screen_idx + 1) < screen_cnt && screen_table[screen_idx] == offset)
+		if (screen_idx < MAX_SCREENS && screen_idx < screen_cnt && screen_table[screen_idx] == offset)
 			return TRUE;
 	}
 	return FALSE;
@@ -1559,8 +1912,6 @@ static int make_txtfile(void)
 		return FALSE;
 	}
 
-	setvbuf(txtfile, NULL, _IOFBF, 32 * 1024L);
-
 	textbuffer = g_new(char, TXTBUFSIZE);
 	if (!textbuffer)
 	{
@@ -1571,9 +1922,12 @@ static int make_txtfile(void)
 
 	for (index = 0; index < screen_cnt; index++)
 	{
-		if (with_index || !is_dir_screen(screen_table[index]))
+		if (help_format == 2 || with_index || !is_dir_screen(screen_table[index]))
 		{
-			size = decode(index, textbuffer);
+			if (help_format == 2)
+				size = decode_pp(index, textbuffer);
+			else
+				size = decode(index, textbuffer);
 			tp = textbuffer;
 			limit = textbuffer + size;
 			while (tp < limit)
@@ -1583,14 +1937,21 @@ static int make_txtfile(void)
 				case ESC_CHR:
 					fputs(bold_on, txtfile);
 					tp += 3;			/* Skip over cross-reference */
-					while (*tp != ESC_CHR)
+					while (tp < limit && *tp != ESC_CHR)
 						fputc(*tp++, txtfile);
 					fputs(bold_off, txtfile);
 					tp++;
 					break;
 				case CR:
-					tp += 2;			/* Skip over LF */
+					/* Skip over CR/LF */
 					fputc('\n', txtfile);
+					tp++;
+					if (tp < limit && *tp == NL)
+						tp++;
+					break;
+				case NL:
+					fputc('\n', txtfile);
+					tp++;
 					break;
 				default:
 					fputc(*tp++, txtfile);
@@ -1622,13 +1983,16 @@ static int rd_sidx_names(SUB_IDX_ENTRY subidx_code)
 	const char *pos;
 	uint16_t scr_index;					/* Index in screen-table */
 	uint16_t screen_code;				/* that belongs to the name */
-	char screen_name[80];
+	char screen_name[128];
 	const char *limit;
 
 	scr_index = screen_index(subidx_code);
 	if (!screen_done[scr_index])
 	{
-		size = decode(scr_index, plain_text);
+		if (help_format == 2)
+			size = decode_pp(scr_index, plain_text);
+		else
+			size = decode(scr_index, plain_text);
 
 		/* Work through every entry of the IV */
 		pos = plain_text;
@@ -1638,10 +2002,11 @@ static int rd_sidx_names(SUB_IDX_ENTRY subidx_code)
 			if (*pos == ESC_CHR)
 			{
 				pos++;
-				screen_code = *(unsigned char *) pos++ << 8;
-				screen_code += *(unsigned char *) pos++;
+				screen_code = ((unsigned char)*pos++) << 8;
+				screen_code += (unsigned char)*pos++;
 				pos += get_name(pos, limit, screen_name, sizeof(screen_name));
-				ins_name(&namelist, &name_cnt, screen_name, screen_code, SCR_NAME, 0);
+				if (screen_code != LINK_EXTERNAL)
+					ins_name(&namelist, &name_cnt, screen_name, screen_code, SCR_NAME, 0);
 			} else
 			{
 				pos++;
@@ -1672,21 +2037,38 @@ static int read_Link(void)
 	int i;
 	int32_t size;
 	const char *pos;
-	char name[80];
+	char name[128];
 	uint16_t to_code;
-	NAME_ENTRY *elem;
 	const char *limit;
-
+	int first, last;
+	
 	wr_msg(TO_SCREEN, link_msg);
 
-	/*--- Screen 0 Copyright screen 1 Index -----*/
-	for (i = 2; i < screen_cnt - 1; i++)
+	switch (help_format)
+	{
+	case 1:
+		/*--- Screen 0 Copyright screen 1 Index -----*/
+		first = 2;
+		last = screen_cnt;
+		break;
+	case 2:
+		first = 0;
+		last = screen_cnt;
+		break;
+	default:
+		return FALSE;
+	}
+
+	for (i = first; i < last; i++)
 	{
 		/*------ Is it a directory screen?---*/
-		if (!is_dir_screen(screen_table[i]))
+		if (help_format == 2 || !is_dir_screen(screen_table[i]))
 		{
 			/*------ Fetch page and decode it ---*/
-			size = decode(i, plain_text);
+			if (help_format == 2)
+				size = decode_pp(i, plain_text);
+			else
+				size = decode(i, plain_text);
 			/*----- Work through every name -----*/
 			/*----- entry of a screen -----------*/
 			pos = plain_text;
@@ -1696,10 +2078,11 @@ static int read_Link(void)
 				if (*pos == ESC_CHR)
 				{
 					pos++;
-					to_code = *(unsigned char *) pos++ << 8;
-					to_code += *(unsigned char *) pos++;
+					to_code = ((unsigned char)*pos++) << 8;
+					to_code += (unsigned char)*pos++;
 					pos += get_name(pos, limit, name, sizeof(name));
-					if (!find_name(namelist, name, &elem) && !find_name(link_list, name, &elem))
+					if ((to_code == LINK_EXTERNAL || find_name(namelist, name) == NULL) &&
+						find_name(link_list, name) == NULL)
 					{
 						ins_name(&link_list, &link_cnt, name, to_code, LINK, i);
 					}
@@ -1731,7 +2114,7 @@ static int read_Index(void)
 	int sub_idx = 0;					/* Entry being worked on */
 	int i;
 	const char *pos;
-	char name[80];
+	char name[128];
 	uint16_t screen_code;
 
 	wr_msg(TO_SCREEN, rd_idx_msg);
@@ -1750,8 +2133,8 @@ static int read_Index(void)
 		if (*pos == ESC_CHR)
 		{
 			pos++;
-			screen_code = *(unsigned char *) pos++ << 8;
-			screen_code += *(unsigned char *) pos++;
+			screen_code = ((unsigned char)*pos++) << 8;
+			screen_code += (unsigned char)*pos++;
 			if (sub_idx >= INDEX_CNT)
 			{
 				wr_msg(TO_ALL, idx_warn_msg, INDEX_CNT);
@@ -1765,7 +2148,9 @@ static int read_Index(void)
 			if (with_index)
 				ins_name(&namelist, &name_cnt, name, screen_code, SCR_NAME, 0);
 		} else
+		{
 			pos++;
+		}
 	}
 
 	/* Now work through every Sub-index */
@@ -1778,6 +2163,59 @@ static int read_Index(void)
 }
 
 
+static int generate_name_table(void)
+{
+	int i;
+	int32_t size;
+	const char *pos;
+	char name[128];
+	uint16_t to_code;
+	const char *limit;
+	NAME_ENTRY *entry;
+
+	wr_msg(TO_SCREEN, rd_idx_msg);
+
+	for (i = 0; i < screen_cnt; i++)
+	{
+		size = decode_pp(i, plain_text);
+		pos = plain_text;
+		limit = plain_text + size;
+		while (pos < limit)
+		{
+			if (*pos == ESC_CHR)
+			{
+				pos++;
+				to_code = ((unsigned char)*pos++) << 8;
+				to_code += (unsigned char)*pos++;
+				pos += get_name(pos, limit, name, sizeof(name));
+				if (to_code != LINK_EXTERNAL)
+				{
+					if ((entry = find_name(namelist, name)) == NULL)
+					{
+						ins_name(&namelist, &name_cnt, name, to_code, SCR_NAME, 0);
+					} else if (screen_index(to_code) != screen_index(entry->scr_code))
+					{
+						/*
+						 * there are actually sometimes different pages referenced by the same link text
+						 */
+						if (find_screencode(namelist, screen_index(to_code)) == NULL)
+						{
+							sprintf(name, "page%d", screen_index(to_code));
+							ins_name(&namelist, &name_cnt, name, to_code, SCR_NAME, 0);
+						}
+					}
+				}
+			} else
+			{
+				pos++;
+			}
+		}
+	}
+
+	return TRUE;
+}
+
+
 /*----------------------------------------------*/
 /*  is_helpfile:                                */
 /*----------------------------------------------*/
@@ -1786,10 +2224,23 @@ static int read_Index(void)
 static int is_helpfile(void)
 {
 	char buffer[sizeof(hlphdr.magic)];
-
+	PPHDR pphdr;
+	
 	fseek(hlpfile, offsetof(HLPHDR, magic), SEEK_SET);
-	fread(buffer, 1, sizeof(buffer), hlpfile);
-	return strncmp(buffer, HC_MAGIC, sizeof(HC_MAGIC) - 1) == 0;
+	if (fread(buffer, sizeof(buffer), 1, hlpfile) == 1 &&
+		strncmp(buffer, HC_MAGIC, sizeof(HC_MAGIC) - 1) == 0)
+	{
+		help_format = 1;
+		return TRUE;
+	}
+	fseek(hlpfile, 0, SEEK_SET);
+	if (fread(&pphdr, sizeof(pphdr), 1, hlpfile) == 1 &&
+		pphdr.magic == cpu_to_be32(PP_MAGIC))
+	{
+		help_format = 2;
+		return TRUE;
+	}
+	return FALSE;
 }
 
 
@@ -1802,23 +2253,43 @@ static int is_helpfile(void)
 static int read_header(void)
 {
 	unsigned char hlphdr_raw[sizeof(HLPHDR)];
-#define VAL_OFF offsetof(HLPHDR, scr_tab_size)
 
-	fseek(hlpfile, 0, SEEK_SET);
-	if (fread(hlphdr_raw, sizeof(hlphdr_raw), 1, hlpfile) != 1)
-		return FALSE;
-	hlphdr.scr_tab_size = read_int_32(hlphdr_raw + VAL_OFF + 0);
-	hlphdr.str_offset = read_int_32(hlphdr_raw + VAL_OFF + 4);
-	hlphdr.str_size = read_int_32(hlphdr_raw + VAL_OFF + 8);
-	memcpy(hlphdr.char_table, hlphdr_raw + VAL_OFF + 12, sizeof(hlphdr.char_table));
-	hlphdr.caps_offset = read_int_32(hlphdr_raw + VAL_OFF + 24);
-	hlphdr.caps_size = read_int_32(hlphdr_raw + VAL_OFF + 28);
-	hlphdr.caps_cnt = read_int_32(hlphdr_raw + VAL_OFF + 32);
-	hlphdr.sens_offset = read_int_32(hlphdr_raw + VAL_OFF + 36);
-	hlphdr.sens_size = read_int_32(hlphdr_raw + VAL_OFF + 40);
-	hlphdr.sens_cnt = read_int_32(hlphdr_raw + VAL_OFF + 44);
-	return TRUE;
+	switch (help_format)
+	{
+	case 1:
+#define VAL_OFF offsetof(HLPHDR, scr_tab_size)
+		fseek(hlpfile, 0, SEEK_SET);
+		if (fread(hlphdr_raw, sizeof(hlphdr_raw), 1, hlpfile) != 1)
+			return FALSE;
+		hlphdr.scr_tab_size = read_int_32(hlphdr_raw + VAL_OFF + 0);
+		hlphdr.str_offset = read_int_32(hlphdr_raw + VAL_OFF + 4);
+		hlphdr.str_size = read_int_32(hlphdr_raw + VAL_OFF + 8);
+		memcpy(hlphdr.char_table, hlphdr_raw + VAL_OFF + 12, sizeof(hlphdr.char_table));
+		hlphdr.caps_offset = read_int_32(hlphdr_raw + VAL_OFF + 24);
+		hlphdr.caps_size = read_int_32(hlphdr_raw + VAL_OFF + 28);
+		hlphdr.caps_cnt = read_int_32(hlphdr_raw + VAL_OFF + 32);
+		hlphdr.sens_offset = read_int_32(hlphdr_raw + VAL_OFF + 36);
+		hlphdr.sens_size = read_int_32(hlphdr_raw + VAL_OFF + 40);
+		hlphdr.sens_cnt = read_int_32(hlphdr_raw + VAL_OFF + 44);
+		screen_cnt = (int) (hlphdr.scr_tab_size >> 2) - 1;
+		return TRUE;
 #undef VAL_OFF
+	case 2:
+		fseek(hlpfile, 0, SEEK_SET);
+		if (fread(&pphdr, sizeof(pphdr), 1, hlpfile) != 1)
+			return FALSE;
+		pphdr.search_tab_size = be32_to_cpu(pphdr.search_tab_size);
+		pphdr.str_size = be32_to_cpu(pphdr.str_size);
+		pphdr.scr_tab_size = be32_to_cpu(pphdr.scr_tab_size);
+		pphdr.compr_tab_size = be32_to_cpu(pphdr.compr_tab_size);
+		pp_name_cnt = (unsigned int)(pphdr.search_tab_size / 4);
+		pphdr.reserved_20 = be32_to_cpu(pphdr.reserved_20);
+		pphdr.reserved_24 = be32_to_cpu(pphdr.reserved_24);
+		pphdr.reserved_28 = be32_to_cpu(pphdr.reserved_28);
+		screen_cnt = (int) (pphdr.scr_tab_size >> 1);
+		return TRUE;
+	}
+	return FALSE;
 }
 
 
@@ -1830,18 +2301,68 @@ static int read_header(void)
 /*-------------------------------------------*/
 static int read_screen_table(void)
 {
-	uint32_t bytes_read;
 	int i;
+	int chunks;
 
 	wr_msg(TO_SCREEN, rd_scr_msg);
-	fseek(hlpfile, sizeof(HLPHDR), SEEK_SET);
-	screen_cnt = (int) (hlphdr.scr_tab_size >> 2);
-	screen_table = g_new(int32_t, screen_cnt);
-	if (!screen_table)
+	switch (help_format)
 	{
-		wr_msg(TO_ALL, "%s", strerror(errno));
-		return FALSE;
+	case 1:
+		fseek(hlpfile, sizeof(HLPHDR), SEEK_SET);
+		/*--- last entry of table is offset of screen after last one */
+		screen_table = g_new(int32_t, screen_cnt + 1);
+		if (!screen_table)
+		{
+			wr_msg(TO_ALL, "%s", strerror(errno));
+			return FALSE;
+		}
+	
+		if (fread(screen_table, hlphdr.scr_tab_size, 1, hlpfile) != 1)
+			return FALSE;
+#ifdef MUST_SWAP
+		{
+			for (i = 0; i <= screen_cnt; i++)
+			{
+				screen_table[i] = be32_to_cpu(screen_table[i]);
+			}
+		}
+#endif
+		break;
+
+	case 2:
+		fseek(hlpfile, sizeof(pphdr) + pphdr.search_tab_size + pphdr.str_size, SEEK_SET);
+		pp_screen_size_table = g_new(uint16_t, screen_cnt);
+		if (!pp_screen_size_table)
+		{
+			wr_msg(TO_ALL, "%s", strerror(errno));
+			return FALSE;
+		}
+		if (fread(pp_screen_size_table, pphdr.scr_tab_size, 1, hlpfile) != 1)
+			return FALSE;
+		chunks = (int) (pphdr.compr_tab_size >> 1);
+		pp_compressed_size_table = g_new(uint16_t, chunks);
+		if (!pp_compressed_size_table)
+		{
+			wr_msg(TO_ALL, "%s", strerror(errno));
+			return FALSE;
+		}
+		if (fread(pp_compressed_size_table, pphdr.compr_tab_size, 1, hlpfile) != 1)
+			return FALSE;
+#ifdef MUST_SWAP
+		{
+			for (i = 0; i < screen_cnt; i++)
+			{
+				pp_screen_size_table[i] = be16_to_cpu(pp_screen_size_table[i]);
+			}
+			for (i = 0; i < chunks; i++)
+			{
+				pp_compressed_size_table[i] = be16_to_cpu(pp_compressed_size_table[i]);
+			}
+		}
+#endif
+		break;
 	}
+
 	screen_done = g_new(unsigned char, screen_cnt);
 	if (!screen_done)
 	{
@@ -1853,18 +2374,8 @@ static int read_screen_table(void)
 	{
 		screen_done[i] = FALSE;
 	}
-
-	bytes_read = fread(screen_table, 1, hlphdr.scr_tab_size, hlpfile);
-#ifdef MUST_SWAP
-	{
-		unsigned char *p = (unsigned char *)screen_table;
-		for (i = 0; i < screen_cnt; i++)
-		{
-			screen_table[i] = read_int_32(p + i * 4);
-		}
-	}
-#endif
-	return bytes_read == hlphdr.scr_tab_size;
+	
+	return TRUE;
 }
 
 
@@ -1878,15 +2389,30 @@ static int read_string_table(void)
 	uint32_t bytes_read;
 
 	wr_msg(TO_SCREEN, rd_str_msg);
-	string_tab = g_new(unsigned char, hlphdr.str_size);
-	if (!string_tab)
+	switch (help_format)
 	{
-		wr_msg(TO_ALL, "%s", strerror(errno));
-		return FALSE;
+	case 1:
+		string_tab = g_new(unsigned char, hlphdr.str_size);
+		if (!string_tab)
+		{
+			wr_msg(TO_ALL, "%s", strerror(errno));
+			return FALSE;
+		}
+		fseek(hlpfile, hlphdr.str_offset, SEEK_SET);
+		bytes_read = fread(string_tab, 1, hlphdr.str_size, hlpfile);
+		return bytes_read == hlphdr.str_size;
+	case 2:
+		pp_string_table = g_new(char, pphdr.str_size);
+		if (!pp_string_table)
+		{
+			wr_msg(TO_ALL, "%s", strerror(errno));
+			return FALSE;
+		}
+		fseek(hlpfile, sizeof(pphdr) + pphdr.search_tab_size, SEEK_SET);
+		bytes_read = fread(pp_string_table, 1, pphdr.str_size, hlpfile);
+		return bytes_read == pphdr.str_size;
 	}
-	fseek(hlpfile, hlphdr.str_offset, SEEK_SET);
-	bytes_read = fread(string_tab, 1, hlphdr.str_size, hlpfile);
-	return bytes_read == hlphdr.str_size;
+	return FALSE;
 }
 
 
@@ -1894,7 +2420,9 @@ int main(int argc, char *argv[])
 {
 	int i;
 
-	printf("%s%s%s", hlp_rc1, hlp_rc2, hlp_rc3);
+	printf(hlp_rc1, "", "");
+	printf(hlp_rc2, "");
+	printf(hlp_rc3);
 
 	for (i = 1; i < argc; i++)
 	{
@@ -1950,7 +2478,6 @@ int main(int argc, char *argv[])
 		errors++;
 		goto end;
 	}
-	setvbuf(hlpfile, NULL, _IOFBF, 4 * 1024L);
 
 	if (!is_helpfile())
 	{
@@ -1976,10 +2503,23 @@ int main(int argc, char *argv[])
 		goto end;
 	}
 
-	read_key_table(&key_table, SENS_TABLE);
-	read_key_table(&c_key_table, CAP_TABLE);
-	if (log_flag)
-		wr_keytables();
+	if (!read_string_table())
+	{
+		wr_msg(TO_ALL, rd_str_err);
+		errors++;
+		goto end;
+	}
+
+	switch (help_format)
+	{
+	case 1:
+		read_key_table(&key_table, SENS_TABLE);
+		read_key_table(&c_key_table, CAP_TABLE);
+		break;
+	case 2:
+		pp_read_key_table();
+		break;
+	}
 
 	if (!read_screen_table())
 	{
@@ -1989,25 +2529,42 @@ int main(int argc, char *argv[])
 	}
 	wr_msg(TO_SCREEN, scr_cnt_msg, screen_cnt);
 
-	if (!read_string_table())
+	if (log_flag)
+		wr_keytables();
+
+	switch (help_format)
 	{
-		wr_msg(TO_ALL, rd_str_err);
-		errors++;
-		goto end;
+	case 1:
+		if (!read_Index())
+		{
+			wr_msg(TO_ALL, rd_idx_err);
+			errors++;
+			goto end;
+		}
+		break;
+	case 2:
+		/* there is no index, we have to go through all screens */
+		if (!generate_name_table())
+		{
+			errors++;
+			goto end;
+		}
+		break;
 	}
 
-	if (!read_Index())
-	{
-		wr_msg(TO_ALL, rd_idx_err);
-		errors++;
-		goto end;
-	}
-
+	read_Link();
 	corr_attrs(namelist);
+
+	/*----- Sort by attributes -----*/
+	setup_namearr(namelist);
+	qsort(name_array, name_cnt, sizeof(NAME_ENTRY *), attr_cmp);
+
+	if (log_flag)
+		wr_screentable();
+
 	if (log_flag)
 		wr_nametable();
 
-	read_Link();
 	if (log_flag)
 		wr_linktable();
 
@@ -2046,7 +2603,7 @@ int main(int argc, char *argv[])
 	wr_msg(TO_ALL, final_msg, errors, warnings, glbref_cnt);
 	if (hlpfile)
 		fclose(hlpfile);
-	if (log_flag)
+	if (logfile)
 		fclose(logfile);
 	
 	g_free(screen_table);
@@ -2057,7 +2614,11 @@ int main(int argc, char *argv[])
 	g_free(key_table);
 	g_free(c_key_table);
 	g_free(string_tab);
-	
+	g_free(pp_search_table);
+	g_free(pp_string_table);
+	g_free(pp_screen_size_table);
+	g_free(pp_compressed_size_table);
+
 	{
 		NAME_ENTRY *ent, *next;
 		for (ent = namelist; ent != NULL; ent = next)

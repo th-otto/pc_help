@@ -171,7 +171,7 @@ See also \#Modules\#.
 \end
 
 screen( "Breakpoints",
-		"Breakpoints Window" )
+        "Breakpoints Window" )
 \#View\#/Breakpoints                                             \#CONTROL\#-B
 ----------------------------------------------------------------------
 ... opens a window to show a list of all current breakpoints.
@@ -187,7 +187,7 @@ outline of a 'stop sign' icon in a \#Source Window\# or \#Assembly Window\#.
 \end
 
 screen( "Variables",
-		"Variables Window" )
+        "Variables Window" )
 \#View\#/Variables                                               \#CONTROL\#-V
 ----------------------------------------------------------------------
 ... opens a window to show a list of variable names along with their
@@ -217,7 +217,7 @@ See also \#Action\#/\#Change...\#.
 \end
 
 screen( "Watches Window",
-		"Watches" )
+        "Watches" )
 \#View\#/Watches                                                 \#CONTROL\#-E
 ----------------------------------------------------------------------
 ... opens a window showing a list a variables and/or expressions
@@ -234,7 +234,7 @@ See also \#Action\#/\#Delete\#, \#Delete all\#, \#Change...\# and \#Configuratio
 \end
 
 screen( "Modules",
-		"Modules Window" )
+        "Modules Window" )
 \#View\#/Modules                                                 \#CONTROL\#-M
 ----------------------------------------------------------------------
 ... a window showing a list of module names.  Double clicking any name
@@ -245,7 +245,7 @@ RETURN key to open a \#Source Window\#.
 \end
 
 screen( "Stack",
-		"Trace Window" )
+        "Trace Window" )
 \#View\#/Stack                                                   \#CONTROL\#-T                  
 ----------------------------------------------------------------------
 ... opens a window showing a list of function names in the order in
@@ -254,7 +254,7 @@ the depth to which a recursive routine has called itself.
 \end
 
 screen( "Assembly Window",
-		"Assembly..." )
+        "Assembly..." )
 \#View\#/Assembly...                                             \#CONTROL\#-A
 ----------------------------------------------------------------------
 ... asks for an absolute \#address\# or a function (or variable) name,
@@ -280,7 +280,7 @@ See also \#Source Window\# and \#Dump Window\#.
 \end
 
 screen( "Dump Window",
-		"Dump..." )
+        "Dump..." )
 \#View\#/Dump...                                                 \#CONTROL\#-D
 ----------------------------------------------------------------------
 ... asks for an absolute \#address\# or a variable (or function) name,
@@ -305,7 +305,7 @@ the RETURN key to execute the \#Change...\# command.
 \end
 
 screen( "CPU",
-		"CPU Window" )
+        "CPU Window" )
 \#View\#/CPU                                                     \#CONTROL\#-C
 ----------------------------------------------------------------------
 ... opens a window showing the contents of the registers.
@@ -336,7 +336,7 @@ See also \#Action\#/\#Change...\#
 \end
 
 screen( "File Window",
-		"File..." )
+        "File..." )
 \#View\#/File...                                                 \#CONTROL\#-H
 ----------------------------------------------------------------------
 ... uses the \#File Selector\# with the '.*' extension set to open a file
@@ -351,7 +351,7 @@ See also \#Action\#/\#Find...\#, \#Find Same\# and \#Goto Line...\#
 \end
 
 screen( "Log",
-		"Log Window" )
+        "Log Window" )
 \#View\#/Log                                                     \#CONTROL\#-J
 ----------------------------------------------------------------------
 ... opens a window showing a record of actions and events:
@@ -432,7 +432,7 @@ See also \#Breakpoints Window\#, \#Source Window\# and \#Assembly Window\#.
 \end
 
 screen( "Inspect Window",
-		"Inspect..." )
+        "Inspect..." )
 \#Action\#/Inspect...                                          \#ALTERNATE\#-I
 ----------------------------------------------------------------------
 ... asks for an \#expression\#, then opens a window showing the value,
@@ -787,7 +787,7 @@ The remaining buttons have nothing to do with the calling function:
 \end
 
 screen( "Configuration File",
-		"*.CFG" )
+        "*.CFG" )
 Configuration File  (*.CFG)
 ----------------------------------------------------------------------
 The configuration file contains essentially everything about the
@@ -1127,13 +1127,13 @@ address.
 \end
 
 screen( capsensitive("Assembler Options"),
-		capsensitive("Compiler Options"),
-		capsensitive("Check Braces"),
-		capsensitive("Editor"),
-		capsensitive("Find Error"),
-		capsensitive("Linker Options"),
-		capsensitive("Project File"),
-		capsensitive("Shell Options") )
+        capsensitive("Compiler Options"),
+        capsensitive("Check Braces"),
+        capsensitive("Editor"),
+        capsensitive("Find Error"),
+        capsensitive("Linker Options"),
+        capsensitive("Project File"),
+        capsensitive("Shell Options") )
 The requested keyword is found in PC.HLP
 ----------------------------------------------------------------------
 Assembler Options
@@ -1151,8 +1151,8 @@ information.
 \end
 
 screen( "Linker",
-		capsensitive("PLINK"),
-		capsensitive("_StkSize") )
+        capsensitive("PLINK"),
+        capsensitive("_StkSize") )
 Linker
 ----------------------------------------------------------------------
 ... combines the text, data and BSS segments from several object files

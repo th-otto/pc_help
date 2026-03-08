@@ -186,7 +186,7 @@ Variable Parameter Lists:
 \end
 
 screen( capsensitive("GEM"),
-		capsensitive("GEMDOS") )
+        capsensitive("GEMDOS") )
 GEM Functions  (Graphics Environment Manager)
 ----------------------------------------------------------------------
 File I/O (handles):
@@ -2102,7 +2102,7 @@ See also \#Standard Library\#.
 \end
 
 screen( capsensitive("exit"),
-		capsensitive("_exit") )
+        capsensitive("_exit") )
 #include <stdlib.h>
 
 void exit( int status );
@@ -3033,7 +3033,7 @@ See also \#String & Character\#.
 \end
 
 screen( capsensitive("strcmpi"),
-		capsensitive("stricmp") )
+        capsensitive("stricmp") )
 #include <string.h>
 
 int strcmpi( const unsigned char *s1, const unsigned char *s2 );
@@ -3055,7 +3055,7 @@ See also \#String & Character\#.
 \end
 
 screen( capsensitive("strncmpi"),
-		capsensitive("strnicmp") )
+        capsensitive("strnicmp") )
 #include <string.h>
 
 int strncmpi( const unsigned char *s1, const unsigned char *s2,
@@ -4863,7 +4863,7 @@ See also \#GEMDOS\# and \#exit\#().
 \end
 
 screen( capsensitive("Fsfirst"),
-		capsensitive("Fsnext") )
+        capsensitive("Fsnext") )
 #include <tos.h>
 
 int Fsfirst( const char *filename, int attrib );
@@ -6383,7 +6383,7 @@ See also \#XBIOS Misc\#.
 \end
 
 screen( capsensitive("EsetShift"),
-		capsensitive("Esetshift") )
+        capsensitive("Esetshift") )
 #include <tos.h> 
 
 int Esetshift( int shftMode );
@@ -6402,7 +6402,7 @@ See also \#XBIOS Video\#.
 \end
 
 screen( capsensitive("EgetShift"),
-		capsensitive("Egetshift") )
+        capsensitive("Egetshift") )
 #include <tos.h> 
 
 int Egetshift( void );
@@ -6546,7 +6546,7 @@ See also \#XBIOS Video\#.
 \end
 
 screen( capsensitive("VsetMode"),
-		capsensitive("Vsetmode") )
+        capsensitive("Vsetmode") )
 #include <tos.h> 
 
 int Vsetmode( int modecode );
@@ -6579,7 +6579,7 @@ See also \#XBIOS Video\# and \#VsetScreen\#().
 \end
 
 screen( capsensitive("mon_type"),
-		capsensitive("VgetMonitor") )
+        capsensitive("VgetMonitor") )
 #include <tos.h> 
 
 int mon_type( void );
@@ -7336,7 +7336,7 @@ See also \#XBIOS Sound\# and \link("%%GLOBAL%%")DSP56001\#.
 \end
 
 screen( capsensitive("locksnd"),
-		capsensitive("Locksnd") )
+        capsensitive("Locksnd") )
 #include <tos.h> 
 
 long locksnd( void );
@@ -7353,7 +7353,7 @@ See also \#XBIOS Sound\#.
 \end
 
 screen( capsensitive("unlocksnd"),
-		capsensitive("Unlocksnd") )
+        capsensitive("Unlocksnd") )
 #include <tos.h> 
 
 long unlocksnd( void );
@@ -7370,7 +7370,7 @@ See also \#XBIOS Sound\#.
 \end
 
 screen( capsensitive("soundcmd"),
-		capsensitive("Soundcmd") )
+        capsensitive("Soundcmd") )
 #include <tos.h> 
 
 long soundcmd( int mode, int data );
@@ -7420,7 +7420,7 @@ Increasing values increase input signal by 1.5 dB per increment.
 \end
 
 screen( capsensitive("setbuffer"),
-		capsensitive("Setbuffer") )
+        capsensitive("Setbuffer") )
 #include <tos.h> 
 
 long setbuffer( int reg, void *begaddr, void *endaddr );
@@ -7441,7 +7441,7 @@ See also \#XBIOS Sound\#.
 \end
 
 screen( capsensitive("setmode"),
-		capsensitive("Setmode") )
+        capsensitive("Setmode") )
 #include <tos.h> 
 
 long setmode( int mode );
@@ -7462,7 +7462,7 @@ See also \#XBIOS Sound\#.
 \end
 
 screen( capsensitive("settracks"),
-		capsensitive("Settracks") )
+        capsensitive("Settracks") )
 #include <tos.h> 
 
 long settracks( int playtracks, int rectracks );
@@ -7482,7 +7482,7 @@ See also \#XBIOS Sound\#.
 \end
 
 screen( capsensitive("setmontracks"),
-		capsensitive("Setmontracks") )
+        capsensitive("Setmontracks") )
 #include <tos.h> 
 
 long setmontracks( int montrack );
@@ -7501,7 +7501,7 @@ See also \#XBIOS Sound\#.
 \end
 
 screen( capsensitive("setinterrupt"),
-		capsensitive("Setinterrupt") )
+        capsensitive("Setinterrupt") )
 #include <tos.h> 
 
 long setinterrupt( int src_inter, int cause );
@@ -7530,7 +7530,7 @@ See also \#XBIOS Sound\#.
 \end
 
 screen( capsensitive("buffoper"),
-		capsensitive("Buffoper") )
+        capsensitive("Buffoper") )
 #include <tos.h> 
 
 long buffoper( int mode );
@@ -7553,7 +7553,7 @@ See also \#XBIOS Sound\#.
 \end
 
 screen( capsensitive("dsptristate"),
-		capsensitive("Dsptristate") )
+        capsensitive("Dsptristate") )
 #include <tos.h> 
 
 long dsptristate( int dspxmit, int dsprec );
@@ -7577,7 +7577,7 @@ See also \#XBIOS Sound\# and \link("%%GLOBAL%%")DSP56001\#.
 \end
 
 screen( capsensitive("gpio"),
-		capsensitive("Gpio") )
+        capsensitive("Gpio") )
 #include <tos.h> 
 
 long gpio( int mode, int data );
@@ -7601,7 +7601,7 @@ See also \#XBIOS Sound\# and \link("%%GLOBAL%%")DSP56001\#.
 \end
 
 screen( capsensitive("devconnect"),
-		capsensitive("Devconnect") )
+        capsensitive("Devconnect") )
 #include <tos.h> 
 
 long devconnect( int src, int dst, int srcclk, int prescale,
@@ -7639,7 +7639,7 @@ See also \#XBIOS Sound\#, \link("%%GLOBAL%%")DSP56001\# and \link("%%GLOBAL%%")D
 \end
 
 screen( capsensitive("sndstatus"),
-		capsensitive("Sndstatus") )
+        capsensitive("Sndstatus") )
 #include <tos.h> 
 
 long sndstatus( int reset );
@@ -7667,7 +7667,7 @@ See also \#XBIOS Sound\#.
 \end
 
 screen( capsensitive("buffptr"),
-		capsensitive("Buffptr") )
+        capsensitive("Buffptr") )
 #include <tos.h> 
 
 long buffptr( long *ptr );
@@ -8148,7 +8148,7 @@ See also \#Messages\# and \#wind_set\#().
 \end
 
 screen( capsensitive("WM_NEWTOP"),
-		capsensitive("WM_ONTOP") )
+        capsensitive("WM_ONTOP") )
 WM_NEWTOP / WM_ONTOP                                           <aes.h>
 ----------------------------------------------------------------------
 This window is now the top window (no action required).
@@ -8519,7 +8519,7 @@ WF_TOP                                                         <aes.h>
 \end
 
 screen( capsensitive("WF_FIRSTXYWH"),
-		capsensitive("WF_NEXTXYWH") )
+        capsensitive("WF_NEXTXYWH") )
 WF_FIRSTXYWH & WF_NEXTXYWH                                     <aes.h>
 ----------------------------------------------------------------------
 These are used to redraw the work area of a partially obscured window.
@@ -10493,7 +10493,7 @@ See also \#Form\#, \#objc_find\#() and \#objc_change\#().
 \end
 
 screen( capsensitive("graf_rubberbox"),
-		capsensitive("graf_rubbox") )
+        capsensitive("graf_rubbox") )
 #include <aes.h>
 
 int graf_rubberbox( int x, int y, int min_width, int min_height,
@@ -10549,7 +10549,7 @@ See also \#Graphics\#.
 \end
 
 screen( capsensitive("graf_mbox"),
-		capsensitive("graf_movebox") )
+        capsensitive("graf_movebox") )
 #include <aes.h>
 
 int graf_movebox( int width, int height, int source_x, int source_y,
@@ -14306,7 +14306,7 @@ See also \#VDI Alpha Escapes\#.
 \end
 
 screen( capsensitive("v_curaddress"),
-		capsensitive("vs_curaddress") )
+        capsensitive("vs_curaddress") )
 #include <vdi.h>
 
 void  v_curaddress( int handle, int row, int column );
@@ -16023,7 +16023,7 @@ See also \#PCEXTLIB\# and \#Dsetdrv\#().
 \end
 
 screen( capsensitive("findfirst"),
-		capsensitive("findnext") )
+        capsensitive("findnext") )
 #include <ext.h>
 
 int findfirst( const char *filename, struct \#ffblk\# *ffblk,
@@ -16379,7 +16379,7 @@ See \#draw_sprite\#() and \#undraw_sprite\#().
 \end
 
 screen( capsensitive("FONT_HDR"),
-		capsensitive("fonthrd") )
+        capsensitive("fonthrd") )
 Bitmap Font Header                                           <linea.h>
 ----------------------------------------------------------------------
 typedef struct fonthdr {
@@ -16979,7 +16979,7 @@ See also \#Line A\#.
 \end
 
 screen( capsensitive("BGI"),
-		capsensitive("PCBGILIB") )
+        capsensitive("PCBGILIB") )
 PCBGILIB - Borland Graphics Interface                     <graphics.h>
 ----------------------------------------------------------------------
 ... is a graphics package which is portable to Turbo C on an IBM PC.
@@ -22271,7 +22271,7 @@ In binary mode, no conversions are performed on the data and the
 \end
 
 screen( "GEMDOS handle",
-		"I/O handle" )
+        "I/O handle" )
 GEMDOS file handles
 -----------------------------------------------------------------------
 Files opened by \#Fopen\# or \#Fcreate\# are assigned an int handle
@@ -22901,7 +22901,7 @@ Free_space_in_bytes = (b_free * b_clsiz * b_secsiz);
 \end
 
 screen( capsensitive("BASPAG"),
-		capsensitive("baspag") )
+        capsensitive("baspag") )
 Base Page Structure                                            <tos.h>
 ----------------------------------------------------------------------
 typedef struct baspag
@@ -23170,8 +23170,8 @@ in each subdirectory are for "." and ".." (see \#Pathnames\#).
 \end
 
 screen( capsensitive("SYSHDR"),
-		capsensitive("the_magic"),
-		capsensitive("_syshdr") )
+        capsensitive("the_magic"),
+        capsensitive("_syshdr") )
 GEMDOS System Header                                           <tos.h>
 ----------------------------------------------------------------------
 typedef struct _syshdr
@@ -23378,8 +23378,8 @@ See also \#Prtblk\#(), \#Physbase\#(), \#Getrez\#() and \#Setprt\#().
 \end
 
 screen( capsensitive("MD"),
-		capsensitive("MPB"),
-		capsensitive("__md") )
+        capsensitive("MPB"),
+        capsensitive("__md") )
 Memory Parameter Block                                         <tos.h>
 ----------------------------------------------------------------------
 typedef struct __md
@@ -23401,7 +23401,7 @@ See also \#Getmpb\#() and \#OS Pool\#.
 \end
 
 screen( capsensitive("BCONMAP"),
-		capsensitive("MAPTAB") )
+        capsensitive("MAPTAB") )
 Mapable I/O Port Vector Table                                  <tos.h>
 ----------------------------------------------------------------------
 typedef struct
@@ -23454,8 +23454,8 @@ ob_x and ob_y are relative to its parent object.
 \end
 
 screen( capsensitive("bfobspec"),
-		capsensitive("OBSPEC"),
-		capsensitive("obspecptr") )
+        capsensitive("OBSPEC"),
+        capsensitive("obspecptr") )
 AES \#OBJECT\# Specification/Pointer                               <aes.h>
 ----------------------------------------------------------------------
 typedef struct                    /* \#Box Spec\# or \#Color Spec\#        */
@@ -23514,7 +23514,7 @@ See also \#objc_draw\#() and \#form_do\#().
 \end
 
 screen( "template",
-		"validation" )
+        "validation" )
 \#TEDINFO\# template and validation strings
 ----------------------------------------------------------------------
 The template string separates fixed from editable characters ('_').
@@ -23585,9 +23585,9 @@ See also \#Default Colors\#.
 \end
 
 screen( capsensitive("CICON"),
-		capsensitive("CICONBLK"),
-		capsensitive("cicon_blk"),
-		capsensitive("cicon_data") )
+        capsensitive("CICONBLK"),
+        capsensitive("cicon_blk"),
+        capsensitive("cicon_data") )
 AES Color Icon Block                                           <aes.h>
 ----------------------------------------------------------------------
 typedef struct cicon_data
@@ -23665,7 +23665,7 @@ See also \#objc_draw\#() and \#objc_change\#().
 \end
 
 screen( capsensitive("PARMBLK"),
-		capsensitive("__parmblk") )
+        capsensitive("__parmblk") )
 AES User Provided \#OBJECT\# Parameter Block                       <aes.h>
 ----------------------------------------------------------------------
 typedef struct __parmblk
@@ -23713,7 +23713,7 @@ See also \#menu_settings\#().
 \end
 
 screen( capsensitive("GEMPARBLK"),
-		capsensitive("_GemParBlk") )
+        capsensitive("_GemParBlk") )
 Global Arrays used to Pass \#AES\# Parameters                      <aes.h>
 ----------------------------------------------------------------------
 typedef struct
@@ -23779,7 +23779,7 @@ See also \#GEMPARBLK\#, \#AESPB\# and \#_crystal\#().
 \end
 
 screen( capsensitive("RSHDR"),
-		capsensitive("rshdr") )
+        capsensitive("rshdr") )
 \#Resource\# File Header                                           <aes.h>
 ----------------------------------------------------------------------
 typedef struct rshdr
@@ -23897,7 +23897,7 @@ See also \#Event\#, \#evnt_multi\#() and \link("%%GLOBAL%%")Scan Codes\#.
 \end
 
 screen( capsensitive("MFORM"),
-		capsensitive("mfstr") )
+        capsensitive("mfstr") )
 Mouse Form Definition                                          <aes.h>
 ----------------------------------------------------------------------
 typedef struct mfstr
@@ -23924,7 +23924,7 @@ See also \#graf_mouse\#() and \#vsc_form\#().
 \end
 
 screen( capsensitive("VDIPARBLK"),
-		capsensitive("_VDIParBlk") )
+        capsensitive("_VDIParBlk") )
 Global Arrays used to Pass \#VDI\# Parameters                      <vdi.h>
 ----------------------------------------------------------------------
 typedef struct
@@ -24457,9 +24457,9 @@ See also \#getarccoords\#().
 \end
 
 screen( capsensitive("PCSTART"),
-		capsensitive("__BSS"),
-		capsensitive("__data"),
-		capsensitive("__text") )
+        capsensitive("__BSS"),
+        capsensitive("__data"),
+        capsensitive("__text") )
 PCSTART.O
 ----------------------------------------------------------------------
 ... is the stub program which calls function \link("%%GLOBAL%%")main\#().

@@ -1,8 +1,8 @@
 
 
 screen( "Haupt-MenÅ",
-		"MenÅleiste",
-		capsensitive("Menu") )
+        "MenÅleiste",
+        capsensitive("Menu") )
 Die MenÅleiste
 ----------------------------------------------------------------------
 
@@ -10,7 +10,7 @@ Die MenÅleiste
 \end
 
 screen( "Debugger (MenÅ)",
-		"Versionsnummer" )
+        "Versionsnummer" )
 Der MenÅtitel 'Debugger'
 ----------------------------------------------------------------------
 
@@ -19,8 +19,8 @@ Versionsnummer Ihres Debuggers befindet.
 \end
 
 screen( "File-MenÅ",
-		"MenÅ, File-",
-		capsensitive("File") )
+        "MenÅ, File-",
+        capsensitive("File") )
 Der MenÅtitel 'File'
 ----------------------------------------------------------------------
 
@@ -34,8 +34,8 @@ Der MenÅtitel 'File'
 \end
 
 screen( "MenÅ, View-",
-		"View-MenÅ",
-		capsensitive("View") )
+        "View-MenÅ",
+        capsensitive("View") )
 Der MenÅtitel 'View'
 ----------------------------------------------------------------------
 
@@ -56,8 +56,8 @@ Der MenÅtitel 'View'
 \end
 
 screen( "Action-MenÅ",
-		"MenÅ, Action-",
-		capsensitive("Action") )
+        "MenÅ, Action-",
+        capsensitive("Action") )
 Der MenÅtitel 'Action'
 ----------------------------------------------------------------------
 
@@ -78,7 +78,7 @@ Der MenÅtitel 'Action'
 \end
 
 screen( "MenÅ, Run-",
-		capsensitive("Run-MenÅ") )
+        capsensitive("Run-MenÅ") )
 Der MenÅtitel 'Run'
 ----------------------------------------------------------------------
 
@@ -94,8 +94,8 @@ Der MenÅtitel 'Run'
 \end
 
 screen( "MenÅ, Options-",
-		"Options-MenÅ",
-		capsensitive("Options") )
+        "Options-MenÅ",
+        capsensitive("Options") )
 Der MenÅtitel 'Options'
 ----------------------------------------------------------------------
 
@@ -108,8 +108,8 @@ Der MenÅtitel 'Options'
 \end
 
 screen( "Help-MenÅ",
-		"MenÅ, Help-",
-		capsensitive("Help") )
+        "MenÅ, Help-",
+        capsensitive("Help") )
 Der MenÅtitel 'Help'
 ----------------------------------------------------------------------
 
@@ -136,8 +136,8 @@ Fenster oder durch DrÅcken der Tastenkombination \#CONTROL\#-U.
 \end
 
 screen( "File/Load...",
-		"Programm laden",
-		capsensitive("Load...") )
+        "Programm laden",
+        capsensitive("Load...") )
 \#File\#/Load                                                    \#CONTROL\#-O
 ----------------------------------------------------------------------
 
@@ -150,9 +150,9 @@ drÅcken Sie RETURN oder verwenden Sie den Maus-Doppelklick.
 \end
 
 screen( "File/Info...",
-		"Informationen zum Prg.",
-		"Programm-Informationen",
-		capsensitive("Info...") )
+        "Informationen zum Prg.",
+        "Programm-Informationen",
+        capsensitive("Info...") )
 \#File\#/Info                                                    \#CONTROL\#-I
 ----------------------------------------------------------------------
 
@@ -166,8 +166,8 @@ Dialogbox, die man mit RETURN verlassen kann.
 \end
 
 screen( "File/Close Window",
-		"Fenster, Schlieûen der",
-		capsensitive("Close Window") )
+        "Fenster, Schlieûen der",
+        capsensitive("Close Window") )
 \#File\#/Close Window                                            \#CONTROL\#-U
 ----------------------------------------------------------------------
 
@@ -176,8 +176,8 @@ wieder schlie·en.
 \end
 
 screen( "File/Close Windows",
-		"Fenster, Wechseln der",
-		capsensitive("Cycle Windows") )
+        "Fenster, Wechseln der",
+        capsensitive("Cycle Windows") )
 \#File\#/Cycle Window                                            \#CONTROL\#-W
 ----------------------------------------------------------------------
 
@@ -186,9 +186,9 @@ Befehl \#File\#/Cycle Window zyklisch durchblÑttern.
 \end
 
 screen( "Ende",
-		"File/Quit",
-		"Programm beenden",
-		capsensitive("Quit") )
+        "File/Quit",
+        "Programm beenden",
+        capsensitive("Quit") )
 \#File\#/Quit                                                    \#CONTROL\#-Q
 ----------------------------------------------------------------------
 
@@ -202,11 +202,11 @@ Querverweis:   \#Konfigurationsdatei\#
 \end
 
 screen( "Betrachten von Funkt.",
-		"Finden von Funkt.",
-		"Funktionen ansehen",
-		"Suchen von Funkt.",
-		"View/Function",
-		capsensitive("Function...") )
+        "Finden von Funkt.",
+        "Funktionen ansehen",
+        "Suchen von Funkt.",
+        "View/Function",
+        capsensitive("Function...") )
 \#View\#/Function...                                             \#CONTROL\#-S
 ----------------------------------------------------------------------
 
@@ -219,11 +219,11 @@ befinden.
 \end
 
 screen( "Breakpoint-Fenster",
-		"Breakpoint-Liste",
-		"Fenster, Breakpoint-",
-		"Liste der Breakpoints",
-		"View, Brekpoints",
-		capsensitive("Breakpoints") )
+        "Breakpoint-Liste",
+        "Fenster, Breakpoint-",
+        "Liste der Breakpoints",
+        "View, Brekpoints",
+        capsensitive("Breakpoints") )
 \#View\#/Breakpoints                                             \#CONTROL\#-B
 ----------------------------------------------------------------------
 
@@ -236,13 +236,13 @@ Breakpoints haben.
 \end
 
 screen( "Fenster, Variables-",
-		"Funktionen-Liste",
-		"Liste der Funktionen",
-		"Liste der Variablen",
-		"Variablen-Fenster",
-		"Variablen-Liste",
-		"View/Variables",
-		capsensitive("Variables") )
+        "Funktionen-Liste",
+        "Liste der Funktionen",
+        "Liste der Variablen",
+        "Variablen-Fenster",
+        "Variablen-Liste",
+        "View/Variables",
+        capsensitive("Variables") )
 \#View\#/Variables                                               \#CONTROL\#-V
 ----------------------------------------------------------------------
 
@@ -281,11 +281,11 @@ ab bewegen.
 \end
 
 screen( "AusdrÅcke auswerten",
-		"Auswertung von AusdrÅcken",
-		"Betrachten von AusdrÅcken",
-		"View/Watches",
-		"Watch-Fenster",
-		capsensitive("Watches") )
+        "Auswertung von AusdrÅcken",
+        "Betrachten von AusdrÅcken",
+        "View/Watches",
+        "Watch-Fenster",
+        capsensitive("Watches") )
 \#View\#/Watches                                                 \#CONTROL\#-E
 ----------------------------------------------------------------------
 
@@ -302,11 +302,11 @@ EintrÑge erhalten.
 \end
 
 screen( "Fenster, Modules-",
-		"Liste der Quelltexte",
-		"Modules-Fenster",
-		"Quelltext-Liste",
-		"View/Modules",
-		capsensitive("Modules") )
+        "Liste der Quelltexte",
+        "Modules-Fenster",
+        "Quelltext-Liste",
+        "View/Modules",
+        capsensitive("Modules") )
 \#View\#/Modules                                                 \#CONTROL\#-M
 ----------------------------------------------------------------------
 
@@ -317,11 +317,11 @@ darstellen.
 \end
 
 screen( "Aufrufreihenfolge der Funktio",
-		"Fenster, Stack-",
-		"Funktionen, Aufrufreihenfolge",
-		"Stack-Fenster",
-		"View/Stack",
-		capsensitive("Stack") )
+        "Fenster, Stack-",
+        "Funktionen, Aufrufreihenfolge",
+        "Stack-Fenster",
+        "View/Stack",
+        capsensitive("Stack") )
 \#View\#/Stack                                                   \#CONTROL\#-T
 ----------------------------------------------------------------------
 
@@ -329,8 +329,8 @@ Das Stack-Fenster zeigt die Aufrufreihenfolge der Funktionen.
 \end
 
 screen( "Assembly",
-		"Assembly-Fenster",
-		capsensitive("Assembly...") )
+        "Assembly-Fenster",
+        capsensitive("Assembly...") )
 \#View\#/Assembly...                                             \#CONTROL\#-A
 ----------------------------------------------------------------------
 
@@ -342,9 +342,9 @@ Assembler-Code.
 \end
 
 screen( "Dump-Fenster",
-		"Fenster, Dump-",
-		"View/Dump",
-		capsensitive("Dump...") )
+        "Fenster, Dump-",
+        "View/Dump",
+        capsensitive("Dump...") )
 \#View\#/Dump                                                    \#CONTROL\#-D
 ----------------------------------------------------------------------
 
@@ -367,10 +367,10 @@ Zeile.
 \end
 
 screen( "MC 680x0",
-		"MC 68881/2",
-		"680x0",
-		"68881/2",
-		capsensitive("CPU") )
+        "MC 68881/2",
+        "680x0",
+        "68881/2",
+        capsensitive("CPU") )
 \#View\#/CPU                                                     \#CONTROL\#-C
 ----------------------------------------------------------------------
 
@@ -394,7 +394,7 @@ das Flieûkomma-Befehlsadressregister \link("%%GLOBAL%%")FPIAR\# angezeigt.
 \end
 
 screen( "Datei-Fenster",
-		capsensitive("File...") )
+        capsensitive("File...") )
 \#View\#/File                                                    \#CONTROL\#-H
 ----------------------------------------------------------------------
 
@@ -409,8 +409,8 @@ ist.
 \end
 
 screen( "Log-Datei",
-		"Log-Fenster",
-		capsensitive("Log") )
+        "Log-Fenster",
+        capsensitive("Log") )
 \#View\#/Log                                                     \#CONTROL\#-J
 ----------------------------------------------------------------------
 
@@ -500,7 +500,7 @@ Textende positioniert.
 \end
 
 screen( "Breakpoint-Formular",
-		capsensitive("Breakpoint...") )
+        capsensitive("Breakpoint...") )
 \#Action\#/Breakpoint...                                       \#ALTERNATE\#-B
 ----------------------------------------------------------------------
 
@@ -611,7 +611,7 @@ Querverweis:   \#Breakpoint-Formular\#
 \end
 
 screen( "DurchlaufzÑhler",
-		"Pass count" )
+        "Pass count" )
 Pass count
 ----------------------------------------------------------------------
 
@@ -628,14 +628,14 @@ Querverweis:   \#Breakpoint-Formular\#
 \end
 
 screen( "Aktivieren eines Breakpoints",
-		"Breakpoint aktivieren",
-		"Breakpoint deaktivieren",
-		"Breakpoint disable",
-		"Breakpoint enable",
-		"Disable",
-		"Deaktivieren eines Breakpoint",
-		"Enable/Disable",
-		"Enable" )
+        "Breakpoint aktivieren",
+        "Breakpoint deaktivieren",
+        "Breakpoint disable",
+        "Breakpoint enable",
+        "Disable",
+        "Deaktivieren eines Breakpoint",
+        "Enable/Disable",
+        "Enable" )
 Enable/Disable
 ----------------------------------------------------------------------
 
@@ -654,7 +654,7 @@ Querverweis:   \#Breakpoint-Formular\#
 \end
 
 screen( "Breakpoint, einfacher",
-		"Einfacher Breakpoint" )
+        "Einfacher Breakpoint" )
 Einfacher Breakpoint
 ----------------------------------------------------------------------
 
@@ -669,8 +669,8 @@ Sie einen Doppelklick auf der linken vertikalen Randleiste in einem
 \end
 
 screen( "Breakpoint, globaler",
-		"Globaler Breakpoint",
-		"Watchpoint" )
+        "Globaler Breakpoint",
+        "Watchpoint" )
 Globaler Breakpoint
 ----------------------------------------------------------------------
 
@@ -686,7 +686,7 @@ Optionen auswÑhlen kînnen.
 \end
 
 screen( "Breakpoint, komplexer",
-		"Komplexer Breakpoint" )
+        "Komplexer Breakpoint" )
 Komplexer Breakpoint
 ----------------------------------------------------------------------
 
@@ -703,9 +703,9 @@ erreicht wird.
 \end
 
 screen( "Action/Inspect...",
-		"Fenster, Inspect-",
-		"Inspect-Fenster",
-		capsensitive("Inspect...") )
+        "Fenster, Inspect-",
+        "Inspect-Fenster",
+        capsensitive("Inspect...") )
 \#Action\#/Inspect...                                          \#ALTERNATE\#-I
 ----------------------------------------------------------------------
 
@@ -748,7 +748,7 @@ eingeben. Falls Sie zuvor eine Variable oder einen Ausdruck im
 \end
 
 screen( "Taschenrechner",
-		capsensitive("Log...") )
+        capsensitive("Log...") )
 \#Action\#/Log...                                              \#ALTERNATE\#-L
 ----------------------------------------------------------------------
 
@@ -984,7 +984,7 @@ Debugger zu beeinflussen:
 \end
 
 screen( "Bildschirmumschaltung",
-		"Display swapping via" )
+        "Display swapping via" )
 Display swapping via
 ----------------------------------------------------------------------
 
@@ -1037,8 +1037,8 @@ Methoden.
 \end
 
 screen( "Farbbildschirme",
-		"Grafikkarten",
-		"Use VDI graphics" )
+        "Grafikkarten",
+        "Use VDI graphics" )
 Use VDI graphics
 ----------------------------------------------------------------------
 
@@ -1084,7 +1084,7 @@ Eine neue Konfigurationsdatei legen Sie an, indem Sie in der
 \end
 
 screen( "Konfigurationsdatei",
-		capsensitive("Save") )
+        capsensitive("Save") )
 \#Options\#/Save                                              \#ALTERNATE\#-H
 ----------------------------------------------------------------------
 
@@ -1154,7 +1154,7 @@ Querverweis:   \#Display swapping\#
 \end
 
 screen( "Default tab size",
-		"Tabulatorgrîûe" )
+        "Tabulatorgrîûe" )
 Default tab size - Tabulatorgrîûe
 ----------------------------------------------------------------------
 
@@ -1212,7 +1212,7 @@ Querverweis:   \#Display swapping\#
 \end
 
 screen( "Hotkeys",
-		"Shortcuts" )
+        "Shortcuts" )
 Hotkeys
 ----------------------------------------------------------------------
 
@@ -1357,8 +1357,8 @@ sind sie jedoch leicht aufzuspÅren.
 \end
 
 screen( "Bewegung in den Fenstern mitt",
-		"Cursor",
-		"Cursorbewegung" )
+        "Cursor",
+        "Cursorbewegung" )
 Bewegung in den Fenstern mittels Tastatur
 ----------------------------------------------------------------------
 
@@ -1399,7 +1399,7 @@ Unter folgenden Bedingungen ist ein Abbruch nicht mîglich:
 \end
 
 screen( "Quelltext",
-		"Quelltext-Fenster" )
+        "Quelltext-Fenster" )
 Quelltext-Fenster
 ----------------------------------------------------------------------
 

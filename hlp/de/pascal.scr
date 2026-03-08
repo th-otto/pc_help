@@ -1,0 +1,3478 @@
+
+
+screen( sensitive("PASCAL") )
+Pascal auf einen Blick                                          Pascal
+----------------------------------------------------------------------
+
+\#Sprachelemente\#
+\#Konstantendeklarationen\#
+\#Typdeklarationen\#
+\#Variablendeklarationen\#
+\#AusdrÅcke\#
+\#Anweisungen\#
+\#Prozedurdeklarationen\#
+\#Programme\#
+\#Units\#
+\#Compiler-Direktiven\#
+\#Pure Pascal intern\#
+\end
+
+screen( "Sprachelemente" )
+Sprachelemente                                                  Pascal
+----------------------------------------------------------------------
+
+Pascal-Programme bestehen aus Grundelementen, sogenannten Tokens.
+Innerhalb dieser Grundelemente sind Leerzeichen und Zeilen-
+vorschÅbe nicht erlaubt (mit Ausnahme von Stringkonstanten und
+Kommentaren, s.u.).
+
+Folgende Zeichen haben in Pure Pascal eine festgelegte Bedeutung:
+
+  +  -  *  /  =  <  >  [  ]  .  ,  (  )  :  ;  ^  @
+
+Und folgende Paare von Zeichen:
+
+  :=  <=  >=  <>  ..
+
+
+Reservierte Wîrter
+------------------
+
+Eine festgelegte Bedeutung haben auch die sogenannten reser-
+vierten Wîrter von Pure Pascal:
+
+  \#and\#          \#file\#             \#not\#       \#string\#
+  \#array\#        \#for\#              \#object\#    \#then\#
+  \#begin\#        \#function\#         \#of\#        \#to\#
+  \#case\#         \#goto\#             \#or\#        \#type\#
+  \#const\#        \#if\#               \#packed\#    \#unit\#
+  \#constructor\#  \#implementation\#   \#procedure\# \#until\#
+  \#destructor\#   \#in\#               \#program\#   \#uses\#
+  \#div\#          \#inherited\#        \#record\#    \#var\#
+  \#do\#           \#interface\#        \#repeat\#    \#while\#
+  \#downto\#       \#label\#            \#set\#       \#with\#
+  \#else\#         \#mod\#              \#shl\#       \#xor\#
+  \#end\#          \#nil\#              \#shr\#
+
+Groû- und Kleinschreibung spielt hierbei keine Rolle,
+Sie kînnen reservierte Wîrter also auch groû schreiben.
+
+Direktiven haben nur bei bestimmten Deklarationen
+eine festgelegte Bedeutung:
+
+  \#absolute\#     \#external\#         \#forward\#     \#private\#
+  \#virtual\#
+
+
+Bezeichner
+----------
+
+Sogenannte Bezeichner stehen fÅr deklarierte Konstanten, Typen,
+Variablen, Prozeduren, Funktionen, Felder, Units und Programme.
+Sie beginnen mit einem Buchstaben (A bis Z oder a bis z),
+gefolgt von Buchstaben, Ziffern (0 bis 9) oder Unterstreichungs-
+zeichen ('_'). Beachten Sie, daû Umlaute und das 'û' nicht in
+Bezeichnern vorkommen dÅrfen. Beispiele fÅr Bezeichner:
+
+  i  real  Ein_ziemlich_langer_Bezeicher  VT52
+
+Bezeichner kînnen in Pure Pascal bis zu 255 Zeichen lang sein,
+wobei alle Zeichen signifikant sind. Wie bei reservierten Wîrtern
+kommt es nicht auf Groû- und Kleinschreibung an, fÅr den Compiler
+ist also z.B. kein Unterschied zwischen VT52 und vt52.
+
+
+Numerische Werte
+----------------
+
+Numerische Werte werden normalerweise in Dezimalnotation als
+ganze oder Flieûkommazahlen angegeben. Pure Pascal erlaubt
+jedoch auch die Verwendung von Hexadezimalkonstanten, die
+aus einem Dollarzeichen ($) gefolgt von Hexadezimalziffern
+(0 bis 9, A bis F und a bis f) bestehen.
+
+Beispiele fÅr numerische Werte:
+
+  1  42  00100
+  3.14  3e8  1.4E-1
+  $1F0000  $D  $002a
+
+Der Skalenfaktor nach 'e' in einer Flieûkommazahl ist als
+"mal 10 hoch ..." zu verstehen, 1.4e-1 ist also dasselbe wie 0.14.
+
+
+Stringkonstanten
+----------------
+
+Stringkonstanten bestehen in ihrer einfachsten Form aus einer
+beliebigen Folge von Zeichen, die von Hochkommata begrenzt werden:
+
+  'A'  'Pascal'  'Ein etwas lÑngerer String'
+
+Hochkommata selbst und Zeilenenden dÅrfen jedoch nicht in String-
+konstanten enthalten sein. Deshalb hat man sich Ersatzdarstellungen
+fÅr diese und Ñhnlich spezielle Zeichen einfallen lassen. Hoch-
+kommate kînnen innerhalb von Stringkonstanten dadurch angegeben
+werden, daû man sie einfach zweimal hinschreibt, z.B.:
+
+  'Wie geht''s'  'Sei''s drum'  ''''
+
+Das letzte Beispiel ist also ein String, der nur ein einzelnes
+Hochkomma enthÑlt.
+
+Beliebige Zeichen kînnen durch das Symbol #, gefolgt von einer
+ganzen Zahl in Dezimal- oder Hexadezimalschreibweise dargestellt
+werden. Beispielsweise steht #13 oder #$d fÅr das ASCII-Zeichen
+WagenrÅcklauf (carriage return). Hier einige Beispiele:
+
+  'Zeile1'#13#10'Zeile 2'  #7'Hallo, hallo'#7
+
+
+Kommentare
+----------
+
+Kommentare werden durch das Zeichen { oder (* eingeleitet und
+durch eine entsprechende schlieûende Klammer } oder *) beendet.
+Sie werden vom Compiler wie ein einzelnes Leerzeichen betrachtet,
+trennen also Tokens, werden sonst jedoch ignoriert. Beispiele:
+
+  { Dies ist ein Kommentar }
+  (* Kommentare dÅrfen auch
+     ZeilenvorschÅbe beinhalten
+  *)
+
+Kommentare dÅrfen in Pascal nicht geschachtelt werden, das heiût
+man darf einen Kommentar nicht in einen weiteren einschlieûen.
+In Pure Pascal (und auch Turbo Pascal) geht das allerdings doch,
+wenn man den Trick verwendet, den Ñuûeren Kommentar durch die
+jeweils andere Sorte von Klammern einzuschlieûen. Beispiel:
+
+  (* Dieser Kommentar enthÑlt { einen weiteren Kommentar } *)
+
+Es stimmt nicht ganz, daû der Inhalt von Kommentaren vom Compiler
+vîllig ignoriert wird - wenn das erste Zeichen nach der îffnenden
+Klammer ein $-Zeichen ist, wird der Kommentar als \#Compiler-Direktive\#
+angesehen.
+
+
+ZeilenlÑnge
+-----------
+
+Der Compiler erwartet, daû der Quelltext aus Zeilen von maximal
+256 Zeichen LÑnge besteht. Als Zeilenende gilt dabei das ASCII-
+Zeichen fÅr WagenrÅcklauf (carriage return). Zeilen mit mehr
+als 256 Zeichen LÑnge fÅhren zu einer Fehlermeldung.
+\end
+
+screen( "Konstantendeklarationen",
+        "const",
+        sensitive("CONST") )
+Konstantendeklarationen                                         Pascal
+----------------------------------------------------------------------
+
+Konstantendeklarationen dienen dazu, Konstanten mit Namen zu
+versehen. Strenggenommen sind diese Deklarationen ÅberflÅssig -
+Åberall wo der Name verwendet wird, kînnte man auch den ver-
+einbarten Wert der Konstante einsetzen. Jedoch wird das Programm
+durch die Verwendung von Namen fÅr Werte lesbarer. Auûerdem sind
+énderungen leichter durchfÅhrbar, da der Wert nur an einer Stelle
+im Programm angegeben ist.
+
+Konstantendeklarationen bestehen aus dem reservierten Wort const,
+gefolgt von beliebig vielen Vereinbarungen der Form
+
+  Name = Wert;
+
+Beispiele:
+
+  const
+    Pi = 3.141592653589793238;    { Kreiszahl pi }
+    Answer = 42;                  { Siehe Hitchhiker's Guide... }
+    SpeedOfLight = 2.998e8;       { Meter pro Sekunde }
+    SpeedLimit = SpeedOfLight;    { Verwendung bereits definierter Namen }
+    CarriageReturn = #13;         { ASCII fÅr WagenrÅcklauf }
+    MeinName = 'Gantenbein';      { Siehe Max Frisch }
+    GrossBuchstaben = ['A'..'Z']; { Mengen-Konstante, siehe \#set\# }
+
+In Pure Pascal und Turbo Pascal gibt es auch Konstantenvereinbarungen
+fÅr Arrays, Records usw. Diese werden unter \#typisierte Konstanten\#
+besprochen.
+
+Neu in Borland Pascal 7.0 und Pure Pascal 1.1 sind \#konstante Parameter\#
+\end
+
+screen( "typisierte Konstanten" )
+typisierte Konstanten                                           Pascal
+----------------------------------------------------------------------
+
+Bei typisierten Konstanten wird in der Deklaration auch der Datentyp
+mit angegeben. Die allgemeine Form der Vereinbarung einer solchen Kon-
+stante lautet:
+
+  const
+    Name : Typ = Wert;
+
+Beispiele:
+
+  const
+    max : integer = 999;
+    eps : real = 1e-18;
+    hello : string[11] = 'Hello world';
+    buchstaben : set of char = [ 'A' .. 'Z', 'a' .. 'z' ];
+
+Typisierte Konstanten dÅrfen auch von Array-, Record-, Objekt-, Zeiger-,
+und Prozedurtypen gebildet werden. FÅr Array-Typen werden dafÅr die
+Werte der einzelnen Elemente in runden Klammern aufgelistet, z.B.:
+
+  const
+    tabelle : array [ 0 .. 3 ] of byte = ( 0, 2, 3, 1 );
+    matrix  : array [ 1 .. 3 , 1 .. 4 ] of real =
+                  ( ( 1.0, 0.0, 0.0, 0.0 ),
+                    ( 0.0, 1.0, 0.0, 0.0 ),
+                    ( 0.0, 0.0, 1.0, 0.0 ) );
+
+Bei Record- und Objekt-Typen muû jeweils der Feldname des betreffenden
+Elements angegeben werden. Beispiel:
+
+  type
+    Datum = record
+              tag:   1..31;
+              monat: 1..12;
+              jahr:  integer;
+            end;
+
+  const
+    termin : Datum = (tag: 12; monat: 6; jahr: 1992);
+
+Bei Objekt-Typen wird kein Wert fÅr Methoden angegeben.
+
+Bei Zeigertypen darf entweder der Wert \#nil\# angegeben werden oder
+die Adresse einer globalen Variable oder typisierten Konstante. Beispiel:
+
+  type
+    NamenZeiger = ^NamenEintrag;
+    NamenEintrag = record
+                     naechster: NamenZeiger;
+                     name: ^string;
+                   end;
+
+  const
+    hugo : string = 'Hugo';
+    eintrag : NamenEintrag = (naechster : nil; name : @hugo);
+
+FÅr Prozedur- und Funktionstypen ist der Name einer kompatiblen Prozedur
+oder Funktion anzugeben. Beispiel:
+
+  type
+    FatalProc = procedure(errorMessage : string);
+
+  procedure FatalError(errorMessage : string);
+  begin
+    writeln(errorMessage);
+    Halt(1);
+  end;
+
+  const
+    fatalErrorHook : FatalProc = FatalError;
+
+Typisierte Konstanten in Pure Pascal sind nicht wirklich konstant - man
+darf ihnen auch Werte zuweisen (aus GrÅnden der KompatibilitÑt mit
+Turbo Pascal). Wir raten von solchen Praktiken jedoch ab - Konstanten
+sollten sich nicht verÑndern, und wenn initialisierte Variablen ge-
+braucht werden, sollten diese im Initialisierungsteil der betreffenden
+Unit initialisiert werden.
+\end
+
+screen( "Typdeklarationen",
+        "type",
+        sensitive("TYPE") )
+Typdeklarationen                                                Pascal
+----------------------------------------------------------------------
+
+Mit Typdeklarationen vereinbart man Namen fÅr Datentypen. Die Form
+einer Typdeklaration ist Ñhnlich wie die einer Konstantendeklaration:
+ZunÑchst kommt das reservierte Wort \#type\#, dann beliebig viele
+Vereinbarungen der Form
+
+  Name = Typ;
+
+Das Typsystem von Pascal bietet nun sehr viele Mîglichkeiten dafÅr,
+was ein Typ sein kann. Es gibt:
+
+  \#Integer-Typen\#
+  \#Typ Char\#
+  \#Typ Boolean\#
+  \#Real-Typen\#
+  \#AufzÑhlungstypen\#
+  \#Unterbereichstypen\#
+  \#Array-Typen\#
+  \#String-Typen\#
+  \#Record-Typen\#
+  \#Objekt-Typen\#
+  \#Set-Typen\#
+  \#Datei-Typen\#
+  \#Zeiger-Typen\#
+  \#Prozedur-Typen\#
+
+Hier noch einige recht einfache Beispiele:
+
+  type
+    index = 1..10;                   (* Werte von 1 bis 10      *)
+    vector = Array [1..10] of real;  (* Vektor mit 10 Elementen *)
+    point = record x, y: real end;   (* Punkt mit zwei Koordinaten *)
+\end
+
+screen( "Integer-Typen",
+        "byte",
+        "word",
+        "integer",
+        "shortint",
+        "longint",
+        sensitive("BYTE"),
+        sensitive("INTEGER"),
+        sensitive("LONGINT"),
+        sensitive("SHORTINT"),
+        sensitive("WORD") )
+Integer-Typen                                                   Pascal
+----------------------------------------------------------------------
+
+Integer-Typen stellen einfach ganze Zahlen dar. Die fÅnf vordefinierten
+Integer-Typen unterscheiden sich im Wertebereich und im Speicherbedarf:
+
+  Typ                 Bereich           Speicherbedarf
+----------------------------------------------------------------
+  Integer         -32768 .. 32767        2 Byte (16 Bit)
+  Byte                 0 .. 255          1 Byte (8 Bit)
+  Shortint          -128 .. 127          1 Byte (8 Bit)
+  Word                 0 .. 65535        2 Byte (16 Bit)
+  Longint    -2147483648 .. 2147483647   4 Byte (32 Bit)
+----------------------------------------------------------------
+
+In arithmetischen AusdrÅcken kînnen verschiedene Integer-Typen beliebig
+gemischt werden. Der Compiler berechnet den Wert von UnterausdrÅcken
+in einem \#gemeinsamen Typ\#, der groû genug ist, die Typen beider Operanden
+zu umfassen. Eine Addition einer Byte- und einer Integervariable wÅrde
+beispielsweise im Typ Integer ausgefÅhrt.
+\end
+
+screen( "Typ Char",
+        "char",
+        sensitive("CHAR") )
+Datentyp Char                                                   Pascal
+----------------------------------------------------------------------
+
+Der Datentyp char wird fÅr einzelne Zeichen verwendet. Diese werden
+als ASCII-Zeichen (8 Bit) kodiert. Jedem Zeichen entspricht eine
+fortlaufende Zahl, die Sie mit der Standardfunktion \link("%%GLOBAL%%")Ord\# heraus-
+finden kînnen. Umgekehrt kînnen Zahlen zwischen 0 und 255 mittels
+der Funktion \link("%%GLOBAL%%")Chr\# in Zeichen umgewandelt werden. Konstanten des
+Typs char werden in Pascal wie Stringkonstanten der LÑnge 1 geschrieben.
+
+Beachten Sie bitte, daû deutsche Umlaute sowie das 'û' auf unter-
+schiedlichen Computersystemen leider nicht einheitlich kodiert sind.
+Dies fÅhrt oft zu Problemen bei der öbertragung deutscher Texte.
+\end
+
+screen( "Typ Boolean",
+        "true",
+        "false",
+        "boolean",
+        sensitive("BOOLEAN"),
+        sensitive("FALSE"),
+        sensitive("TRUE") )
+Datentyp Boolean                                                Pascal
+----------------------------------------------------------------------
+
+Der Typ boolean dient zur Darstellung von sogenannten Wahrheitswerten.
+Er hat nur zwei mîgliche Werte, nÑmlich die vordefinierten Konstanten
+\#true\# und \#false\#.
+
+Vergleichsoperatoren in Pascal liefern stets boole'sche Resultate,
+viele strukturierte Anweisungen erfordern boole'sche AusdrÅcke
+als Bedingung.
+\end
+
+screen( "Real-Typen",
+        "single",
+        "double",
+        "real",
+        "extended",
+        sensitive("DOUBLE"),
+        sensitive("EXTENDED"),
+        sensitive("REAL"),
+        sensitive("SINGLE") )
+Real-Typen                                                      Pascal
+----------------------------------------------------------------------
+
+Real-Typen kînnen im Gegensatz zu Integer-Typen nicht nur ganze, sondern
+auch gebrochene Zahlen darstellen.
+
+Die verschiedenen vordefinierten Real-Typen unterscheiden sich in den
+Parametern Genauigkeit, Wertebereich und Speicherbedarf:
+
+  Typ    Genauigkeit         Bereich           Speicherbedarf
+-------------------------------------------------------------------
+  single      7-8  Stellen    1.4e-45 .. 3.4e38     4 Byte (32 Bit)
+  double     15-16 Stellen   4.9e-324 .. 1.7e308    8 Byte (64 Bit)
+  real       19-20 Stellen  9.0e-4952 .. 1.1e4931  10 Byte (80 Bit)
+  extended   19-20 Stellen  9.0e-4952 .. 1.1e4931  12 Byte (96 Bit)
+-------------------------------------------------------------------
+
+Die verschiedenen Real-Typen kînnen in AusdrÅcken beliebig gemischt
+werden. Berechnungen werden werden grundsÑtzlich in einem der genauen
+Formate real oder extended vorgenommen.
+\end
+
+screen( "AufzÑhlungstypen" )
+AufzÑhlungstypen                                                Pascal
+----------------------------------------------------------------------
+
+Wie schon der Name sagt, werden bei AufzÑhlungstypen die Werte, die
+der Datentyp annehmen kann, in der Deklaration einfach aufgezÑhlt.
+
+Hier sind einige Beispiele:
+
+  type
+    Farbe = (Schwarz, Rot, Gruen, Blau, Gelb);
+    ArbeitsTag = (Montag, Dienstag, Mittwoch, Donnerstag, Freitag);
+
+Intern werden die Namen fÅr die Werte vom Compiler durchnummeriert,
+wobei der erste Wert die Nummer 0 bekommt. Diese interne Nummer
+kann man mit der Standardfunktion \link("%%GLOBAL%%")Ord\# abfragen. Sie wird auch
+bei Vergleichen zugrunde gelegt, d.h. die erste Konstante gilt als
+kleiner als die zweite, usw.
+
+AufzÑhlungstypen beanspruchen ein Byte Speicherplatz, wenn die
+Anzahl der Werte kleiner oder gleich 256 ist, sonst zwei Byte.
+\end
+
+screen( "Unterbereichstypen" )
+Unterbereichstypen                                              Pascal
+----------------------------------------------------------------------
+
+Unterbereichstypen dienen dazu, den zulÑssigen Wertebereich von
+Variablen einzuschrÑnken. Dazu wird einfach die zulÑssige Unter-
+und Obergrenze angegeben, wobei natÅrlich die Obergrenze nicht
+kleiner als die Untergrenze sein darf. Beide Grenzen mÅssen
+den gleichen Datentyp haben, der ein sogenannter ordinaler
+(ganzzahliger) Typ sein muû. Es kommen dafÅr die \#Integer-Typen\#,
+\#AufzÑhlungstypen\# und die vordefinierten Typen \#char\# und \#boolean\#
+in Frage. Hier einige Beispiele:
+
+  type
+    Index = 1 .. 10;
+    Kleinbuchstabe = 'a' .. 'z';
+    BunteFarbe = Rot .. Gelb;
+    nurFalse = false .. false;   { ziemlich witzlos, aber legal }
+
+Unterbereichstypen werden wie der kleinste Integer-Typ gespeichert,
+dessen Wertebereich Ober- und Untergrenze enthÑlt.
+\end
+
+screen( "array",
+        "Array-Typen",
+        sensitive("ARRAY") )
+Array-Typen                                                     Pascal
+----------------------------------------------------------------------
+
+Ein Array besteht in Pascal aus einer festen Menge von Elementen
+die alle denselben Typ haben, den sogenannten Elementtyp des
+Arrays. Im Unterschied zu anderen Programmiersprachen (z.B. C)
+wird in Pascal nicht einfach die Anzahl der Elemente angegeben,
+sondern der Typ, mit dem indiziert werden soll, der sogenannte
+Indextyp. Dies nur durch die \#Unterbereichstypen\# in dieser
+Allgemeinheit mîglich.
+
+Die Syntax fÅr Arraytypen lautet:
+
+  ArrayTyp = array [ IndexTyp ] of ElementTyp;
+
+Der Indextyp muû ein sogenannter ordinaler (ganzzahliger) Typ
+sein, also ein Integer-Typ, ein AufzÑhlungs- oder Unterbereichstyp
+oder einer der vordefinierten Typen \#char\# und \#boolean\#.
+
+Der Elementtyp ist dagegen keinen EinschrÑnkungen unterworfen.
+
+Hier einige Beispiele:
+
+  type
+    vector = array [ 1 .. 10 ] of real;
+    matrix = array [ 1 .. 10 ] of vector;
+    charMap = array [ char ] of char;
+    bigArray = array [ integer ] of byte;
+
+FÅr mehrdimensionale Arrays (wie z.B. matrix oben) stellt Pascal
+eine AbkÅrzung bereit. Man darf auch schreiben:
+
+  type
+    matrix = array [ 1 .. 10, 1 .. 10 ] of real;
+
+Dies wird aber genauso verstanden wie die Definition von matrix
+weiter oben, d.h. matrix ist ein array von arrays.
+\end
+
+screen( "string",
+        "String-Typen",
+        sensitive("STRING") )
+String-Typen                                                    Pascal
+----------------------------------------------------------------------
+
+Strings dienen zur Aufbewahrung von Zeichenketten. Sie sind sehr
+Ñhnlich wie \#Array-Typen\# mit dem Elementtyp char, weisen jedoch
+darÅber hinausgehende Eigenschaften und Besonderheiten auf.
+
+Bei der Deklaration wird kein Indextyp angegeben, sondern nur die
+(Maximal-)LÑnge. Die einzelnen Zeichen sind dann mit den Indices
+1 .. LÑnge zu erreichen. Ein Elementtyp wird gar nicht verlangt,
+er ist automatisch der Typ char. Beispiel:
+
+  type
+    string20 = string[20];
+
+Diese Vereinbarung deklariert einen Stringtyp, der bis zu 20
+Zeichen enthalten kann.
+
+Jeder String hat auch ein nulltes Element. Dieses wird jedoch
+zweckentfremdet, um die aktuelle LÑnge des Strings aufzubewahren.
+
+Aus dieser Technik ergibt sich auch die EinschrÑnkung, daû die
+MaximallÑnge eines Strings nicht grîûer sein darf als 255.
+
+Man darf die LÑnge des Strings in der Deklaration auch weglassen
+und erhÑlt dann einen String der LÑnge 255.
+
+Ab Pure Pascal 1.1 bzw. Borland Pascal 7.0 gibt es den Typ \#PChar\#
+(Pointer to Char), der es gestattet, bequem mit nullterminierten
+Zeichenketten zu arbeiten, wie sie in der Sprache C verwendet werden.
+\end
+
+screen( "PChar",
+        sensitive("PCHAR") )
+Typ PCHar                                                       Pascal
+----------------------------------------------------------------------
+
+Der Standarddatentyp PChar (Pointer to Char) dient in Pascal zur Dar-
+stellung nullterminierter Strings, wie sie in der Sprache C verwendet
+werden.
+
+Nullterminierte Strings besitzen kein LÑngenbyte, sondern werden von
+einem einzelnen ASCII 0 Zeichen (#0 oder CHR(0)) abgeschlossen. Dadurch
+ist ihre LÑnge im Prinzip unbegrenzt.
+
+Eine Variable des Typs PChar enthÑlt nicht den String selbst, sondern
+nur einen Zeiger auf dessen erstes Zeichen.
+
+Wenn die Compileroption $X+ aktiv ist (erweiterte Syntax), so sind
+bestimmte erweiterte Operationen auf normalen Strings und nullterminier-
+ten Strings erlaubt:
+
+  - Stringliterale dÅrfen an Variablen des Typs PChar zugewiesen werden.
+  - Eine Variable des Typs ARRAY [0..n] OF CHAR ("nullbasiertes
+    Zeichenarray") ist kompatibel mit dem Typ PChar.
+  - In Variablen des Typs PChar darf indiziert werden wie in Strings.
+    Das erste Zeichen ist dabei unter Index 0 zu finden, es gibt ja
+    kein LÑngenbyte.
+  - Die Standardfunktionen Read, Readln, und Str dÅrfen auch auf
+    nullbasierte Zeichenarrays angewendet werden.
+  - Die Standardfunktionen Write, Writeln, Val, Assign und Rename dÅrfen
+    sowohl auf nullbasierte Zeichenarrays als auch auf Variable des
+    Typs PCHar angewendet werden.
+
+Die Unit Strings bietet viele Funktionen zur komfortablen Verarbeitung
+von nullterminierten Strings.
+\end
+
+screen( "record",
+        "Record-Typen",
+        sensitive("RECORD") )
+Record-Typen                                                    Pascal
+----------------------------------------------------------------------
+
+Im Unterschied zu \#Array-Typen\# handelt es sich bei Records
+um eine Zusammenfassung von Elementen verschiedenen Typs.
+Die Komponenten (bei Records spricht man auch gern von Feldern)
+werden auch nicht Åber Indices angesprochen, sondern sie bekommen
+Namen.
+
+Die Definition eines Recordtyps wird eingeleitet durch das reser-
+vierte Wort record, dann folgt die sogenannte Feldliste, und ab-
+geschlossen wird das Ganze durch das SchlÅsselwort end. In der
+Feldliste wird jeweils der Name jedes Feldes und sein Typ angegeben.
+
+Hier einige Beispiele:
+
+  type
+    Datum = record
+              Jahr:  Integer;
+              Monat: 1 .. 12;
+              Tag:   1 .. 31;
+            end;
+
+    Rechteck = record
+                 x, y: Real;  { Koordinaten der linken oberen Ecke }
+                 w, h: Real;  { Breite und Hîhe                    }
+               end;
+
+Pascal bietet auch die Mîglichkeit, sogenannte variante Records zu
+deklarieren, das sind solche, die je nach Art des beschriebenen
+Objekts verschiedene Felder enthalten kînnen. FÅr den Fall, daû das
+zu nebulos klingt, hier ein Beispiel:
+
+  type
+    FigurArt = (Rechteck, Dreieck, Kreis);
+    FigurRec = record
+                 x, y: Real;
+                 case Art: FigurArt of
+                   Rechteck: (Breite, Hoehe: Real);
+                   Dreieck:  (Seite1, Seite2, Winkel: Real);
+                   Kreis:    (Radius: Real)
+               end;
+
+Im Beispiel enthÑlt FigurRec unterschiedliche Angaben je nach Art der
+Figur. Nur eine der Varianten kann gleichzeitig aktiv sein. Der
+Compiler kann bei varianten Records daher Speicherplatz sparen,
+indem alle Varianten sich denselben Platz teilen.
+
+Das Feld, das unterscheidet, um welche Variante es sich jeweils handelt,
+nennt man das Selektor- oder Tagfeld. Es kann auch fortgelassen werden,
+wenn die aktive Variante immer aus dem Zusammenhang klar ist. Der Typ
+des Tagfeldes muû aber immer angegeben werden.
+
+Variante Records ermîglichen es auch, Datentypen als andere Typen
+zu interpretieren. Dies ist fÅr maschinennahe Algorithmen manchmal
+nîtig. Hier ein Beispiel:
+
+  type
+    FloatRec = record
+                 case boolean of
+                 false: (x: real);
+                 true:  (exponent: word; mantHi, mantLo: longint)
+               end;
+
+Die Definition von FloatRec ermîglicht es, auf die interne Darstellung
+von Gleitkommazahlen zuzugreifen. Solche Konstruktionen setzen genaue
+Kenntnis der internen Darstellung von Datentypen voraus und sind sehr
+maschinenabhÑngig - dieses Beispiel wÅrde zwar unter Pure Pascal auf
+dem Atari funktionieren, nicht jedoch unter Turbo Pascal auf dem IBM-PC.
+
+In vielen FÑllen wird ein varianter Recordtyp besser durch \#Objekt-Typen\#
+dargestellt.
+\end
+
+screen( "object",
+        "Objekt-Typen",
+        sensitive("OBJECT") )
+Objekt-Typen                                                    Pascal
+----------------------------------------------------------------------
+
+Objekt-Typen sind auf den ersten Blick wie \#Record-Typen\# - hier wie
+da gibt es eine Feldliste, die Namen und Typen der Datenfelder
+nennt. Die Mîglichkeit von Varianten bieten Objekte nicht, dafÅr darf
+man aber nicht nur Datenfelder deklarieren, sondern auch Prozeduren
+(im Zusammenhang mit Objekten auch oft Methoden genannt), und es
+besteht die Mîglichkeit, in einem anderen Objekttyp bereits deklarierte
+Datenfelder und Methoden einfach zu Åbernehmen, hier spricht man von
+Vererbung. Am besten sofort ein Beispiel:
+
+  type
+    Figur =
+      object                     (* nicht record, sondern object, naja *)
+        x, y: Real;              (* Datenfelder: Koordinaten *)
+        procedure Draw; virtual; (* Methode, um die Figur zu zeichnen *)
+      end;
+    Rechteck =
+      object (Figur)             (* Rechteck ist von Figur abgeleitet *)
+        breite, hoehe: Real;     (* Nur die neuen Felder werden deklariert *)
+        procedure Draw; virtual; (* Methode zum Zeichnen des Rechtecks *)
+      end;
+    Kreis =
+      object (Figur)             (* Kreis ist von Figur abgeleitet *)
+        radius: Real;            (* Nur die neuen Felder werden deklariert *)
+        procedure Draw; virtual; (* Methode zum Zeichnen des Kreises *)
+      end;
+
+Der wesentliche Punkt hier ist, daû gemeinsame Eigenschaften bereits
+im Basistyp (hier Figur) definiert werden kînnen - etwa daû jede
+Figur eine x- und y-Koordinate hat und fÑhig ist, sich selbst zu
+zeichnen.
+
+Die Neudeklaration der Methode Draw in den abgeleiteten Typen Rechteck
+und Kreis sagt dem Compiler, daû zwar der Prozedurkopf vom Basistyp
+Figur Åbernommen werden soll, daû sich die Implementierung jedoch
+Ñndert.
+
+Apropos Implementierung: Sie haben gesehen, daû wir in der Deklaration
+der Objekttypen nur den Kopf der Methoden hingeschrieben haben. Die
+Implementierung der Methode wird vom Compiler innerhalb derselben
+Unit oder desselben Programms erwartet. In dieser Hinsicht ist
+die Deklaration einer Methode in einem Objekt vergleichbar mit einer
+\#forward\#-Deklaration einer Prozedur: Man kÅndigt die Prozedur
+oder Methode bereits jetzt an, implementiert sie aber erst spÑter.
+
+Die Direktive \#virtual\# im Beispiel bewirkt Åbrigens, daû erst zur
+Laufzeit entschieden wird, welche Methode letztlich aufgerufen wird.
+
+Die (hier nicht gezeigte) Direktive \#private\# ermîglicht es, Daten-
+felder und Methoden vor anderen Units zu "verstecken".
+
+Sogenannte \#Konstruktoren\# und \#Destruktoren\# sind spezielle
+Methoden, die Objekte initialisieren bzw. nach Gebrauch ordentlich
+"aufrÑumen".
+\end
+
+screen( "virtual",
+        sensitive("VIRTUAL") )
+Virtuelle Methoden                                              Pascal
+----------------------------------------------------------------------
+
+Die Direktive virtual bei der Deklaration von Methoden in \#Objekt-Typen\#
+bewirkt die sogenannte spÑte Bindung - erst zur Laufzeit des Programms
+wird entschieden, welche Methode aufgerufen wird. Die Direktive wird
+einfach nach dem schlieûenden Semikolon des Prozedurkopfes angegeben
+und von einem weiteren Semikolon abgeschlossen.
+
+Methoden ohne virtual-Direktive werden als statische Methoden
+bezeichnet.
+
+Virtuelle Methoden dÅrfen statische oder virtuelle Methoden gleichen
+Namens im Basistypen Åberlagern. Falls die Methode im Basistyp schon
+virtuell war, mÅssen die Parameterlisten exakt Åbereinstimmen.
+
+Statische Methoden dÅrfen dagegen zwar andere statische Methoden Åber-
+lagern, nicht jedoch virtuelle Methoden.
+\end
+
+screen( "private",
+        sensitive("PRIVATE"),
+        sensitive("PUBLIC") )
+Private Felder und Methoden                                     Pascal
+----------------------------------------------------------------------
+
+Die Direktive private ermîglicht es, Datenfelder und Methoden in
+Objekttypen vor dem Zugriff aus anderen Units zu schÅtzen.
+
+Nach der Deklaration der îffentlichen Felder und Methoden leitet die
+Direktive "private" die Deklaration privater Felder und Methoden ein.
+
+Umgekehrt kann die Direktive "public" verwendet werden, um nach privaten
+Feldern und Methoden wieder îffentliche zu deklarieren.
+
+ôffentliche und private Teile dÅrfen sich innerhalb von Objekttypen
+beliebig abwechseln.
+
+In der deklarierenden Unit sind private Komponenten Åberall sichtbar -
+auch fÅr normale Prozeduren oder Methoden anderer Objekttypen.
+
+In anderen Units oder Programmen sind sie nie sichtbar, nicht einmal
+fÅr Methoden abgeleiteter Objekttypen.
+
+Beispiel:
+
+  type
+    obj = object
+            oeffentlichesFeld: integer;
+            procedure OeffentlicheMethode; virtual;
+          private
+            privatesFeld: pointer;
+            procedure PrivateMethode; virtual;
+          public
+            nochEinOeffentlichesFeld: integer;
+            procedure NochEineOeffentlicheMethode; virtual;
+          end;
+\end
+
+screen( "constructor",
+        "destructor",
+        "Konstruktoren",
+        "Destruktoren",
+        sensitive("CONSTRUCTOR"),
+        sensitive("DESTRUCTOR"),
+        sensitive("KONSTRUKTOR") )
+Konstruktoren und Destruktoren                                  Pascal
+----------------------------------------------------------------------
+
+Konstruktoren und Destruktoren sind spezielle Methoden zur richtigen
+Initialisierung und Deinitialisierung von Objekten.
+
+Objekte mit virtuellen Methoden mÅssen Åber einen Konstruktor verfÅgen
+und dieser muû fÅr jede neue Instanz des Objektes aufgerufen. Anderen-
+falls wÑre der Zeiger auf die virtuelle Methodentabelle im Objekt nicht
+initialisiert und beim Aufruf virtueller Methoden kÑme es zu Laufzeit-
+fehlern.
+
+Beispiel:
+
+  type
+    Figur =
+      object
+        x, y: Real;
+        constructor Init(initX, initY: Real);
+        destructor Done; virtual;
+        procedure Draw; virtual;
+      end;
+    Kreis =
+      object (Figur)
+        radius: Real;
+        constructor Init(initX, initY, initRadius: Real);
+        destructor Done; virtual;
+        procedure Draw; virtual;
+      end;
+
+  constructor Figur.Init(initX, initY: Real);
+  begin
+    x := initX;
+    y := initY;
+  end;
+
+  destructor Figur.Done;
+  begin
+    { Diese Figur abrÑumen... }
+  end;
+
+  constructor Kreis.Init(initX, initY, initRadius: Real);
+  begin
+    Figur.Init(initX, InitY);
+    radius := initRadius;
+  end;
+
+  destructor Kreis.Done;
+  begin
+    { Diesen Kreis abrÑumen... }
+  end;
+
+Beachten Sie, daû Konstruktoren nicht als virtuell deklariert werden
+dÅrfen. Destruktoren dÅrfen dagegen virtuell sein, und das ist oft
+sinnvoll.
+
+Der Konstruktor Kreis.Init ruft zunÑchst den Konstruktor des Basistyps
+auf. Wir hÑtten stattdessen die zwei Datenfelder x und y auch selbst
+initialisieren kînnen, aber eigentlich wurden sie vom Typ Figur ein-
+gefÅhrt und dieser ist deshalb auch dafÅr "zustÑndig", sie zu initia-
+liseren.
+\end
+
+screen( "set",
+        "Set-Typen",
+        sensitive("SET") )
+Set-Typen                                                       Pascal
+----------------------------------------------------------------------
+
+Set-Typen stellen Mengen dar, Mengen in einem ganz mathematischen
+Sinn. Werte eines Mengentyps enthalten Elemente eines Basistyps,
+der in der Deklaration angegeben werden muû. Beispiele:
+
+  type
+    FarbSet = set of (Rot, Gruen, Blau);
+    CharSet = set of char;
+
+Mîgliche Werte von Mengen sind alle mîglichen Teilmengen des Basistyps.
+Die Anzahl mîglicher Werte ergibt sich aus 2 hoch Anzahl der Werte
+des Basistyps. Der Typ FarbSet beispielsweise hat 2 hoch 3 = 8 mîgliche
+Werte, nÑmlich:
+
+    [ ]                     (* leere Menge *)
+    [ Rot ]
+    [ Gruen ]
+    [ Blau ]
+    [ Rot, Gruen ]
+    [ Rot, Blau ]
+    [ Gruen, Blau ]
+    [ Rot, Gruen, Blau ]
+
+Im Unterschied zur Mathematik, die auch unendliche Mengen kennt, sind
+Mengen in Pure Pascal immer endlich, denn sie dÅrfen nicht mehr als
+256 Elemente enthalten.
+
+Diese EinschrÑnkung beschrÑnkt auch die mîglichen Basistypen von Sets.
+Es muû sich um ordinale Typen (Unterbereichstypen, AufzÑhlungstypen,
+\#boolean\#, \#char\#) handeln, es darf nicht mehr als 256 mîgliche
+Werte geben, und bei Unterbereichstypen muû die Untergrenze grîûer
+gleich 0 und die Obergrenze kleiner gleich 255 sein.
+
+WÑhrend wir also gerade noch "set of char" oder "set of byte" bilden
+dÅrfen, wÑre "set of integer" leider nicht erlaubt.
+\end
+
+screen( "file",
+        "Datei-Typen",
+        sensitive("FILE") )
+Datei-Typen                                                     Pascal
+----------------------------------------------------------------------
+
+éhnlich wie \#Array-Typen\# stellen Datei-Typen eine Reihung von Ele-
+menten desselben Typs dar. Jedoch ist die Anzahl der Elemente nicht
+fest, sondern variabel. Zudem werden Datei-Typen nicht im Hauptpeicher,
+sondern auf Massenspeichern wie Disketten oder Festplatten abgelegt.
+
+Die Deklaration von Datei-Typen ist hîchst einfach. Hier einige
+Beispiele:
+
+  type
+    ByteFile = file of byte;   { Elementtyp ist byte }
+    DatumFile = file of        { Elementtyp ist Datum }
+                  record
+                   Jahr:  Integer;
+                   Monat: 1 .. 12;
+                   Tag:   1 .. 31;
+                  end;
+
+Der Elementtyp eines Datei-Typs darf fast alles sein - auûer einem
+Datei-Typ selbst.
+
+Zwei wichtige Datei-Typen sind vordefiniert: \#text\# und \#file\#.
+Textdateien dienen zur Speicherung von Texten (in ASCII-Kodierung).
+Bei Dateien des Typs file wird der Elementtyp nicht nÑher spezifiert -
+sie werden verwendet, wenn Dateien aus Komponenten verschiedenen
+Typs oder flexibler Grîûe bestehen.
+\end
+
+screen( "text",
+        sensitive("TEXT") )
+Textdateien                                                     Pascal
+----------------------------------------------------------------------
+
+Textdateien dienen zur Speicherung von ASCII-Texten. Eine Reihe
+von Standardfunktionen sind fÅr Ein- und Ausgabe auf Textdateien
+vorhanden:
+
+ \link("%%GLOBAL%%")Read\#, \link("%%GLOBAL%%")Readln\#           Einlesen von Werten
+ \link("%%GLOBAL%%")Write\#, \link("%%GLOBAL%%")Writeln\#         Ausgeben von Werten
+ \link("%%GLOBAL%%")Eoln\#                   Erkennen des Zeilenendes
+ \link("%%GLOBAL%%")SetTextBuf\#             Setzen eines neuen Puffers
+ \link("%%GLOBAL%%")SeekEof\#, \link("%%GLOBAL%%")SeekEoln\#      öberlesen von Leerzeichen
+\end
+
+screen( "nil",
+        "Zeiger-Typen",
+        "pointer",
+        sensitive("NIL"),
+        sensitive("POINTER") )
+Zeiger-Typen                                                    Pascal
+----------------------------------------------------------------------
+
+Ein Zeiger-Typ enthÑlt Adressen von dynamischen Variablen, die zur
+Laufzeit des Programms mit einer der Standardprozeduren \link("%%GLOBAL%%")New\# oder
+\link("%%GLOBAL%%")GetMem\# erzeugt werden. Zeiger werden immer dann verwendet, wenn
+Anzahl oder Grîûe von Objekten zur öbersetzungszeit nicht festgelegt
+werden kînnen. In der Deklaration eines Zeigers muû der Typ der
+Variablen angegeben werden, die der Zeiger referenzieren soll, der
+sogenannte Basistyp des Zeigers.
+
+Der Basistyp muû immer als Name angegeben werden. Dieser Name muû noch
+nicht definiert sein. In diesem Fall muû die Definition des Basistyps
+alsbald folgen, nÑmlich im selben Typdefinitionsteil, in dem auch der
+Zeigertyp definiert ist. Hier ist eine Ausnahme von der Åblichen Pascal-
+Regel, daû alles definiert werden muû, bevor es verwendet wird.
+Hier einige Beispiele:
+
+  type
+    CharPtr = ^char;        { Ein Zeiger auf einen einzelnes Zeichen }
+    StringPtr = ^string;    { Ein Zeiger auf eine Zeichenkette       }
+    ListPtr = ^ListElement; { Ein Zeiger auf...? Kommt gleich!       }
+    ListElement = record
+                    number: Integer;
+                    next:   ListPtr;
+                  end;
+
+Das letzte Beispiel verdeutlicht, wie man Zeiger verwenden kann, um
+beliebig umfangreiche Datenstrukturen aufzubauen: Eine einzige Zeiger-
+variable im Programm kann auf das erste Listenelement verweisen, dieses
+verweist auf das nÑchste, usw.
+
+Nun fehlt uns nur noch eine Methode, um das Ende dieser Kette zu mar-
+kieren. Zu diesem Zweck stellt Pascal das reservierte Wort \#nil\# zur
+VerfÅgung. Es steht fÅr einen Zeigerwert, der nicht auf weitere Infor-
+mationen verweist, sondern auf gar nichts. Er bildet sozusagen das Signal
+fÅr "Achtung, hier Ende der Kette!".
+
+Pure Pascal definiert einen Standarddatentyp \#pointer\#, bei dem nicht
+nÑher spezifiert ist, auf welchen Datentyp er zeigt. Eine auf den ersten
+Blick absurde Konstruktion, die erst in grîûeren Projekten Sinn ergibt,
+dann nÑmlich, wenn \#Units\# vor dem Rest der Welt geheimhalten mîchten,
+auf welche Art von Objekten ihre Zeiger zeigen.
+\end
+
+screen( "Prozedur-Typen" )
+Prozedur-Typen                                                  Pascal
+----------------------------------------------------------------------
+
+Prozedur-Typen sind ein wenig Ñhnlich zu \#Zeiger-Typen\#, nur daû
+sie nicht auf Datenobjekte zeigen, sondern auf Prozeduren oder
+Funktionen. In Prozedurvariablen kann man sich also die Adressen
+von Prozeduren merken, und diese Prozeduren spÑter aufrufen. Damit
+der Compiler ÅberprÅfen kann, ob Typ und Anzahl der Parameter korrekt
+sind, und damit er den Typ eines eventuellen Funktionsergebnisses
+kennt, mÅssen all diese Dinge in der Deklaration des Prozedurtyps
+angegeben werden. Im Endeffekt ist die Definition eines Prozedurtyps
+deshalb sehr Ñhnlich zum Kopf einer normalen \#Prozedurdeklaration\#.
+Hier einige Beispiele:
+
+  type
+    Proc = procedure;                   { Eine Prozedur ohne Parameter }
+    RealFunc = function(x: Real): Real; { Real Parameter und Resultat  }
+
+Die Namen der Parameter in einer solchen Deklaration werden vom Compiler
+souverÑn ignoriert - sie verbessern nur (hoffentlich!) die Lesbarkeit
+des Programms.
+
+Prozedurtypen ermîglichen es, Programme allgemeiner zu formulieren.
+Wenn man beispielsweise die Werte einer Funktion zeichnen will, spielt
+es fÅr den eigentlichen Zeichenalgorithmus keine Rolle, welche Funktion
+gezeichnet wird - wichtig ist nur, daû man die Funktion mit einem
+x-Wert als Parameter aufruft und als Ergebnis den y-Wert zurÅckerhÑlt.
+Mit Prozedurtypen kann man nun die Funktion als Parameter Åbergeben,
+etwa wie folgt:
+
+    PROCEDURE ZeichneFunktion( xMin, xMax: Real; Funktion: RealFunc);
+    VAR x, y: Real;
+    BEGIN
+      { aktuelles x berechnen }
+      y := Funktion(x);
+      { Punkt bei x,y zeichnen }
+    END;
+
+Eine EinschrÑnkung gilt es zu beachten: Prozeduren und Funktionen, die
+lokal zu anderen sind, dÅrfen nicht an Prozedurvariable zugewiesen oder
+als Prozedurparameter Åbergeben werden.
+\end
+
+screen( "Variablendeklarationen",
+        "var",
+        "absolute",
+        sensitive("ABSOLUTE"),
+        sensitive("VAR") )
+Variablendeklarationen                                          Pascal
+----------------------------------------------------------------------
+
+Variablen sind sozusagen BehÑlter fÅr Werte eines bestimmten Datentyps.
+Im Unterschied zu Konstanten steht dieser Wert nicht fest, sondern
+wird den Variablen erst zur Laufzeit des Programms zugewiesen.
+
+Dementsprechend wird in der Deklaration von Variablen nur der Datentyp
+angegeben. Hier einige Beispiele:
+
+  var
+    x, y, z: Real;     { alle drei Variablen vom Typ Real }
+    count: Integer;
+    index: 1..10;
+    ch: Char;
+    vorname: String;
+
+Beachten Sie, daû alle Variablen in Pascal vor ihrer ersten Verwendung
+deklariert werden mÅssen. Dies mag vor allem Basic-Programmierern
+unangenehm bÅrokratisch vorkommen, es sorgt jedoch dafÅr, daû simple
+Tippfehler sofort erkannt werden.
+
+Einen Sonderfall stellen die sogenannten absoluten Variablen dar.
+WÑhrend normalerweise der Compiler Speicherplatz fÅr Variablen bereit-
+stellt, wird bei der Deklaration absoluter Variablen die Adresse vom
+Programmierer angegeben. Die Adresse wird entweder als Zahl angegeben,
+oder eine andere Variable wird spezifiert und deren Adresse fÅr
+die neue Variable verwendet. Hier Beispiele fÅr beide Formen:
+
+  var
+    hz200  : Longint absolute $4ba;  { Bisherige Zahl der 200 Hz Interrupts }
+    str    : string;
+    strLen : byte absolute str;
+
+Im ersten Beispiel wird eine der Systemvariablen des Atari ST deklariert,
+die an einer festen Adresse liegt.
+
+Im zweiten Beispiel wird zunÑchst ein String deklariert, dann an derselben
+Adresse eine Byte-Variable, die dadurch der jeweils aktuellen LÑnge
+des Strings entspricht.
+\end
+
+screen( "AusdrÅcke" )
+AusdrÅcke                                                       Pascal
+----------------------------------------------------------------------
+
+Ein Ausdruck ist eine Rechenregel. Wenn er zur Laufzeit des Programms
+ausgewertet wird, ergibt er einen Wert.
+
+AusdrÅcke bestehen aus \#Operatoren\# und \#Operanden\#. \#PrioritÑtsregeln\#
+legen fest, welche Operatoren zuerst ausgewertet werden. Diese
+Reihenfolge kann durch Klammerung geÑndert werden.
+
+AusdrÅcke kînnen in mehreren ZusammenhÑngen verwendet werden:
+
+  - Auf der linken oder rechten Seite einer Zuweisung
+  - Als aktueller Parameter eines Prozedur- oder Funktionsaufrufs
+  - Als Indexausdruck in der Selektion einer Arraykomponente
+  - Als Bedingung in einer strukturierten Anweisung
+
+AusdrÅcke deren Wert zur öbersetzungszeit vom Compiler berechnet
+werden kann (sogenannte konstante AusdrÅcke), dÅrfen Åberdies
+in der Deklaration von Unterbereichstypen als Grenzen und in der
+Deklaration von Stringtypen als LÑnge verwendet werden.
+
+AusdrÅcke haben nicht nur einen Wert, sondern auch einen bestimmten
+Typ, der sich aus den Typen der Operanden und den angewandten Operatoren
+ergibt.
+
+Einige Beispiele fÅr AusdrÅcke:
+
+  1980                       { konstanter Ausdruck - Typ Integer }
+  k DIV 3                    { Typ Integer, Word oder Longint }
+  [ 'A' .. 'Z' ]             { konstanter Ausdruck - Typ Set of char }
+  a[i] + a[j]                { Typ ist Elementtyp des Arrays a }
+  (i < 10) and (a[i] <> k)   { Typ Boolean }
+  ch IN Buchstaben + Ziffern { Typ Boolean }
+\end
+
+screen( "Operanden" )
+Operanden                                                       Pascal
+----------------------------------------------------------------------
+
+Operanden sind die Einzelbestandteile, aus denen \#AusdrÅcke\# in Pascal
+bestehen. ZunÑchst kînnen das einzelne Datenobjekte wie Konstanten
+und Variablen sein, die einfach durch Hinschreiben ihres Wertes oder
+ihres Namens verwendet werden.
+
+Als nÑchstes gibt es die Mîglichkeit, Unterbestandteile von Variablen
+durch sogenannte Selektionsoperationen auszuwÑhlen:
+
+  - Durch Indizierung wÑhlt man ein Element eines Arrays aus.
+    Nach dem Operanden wird ein Indexausdruck in eckigen Klammern
+    angegeben. Der Typ eines solchen Operanden ist der Elementtyp
+    des Arrays. Bei mehrdimensionalen Arrays kann natÅrlich
+    mehrfach indiziert werden. Beispielr: a[i], matrix[i-1,j+1].
+
+  - Bei Recordvariablen kann ein bestimmtes Feld durch Angabe eines
+    Punktes und des Feldnamens ausgewÑhlt werden. Der Typ eines
+    solchen Operanden ist der Typ des ausgewÑhlten Feldes.
+    Beispiel: rec.feld.
+
+  - Zeigervariablen kînnen mit Hilfe des ^-Operators dereferenziert
+    werden. Der Typ eines solchen Operanden ist der Basistyp des
+    Zeigertyps. Beispiel: p^.
+
+Selektionsoperationen kînnen beliebig hintereinander angewendet werden,
+vorausgesetzt die Datentypen der jeweiligen Operanden lassen es zu.
+Hier ein Beispiel:
+
+  dir[i]^.name
+
+Die Variable dir ist als Array von Zeigern auf Records deklariert.
+Zuerst wÑhlen wir aus diesem Array ein Element aus (dir[i]). Nun
+haben wir also einen Zeiger. Dieser wird dereferenziert (dir[i]^)
+und wir erhalten einen Record. Aus diesem wird nun das Feld name
+ausgewÑhlt (dir[i]^.name).
+
+Mengenkonstruktoren ermîglichen es, Mengenwerte aus der Angabe
+ihrer Elemente zu konstruieren. Dabei wird in eckigen Klammern
+eine Liste von Elementen oder Elementbereichen angegeben. Dabei
+sind nicht nur konstante Elemente, sondern auch Variable und
+Ausdruecke zulÑssig. Beispiele:
+
+  [ ]                                  { leere Menge }
+  [ 2, 3, 5, 7, 11, 13, 17, 19 ]       { einige Primzahlen }
+  [ k ]                                { Menge, die nur k enthÑlt }
+  [ 1 .. k-1 ]                         { Alle Elemente von 1 bis k-1 }
+  [ 'A' .. 'Z', 'a' .. 'z' ]           { Groû- und Kleinbuchstaben }
+
+Als Operanden gelten auch Funktionsaufrufe. Dabei wird eine Funktion
+mit den angegebenen aktuellen Parametern aufgerufen und ausgefÅhrt,
+und erst der RÅckgabewert als Operand verwendet. Beispiele:
+
+  tangens := sin(x) / cos(x)
+
+Zur öbergabe aktueller Parameter siehe \#Prozeduraufruf\#
+
+Sogenannte Typumwandlungen (engl. type casts) kînnen ebenfalls als
+Operanden auftreten. Sie bestehen aus dem Namen des Typs in den
+gewandelt werden soll, gefolgt von dem zu wandelnden Ausdruck in
+runden Klammern. Das ganze sieht wie der Aufruf einer Funktion mit
+einem Parameter aus. Beispiele:
+
+  type
+    punkt = record x, y: integer end;
+  var
+    p : punkt;
+    l : longint;
+    i : integer;
+  begin
+    p := punkt(l);
+    i := punkt(l).x;
+  end.
+
+Zwischen zwei Formen von Typumwandlungen ist zu unterscheiden:
+
+ - Die Typumwandlungen von Variablen setzt voraus, daû der umzuwandelnde
+   Ausdruck eine Variable ist (mîglicherweise mit Selektionsoperationen),
+   und daû Ausgangs- und Zieltyp exakt gleich viel Speicherplatz belegen.
+
+ - Die Umwandlung von Werten betrifft beliebige AusdrÅcke, jedoch mÅssen
+   beide Typen ordinale Typen oder Zeiger sein.
+\end
+
+screen( "Operatoren" )
+Operatoren                                                      Pascal
+----------------------------------------------------------------------
+
+Operatoren in Pascal dienen zur Errechnung neuer Werte aus den Werten
+ihrer \#Operanden\#. Die Reihenfolge der Auswertung richtet sich nach
+\#PrioritÑtsregeln\#.
+
+Nach dem Typ ihrer Operanden und ihres Resultats unterscheiden wir:
+
+  - \#Arithmetische Operatoren\#    anwendbar auf Integer- und Real-Typen
+  - \#Logische Operatoren\#         anwendbar auf Integer-Typen
+  - \#Boole'sche Operatoren\#       anwendbar auf boole'sche Operanden
+  - \#Mengen-Operatoren\#           anwendbar auf Mengen
+  - \#String-Operatoren\#           anwendbar auf Zeichenketten
+  - \#Adreû-Operator\#              anwendbar auf Variablen und Prozeduren
+  - \#Vergleichsoperatoren\#        Ergebnis immer \#boolean\#
+\end
+
+screen( "div",
+        "mod",
+        "Arithmetische Operatoren",
+        sensitive("DIV"),
+        sensitive("MOD") )
+Arithmetische Operatoren                                        Pascal
+----------------------------------------------------------------------
+
+Arithmetische Operatoren sind auf Integer- und Real-Typen anwendbar.
+
+UnÑre arithmetische Operatoren sind die Vorzeichen + und -.
+
+Sie sind in der folgenden Tabelle zusammengefaût:
+
+  Operator  Operation        Typ des Operanden   Typ des Resultats
+--------------------------------------------------------------------
+    +       IdentitÑt        Integer-Typ         Integer-Typ
+                             Real                Real
+    -       Negation         Integer-Typ         Integer-Typ
+                             Real                Real
+--------------------------------------------------------------------
+
+Der Typ des Resultats ist jeweils der Typ des Operanden.
+
+Die binÑren arithmetischen Operatoren +, -, *, /, div und mod
+sind in folgender Tabelle zusammengefaût:
+
+  Operator  Operation        Typ der Operanden   Typ des Resultats
+--------------------------------------------------------------------
+    +       Addition         Integer-Typ         Integer-Typ
+                             Real                Real
+    -       Subtraktion      Integer-Typ         Integer-Typ
+                             Real                Real
+    *       Multiplikation   Integer-Typ         Integer-Typ
+                             Real                Real
+    /       Division         Integer-Typ         Real (!!!)
+                             Real                Real
+    div     Integerdivision  Integer-Typ         Integer-Typ
+    mod     Modulo (Rest)    Integer-Typ         Integer-Typ
+--------------------------------------------------------------------
+
+Falls fÅr den Typ des Resultats Integer-Typ angegeben ist, so handelt
+es sich jeweils um den \#gemeinsamen Typ\# beider Operanden, jedoch
+wird mindestens in Wortbreite gerechnet.
+
+FÅr Programmierer anderer Programmiersprachen mag die Tatsache Åber-
+raschend sein, daû der /-Operator auch fÅr ganzzahlige Operanden
+ein Real-Ergebnis liefert. Der Ausdruck 1/3 ergibt also 0.33333... 
+
+FÅr ganzzahlige Division ist dagegen der \#div\#-Operator vorgesehen.
+Der Ausdruck 1 div 3 ergibt also den Wert 0. Bei ganzzahliger
+Division wird immer zur Null hin gerundet, d.h. -1 div 3 ergibt
+ebenfalls den Wert 0.
+
+Der \#mod\#-Operator liefert den "Rest" bei ganzzahliger Division.
+Folgende IdentitÑt gilt:
+
+  i mod j = i - (i div j) * j;
+
+Das Resultat des \#mod\#-Operators hat dasselbe Vorzeichen wie der
+erste Operand.
+\end
+
+screen( "and",
+        "not",
+        "or",
+        "shl",
+        "xor",
+        "shr",
+        "Logische Operatoren",
+        sensitive("AND"),
+        sensitive("NOT"),
+        sensitive("OR"),
+        sensitive("SHL"),
+        sensitive("SHR"),
+        sensitive("XOR") )
+Logische Operatoren                                             Pascal
+----------------------------------------------------------------------
+
+Logische Operatoren sind auf Integer-Typen anwendbar, fassen ihre
+Operanden jedoch als Bitmuster auf.
+
+Beachten Sie, daû die Operatoren \#and\#, \#or\#, \#not\# und \#xor\# auch als
+\#Boole'sche Operatoren\# verwendet werden.
+
+Folgende Tabelle bietet eine Zusammenfassung:
+
+  Operator  Operation          Typ der Operanden   Typ des Resultats
+--------------------------------------------------------------------
+    not     bitweise Negation  Integer-Typ         Integer-Typ
+    and     bitweises und      Integer-Typ         Integer-Typ
+    or      bitweises oder     Integer-Typ         Integer-Typ
+    xor     bitweises          Integer-Typ         Integer-Typ
+             exklusiv-oder
+    shl     linksschieben      Integer-Typ         Integer-Typ
+    shr     rechtsschieben     Integer-Typ         Integer-Typ
+--------------------------------------------------------------------
+
+Das Resultat des \#not\#-Operators hat denselben Typ wie sein Operand.
+Jedes Bit im Ergebnis ist 1 wenn das entsprechende Bit im Operanden
+0 war und umgekehrt.
+
+Das Resultat des \#and\#-Operators hat den \#gemeinsamen Typ\# seiner
+Operanden. Jedes Bit im Ergebnis ist nur dann 1, wenn die entsprechenden
+Bits in beiden Operanden 1 waren, sonst 0.
+
+Das Resultat des \#or\#-Operators hat den \#gemeinsamen Typ\# seiner
+Operanden. Jedes Bit im Ergebnis ist nur dann 0, wenn die entsprechenden
+Bits in beiden Operanden 0 waren, sonst 1.
+
+Das Resultat des \#xor\#-Operators hat den \#gemeinsamen Typ\# seiner
+Operanden. Jedes Bit im Ergebnis ist nur dann 1, wenn die entsprechenden
+Bits in beiden Operanden ungleich waren, sonst 0.
+
+Das Resultat des \#shl\# und des \#shr\#-Operators hat den Typ des
+linken Operanden. Der Wert des linken Operanden wird um den Wert des
+rechten Operanden nach links oder rechts geschoben. Beim \#shl\#-Operator
+werden von rechts 0-Bits in die leerwerdenden Bitpositionen nachgezogen.
+Beim \#shr\#-Operator werden fÅr vorzeichenlose Operanden (\#byte\# oder
+\#word\#) von links 0-Bits nachgezogen, fÅr vorzeichenbehaftete Operanden
+wird das Vorzeichen in die leerwerdenden Bitpositionen kopiert.
+\end
+
+screen( "Boole'sche Operatoren" )
+Boole'sche Operatoren                                           Pascal
+----------------------------------------------------------------------
+
+Boole'sche Operatoren verknÅpfen Operanden des Standardtyps \#boolean\#.
+
+Folgende Tabelle faût die boole'schen Operatoren zusammen:
+
+  Operator  Operation          Typ der Operanden   Typ des Resultats
+--------------------------------------------------------------------
+    not     Logische Negation  Boolean             Boolean
+    and     Logisches Und      Boolean             Boolean
+    or      Logisches Oder     Boolean             Boolean
+    xor     Logisches
+             Exklusiv-Oder     Boolean             Boolean
+--------------------------------------------------------------------
+
+Der \#not\#-Operator liefert \#true\#, wenn sein Operand \#false\# war,
+und umgekehrt.
+
+Der \#and\#-Operator liefert nur dann \#true\#, wenn beide Operanden
+\#true\# waren, sonst \#false\#.
+
+Der \#or\#-Operator liefert \#true\#, wenn mindestens ein Operand
+\#true\# war. Waren beide \#false\#, so ist auch das Ergebnis \#false\#.
+
+Der \#xor\#-Operator liefert \#true\#, wenn die Operanden verschiedene
+Werte hatten, sonst \#false\#.
+
+Pure Pascal bietet zwei verschiedene Verfahren der Codeerzeugung
+fÅr die \#and\#- und \#or\#-Operatoren: vollstÑndige Auswertung und
+Kurzschluûauswertung. Welches Verfahren aktiv ist, wird durch die
+Stellung des $B-Compilerschalters bestimmt: $B+ bewirkt vollstÑndige
+Auswertung boole'scher AusdrÅcke, $B- bewirkt Kurzschluûauswertung.
+Voreinstellung ist $B-, also Kurzschluûauswertung.
+
+VollstÑndige Auswertung bedeutet, daû zunÑchst beide Operanden aus-
+gewertet werden, und dann das Ergebnis errechnet wird.
+
+Bei der Kurzschluûauswertung wird zunÑchst nur der linke Operand
+ausgewertet. Handelt es sich um einen \#and\#-Operator und ist
+der linke Operand bereits \#false\#, so muû auch das Ergebnis
+\#false\# sein. Der rechte Operand wird dann gar nicht ausgewertet.
+Beim \#or\#-Operator wird der rechte Operand nicht ausgewertet,
+wenn der linke Operand bereits \#true\# ergab.
+
+Normalerweise ist die Kurzschluûauswertung am effizientesten und
+bequemsten. In der Praxis sollen oft bestimmte Teile von Bedingungen
+nicht ausgewertet werden, da sonst Laufzeitfehler auftreten.
+
+Hier ein Beispiel:
+
+  while (p <> nil) and (p^.value <> 5) do
+    p := p^.next;
+
+Hier darf die zweite Bedingung nicht ausgewertet werden, wenn der Zeiger
+p bereits den Wert nil hatte - ein Laufzeitfehler wÑre die Folge.
+\end
+
+screen( "Mengen-Operatoren" )
+Mengen-Operatoren                                               Pascal
+----------------------------------------------------------------------
+
+Pascal stellt die auch in der Mathematik grundlegenden Operationen
+auf Mengen zur VerfÅgung - Vereinigung, Durchschnitt und Differenz.
+
+Sie sind in folgender Tabelle zusammengefaût:
+
+  Operator  Operation          Typ der Operanden
+--------------------------------------------------------------------
+    +       Vereinigung        kompatible Mengen
+    -       Differenz          kompatible Mengen
+    *       Durchschnitt       kompatible Mengen
+--------------------------------------------------------------------
+
+In der Vereinigung zweier Mengen sind alle Elemente enthalten, die
+in mindestens einer der beiden Mengen enthalten sind.
+
+Der Durchschnitt zweier Mengen weist dagegen nur die Elemente auf,
+die in beiden Mengen enthalten sind.
+
+Die Differenz schlieûlich besteht nur aus den Elementen, die nur
+in der ersten, nicht aber in der zweiten Menge enthalten sind.
+
+Mengen kînnen auch verglichen werden, und man kann das Enthaltensein
+eines bestimmten Elements in einer Menge prÅfen - mehr darÅber unter
+\#Vergleichsoperatoren\#
+\end
+
+screen( "String-Operatoren" )
+String-Operatoren                                               Pascal
+----------------------------------------------------------------------
+
+An String-Operatoren stellt Pascal auûer den Vergleichen nur einen ein-
+zigen zur VerfÅgung - nÑmlich die Verkettung von Strings, dargestellt
+durch den Additionsoperator +.
+
+Als Operanden kînnen Strings, einzelne Zeichen (Datentyp char) und
+Array [...] of char verwendet werden - letztere nur, falls ihre LÑnge
+kleiner 255 Zeichen ist.
+
+Das Ergebnis ist jedenfalls vom Typ String und damit auf 255 Zeichen
+LÑnge begrenzt - ÅberzÑhlige Zeichen werden kommentarlos abgeschnitten.
+\end
+
+screen( "Adreû-Operator",
+        sensitive("$T") )
+Adreû-Operator                                                  Pascal
+----------------------------------------------------------------------
+
+Der Adreû-Operator @ ist ein unÑrer Operator. Sein Operand ist eine
+Variable oder eine Prozedur oder Funktion. Das Ergebnis ist die
+Adresse des Operanden.
+
+Der Datentyp des Ergebnisses hÑngt von der Stellung des Compiler-
+schalters $T ab:
+
+ - In der Stellung $T- hat das Ergebnis den Standardtyp \#pointer\#, also
+   einen Zeigertyp, bei dem nicht nÑher spezifiert ist, worauf er zeigt,
+   der aber mit allen anderen Zeigertypen vertrÑglich ist.
+
+ - In der Stellung $T+ hat das Ergebnis den Datentyp "Zeiger auf Typ",
+   wenn "Typ" der Datentyp der Variable ist. Dies fÅhrt zu einer
+   genaueren TypprÅfung beim öbersetzen.
+
+Voreingestellt ist $T-.
+\end
+
+screen( "in",
+        "Vergleichsoperatoren",
+        sensitive("IN") )
+Vergleichsoperatoren                                            Pascal
+----------------------------------------------------------------------
+
+Vergleichsoperatoren dienen dazu, die Beziehung zwischen zwei Operanden
+festzustellen. In Pascal ist ihr Ergebnis stets der Standardtyp \#boolean\#.
+
+Folgende Tabelle stellt die Vergleichsoperatoren zusammen:
+
+  Operator   Operation          Typ der Operanden
+----------------------------------------------------------------------
+    =         gleich            ordinal, real, Zeiger, Mengen, Strings
+    <>        ungleich          ordinal, real, Zeiger, Mengen, Strings
+    <         kleiner           ordinal, real, Strings
+    >         grîûer            ordinal, real, Strings
+    <=        kleiner gleich    ordinal, real
+              Teilmenge von     Mengen
+    >=        grîûer gleich     ordinal, real, Strings
+              Obermenge von     Mengen
+    in        Element von       linker Operand ordinal, rechter Menge
+----------------------------------------------------------------------
+
+Real-Typen dÅrfen mit Integer-Typen verglichen werden, der Integer-
+Operand wird vor dem Vergleich nach real gewandelt.
+
+Strings dÅrfen mit einzelnen Zeichen verglichen werden. Diese werden
+dann wie ein String der LÑnge 1 behandelt. Beim Vergleich von Strings
+wird der ASCII-Zeichensatz und lexikographische Ordnung zugrundegelegt.
+
+Zeiger dÅrfen nur auf Gleichheit und Ungleichheit geprÅft werden.
+
+Mengen sind nur dann gleich, wenn sie genau dieselben Elemente ent-
+halten. Eine Menge A ist Teilmenge einer anderen Menge B (A <= B),
+genau dann, wenn alle Elemente von A auch in B enthalten sind.
+Eine Menge A ist Obermenge von B (A >= B), wenn alle Elemente von B
+auch in A enthalten sind. Man beachte, daû auch der Fall eintreten
+kann, daû weder A <= B noch A >= B gilt.
+\end
+
+screen( "gemeinsamen Typ" )
+Gemeinsamer Typ                                                 Pascal
+----------------------------------------------------------------------
+
+Arithmetische und logische Operatoren kînnen auf Operanden unterschied-
+licher Integer-Typen angewendet werden. Beispielsweise kann der linke
+Operand \#integer\# sein, der rechte \#byte\#.
+
+Um solche Operationen durchfÅhren zu kînnen, werden zunÑchst beide
+Operanden in einen gemeinsamen Typ umgewandelt.
+
+Der gemeinsame Typ zweier Integer-Typen ist der kleinste Integer-Typ,
+der die Wertebereiche beider Operandentypen enhÑlt.
+
+Folgende Tabelle faût dies zusammen:
+
+  linker Operand   rechter Operand             Resultat
+--------------------------------------------------------------------
+   byte             byte                        byte
+                    shortint, integer           integer
+                    word                        word
+                    longint                     longint
+
+   shortint         byte                        integer
+                    shortint                    shortint
+                    integer                     integer
+                    word, longint               longint
+
+   integer          shortint, byte, integer     integer
+                    word, longint               longint
+
+   word             byte, word                  word
+                    shortint, integer, longint  longint
+
+   longint          byte, shortint, integer,
+                    word, longint               longint
+--------------------------------------------------------------------
+
+Das Resultat arithmetischer Operationen wird jedoch mindestens
+in Wortbreite (integer oder word) errechnet.
+\end
+
+screen( "PrioritÑtsregeln" )
+PrioritÑtsregeln fÅr Operatoren                                 Pascal
+----------------------------------------------------------------------
+
+Pascal bestimmt die Reihenfolge der Auswertung von AusdrÅcken nach
+bestimmten PrioritÑtsregeln. UnÑre Operatoren (solche mit nur einem
+Operanden) werden zuerst ausgewertet. Dann folgen die sogenannten
+multiplizierenden Operatoren, dann die addierenden und schlieûlich
+die relationalen oder Vergleichsoperatoren. Operatoren gleicher
+PrioritÑt werden von links nach rechts ausgewertet. AusdrÅcke in
+runden Klammern werden zunÑchst ausgewertet, bevor ihr Ergebnis
+weiterverwendet wird.
+
+All diese Regeln sind nicht weiter geheimnisvoll - schlieûlich haben
+wir schon in der Schule gelernt, daû Punkt vor Strich geht.
+
+Hier zur Zusammenfassung eine Tabelle aller Operatoren, geordnet
+nach PrioritÑtsstufen:
+
+  Operatoren                     PrioritÑt            Art
+-----------------------------------------------------------------
+  @, not, +, -                   1 (hîchste)      unÑr
+  *, /, div, mod, and, shl, shr  2                multiplizierend
+  +, -, or, xor                  3                addierend
+  =, <>, <, >, <=, >=, in        4 (niedrigste)   vergleichend
+-----------------------------------------------------------------
+
+Die Operatoren + und - tauchen zweimal in der Tabelle auf - als
+unÑre und binÑre Operatoren.
+
+Die meisten Pascalprogrammierer haben hier keine Probleme - nur
+die Tatsache, daû die Operatoren and und or stÑrker binden als
+die Vergleichsoperatoren fÅhrt manchmal zu Fehlern. In einem
+Ausdruck wie:
+
+  (i > 0) and (a[i] <> k)
+
+kommt man nicht ohne Klammern aus.
+\end
+
+screen( "Anweisungen" )
+Anweisungen                                                     Pascal
+----------------------------------------------------------------------
+
+Anweisungen sind Konstrukte, die im Programm Aktionen auslîsen.
+Damit stehen sie im Gegensatz zu Deklarationen, die nur dem Compiler
+bestimmte Informationen Åbermitteln.
+
+Wir unterscheiden zwischen einfachen Anweisungen:
+
+ - \#Zuweisung\#          Zuweisung von Werten an Variablen
+ - \#Prozeduraufruf\#     Aufruf von Prozeduren und Funktionen
+ - \#goto\#-Anweisung     Sprung an eine durch ein \#Label\# markierte Stelle
+
+und strukturierten Anweisungen:
+
+ - \#if\#-Anweisung       Bedingte AusfÅhrung von Anweisungen
+ - \#case\#-Anweisung     Bedingte AusfÅhrung von Anweisungen
+ - \#while\#-Anweisung    Bedingte Wiederholung von Anweisungen
+ - \#repeat\#-Anweisung   Bedingte Wiederholung von Anweisungen
+ - \#for\#-Anweisung      Wiederholte AusfÅhrung von Anweisungen
+ - \#with\#-Anweisung     AbkÅrzung von Schreibarbeit bei records
+ - \#Blockanweisung\#     Klammerung mehrerer Anweisungen zu einer
+
+Strukturierte Anweisungen enthalten in der Regel einfache Anweisungen,
+sie sind also Åbergeordnete Strukturen.
+\end
+
+screen( "Zuweisung" )
+Zuweisung                                                       Pascal
+----------------------------------------------------------------------
+
+Die Zuweisung dient dazu, Variable auf bestimmte Werte zu setzen.
+Ihre allgemeine Form lautet:
+
+  Variable := Ausdruck
+
+Der Ausdruck wird ausgewertet, und sein Wert dann in den Speicherplatz
+der Variablen kopiert. Nach der AusfÅhrung der Zuweisung nimmt die
+Variable daher den Wert des Ausdrucks an.
+
+Voraussetzung fÅr die AusfÅhrung ist, daû der Wert des Ausdrucks in
+den Datentyp der Variable ÅberfÅhrt werden kann, daû sein Typ zu-
+weisungskompatibel zum Typ der Variable ist.
+
+Beispiele:
+
+  i := 3;
+  j := i + 5;
+  a[i,j] := a[i,j] + f(i);
+  buchstaben := ['A' .. 'Z', 'a' .. 'z'];
+  p^.next := nil;
+  radius := sqrt( sqr(x) + sqr(y) );
+\end
+
+screen( "Prozeduraufruf" )
+Prozeduraufruf                                                  Pascal
+----------------------------------------------------------------------
+
+Prozeduraufrufe dienen dazu, vorher vereinbarte Unterprogramme zu
+aktivieren. (Siehe auch \#Prozedurdeklaration\#).
+
+Prozeduraufrufe bestehen in Pascal einfach aus dem Namen der Prozedur,
+gefolgt von der Liste der aktuellen \#Parameter\# in runden Klammern.
+Beispiele von Prozeduraufrufen:
+
+    NaechsteZeile;
+    get_data(a, y, n, m);
+    writeln('Hello world');
+
+Methodenaufrufe sind sehr Ñhnlich wie Prozeduraufrufe. Jedoch muû
+der Aufruf angeben, fÅr welches Objekt die Methode aufgerufen wird.
+Dieses wird dann als impliziter \#self\#-Parameter der Methode Åber-
+geben. FÅr den Aufruf einer Methode gibt es folgende Mîglichkeiten:
+
+ - Das Objekt wird explizit angegeben. Beispiel:
+
+     ball.MoveTo(x, 22);
+
+ - In einer Methode wird eine andere Methode fÅr dasselbe Objekt
+   aufgerufen. Beispiel:
+
+     procedure Counter.Decrement;
+     begin
+       SetValue( GetValue - 1 );
+     end;
+
+ - In einer Methode wird die gleichnamige Methode einer Basisklasse
+   aufgerufen. Dies ist insbesondere bei Konstruktoren sehr hÑufig.
+   Hier stehen zwei verschiedene Mîglichkeiten zur VerfÅgung: man
+   kann den Basistyp entweder explizit angeben, oder mit dem SchlÅssel-
+   wort \#inherited\# einfach die ererbte Methode bezeichnen.
+
+   Beispiele:
+
+     procedure DownCounter.Decrement;
+     begin
+       if GetValue > Minimum then
+         Counter.Decrement;
+     end;
+
+     oder:
+
+     procedure DownCounter.Decrement;
+     begin
+       if GetValue > Minimum then
+         inherited Decrement;
+     end;
+
+ - Aufrufe von Konstruktoren kînnen in Aufrufe der Standardfunktion
+   \link("%%GLOBAL%%")New\# eingebettet werden, um ein Objekt zu allozieren und zu
+   initialisieren. éhnlich kann innerhalb eines Aufrufs von \link("%%GLOBAL%%")Dispose\#
+   ein Destruktoraufruf stehen, um das betreffende Objekt ordentlich
+   wegzurÑumen. Beispiele:
+
+     New(ball, Init(3, 4));
+     Dispose(ball, Done);
+\end
+
+screen( "self",
+        sensitive("SELF") )
+self-Parameter                                                  Pascal
+----------------------------------------------------------------------
+
+Beim Aufruf von Methoden wird das Objekt, auf das sich der Aufruf
+bezieht, als impliziter Parameter mit Åbergeben.
+
+In der Methode ist dieser Parameter unter dem Namen \#self\# zugÑng-
+lich. Er ist als VAR-Parameter des betreffenden Objekttyps deklariert.
+
+Normalerweise ist es nicht nîtig, auf \#self\# explizit zuzugreifen -
+Felder und Methoden des jeweiligen Objekttyps sind ohnehin sichtbar.
+
+Wenn man jedoch etwa eine Liste von erzeugten Objekten eines bestimmten
+Typs anlegen mîchte, kommt man um den direkten Zugriff auf \#self\# nicht
+herum. Beispiel:
+
+  constructor Treiber.Init;
+  begin
+    naechsterTreiber := treiberListe;
+    treiberListe := @self;
+  end;
+\end
+
+screen( "then",
+        "if",
+        "else",
+        sensitive("ELSE"),
+        sensitive("IF"),
+        sensitive("THEN") )
+if-Anweisung                                                    Pascal
+----------------------------------------------------------------------
+
+Die if-Anweisung dient zur bedingten AusfÅhrung von Anweisungen.
+Sie kommt in zwei Formen vor, mit und ohne else-Zweig. Ihre all-
+gemeine Form ist:
+
+  if Bedingung then
+    Anweisung1
+  else
+    Anweisung2;
+
+oder
+
+  if Bedingung then
+    Anweisung1;
+
+Die Bedingung ist ein Ausdruck, der den Typ \#boolean\#
+haben muû. Anweisung1 und Anweisung2 sind beliebige Anweisungen.
+Falls die Auswertung der Bedingung den Wert \#true\# ergibt, so
+wird Anweisung1 ausgefÅhrt, sonst, falls vorhanden, Anweisung2.
+
+Hier einige Beispiele:
+
+  { Berechne Maximum von a und b }
+  if a > b then
+    max := a
+  else
+    max := b;
+
+  { Berechne Maximum von a und b }
+  max := a;
+  if b > a then
+    max := b;
+
+Sollen im then- oder else-Zweig mehrere Anweisungen stehen, so muû
+man diese mit einer \#Blockanweisung\# zusammenfassen:
+
+  if a[j-1] > a[j] then  { vertausche a[j-1] und a[j] }
+  begin
+    x := a[j-1];
+    a[j-1] := a[j];
+    a[j] := x;
+  end;
+
+NatÅrlich kînnen in beiden Zweigen nicht nur einfache, sondern wieder
+strukturierte Anweisungen, beispielsweise if-Anweisungen, stehen:
+
+  { Berechne Maximum von a, b, c }
+  if a > b then
+    if a > c then
+      max := a
+    else
+      max := c
+  else
+    if b > c then
+      max := b
+    else
+      max := c
+\end
+
+screen( "while",
+        sensitive("WHILE") )
+while-Anweisung                                                 Pascal
+----------------------------------------------------------------------
+
+Die while-Schleife dient zur kontrollierten Wiederholung von Anweisungen.
+Ihre allgemeine Form ist:
+
+  while Bedingung do
+    Anweisung;
+
+Die Bedingung ist ein Ausdruck, der den Typ \#boolean\# hat. Solange
+dieser Ausdruck den Wert \#true\# ergibt, wird die Anweisung ausgefÅhrt.
+Die Bedingung wird natÅrlich jedesmal erneut ausgewertet.
+
+Beispiel:
+
+  i := 10;
+  found := false;
+  while (i > 0) and (a[i] <> k) do
+    i := i - 1;
+
+Falls mehrere Anweisungen wiederholt werden sollen, muû man diese
+mit einer \#Blockanweisung\# zusammenfassen:
+
+  while x < a[j-1] do
+  begin
+    a[j] := a[j-1];
+    j := j-1
+  end;
+
+Man beachte, daû die Anweisung unter UmstÑnden nie ausgefÅhrt wird,
+nÑmlich dann, wenn die Auswertung der Bedingung schon beim ersten
+Mal den Wert \#false\# ergibt. Hier liegt der wesentliche Unterschied
+zur \#repeat\#-Anweisung.
+\end
+
+screen( "until",
+        "repeat",
+        sensitive("REPEAT"),
+        sensitive("UNTIL") )
+repeat-Anweisung                                                Pascal
+----------------------------------------------------------------------
+
+Die repeat-Schleife dient wie die \#while\#-Schleife zur bedingten
+Wiederholung von Anweisungen. Ihre allgemeine Form ist:
+
+  repeat
+    Anweisung1;
+    Anweisung2;
+    ...
+  until Bedingung;
+
+Die Anweisungen werden zunÑchst ausgefÅhrt. Dann wird die Bedingung -
+ein Ausdruck mit Typ \#boolean\# - ausgewertet. Ergibt die Auswertung
+den Wert \#false\#, so wird die AusfÅhrung der repeat-Anweisung wieder-
+holt, sonst beendet.
+
+Beispiel:
+
+  repeat
+    Write('Wie heiût du? ');
+    Readln(name);
+    Writeln('Hallo ', name, '!');
+  until name = '';
+
+Beachten Sie, daû die repeat-Anweisungen im Unterschied zu fast allen
+anderen strukturierten Anweisungen mehrere Teilanweisungen beinhalten
+kann, ohne daû diese zu einer \#Blockanweisung\# zusammengefasst werden
+mÅssen.
+
+Der wesentlich Unterschied zur \#while\#-Schleife liegt darin, daû
+die Bedingung erst am Ende der Schleife ausgewertet wird, daû die
+Anweisungen also mindestens einmal ausgefÅhrt werden.
+\end
+
+screen( "begin",
+        "Blockanweisung",
+        sensitive("BEGIN") )
+Blockanweisung                                                  Pascal
+----------------------------------------------------------------------
+
+Die Blockanweisung ist eine der einfachsten strukturierten Anweisungen.
+Sie bildet eine Art Klammer, die mehrere Anweisungen zu einer einzigen
+zusammenfaût. Als Symbol fÅr die îffnende Klammer fungiert das SchlÅssel-
+wort \#begin\#, als schlieûende das SchlÅsselwort \#end\#.
+
+Blockanweisungen sind in Pascal immer dann nîtig, wenn andere strukturierte
+Anweisungen mehr als eine Teilanweisung enthalten sollen.
+
+Hier ein Beispiel:
+
+  while x < a[j-1] do
+  begin
+    a[j] := a[j-1];
+    j := j-1
+  end;
+
+In diesem Beispiel sollte die \#while\#-Schleife zwei Anweisungen
+wiederholen. Das nur mîglich, wenn diese mit einer \#begin\#-\#end\#-
+Klammer zusammengefaût werden.
+\end
+
+screen( "for",
+        "to",
+        "downto",
+        sensitive("DOWNTO"),
+        sensitive("FOR"),
+        sensitive("TO") )
+for-Anweisung                                                   Pascal
+----------------------------------------------------------------------
+
+Die for-Schleife ermîglicht es, Anweisungen fÅr einen bestimmten Bereich
+von Werten zu wiederholen.
+
+Zwei Formen sind mîglich: aufwÑrts- und abwÑrtszÑhlend. Die allgemeine
+Form der for-Schleife lautet:
+
+  for Laufvariable := Anfangswert to Endwert do
+    Anweisung;
+
+bzw.:
+
+  for Laufvariable := Anfangswert downto Endwert do
+    Anweisung;
+
+Die Laufvariable muû lokal zur aktuellen Prozedur sein und ordinalen
+Typ (Integer-Typen, AufzÑhlungs- und Unterbereichstypen, \#char\#,
+\#boolean\#) haben. Anfangswert und Endwert sind beliebige AusdrÅcke,
+deren Typ mit dem der Laufvariable vertrÑglich ist. Anfangs- und
+Endwert werden nur einmal zu Beginn der Schleife errechnet.
+
+Zu Beginn wird der Laufvariablen der Anfangswert zugewiesen.
+Die Anzahl der SchleifendurchlÑufe wird aus Endwert - Anfangswert + 1
+fÅr die aufwÑrtszÑhlende Schleife bzw. Anfangswert - Endwert + 1 fÅr
+die abwÑrtszÑhlende Schleife errechnet.
+
+Die Anweisung wird dann sooft durchlaufen, wie es die berechnete Anzahl
+der SchleifendurchlÑufe angibt. War die Anzahl kleiner oder gleich Null,
+so wird die Anweisung nie durchlaufen. Nach jedem Schleifendurchlauf
+wird die Kontrollvariable um eins erhîht (aufwÑrtszÑhlende Schleife) bzw.
+um eins erniedrigt (abwÑrtszÑhlende Schleife).
+
+In der Schleife sind Zuweisungen an die Laufvariable unzulÑssig und
+fÅhren zu einer Fehlermeldung des Compilers - die for-Schleife kann nur
+Åber eine \#goto\#- oder \link("%%GLOBAL%%")break\#-Anweisung vorzeitig verlassen werden.
+
+Hier einige Beispiele:
+
+  for i := 0 to size do
+    flags[i] := true;
+
+  for i := n downto 1 do begin
+    sum := y[i];
+    for j := i + 1 to n do
+      sum := sum - a[i,j]*x[j];
+    x[i] := sum / d[i];
+  end;
+
+  for c := 'A' to 'Z' do
+    loCase[c] := Chr( Ord(c) - Ord('A') + Ord('a') );
+
+Das zweite Beispiel zeigt auch, wie man mehrere Anweisungen in einer
+\#for\#-Schleife wiederholen kann: Man faût die Anweisung mit einer
+\#begin\#-\#end\#-Klammmer (\#Blockanweisung\#) zusammen.
+\end
+
+screen( "do",
+        sensitive("DO") )
+SchlÅsselwort \#do\#                                                Pascal
+----------------------------------------------------------------------
+
+Das SchlÅsselwort \#do\# wird in \#for\#- und \#while\#-Schleifen
+verwendet sowie in der \#with\#-Anweisung.
+\end
+
+screen( "end",
+        sensitive("END") )
+SchlÅsselwort \#end\#                                               Pascal
+----------------------------------------------------------------------
+
+Das SchlÅsselwort \#end\# wird in der \#Blockanweisung\# verwendet,
+in der Deklaration von \#record\#- und \#object\#-Typen und am Ende
+des Anweisungsteils von Prozeduren, Funktionen, Units und Programmen.
+\end
+
+screen( "of",
+        sensitive("OF") )
+SchlÅsselwort \#of\#                                                Pascal
+----------------------------------------------------------------------
+
+Das SchlÅsselwort \#of\# wird in der Deklaration von \#Array-Typen\#,
+\#Set-Typen\#, \#Datei-Typen\# und varianten \#Record-Typen\# sowie
+in der \#case\#-Anweisung verwendet.
+\end
+
+screen( "packed",
+        sensitive("PACKED") )
+SchlÅsselwort \#packed\#                                            Pascal
+----------------------------------------------------------------------
+
+Das SchlÅsselwort \#packed\# gibt fÅr strukturierte Datentypen
+(\#Array-Typen\#, \#Record-Typen\#, \#Objekt-Typen\#, \#Set-Typen\# und
+\#Datei-Typen\#) in Standard Pascal an, ob der Datentyp mîglichst
+platzsparend gespeichert werden soll oder nicht.
+
+Da Pure Pascal (wie Åbrigens auch Turbo Pascal) Datenstrukturen
+automatisch packt, ist \#packed\# in Pure Pascal zwar erlaubt, hat
+jedoch keine Funktion.
+\end
+
+screen( "with",
+        sensitive("WITH") )
+with-Anweisung                                                  Pascal
+----------------------------------------------------------------------
+
+Die with-Anweisung dient zur Minimierung von Schreibarbeit beim Zugriff
+auf Record-Variable. Sie ermîglicht dem Compiler in vielen FÑllen auch
+die Erzeugung effizienteren Maschinencodes. Jedoch kann jede with-An-
+weisung in Ñquivalente Anweisungen ohne with umgeformt werden.
+
+Die allgemeine Form der with-Anweisung lautet:
+
+  with Recordvariable1, Recordvariable2, ... do
+    Anweisung;
+
+Innerhalb der Anweisung kann auf Felder der Recordvariablen direkt
+zugegriffen werden, ohne die jeweilige Recordvariable neu anzugeben.
+
+Beispiele:
+
+  with datum do
+    if monat = 12 then begin
+      monat := 1;
+      jahr := jahr + 1;
+    end else
+      monat := monat + 1;
+
+bedeutet dasselbe wie:
+
+  if datum.monat = 12 then begin
+    datum.monat := 1;
+    datum.jahr := datum.jahr + 1;
+  end else
+    datum.monat := datum.monat + 1;
+
+und:
+
+  with dir[i]^ do                 { Inhaltsverzeichnis ausgeben }
+    writeln(name : 12, size : 9);
+
+ist gleichbedeutend mit:
+
+  writeln(dir[i]^.name : 12, dir[i]^.size : 9);
+
+Sollen mehrere Anweisungen ausgefÅhrt werden, so mÅssen diese mit
+einer \#Blockanweisung\# (\#begin\#-\#end\#-Klammer) zusammengefaût
+werden.
+\end
+
+screen( "case",
+        sensitive("CASE") )
+case-Anweisung                                                  Pascal
+----------------------------------------------------------------------
+
+Die case-Anweisung ermîglicht es, eine von mehreren Anweisungen ab-
+hÑngig vom Wert eines Ausdrucks auszufÅhren. Im Unterschied zur \#if\#-
+Anweisung erlaubt sie beliebig viele Alternativen.
+
+Die case-Anweisung besteht aus einem Ausdruck und einer Liste von
+case-Alternativen. Jede Alternative besteht aus einer Liste von Kon-
+stanten und konstanten Bereichen und einer Anweisung. Es wird diejenige
+Alternative ausgefÅhrt, deren Konstantenliste den aktuellen Wert des
+Ausdrucks enthÑlt. Ein optionaler else-Zweig wird ausgefÅhrt, falls
+keine der Alternativen ausgefÅhrt werden kann.
+
+Beispiele:
+
+  case operator of
+    Plus:  w := x + y;
+    Minus: w := x - y;
+    Mal:   w := x + y;
+  end;
+
+  case ch of
+    'A' .. 'Z' :        VerarbeiteGrossbuchstaben;
+    'a' .. 'z' :        VerarbeiteKleinbuchstaben;
+    '0' .. '9' :        VerarbeiteZiffern;
+    '+', '-', '*', '/': VerarbeiteOperatorZeichen;
+    else begin
+      Writeln('UnzulÑssiges Zeichen: ', ch);
+      Halt;
+    end;
+  end;
+
+Falls in einer der case-Alternativen mehrere Anweisungen ausgefÅhrt
+werden sollen, mÅssen diese mit einer \#Blockanweisung\#
+(\#begin\#-\#end\#-Klammer) zusammengefaût werden.
+\end
+
+screen( "goto",
+        "label",
+        "Label",
+        sensitive("GOTO"),
+        sensitive("LABEL") )
+goto-Anweisung                                                  Pascal
+----------------------------------------------------------------------
+
+Eine goto-Anweisung setzt die ProgrammausfÅhrung an einer mit einem
+Label gekennzeichneten Stelle des Programms fort.
+
+Ihre allgemeine Form ist:
+
+  goto marke;
+
+wobei marke ein Bezeichner oder eine vorzeichenlose Zahl ist, die in
+der aktuellen Prozedur vorher mit einer Label-Deklaration vereinbart
+wurde:
+
+  label marke;
+
+Das Label marke muû auûerdem vor die Stelle, die es bezeichnen soll,
+mit einem Doppelpunkt hingeschrieben werden.
+
+In Pure Pascal ist es nicht mîglich, aus einer Prozedur heraus- oder
+in sie hineinzuspringen. Es ist zwar mîglich, in die Teilanweisungen
+einer strukturierten Anweisung hineinzuspringen, jedoch kînnen dabei
+insbesondere bei \#with\#- und \#for\#-Anweisungen unvorsehbare Effekte
+bis hin zum Programmabsturz auftreten, da mîglicherweise wichtige
+Initialisierungen Åbersprungen werden. Die goto-Anweisung sollte
+deshalb vorsichtig und sparsam verwendet werden.
+
+Beispiel:
+
+  label fehlerAusgang;
+  var eingabe: text; ch: Char;
+  begin
+    {$I-}
+    reset(eingabe);
+    if IOResult <> 0 then
+      goto fehlerAusgang;
+    while not eof(eingabe) do begin
+      read(ch);
+      if IOResult <> 0 then
+        goto fehlerAusgang;
+      VerarbeiteZeichen(ch);
+    end;
+  fehlerAusgang:
+    close(eingabe);
+  end;
+
+Viele FÑlle, in denen Programmierer anderer Programmiersprachen goto-
+Anweisungen verwenden wÅrden, kînnen in Pascal mit Hilfe der strukturierten
+\#if\#-, \#case\#-, \#while\#-, und \#repeat\#-Anweisungen eleganter und Åbersicht-
+licher gelîst werden.
+
+Falls es nur darum geht, die aktuelle Prozedur zu verlassen, kann auch
+die Standardfunktion \link("%%GLOBAL%%")Exit\# verwendet werden, oder in Konstruktoren
+die Standardfunktion \link("%%GLOBAL%%")Fail\#.
+
+Falls das gesamte Programm wegen eines Fehler abgebrochen werden soll,
+kînnen die Standardfunktionen \link("%%GLOBAL%%")Halt\# oder \link("%%GLOBAL%%")Runerror\# verwendet
+werden.
+\end
+
+screen( "inherited",
+        sensitive("INHERITED") )
+SchlÅsselwort inherited                                         Pascal
+----------------------------------------------------------------------
+
+Das SchlÅsselwort "inherited" darf nur in Methoden eines Objekttyps
+verwendet werden. Es bewirkt den Aufruf der vom Basistyp ererbten
+Methode des angegebenen Namens. Falls es keinen Basistyp gibt, wird
+eine Fehlermeldung ausgegeben.
+
+Beispiel:
+
+  type
+    Figur =
+      object
+        x, y: Real;
+        constructor Init(initX, initY: Real);
+      end;
+    Kreis =
+      object (Figur)
+        radius: Real;
+        constructor Init(initX, initY, initRadius: Real);
+      end;
+
+  constructor Figur.Init(initX, initY: Real);
+  begin
+    x := initX;
+    y := initY;
+  end;
+
+  constructor Kreis.Init(initX, initY, initRadius: Real);
+  begin
+    inherited Init(initX, InitY);
+    radius := initRadius;
+  end;
+\end
+
+screen( "Prozedurdeklarationen",
+        "function",
+        "procedure",
+        "Prozedurdeklaration",
+        sensitive("FUNCTION"),
+        sensitive("PROCEDURE") )
+Prozedurdeklarationen                                           Pascal
+----------------------------------------------------------------------
+
+Prozedur- und Funktionsdeklarationen vereinbaren Unterprogramme. Beiden
+werden beim Aufruf Parameter Åbergeben. Prozeduren liefern kein Resul-
+tat - deswegen kînnen Prozeduraufrufe als einfache Anweisungen verwen-
+det werden. Funktionsaufrufe dagegen treten innerhalb von AusdrÅcken
+auf - mit dem von der Funktion gelieferten Resultat wird weitergerechnet.
+
+Prozedur- und Funktionsdeklarationen bestehen zunÑchst aus dem Prozedur-
+kopf. Dieser spezifiziert Anzahl und Art der \#Parameter\#, sowie (nur bei
+Funktionen) den Typ des Resultats.
+
+Dann folgen lokale Deklarationen (selbst weitere Prozedurdeklarationen
+sind erlaubt), und schlieûlich der Anweisungsteil der Prozedur.
+
+Eine Ausnahme stellen Deklarationen im Interfaceteil von Units, Methoden-
+deklarationen in Objekten und \#forward\#-Deklarationen dar - hier wird
+nur der Prozedurkopf angegeben.
+
+Beispiel:
+
+  procedure StrHex( x : Word; var res : string );
+
+    { Es folgt eine lokale Funktion }
+    function NibbleChar( n : Word ) : char;     { Resultattyp : char }
+    const hexDig : array [ 0 .. 15 ] of char = '0123456789ABCDEF';
+    begin
+      nibbleChar := hexDig[ n and $F ];
+    end;
+
+  begin                              { Start Anweisungen von StrHex    }
+    res[0] := chr(4);                { LÑnge des Resultats = 4 Zeichen }
+    res[1] := NibbleChar( x shr 12 );
+    res[2] := NibbleChar( x shr 8 );
+    res[3] := NibbleChar( x shr 4 );
+    res[4] := NibbleChar( x );
+  end;                               { Ende von StrHex                 }
+
+Im Beispiel enthÑlt die Prozedur StrHex die lokale Funktion NibbleChar,
+diese wiederum die lokale typisierte Konstante hexDig.
+
+Im Anweisungsteil von Funktionen muû eine Zuweisung an den Namen der
+Funktion vorkommen. Diese Zuweisung spezifiziert den Wert, der als
+Ergebnis des Aufrufs zurÅckgegeben wird. Beachten Sie, daû der Name der
+Funktion innerhalb eines Ausdrucks (etwa auf der rechten Seite einer Zu-
+weisung) keinen Zugriff auf den RÅckgabewert erlaubt, sondern fÅr einen
+rekursiven Aufruf der Funktion selbst steht.
+
+Beispiel:
+
+  function Fakultaet(n: longint): longint;
+  begin
+    if n = 0 then
+      Fakultaet := 1                    { Ergebnis ist 1     }
+    else
+      Fakultaet := n * Fakultaet(n-1);  { rekursiver Aufruf! }
+  end;
+\end
+
+screen( "Parameter" )
+Parameter                                                       Pascal
+----------------------------------------------------------------------
+
+Parameter machen Prozeduren und Funktionen flexibler - mit welchen
+Werten oder Variablen gerechnet wird, kann bei jedem einzelnen Aufruf
+neu bestimmt werden.
+
+Parameter mÅssen bei der Deklaration von Prozeduren und Funktionen
+deklariert werden (formale Parameter), und sie mÅssen beim Aufruf
+angegeben werden (aktuelle Parameter).
+
+In Pascal gibt es zwei Arten formalen Parametern: sogenannte Wertpara-
+meter (engl. Value-Parameter) dienen zur öbergaben von Werten an Unter-
+programme, sie sind sozusagen nur Eingabewerte.
+
+Var-Parameter sagen dem Unterprogramm dagegen, auf welche Variablen
+sich die Berechnung beziehen soll, insbesondere etwa welchen Variablen
+Ergebnisse zugewiesen werden sollen. Sie werden oft verwendet, wenn
+das Unterprogramm Ergebnisse zurÅckliefern oder Variablen verÑndern soll.
+
+  Beispiel fÅr Value-Parameter:
+
+    function Kreisflaeche( radius: real ) : real;
+    begin
+      Kreisflaeche := pi * radius * radius;
+    end;
+
+    begin
+      { Aufruf von Kreisflaeche }
+      Writeln( Kreisflaeche(3) );
+    end.
+
+Obiges Beispiel kînnte man mit Hilfe eines zusÑtzlichen Var-Parameters
+auch anders formulieren:
+
+    procedure Kreisflaeche( radius: real; var ergebnis : real );
+    begin
+      ergebnis := pi * radius * radius;
+    end;
+
+    var flaeche : real;
+    begin
+      { Aufruf von Kreisflaeche }
+      Kreisflaeche(3, flaeche);
+      Writeln( flaeche );
+    end.
+
+Bei Wertparametern rechnet die Prozedur tatsÑchlich mit einer Kopie
+des Wertes - sie kann dem formalen Parameter zwar Werte zuweisen, dies
+wirkt sich jedoch auf den aktuellen Parameter nicht aus.
+
+Var-Parametern kann man ebenfalls Werte zuweisen, und dadurch wird die
+als aktueller Parameter Åbergebene Variable geÑndert.
+
+Normalerweise wird man also Eingabewerte fÅr eine Prozedur oder
+Funktion als Wertparameter deklarieren, Ausgabewerte als Var-Parameter.
+
+Da bei Wert-Parametern jedoch wie oben erwÑhnt eine Kopie des aktuellen
+Parameters angelegt wird, kann es bei groûen Arrays oder Records effi-
+zienter sein, auch Eingabeparameter als Var-Parameter zu deklarieren,
+um Programmlaufzeit und Speicherplatz zu sparen.
+
+Um dieses Problem noch eleganter zu lîsen, gibt es neuerdings (ab
+Borland Pascal 7.0 bzw. Pure Pascal 1.1) die Mîglichkeit, Wert-Parameter
+als \#konstante Parameter\# zu deklarieren.
+
+Neu eingefÅhrt wurden auch \#offene Arrayparameter\#, die es ermîglichen,
+die Grîûe Åbergebener Arrays flexibel zu halten.
+\end
+
+screen( "offene Arrayparameter" )
+Offene Arrayparameter                                           Pascal
+----------------------------------------------------------------------
+
+Offene Arrayparameter gestatten es, die Grîûe von Arrayparametern nicht
+fest zu vereinbaren, sondern vom Åbergebenen aktuellen Parameter ab-
+hÑngig zu machen.
+
+Die Deklaration des Parameters geschieht mit "ARRAY OF <Typname>", zum
+Beispiel so:
+
+    FUNCTION SkalarProdukt( a, b: ARRAY OF REAL): REAL;
+
+Als aktueller Parameter darf dann ein beliebig langes Array des ange-
+gebenen Typs Åbergeben werden. Sogar die öbergabe einer einzelnen Vari-
+able des Typs ist zulÑssig.
+
+Im Beispiel kînnen also beliebige Arrays von REAL Åbergeben werden (auch
+verschieden lange fÅr a und b!), oder auch einzelne REAL Variable. Die
+öbergabe von Konstanten oder AusdrÅcken ist dagegen nicht zulÑssig.
+
+Innerhalb einer Funktion mit offenen Parametern mîchte man natÅrlich
+gerne die Indexgrenzen der Parameter erfragen. Dazu sind die Standard-
+funktionen \link("%%GLOBAL%%")HIGH\# und \link("%%GLOBAL%%")LOW\# neu eingefÅhrt worden. Angewandt auf Arrays oder
+offene Arrayparameter liefern sie die Indexgrenzen zurÅck. Im Beispiel:
+
+    FUNCTION SkalarProdukt( a, b: ARRAY OF REAL): REAL;
+    VAR
+        summe: REAL;
+        i: LONGINT;      { Parameter kînnen bis 2 Gigabyte groû sein ! }
+    BEGIN
+        summe := 0.0;
+        { Man sollte prÅfen, daû LOW(a) = LOW(b) und HIGH(a) = HIGH(b) }
+        FOR i := LOW(a) TO HIGH(a) DO summe := summe + a[i]*b[i];
+        SkalarProdukt := summe;
+    END;
+
+Offene Arrayparameter werden vom Compiler immer so angelegt, daû die
+Untergrenze (also der Wert von LOW) gleich Null ist. Wenn der aktuelle
+Parameter eine Untergrenze ungleich Null hat, wird die Obergrenze des
+offenen Parameters entsprechend angepaût, sodaû die Anzahl der Elemente
+Åbereinstimmt. Durch diese Konvention wird der erzeugte Maschinencode
+etwas effizienter, da nur eine Indexgrenze Åbergeben werden muû.
+
+Die kleine Beispielfunktion ist noch nicht so effizient, wie sie sein
+kînnte, da die beiden Werte-Parameter von der Funktion kopiert werden.
+
+Vermeiden kann man diese Kopie entweder durch Deklaration als VAR-
+Parameter oder ab Pure Pascal 1.1 bzw. Borland Pascal 7.0 durch Dek-
+laration als \#CONST-Parameter\#
+\end
+
+screen( "konstante Parameter",
+        "CONST-Parameter" )
+Konstante Parameter                                             Pascal
+----------------------------------------------------------------------
+
+Ab Pure Pascal 1.1 bzw. Borland Pascal 7.0 kînnen Parameter auch mit
+dem SchlÅsselwort CONST versehen werden (wie bisher bereits mit VAR).
+
+Eine Deklaration als CONST hat im wesentlichen zwei Effekte:
+
+  - Der Parameter darf von der Prozedur nicht geÑndert werden.
+  - Der Compiler braucht den Parameter nicht zu kopieren.
+
+CONST-Parameter empfehlen sich also, wenn man klarstellen mîchte, daû
+die Prozedur den aktuellen Parameter nicht Ñndern darf, oder wenn man
+das Programm optimieren mîchte, indem man dem Compiler das Kopieren
+des aktuellen Parameters erlÑût.
+
+Letzteres kann vor allem bei groûen Array- oder Recordparametern zu
+einer erheblichen Einsparung von Laufzeit fÅhren. Zudem wird weniger
+Speicherplatz auf dem Stack verbraucht, ein StackÅberlauf wird also
+unwahrscheinlicher.
+
+Hier noch ein abschlieûendes Beispiel:
+
+    TYPE Point = RECORD x, y: INTEGER; END;
+         Rectangle = RECORD x, y, w, h: INTEGER; END;
+
+    FUNCTION PointInRect( CONST p: Point; CONST r: Rectangle ): BOOLEAN;
+    BEGIN
+        PointInRect := (p.x >= r.x)
+                   AND (p.y >= r.y)
+                   AND (p.x < r.x + r.w)
+                   AND (p.y < r.y + r.h);
+    END;
+
+Hier mîchte man nur wissen, ob der Punkt im Rechteck liegt. Eine
+Kopie der Parameter ist nicht nîtig und wird durch CONST vermieden.
+\end
+
+screen( "forward",
+        sensitive("FORWARD") )
+forward-Deklarationen                                           Pascal
+----------------------------------------------------------------------
+
+Sogenannte \#forward\#-Deklarationen in Pascal erlauben es, den Kopf
+einer Prozedur oder Funktion anzugeben und die Prozedur oder Funktion
+aufzurufen, bevor der Prozedurrumpf angegeben wird.
+
+Dies ist z.B. dann sinnvoll, wenn sich zwei Prozeduren gegenseitig
+aufrufen (sogenannte verschrÑnkte Rekursion).
+
+Eine \#forward\#-Deklaration erfolgt, indem nach dem Prozedurkopf
+anstelle des Prozedurrumpfs die Direktive \#forward\# angegeben wird.
+
+SpÑter (aber noch im selben Programm bzw. in derselben Unit) folgt
+dann die vollstÑndige Deklaration. Die Parameterliste kann weggelassen
+oder nochmals wiederholt werden. Wird sie wiederholt, muû sie identisch
+zur Parameterliste in der \#forward\#-Deklaration sein.
+
+Beispiel:
+
+  procedure IchRufeDich( parameter : integer ); forward;
+
+  procedure DuRufstMich( parameter : integer );
+  begin
+    if parameter > 0 then
+      IchRufeDich( parameter - 1 );
+  end;
+
+  procedure IchRufeDich( parameter : integer );
+  begin
+    DuRufstMich( parameter - 1 );
+  end;
+
+Bei Prozedur- oder Funktionsdeklarationen im Interfaceteil von Units
+und innerhalb von Objekttypen wird ebenfalls nur der Prozedurkopf an-
+gegeben. Diese Deklarationen gelten fÅr den Compiler ebenfalls als
+\#forward\#-Deklarationen und die vollstÑndige Deklaration wird inner-
+halb der aktuellen Unit oder des aktuellen Programms erwartet.
+\end
+
+screen( "external",
+        sensitive("EXTERNAL") )
+external-Deklarationen                                          Pascal
+----------------------------------------------------------------------
+
+Sogenannte \#external\#-Deklarationen in Pure Pascal erlauben es, den
+Kopf einer in Assembler oder einer anderen Programmiersprache ge-
+schriebenen Prozedur oder Funktion in Pascal zu deklarieren.
+
+Formal ist eine solche Deklaration sehr Ñhnlich zu einer \#forward\#-
+Deklaration: Nur der Kopf der Prozedur oder Funktion wird angegeben,
+gefolgt von der Direktive external.
+
+Derselbe Name muû dann als globales Symbol in einer Objektdatei auf-
+tauchen, das mit Hilfe der $L-Compilerdirektive geladen wird.
+
+Beispiel:
+
+  function SwapWord(l: longint): longint; external;
+
+  {$L SwapWord }   { Einbinden von SWAPWORD.O  }
+
+Der Assemblerquelltext zu SwapWord kînnte etwa wie folgt aussehen:
+
+        .EXPORT    SwapWord    ; nach auûen sichtbar machen
+
+        .TEXT               ; Code liegt im Textsegment
+
+SwapWord:
+
+;   function SwapWord(l: longint): longint; external;
+;
+;    Parameter wird in D0.L Åbergeben
+;    Resultat wird in D0.L zurÅckgegeben
+
+        SWAP    D0        ; HÑlften vertauschen
+                          ; Resultat schon im richtigen Register!
+        RTS
+
+        .END              ; Und das wars auch schon wieder!
+
+Was sonst noch beim Aufruf von Assemblerroutinen zu beachten ist,
+wird unter \#Datenformate\# und \#Aufrufkonventionen\# erklÑrt.
+\end
+
+screen( "Programme",
+        "program",
+        "Programm",
+        sensitive("PROGRAM") )
+Programme                                                       Pascal
+----------------------------------------------------------------------
+
+Ein Pure Pascal Hauptprogramm beginnt mit dem reservierten Wort \#program\#,
+gefolgt vom Programmnamen.
+
+Optional folgt dann, in runde Klammern eingeschlossen, eine Liste soge-
+nannter Programmparameter. Diese werden in Pure Pascal vom Compiler
+ignoriert.
+
+Optional darf dann eine \#Uses\#-Klausel angegeben werden, in der die
+vom Programm benutzten Units aufgelistet werden.
+
+Hier ein Beispiel:
+
+  program GemBeispiel;    { Name des Programms sei GemBeispiel }
+
+  uses Gem, Dos;          { Deklarationen von Gem und Dos verfÅgbar }
+
+  { Deklarationen des Programms }
+
+  begin
+    { Anweisungen des Programms }
+  end.
+
+Nach der \#Uses\#-Klauses folgen dann die Deklarationen des Programms
+und schlieûlich der Anweisungsteil. Nach dem schlieûenden \#end\# muû
+unbedingt ein Punkt stehen.
+\end
+
+screen( "Units",
+        "unit",
+        sensitive("UNIT") )
+Units                                                           Pascal
+----------------------------------------------------------------------
+
+Units ermîglichen modulares Programmieren in Pascal. Sie bestehen aus
+zwei Teilen, dem Interfaceteil und dem Implementierungsteil.
+
+Der Interfaceteil enthÑlt Deklarationen, die von auûen sichtbar sein
+sollen. Bei Prozedur- und Funktionsdeklarationen wird dabei nur der
+Prozedurkopf angegeben. Die Deklarationen kînnen von anderen Units
+oder dem Hauptprogramm benutzt werden.
+
+Im Implementierungsteil werden die im Interfaceteil deklarierten Pro-
+zeduren und Funktionen implementiert (daher der Name). ZusÑtzlich
+kann man weitere Deklarationen angeben, die dann aber von auûen nicht
+zugÑnglich sind.
+
+Eine besondere Rolle spielt der Anweisungsteil einer Unit: er wird
+beim Programmstart ausgefÅhrt und ermîglicht es der Unit, ihre eigenen
+Datenstrukturen zu initialisieren.
+
+Eine Unit darf natÅrlich auch andere Units benutzen, indem sie sie in
+einer \#Uses\#-Klausel auffÅhrt. In einer Units dÅrfen \#Uses\#-Klauseln
+sogar an zwei Stellen auftauchen: Am Beginn des Interfaceteils und
+am Beginn des Implementierungsteils. Am Beginn des Interfaceteils sollten
+nur die Units aufgelistet werden, die fÅr die Deklarationen der Interface-
+teils erforderlich sind.
+
+Hier ein Beispiel:
+
+  unit UnitBeispiel;         { Name der Unit             }
+
+  interface                  { Beginn des Interfaceteils }
+
+  uses DatenTypen;           { FÅr Interfaceteil erforderlich }
+
+  var
+    Variable: DatenTyp;      { DatenTyp aus Unit DatenTypen }
+
+  procedure Prozedur( par : DatenTyp );
+
+  implementation             { Beginn des Implementierungsteils }
+
+  uses Unit1, Unit2, Unit2;  { FÅr Implementierung erforderlich }
+
+  procedure Prozedur( par : DatenTyp );
+  var lokaleVariable: DatenTyp;
+  begin
+    { Anweisungen }
+  end;
+
+  begin                      { Initialisierung der Unit }
+    Variable := ...
+  end.
+
+Die Prozedurdeklarationen im Interfaceteil werden vom Compiler wie
+eine \#forward\#-Deklaration behandelt. Im Implementierungsteil muû
+man deshalb die Parameterliste nicht nochmals angeben - wenn man das
+aber tut, dann ÅberprÅft der Compiler, ob beide Parameterlisten Åber-
+einstimmen.
+
+Zwei Units kînnen sich gegenseitig in ihren \#Uses\#-Klauseln auffÅhren,
+wenn dieses \#Uses\#-Klauseln im Implementierungsteil der Units stehen.
+\end
+
+screen( "interface",
+        sensitive("INTERFACE") )
+Interfaceteil von Units                                         Pascal
+----------------------------------------------------------------------
+
+Das reservierte Wort \#interface\# leitet den Interfaceteil von \#Units\#
+ein. Nachfolgende Deklarationen sind nach auûen sichtbar.
+
+Der Interfaceteil wird durch das reservierte Wort \#implementation\#
+beendet. Nachfolgende Deklarationen sind nach auûen unsichtbar.
+\end
+
+screen( "implementation",
+        sensitive("IMPLEMENTATION") )
+Implementierungsteil von Units                                  Pascal
+----------------------------------------------------------------------
+
+Das reservierte Wort \#implementation\# leitet den Implementierungs-
+teil von \#Units\# ein.
+
+Deklarationen im Implementierungsteil sind nach auûen unsichtbar.
+
+Im Implementierungsteil mÅssen die vollstÑndigen Deklarationen aller
+Prozeduren und Funktionen nachgeholt werden, deren Kîpfe im \#interface\#-
+Teil deklariert wurden.
+\end
+
+screen( "uses",
+        "Uses",
+        sensitive("USES") )
+Uses-Klausel                                                    Pascal
+----------------------------------------------------------------------
+
+Eine Uses-Klausel in einem \#Programm\# oder einer \#Units\# macht die
+Deklarationen der angegebenen Units zugÑnglich.
+
+Beispiel:
+
+  program lotto;
+
+  uses Gem, Tos;      { macht Deklarationen von Gem und Tos verfÅgbar }
+
+Um die Standardfunktionen und Standarddatentypen immer zugÑnglich zu
+machen, benutzt Pure Pascal immer automatisch die System-Unit. Diese
+enthÑlt die nîtigen Deklarationen.
+
+Namen werden vom Compiler in umgekehrter Reihenfolge der Uses-Klausel
+gesucht. Im Beispiel wÅrde also zunÑchst die Unit Tos, dann Gem, und
+dann System durchsucht.
+
+Wenn Units gleiche Namen deklarieren, entsteht das Problem der Namens-
+Åberdeckung: ein Name aus einer bestimmten Unit kann nicht angesprochen
+werden, weil in einer spÑter benutzten Unit derselbe Name definiert
+ist. Solche Konflikte kînnen durch Angabe des Unitnamens aufgelîst
+werden.
+
+Beispiel:
+
+  program TestRandom;
+
+  uses Tos;   { Funktion Random ist in Tos und System deklariert! }
+
+  begin
+    Writeln( Random );         { Random aus Tos    }
+    Writeln( System.Random );  { Random aus System }
+    Writeln( Tos.Random );     { Random aus Tos    }
+  end.
+
+Wenn eine Unit zwar in einer Uses-Klausel auftaucht, aber spÑter kein
+einziger Name aus dieser Unit verwendet wird, gibt der Compiler eine
+Warnung aus - diese Unit ist dann sehr wahrscheinlich ÅberflÅssig, es
+sei denn, es kommt nur auf den Effekt an, den die AusfÅhrung des
+Initialisierungsteils dieser Unit hat.
+\end
+
+screen( "Compiler-Direktiven",
+        "Compiler-Direktive" )
+Compiler-Direktiven                                             Pascal
+----------------------------------------------------------------------
+
+Compiler-Direktiven steuern die öbersetzung von Pure Pascal Programmen.
+Sie sind Åberall dort erlaubt, wo auch Kommentare erlaubt sind.
+
+Eine Compiler-Direktive beginnt wie ein Kommentar mit dem Zeichen {
+oder dem Zeichenpaar (*. Danach folgt ohne Zwischenraum das Zeichen $,
+gefolgt vom Namen der Direktive.
+
+Drei Hauptgruppen sind zu unterscheiden:
+
+  - \#Schalterdirektiven\# schalten bestimmte Compilereigenschaften ein
+    oder aus. Hier folgt nach dem Namen der Direktive immer + oder -,
+    je nachdem ob ein- oder ausgeschaltet werden soll.
+
+  - \#Parameterdirektiven\# spezifizieren Parameter, die die öbersetung
+    beinflussen, etwa Filenamen oder die Grîûe des Stacks.
+
+  - \#Bedingte Direktiven\# dienen zur bedingten öbersetzung von Programm-
+    teilen, erlauben es also, verschiedene Programmversionen zu
+    erzeugen.
+
+Hier einige Beispiele:
+
+  {$I-}            (* Schaltet I/O-Tests aus *)
+  {$I BROWSER.I }  (* Bezieht BROWSER.I in die öbersetzung ein *)
+  {$M 65536 }      (* Reserviert 64 kB Stack *)
+\end
+
+screen( "Schalterdirektiven",
+        "Compiler-Schalter",
+        sensitive("$B"),
+        sensitive("$D"),
+        sensitive("$G"),
+        sensitive("$I"),
+        sensitive("$L"),
+        sensitive("$N"),
+        sensitive("$P"),
+        sensitive("$Q"),
+        sensitive("$R"),
+        sensitive("$S"),
+        sensitive("$V"),
+        sensitive("$X"),
+        sensitive("$Z") )
+Compiler-Schalter                                               Pascal
+----------------------------------------------------------------------
+
+Hier ist eine Liste der mîglichen Compiler-Schalter von Pure Pascal:
+
+  $B+  VollstÑndige Auswertung boole'scher AusdrÅcke.
+  $B-  Auswertung boole'scher AusdrÅcke im Kurzschlussverfahren.
+
+  $D+  Debuginformation in .PPU und .PRG Dateien.
+  $D-  Keine Debuginformation.
+
+  $G+  Verwendung von 68020/030 Instruktionen.
+  $G-  Keine Verwendung von 68020/030 Instruktionen.
+
+  $I+  Bibliothek prÅft auf Fehler bei Ein-/Ausgabe.
+  $I-  Benutzerprogramm prÅft auf Fehler bei Ein-/Ausgabe.
+       Siehe auch: \#Parameterdirektiven\#
+
+  $L+  Lokale Symbole werden in .PPU Dateien abgelegt.
+  $L-  Lokale Symbole werden nicht abgelegt.
+       Siehe auch: \#Parameterdirektiven\#
+
+  $N+  Verwendung von 68881/882 Instruktionen.
+  $N-  Keine Verwendung von 68881/882 Instruktionen.
+       In Pure Pascal muû diese Direktive immer ganz am Anfang des
+       Programms stehen, VOR dem SchlÅsselwort PROGRAM oder UNIT.
+
+  $P+  VAR-Parameter vom Typ STRING sind flexibel groû.
+  $P-  VAR-Parameter vom Typ STRING enthalten immer 255 Zeichen.
+
+  $Q+  öberlaufprÅfung bei Ganzzahlarithmetik.
+  $Q-  Keine öberlaufprÅfung bei Ganzzahlarithmetik.
+
+  $R+  BereichsprÅfungen zur Laufzeit.
+  $R-  Keine BereichsprÅfungen zur Laufzeit.
+
+  $S+  öberprÅfung auf StackÅberlauf zur Laufzeit.
+  $S-  Keine öberprÅfung auf StackÅberlauf zur Laufzeit.
+
+  $T+  @-Operator liefert Zeiger auf Typ der Variable.
+  $T-  @-Operator liefert Standardtyp POINTER.
+
+  $V+  Strings als Var-Parameter mÅssen exakt Åbereinstimmen.
+  $V-  Strings als Var-Parameter dÅrfen unterschiedliche LÑnge haben.
+
+  $X+  Funktionen dÅrfen ohne Verwendung des Resultats aufgerufen werden.
+  $X-  Funktionsresultate mÅssen verwendet werden
+
+  $Z+  Optimierung des erzeugten Codes einschalten
+  $Z-  Optimierung des erzeugten Codes ausschalten
+
+Folgende Voreinstellungen sind beim Start des Compilers aktiv:
+
+  $B-  Auswertung boole'scher AusdrÅcke im Kurzschlussverfahren.
+  $D+  Debuginformation in .PPU und .PRG Dateien.
+  $G-  Keine Verwendung von 68020/030 Instruktionen.
+  $I+  Bibliothek prÅft auf Fehler bei Ein-/Ausgabe.
+  $L+  Lokale Symbole werden in .PPU Dateien abgelegt.
+  $N-  Keine Verwendung von 68881/882 Instruktionen.
+  $P-  VAR-Parameter vom Typ STRING enthalten immer 255 Zeichen.
+  $Q-  Keine öberlaufprÅfung bei Ganzzahlarithmetik.
+  $R-  Keine BereichsprÅfungen zur Laufzeit.
+  $S-  Keine öberprÅfung auf StackÅberlauf zur Laufzeit.
+  $T-  @-Operator liefert Standardtyp POINTER.
+  $V+  Strings als Var-Parameter mÅssen exakt Åbereinstimmen.
+  $X-  Funktionsresultate mÅssen verwendet werden
+  $Z+  Es wird optimierter Maschinencode erzeugt
+\end
+
+screen( "Parameterdirektiven",
+        sensitive("$E"),
+        sensitive("$M") )
+Parameterdirektiven                                             Pascal
+----------------------------------------------------------------------
+
+Folgende Parameterdirektiven werden von Pure Pascal erkannt:
+
+ {$E extension }    Setzt den Dateityp der erzeugten Programmdatei.
+                    Beispiel: {$E .TTP }
+
+ {$I IncludeDatei } Bezieht IncludeDatei in die öbersetzung mit ein.
+                    Beispiel: {$I BROWSER.I }
+
+ {$L ObjektDatei }  Bindet ObjektDatei ins Programm ein.
+                    Beispiel: {$L SWAPWORD.O }
+
+ {$M Stacksize }    Setzt die Grîûe des Stacks in Bytes.
+                    Beispiel: {$M 65536 }
+\end
+
+screen( "Bedingte Direktiven",
+        sensitive("$DEFINE"),
+        sensitive("$ELSE"),
+        sensitive("$ENDIF"),
+        sensitive("$IFDEF"),
+        sensitive("$IFNDEF"),
+        sensitive("$IFOPT"),
+        sensitive("$UNDEF") )
+Bedingte öbersetzung                                            Pascal
+----------------------------------------------------------------------
+
+Bedingte öbersetzung dient dazu, verschiedene Versionen eines Programms
+zu erzeugen.
+
+In Pure Pascal wird die bedingte öbersetzung von sogenannten Bedingungs-
+symbolen gesteuert, die definiert und abgefragt werden kînnen. Auûerdem
+kann der Zustand der \#Compiler-Schalter\# abgefragt werden.
+
+Bedingungssymbole Ñhneln Boole'schen Variablen: Sie kînnen entweder wahr
+(definiert) oder falsch (undefiniert) sein. Namen von Bedingungssymbolen
+entsprechen den Åblichen Regeln fÅr Bezeichner in Pascal. Ansonsten
+sind Pascal-Bezeichner und Bedingungssymbole vollkommen getrennt.
+
+Zwei Direktiven erlauben es, Bedingungssymbole zu setzen und zu lîschen:
+
+  {$DEFINE Symbol }  Setzt Symbol (Kein Effekt falls bereits gesetzt).
+  {$UNDEF  Symbol }  Lîscht Symbol. (Kein Effekt falls bereits gelîscht).
+
+Zur Abfrage von Bedingungssymbolen dienen folgende Direktiven:
+
+  {$IFDEF  Symbol }   Compiliert folgenden Quelltext nur, wenn Symbol
+                      gesetzt ist.
+  {$IFNDEF Symbol }   Compiliert folgenden Quelltext nur, wenn Symbol
+                      nicht gesetzt ist.
+
+Die Abfrage von Compiler-Schaltern wird durch die $IFOPT-Direktive ermîg-
+licht. Sie wird vom Namen eines Compiler-Schalters und + oder - gefolgt.
+Beispiel:
+
+  {$IFOPT N+ }        Compiliert folgenden Quelltext nur, wenn $N-Schalter
+                      aktiv ist.
+
+Die $ELSE-Direktive compiliert folgenden Quelltext, wenn nach der zuge-
+hîrigen $IFDEF, $IFNDEF oder $IFOPT-Direktive der Quelltext nicht compi-
+liert wurde, und umgekehrt.
+
+Die $ENDIF-Direktive schlieût eine bedingte öbersetzung ab.
+
+Beispiele:
+
+  {$IFOPT N+}
+  type real = extended; (* Dann lÑuft das Programm unter N+ schneller *)
+  {$ENDIF}
+
+  {$IFDEF Debug}
+  Writeln('Kontrollausgabe: hier wÑren wir glÅcklich angekommen');
+  {$ENDIF}
+
+Beachten Sie, daû Bedingungssymbole auch von der integrierten Entwick-
+lungsumgebung aus gesetzt werden kînnen (In Options/Compiler/Conditional
+defines), und daû man sie dem Kommandozeilencompiler PPC.TTP auf der
+Kommandozeile mitgeben kann.
+\end
+
+screen( "Pure Pascal intern" )
+öberblick                                           Pure Pascal intern
+----------------------------------------------------------------------
+
+\#Dynamische Speicherverwaltung\#     Installation eines HeapErrorHandlers
+\#Datenformate\#                      Wie speichert Pure Pascal Variablen?
+\#Aufrufkonventionen\#                Wie werden Parameter Åbergeben?
+\#Textdatei-GerÑtetreiber\#           Installation eigener Treiber
+\#Exit-Prozeduren\#                   "AufrÑumen" nach Programmende
+\end
+
+screen( "Dynamische Speicherverwaltung" )
+Dynamische Speicherverwaltung                       Pure Pascal intern
+----------------------------------------------------------------------
+
+Im Unterschied zu vielen anderen Pascalsystemen muû man bei Pure Pascal
+nicht angeben, wie groû der dynamische Speicherbereich (die sogenannte
+Heap) sein soll. Vielmehr wird die Heap bei Bedarf erweitert, indem
+groûe Speicherblîcke (32kB) vom Betriebssystem angefordert werden. Wenn
+ein solcher Block durch Aufruf von \link("%%GLOBAL%%")Dispose\#, \link("%%GLOBAL%%")Freemem\# oder \link("%%GLOBAL%%")Release\# wieder
+vollstÑndig leer wird, wird der Block wieder an das Betriebssystem
+zurÅckgegeben.
+
+
+Verhalten bei Speichermangel
+----------------------------
+
+Normalerweise meldet die Bibliothek sofort einen Laufzeit-
+fehler, wenn ein Aufruf von \link("%%GLOBAL%%")New\# oder \link("%%GLOBAL%%")Getmem\# wegen Speicher-
+mangel nicht befriedigt werden kann.
+
+Sie kînnen dieses Verhalten jedoch Ñndern, indem Sie die
+Zeigervariable \link("%%GLOBAL%%")HeapError\# in der Unit SYSTEM auf eine von Ihnen
+deklarierte Routine richten. Diese Routine wird aufgerufen,
+wenn Speichermangel auftritt. Sie muû folgendermaûen deklariert
+sein:
+
+   function HeapFunc(Size: longint): integer;
+
+Der Parameter Size steht dabei fÅr die Grîûe des angeforderten
+Speicherbereichs.
+
+Die Funktion kann nun z.B. versuchen, nicht unbedingt benîtigten
+Speicher freizugeben. öber den RÅckgabewert meldet sie, welchen
+Erfolge sie hatte. Drei verschiedene RÅckgabewerte sind mîglich:
+
+ 0 bedeutet, daû kein Speicher mehr frei ist. Das Programm
+   wird mit Laufzeitfehler 203 (Heap overflow) beendet.
+
+ 1 bedeutet, daû zwar kein Speicher mehr frei ist, daû das
+   Programm aber noch nicht beendet werden soll. Stattdessen
+   gibt der betreffende Aufruf von New oder Getmem den
+   Wert \#nil\# zurÅck.
+
+ 2 bedeutet, daû die Funktion es geschafft hat, noch Speicher
+   zu besorgen. Die Bibliothek wird dann nochmals versuchen,
+   den verlangten Speicher zu allozieren.
+
+Wenn in Ihrem Programm also ein Aufruf von New oder Getmem
+immer \#nil\# zurÅckgeben soll, wenn kein Speicher mehr vorhanden
+ist, mÅssen Sie eine Heap-Error-Funktion deklarieren, z.B. so:
+
+   function HeapFunc(Size: longint): integer;
+   begin
+     HeapFunc := 1;
+   end;
+
+und sie am Anfang ihres Programms in der \link("%%GLOBAL%%")HeapError\#-Variablen
+installieren:
+
+   ...
+   begin     { Start des Hauptprogramms }
+     HeapError := @HeapFunc;
+     ...
+   end.
+\end
+
+screen( "Datenformate" )
+Datenformate                                        Pure Pascal intern
+----------------------------------------------------------------------
+
+Integer-Typen
+-------------
+
+Welches interne Format Pure Pascal zur Speicherung von Integer-Typen
+verwendet, hÑngt vom Wertebereich ab:
+
+- Wenn Ober- und Untergrenze zwischen -128 und +127 liegen, wird
+  ein vorzeichenbehaftetes Byte zur Speicherung verwendet.
+  Dies ist auch die Darstellung des vordefinierten Typs \#shortint\#.
+
+- Wenn Ober- und Untergrenze zwischen 0 und +255 liegen, wird
+  ein vorzeichenloses Byte zur Speicherung benutzt.
+  (Vordefinierter Typ \#byte\#)
+
+- Wenn Ober- und Untergrenze zwischen -32768 und +32767 liegen,
+  werden zwei aufeinanderfolgende Bytes benutzt, deren hîherwertiges
+  an der niedrigeren Adresse liegt und das Vorzeichen trÑgt.
+  Die Adresse solcher Variablen wird von Pure Pascal immer auf
+  eine gerade Adresse ausgerichtet. (Vordefinierter Typ \#integer\#)
+
+- Wenn Ober- und Untergrenze zwischen 0 und 65535 liegen, werden
+  zwei Bytes ohne Vorzeichen zur Speicherung verwendet. Das hîher-
+  wertige Byte liegt an der niedrigeren Adresse und wird immer
+  auf eine gerade Adresse ausgerichtet. (Vordefinierter Typ \#word\#)
+
+- Sonst werden vier Bytes verwendet. Das hîchstwertige Byte liegt
+  an der niedrigsten Adresse, trÑgt das Vorzeichen und ist immer
+  auf eine gerade Adresse ausgerichtet. (Vordefinierter Typ \#longint\#)
+
+
+Char-Typen
+----------
+
+Der Datentyp \#char\# und Unterbereiche davon werden immer als vorzeichen-
+loses Byte gespeichert. Es wird der ASCII-Zeichensatz verwendet.
+
+
+Bool-Typen
+----------
+
+Der Datentyp \#boolean\# und Unterbereiche davon werden immer als vorzeichen-
+loses Byte gespeichert. Der Wert \#false\# wird durch den Wert 0 dargestellt
+(d.h. Ord(false) = 0), der Wert \#true\# durch den Wert 1 (also Ord(true) = 1).
+Der Typ boolean verhÑlt sich also so, als sei seine Deklaration:
+
+    type  boolean = (false, true);
+
+Insbesondere ist also false < true.
+
+
+AufzÑhlungstypen
+----------------
+
+AufzÑhlungstypen werden immer ohne Vorzeichen dargestellt. Die Grîûe
+hÑngt von der Anzahl der Werte ab. Sind es 256 oder weniger, wird
+ein vorzeichenloses Byte zur Speicherung verwendet, sonst zwei
+Bytes. Das hîherwertige Byte steht wie immer an der niedrigeren
+Adresse und ist auf eine gerade Adresse ausgerichtet.
+
+
+Zeigertypen
+-----------
+
+Zeigertypen werden immer durch ein Langwort (4 Bytes) dargestellt und
+stehen fÅr die Speicheradresse, die das Objekt enthÑlt, auf das der
+Zeiger weist. Die Zeigerkonstante \#nil\# wird durch den Wert 0 dargestellt.
+
+
+Real-Typen
+----------
+
+In Pure Pascal gibt es ingesamt vier grundlegende Real-Typen, nÑmlich
+\#single\# (4 Bytes), \#double\# (8 Bytes), \#real\# (10 Bytes) und 
+\#extended\# (12 Bytes).
+
+Der in Turbo Pascal vorhandene Datentyp comp ist dagegen nicht
+implementiert, da er vom Gleitkomma-Coprozessor 68881 nicht unterstÅtzt
+wird.
+
+Der Datentyp \#single\# besteht intern aus dem Vorzeichen (1 Bit), dem
+Exponenten (8 Bit) und der Mantisse (23 Bit).
+
+Der Datentyp \#double\# besteht aus dem Vorzeichen (1 Bit), dem Exponenten
+(11 Bit) und der Mantisse (52 Bit).
+
+Der Datentyp \#real\# besteht aus dem Vorzeichen (1 Bit), dem Exponenten
+(15 Bit) und der Mantisse (64 Bit).
+
+Der Datentyp \#extended\# besteht aus dem Vorzeichen (1 Bit), dem Exponenten
+(15 Bit), einem ungenutzten Wort (16 Bit) und der Mantisse (64 Bit).
+Das ungenutzte Wort ist eine Hardwareeigenschaft des Gleitkomma-
+Coprozessors 68881 und wird von Pure Pascal so verwendet, um maximale
+Geschwindigkeit des generierten Maschinencodes zu erreichen.
+
+Alle Real-Typen werden vom Compiler auf gerade Adressen ausgerichtet.
+
+
+String-Typen
+------------
+
+Ein String wird als Folge einzelner Zeichen gespeichert. Die momentane
+LÑnge des Strings wird als nulltes Element des Strings dem eigentlichen
+Inhalt vorangestellt. Deswegen wird zur Speicherung ein Byte mehr
+als die deklarierte Menge des Strings benîtigt.
+
+Da die LÑnge in einem Byte codiert ist, betrÑgt die MaximallÑnge von
+Strings in Pure Pascal 255 Byte.
+
+
+Set-Typen (Mengen)
+------------------
+
+Mengen werden als Sequenz von Bits dargestellt. FÅr jedes (potentielle)
+Element einer Menge ist ein Bit vorhanden, das entweder 1 ist, falls
+das betreffende Element in der Menge enthalten ist, oder 0, falls es
+nicht enthalten ist. Mengen kînnen maximal 256 Elemente enthalten,
+wobei sowohl Unter- als auch Obergrenze des Elementtyps im Bereich
+0 bis 255 enthalten sein mÅssen. Mengen kînnen daher maximal 32
+Byte (256 Elemente / 8 Bits pro Byte) groû sein.
+
+Zur Einsparung von Speicherplatz werden nur diejenigen Bytes angelegt,
+die nach der Definition des Elementtyps Åberhaupt Elemente enthalten
+kînnen. Beispielsweise wÅrden fÅr folgende Menge
+
+    var Grossbuchstaben = set of 'A' .. 'Z';
+
+nur insgesamt vier Bytes reserviert werden. Die Untergrenze des Elementtyps
+ist Ord('A') = 65, die Obergrenze Ord('Z') = 90. Diejenigen Bytes, die die
+Elemente 0..63 und 96..255 enthalten wÅrden, werden automatisch weggelassen.
+
+Die allgemeine Formel fÅr den Platzbedarf einer Menge lautet:
+
+    Bytes = (Obergrenze DIV 8) - (Untergrenze DIV 8) + 1;
+
+Um auf das Element mit einer bestimmten Nummer E zugreifen zu kînnen, muû
+man die Bytenummer und die Bitnummer innerhalb des entsprechenden Byte
+berechnen:
+
+    ByteNummer = (E DIV 8) - (Untergrenze DIV 8);
+    BitNummer  = E MOD 8;
+
+Die Bits innerhalb eines Byte werden Åbrigens so nummeriert, daû das nieder-
+wertigste Bit die Nummer 0 erhÑlt, das hîchstwertige die Nummer 7.
+
+
+Dateitypen
+----------
+
+Dateitypen werden intern als Records dargestellt. Typisierte und untypisierte
+Dateien werden durch folgende Typdefinition (verfÅgbar in der Unit DOS)
+beschrieben:
+
+  type
+    FileRec = record
+                Handle :    Word;
+                Mode :      Word;
+                RecSize :   LongInt;
+                Private :   array[1..28] of Byte;
+                UserData :  array[1..16] of Byte;
+                Name :      array[0..119] of Char;
+                Reserved :  Word;
+              end;
+
+Solche Dateitypen belegen also insgesamt 174 Bytes Speicherplatz.
+
+Textdateien enthalten zusÑtzlich einen Puffer von 128 Bytes, sind also
+insgesamt 302 Bytes groû. Die Deklaration ist wieder in der Unit DOS verfÅgbar:
+
+  type
+    TextBuf = array[0..127] of Char;
+
+    TextRec = record
+                Handle :    Word;
+                Mode :      Word;
+                BufSize :   LongInt;
+                BufPos :    LongInt;
+                BufEnd :    LongInt;
+                BufPtr :    ^TextBuf;
+                OpenFunc :  Pointer;
+                InOutFunc : Pointer;
+                FlushFunc : Pointer;
+                CloseFunc : Pointer;
+                UserData :  array[1..16] of Byte;
+                Name :      array[0..119] of Char;
+                Reserved :  Word;
+                Buffer :    TextBuf;
+              end;
+
+Die Komponente Handle enthÑlt die vom Betriebssystem vergebene
+Kanalnummer fÅr die Datei. Mode beschreibt den Zugriffsmodus und
+kann einen der folgenden Werte annehmen:
+
+  const
+    fmClosed = $D7B0;    { Datei ist geschlossen            }
+    fmInput  = $D7B1;    { Nur Lesen erlaubt                }
+    fmOutput = $D7B2;    { Nur Schreiben erlaubt            }
+    fmInOut  = $D7B3;    { Lesen und Schreiben erlaubt      }
+
+RecSize gibt die Grîûe eines Records einer typisierten Datei an,
+bzw. die Blockgrîûe, die bei untypisierten Dateien als optionaler
+Parameter beim ôffnen der Datei angegeben wurde. Die Komponenten
+Private und Reserved dÅrfen nicht verÑndert werden, sie dienen
+internen Zwecken der Laufzeitbibliothek. Userdata ist dagegen frei
+verwendbar. Der Name enthÑlt den Dateinamen, unter dem die Datei
+geîffnet wurde.
+
+Bei Textdateien gibt es einige zusÑtzliche Felder, die der Verwaltung
+des Dateipuffers dienen: BufSize ist die Grîûe des Puffers, BufPos
+gibt die momentane Position im Puffer wieder, BufEnd die Anzahl
+gÅltiger Zeichen im Puffer, und BufPtr zeigt auf den Anfang des
+Speicherbereichs fÅr den Dateipuffer. Normalerweise zeigt BufPtr auf
+das Feld Buffer, auûer es wurde es ein anderer Textpuffer ein-
+gerichtet (mit der Prozedur SetTextBuf).
+
+Die Felder OpenFunc, InOutFunc, FlushFunc und CloseFunc ermîglichen
+die Implementierung eigener GerÑtetreiber. Eine genaue Beschreibung
+finden Sie im Abschnitt Text-GerÑtetreiber.
+
+
+Array-Typen
+-----------
+
+Arrays werden einfach als Folge ihrer Elemente im Speicher abgelegt.
+Bei mehrdimensionalen Arrays ist die Anordnung so, daû der hinterste
+Index am schnellsten variiert. Beispielsweise wÅrden fÅr folgende
+Deklaration:
+
+  var Matrix = array [1..2,1..3] of integer;
+
+die Elemente in der Reihenfolge
+
+  Matrix[1,1], Matrix[1,2], Matrix[1,3], Matrix[2,1], Matrix[2,2], Matrix[2,3]
+
+im Speicher angeordnet.
+
+Arrays werden vom Compiler dann auf gerade Adressen ausgerichtet, wenn dies
+fÅr die Elemente des Arrays erforderlich ist.
+
+
+Record-Typen
+------------
+
+Bei Records werden die Felder in der Reihenfolge ihrer Deklaration im
+Speicher angeordnet. Der Compiler sorgt dafÅr, daû Records immer auf gerade
+Adressen ausgerichtet werden und daû ihre Grîûe ebenfalls auf eine gerade
+Zahl aufgerundet wird. Die Ausrichtung der Felder richtet sich nach deren
+Datentyp.
+
+Hat ein Record mehrere Varianten, so beginnen diese stets an derselben
+Adresse, d.h. die Varianten Åberlagern sich im Speicher.
+
+
+Object-Typen
+------------
+
+Objekte werden ganz Ñhnlich wie Records dargestellt. Ihre Felder werden
+also nacheinander im Speicher angelegt.
+
+Objekte mit virtuellen Methoden verfÅgen Åber ein zusÑtzliches Feld, nÑmlich
+einen Zeiger auf die virtuelle Methodentabelle. Dieses Feld wird vom
+Compiler angelegt, sobald die erste virtuelle Methode deklariert wird.
+
+Die virtuelle Methodentabelle besteht in Pure Pascal aus einer Tabelle
+von Langworten. Der erste Eintrag enthÑlt die Grîûe in Bytes von
+Objekten dieses Typs, der zweite den Offset des Zeigers auf die
+Methodentabelle in solchen Objekten. Die restlichen Langworte ent-
+halten Zeiger auf die virtuellen Methoden dieses Objekttyps.
+
+
+Procedure-Typen
+---------------
+
+Prozedurtypen werden durch ein Langwort (4 Bytes) dargestellt, das die
+Anfangsadresse der Prozedur enthÑlt.
+\end
+
+screen( "Aufrufkonventionen" )
+Aufrufkonventionen                                  Pure Pascal intern
+----------------------------------------------------------------------
+
+Die Aufrufkonventionen von Pure Pascal sind etwas ungewîhnlich fÅr
+Pascal-Compiler. Sie wurden so gewÑhlt, um einerseits den vom Compiler
+generierten Code mîglichst effizient zu machen und andererseits eine
+einfache Anbindung von in Pure C oder Pure Assembler geschriebenen
+Routinen zu ermîglichen.
+
+Einige Grundregeln erleichtern es, die Aufrufkonventionen zu verstehen:
+
+ - Parameter werden wenn mîglich in Registern Åbergeben.
+
+ - Da der 68000-Prozessor verschiedene Arten von Registern kennt,
+   werden jeweils dem zu Åbergebenden Datentyp angemessene Register
+   benutzt, d.h. Datenregister fÅr ordinale Typen, Adreûregister
+   fÅr Zeiger und Gleitkommaregister fÅr Real-Typen.
+
+ - Parameter, die nicht mehr in Registern Åbergeben werden kînnen,
+   werden auf den Stack gelegt. Dabei wird der letzte Parameter
+   zuerst gepusht. Da der Stack zu niedrigeren Adressen wÑchst,
+   liegt dadurch der erste Stack-Parameter auf der niedrigsten
+   Adresse.
+
+ - Die aufrufende Funktion Åbernimmt die Aufgabe, auf dem Stack
+   Åbergebene Parameter wieder zu entfernen, den Stackpointer also
+   wieder auf den Wert vor dem Aufruf zurÅckzusetzen.
+
+ - Funktionsresultate werden genau wie Parameter in einem dem
+   Datentyp angemessenen Register zurÅckgegeben.
+
+ - Die Register werden unterteilt in solche, die von aufgerufenen
+   Routinen verÑndert werden dÅrfen (D0-D2, A0-A1, FP0-FP2), und
+   solche, die erhalten bleiben mÅssen (D3-D7, A2-A7, FP3-FP7).
+
+   
+Variablen-Parameter
+-------------------
+
+Wenn die aufgerufene Routine den Parameter mit dem SchlÅsselwort
+var deklariert hat, wird immer die Adresse des aktuellen Parameters
+Åbergeben, nicht der Wert des aktuellen Parameters selbst.
+
+Der Compiler reserviert die Adreûregister A0 und A1 fÅr solche
+Parameter. Falls keines dieser Register mehr frei ist, wird die
+Adresse auf den Stack gepusht.
+
+
+Value-Parameter
+---------------
+
+ - Ordinale Typen (\#boolean\#, \#char\#, AufzÑhlungstypen, Integertypen)
+   werden wenn mîglich in den Datenregistern D0, D1 oder D2
+   Åbergeben. Wenn kein Register mehr frei ist, wird der Wert
+   auf den Stack gepusht. Parameter, die nur ein Byte groû sind,
+   beanspruchen trotzdem zwei Byte auf dem Stack. Der Parameter
+   steht dabei auf der niedrigeren Adresse des Wortes, die
+   immer gerade ist. Das andere Byte ist unbenutzt.
+
+ - Zeiger- und Prozedurtypen werden wenn mîglich in den Adreû-
+   registern A0 oder A1 Åbergeben, sonst als Langwort auf dem Stack.
+
+ - Die Typen single, double und real werden immer auf dem Stack
+   Åbergeben.
+
+ - Der Typ extended wird in den Gleitkommaregistern FP0, FP1 oder FP2
+   Åbergeben, wenn dort noch Platz ist, sonst auf dem Stack.
+
+ - Bei allen anderen Typen (string, set, array, record und object)
+   wird ein Zeiger auf den Wert Åbergeben, entweder in einem Adreû-
+   register oder auf dem Stack. Die aufgerufene Funktion macht dann
+   eine Kopie des Wertes.
+
+
+Funktionsresultate
+------------------
+
+ - Ordinale Typen (\#boolean\#, \#char\#, AufzÑhlungstypen, Integertypen)
+   werden im Register D0 zurÅckgegeben. Wenn der Typ weniger als
+   32 Bits beansprucht, sind hîherwertige Bits in D0 undefiniert.
+
+ - Zeigertypen werden im Register A0 zurÅckgegeben.
+
+ - Real-Typen werden im Register FP0 zurÅckgegeben.
+
+ - Bei Strings wird von der aufrufenden Routine Speicherplatz
+   fÅr das Resultat reserviert. Als letzter (unsichtbarer) Parameter
+   wird ein Zeiger auf den reservierten Speicherplatz mit Åbergeben.
+   Die aufgerufene Funktion kopiert das Resultat dann in diesen
+   Speicher.
+
+
+Registerkonventionen
+--------------------
+
+Wie oben bereits erwÑhnt, dÅrfen aufgerufene Funktionen die
+Register D0-D2, A0-A1 und FP0-FP2 frei verÑndern, ohne sie zu
+sichern.
+
+Alle anderen Register dÅrfen ebenfalls verÑndert werden, sie mÅssen
+jedoch in diesem Fall vor VerÑnderung gesichert und am Ende der
+Funktion wiederhergestellt werden.
+\end
+
+screen( "Textdatei-GerÑtetreiber" )
+Textdatei-GerÑtetreiber                             Pure Pascal intern
+----------------------------------------------------------------------
+
+FÅr Textdateien besteht die Mîglichkeit eigene Treiber zu instal-
+lieren. Dazu enthÑlt eine Textdatei-Variable, die wie der in der
+Unit Dos definierte Datentyp TextRec aufgebaut ist, vier Zeiger
+auf Funktionen, die zu diesem Zweck ersetzt werden mÅssen. Die
+vier Funktionen sind
+
+       OpenFunc           (ôffnen der Datei)
+       InOutFunc          (Ein- bzw. Ausgabe des Pufferinhalts)
+       FlushFunc          (Erzwungenes Leeren des Puffers)
+       CloseFunc          (Schlieûen der Datei)
+
+und haben alle die Deklaration
+
+       function <name>( var t : TextRec ) : integer;
+
+Das Resultat der Funktion ist der Wert, den ein folgender Aufruf
+von IOResult liefern soll. Konnte die Funktion erfolgreich aus-
+gefÅhrt werden soll Null zurÅckgegeben werden.
+
+
+Assign
+------
+Jeder Textdatei-GerÑtetreiber muû eine eigene Assign-Prozedur
+besitzen. Diese besetzt den Funktionszeiger OpenFunc mit einem
+Zeiger auf die neue Routine. Ferner muû sie die Komponenten
+BufSize und BufPtr initialisieren. Schlieûlich muû der Komponente
+Mode die Konstante fmClosed zugewiesen werden, die in der Unit
+Dos definiert ist. Das Feld UserData steht zur freien VerfÅgung.
+
+
+OpenFunc
+--------
+OpenFunc wird von Append, Reset und Rewrite aufgerufen und soll
+die Textdatei îffnen. Mode enthÑlt den Dateizugriffsmodus, be-
+stimmt also, ob die Datei fÅr schreibende (fmOutput), lesende
+(fmInput) oder fÅr schreibende und lesende Operationen (fmInOut)
+geîffnet werden soll. Im letzten Fall muû fmInOut nach dem ôffnen
+auf fmOutput gesetzt werden. Nachdem die Datei erfolgreich geîffnet
+wurde, werden die restlichen Funktionszeiger InOutFunc, FlushFunc
+und CloseFunc initialisiert. Somit kînnen je nach Dateizugriffs-
+modus spezielle Funktionen eingerichtet werden.
+
+InOutFunc
+---------
+InOutFunc wird von Close, Flush, Eof, Eoln, Read, Readln, SeekEof,
+SeekEoln, Write und Writeln aufgerufen.
+EnthÑlt die Komponente Mode den Wert fmInput, wird versucht,
+BufSize Zeichen in den Puffer BufPtr^ zu lesen. Die Anzahl der
+tatsÑchlich gelesenen Zeichen wird in BufEnd abgelegt und BufPos
+auf Null gesetzt.
+Bei einer Ausgabedatei (Mode ist dann gleich fmOutput) werden BufPos
+Zeichen aus BufPtr^ ausgegeben.
+
+FlushFunc
+---------
+FlushFunc wird von Flush, Read, Readln, Write und Writeln aufge-
+rufen. Es fÅhrt zum leeren des Puffers BufPtr^.
+EnthÑlt die Komponente Mode den Wert fmInput, werden BufPos und
+BufEnd auf Null gesetzt.
+FÅr Mode gleich fmOutput verhÑlt sich FlushFunc wie InOutFunc,
+d.h. der Inhalt des Puffers wird ausgegeben.
+
+CloseFunc
+---------
+CloseFunc wird von Close aufgerufen, um die Datei zu schlieûen.
+Handelt es sich um eine Ausgabedatei, d.h. Mode ist fmOutput,
+wird zuvor der Inhalt des Puffers BufPtr^ ausgegeben.
+\end
+
+screen( "Exit-Prozeduren" )
+Exit-Prozeduren                                     Pure Pascal intern
+----------------------------------------------------------------------
+
+Exit-Prozeduren werden verwendet, um sicherzustellen, daû bei der
+Programmbeendigung bestimmte Aktionen ausgefÅhrt werden, wie zum
+Beispiel das Speichern von Dateien.
+Eine Exit-Prozedur hat keine Parameter. Sie wird beim normalen
+Programmende oder beim Programmabruch durch Halt aufgerufen. Die
+Installation erfolgt durch Zuweisung der Adresse der Prozedur an
+die Zeigervariable ExitProc.
+Es ist mîglich mehrere Exit-Prozeduren anzumelden. Wenn man eine
+neue Exit-Prozedur installiert, muû man sich deshalb den alten
+Wert von ExitProc merken. Wird die Exit-Prozedur dann ausgefÅhrt,
+muû sie den alten Wert von ExitProc wieder herstellen, z.B.
+
+    ...
+    var OldExit : Pointer;
+    ...
+    procedure NewExit;
+    begin
+      ExitProc := OldExit;
+      ...
+    end;
+    ...
+    begin
+      OldExit := ExitProc;
+      ExitProc := @NewExit;
+      ...
+    end.
+
+Der Terminierungsteil des Programms ruft solange Exit-Prozeduren
+auf, bis ExitProc nil enthÑlt. Um Endlosschleifen, insbesondere
+bei Fehlern innerhalb einer Exit-Prozedur zu vermeiden, wird
+ExitProc vor jedem Aufruf einer Exit-Prozedur auf nil gesetzt.
+\end

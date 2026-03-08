@@ -95,7 +95,7 @@ or writing to specific memory locations (see \#Atari Memory Map\#).
 \end
 
 screen( "Privileged",
-		capsensitive("Supervisor Mode") )
+        capsensitive("Supervisor Mode") )
 Supervisor Mode - Privileged Instructions
 ----------------------------------------------------------------------
 When a program starts execution, the CPU will be operating in User
@@ -787,7 +787,7 @@ Note: All timing information refers to the 68000 CPU only.
 \end
 
 screen( "XBRA Protocol",
-		capsensitive("XBRA") )
+        capsensitive("XBRA") )
 XBRA Protocol
 ----------------------------------------------------------------------
 Intercepting exception vectors or BIOS jump vectors is a fairly common
@@ -807,7 +807,7 @@ See also \#Exceptions\# and \#force_media_change\#().
 \end
 
 screen( "Dest",
-		"Source" )
+        "Source" )
 Source and destination operands
 ----------------------------------------------------------------------
     instruction  source,dest
@@ -819,7 +819,7 @@ address operates as a Dest (including single operands).
 \end
 
 screen( "size modifier",
-		"Sizes:" )
+        "Sizes:" )
 Size Modifiers
 ----------------------------------------------------------------------
   .B   Byte (8 bits)
@@ -1331,7 +1331,7 @@ See also \#PMMU Status Register\#
 \end
 
 screen( "ATC",
-		"Address Translation Cache" )
+        "Address Translation Cache" )
 Address Translation Cache
 ----------------------------------------------------------------------
 There are two formats used by ATC entries, which are selected by the
@@ -1506,7 +1506,7 @@ See also \#*=\# directive.
 \end
 
 screen( "Status Register",
-		sensitive("SR") )
+        sensitive("SR") )
 Status Register (SR)
 ----------------------------------------------------------------------
 The leftmost byte of the status register is used to control the
@@ -1564,7 +1564,7 @@ all levels.
 \end
 
 screen( "Condition Code Register",
-		sensitive("CCR") )
+        sensitive("CCR") )
 Condition Code Register (CCR)
 ----------------------------------------------------------------------
 ... is actually the rightmost byte of the \#Status Register\#.  This byte
@@ -1587,14 +1587,14 @@ See also \#Condition Codes\#, \#FPSR\# and \#PSR\#.
 \end
 
 screen( "Data Registers",
-		sensitive("D0"),
-		sensitive("D1"),
-		sensitive("D2"),
-		sensitive("D3"),
-		sensitive("D4"),
-		sensitive("D5"),
-		sensitive("D6"),
-		sensitive("D7") )
+        sensitive("D0"),
+        sensitive("D1"),
+        sensitive("D2"),
+        sensitive("D3"),
+        sensitive("D4"),
+        sensitive("D5"),
+        sensitive("D6"),
+        sensitive("D7") )
 Data Registers (D0-D7)
 ----------------------------------------------------------------------
 These are 32 bit registers used to perform data manipulation.  Many
@@ -1614,14 +1614,14 @@ See also \#Address Registers\# and \#Floating Point Data Registers\#.
 \end
 
 screen( "Address Registers",
-		sensitive("A0"),
-		sensitive("A1"),
-		sensitive("A2"),
-		sensitive("A3"),
-		sensitive("A4"),
-		sensitive("A5"),
-		sensitive("A6"),
-		sensitive("A7") )
+        sensitive("A0"),
+        sensitive("A1"),
+        sensitive("A2"),
+        sensitive("A3"),
+        sensitive("A4"),
+        sensitive("A5"),
+        sensitive("A6"),
+        sensitive("A7") )
 Address Registers (A0-A7)
 ----------------------------------------------------------------------
 These are 32 bit registers used to contain addresses (see \#Addressing\#).
@@ -1640,7 +1640,7 @@ See also \#Data Registers\# and \#Program Counter\#.
 \end
 
 screen( "Program Counter",
-		sensitive("PC") )
+        sensitive("PC") )
 Program Counter (PC)
 ----------------------------------------------------------------------
 This is a 32 bit register used to contain the address of the next
@@ -1657,7 +1657,7 @@ See also \#Address Registers\# and \#Stack Pointer\#.
 \end
 
 screen( "Stack Pointer",
-		sensitive("SP") )
+        sensitive("SP") )
 Stack Pointer (SP)
 ----------------------------------------------------------------------
 Address register A7 is used as the (active) stack pointer.  The stack
@@ -1693,7 +1693,7 @@ See also \#Pure C Linkage\#, \#User Stack Pointer\#, \#Supervisor Stack Pointer\
 \end
 
 screen( "User Stack Pointer",
-		sensitive("USP") )
+        sensitive("USP") )
 User Stack Pointer (USP)
 ----------------------------------------------------------------------
 In User (normal) Mode, the USP is used as the stack pointer and can
@@ -1707,7 +1707,7 @@ See also \#Stack Pointer\#, \#Supervisor Stack Pointer\#,
 \end
 
 screen( "Supervisor Stack Pointer",
-		sensitive("SSP") )
+        sensitive("SSP") )
 Supervisor Stack Pointer (SSP)                     -- Atari ST Only --
 ----------------------------------------------------------------------
 ... is used as the stack pointer in \#Supervisor Mode\#. 
@@ -1724,7 +1724,7 @@ See also \#Stack Pointer\#, \#User Stack Pointer\#,
 \end
 
 screen( "Interrupt Stack Pointer",
-		sensitive("ISP") )
+        sensitive("ISP") )
 Interrupt Stack Pointer (ISP)                      -- Atari TT Only --
 ----------------------------------------------------------------------
 ... is used by I/O interrupt drivers in \#Supervisor Mode\#. 
@@ -1743,7 +1743,7 @@ See also \#Stack Pointer\#, \#User Stack Pointer\#,
 \end
 
 screen( "Master Stack Pointer",
-		sensitive("MSP") )
+        sensitive("MSP") )
 Master Stack Pointer (MSP)                         -- Atari TT Only --
 ----------------------------------------------------------------------
 ... is used by system software in \#Supervisor Mode\#.
@@ -1763,7 +1763,7 @@ See also \#Stack Pointer\#, \#User Stack Pointer\#,
 \end
 
 screen( "Source Function Code",
-		sensitive("SFC") )
+        sensitive("SFC") )
 Source Function Code (SFC)               -- Not Applicable to Atari --
 ----------------------------------------------------------------------
 The SFC register set the \#Function Code\# to be used for the \#Source\#
@@ -1775,7 +1775,7 @@ See also \#Destination Function Code\#.
 \end
 
 screen( "Destination Function Code",
-		sensitive("DFC") )
+        sensitive("DFC") )
 Destination Function Code (DFC)          -- Not Applicable to Atari --
 ----------------------------------------------------------------------
 The DFC register sets the \#Function Code\# to be used for the \#Dest\#
@@ -1809,7 +1809,7 @@ See also \#Source Function Code\# and \#Destination Function Code\#.
 \end
 
 screen( "Vector Base Register",
-		sensitive("VBR") )
+        sensitive("VBR") )
 Vector Base Register (VBR)                         -- Atari TT Only --
 ----------------------------------------------------------------------
 ... points to a $400 byte area containing the exception vectors.
@@ -1830,7 +1830,7 @@ See also \#Exceptions\#.
 \end
 
 screen( "Cache Address Register",
-		sensitive("CAAR") )
+        sensitive("CAAR") )
 Cache Address Register (CAAR)                      -- Atari TT Only --
 ----------------------------------------------------------------------
 ... is used (in conjunction with \#CACR\#) to invalidate a specific cache
@@ -1843,7 +1843,7 @@ See also \#Cache\#.
 \end
 
 screen( "Cache Control Register",
-		sensitive("CACR") )
+        sensitive("CACR") )
 Cache Control Register (CACR)                      -- Atari TT Only --
 ----------------------------------------------------------------------
 ... is used to control the instruction and data cache on the 68030.
@@ -1873,8 +1873,8 @@ See also \#Cache\#.
 \end
 
 screen( "Transparent Translation",
-		sensitive("TT0"),
-		sensitive("TT1") )
+        sensitive("TT0"),
+        sensitive("TT1") )
 Transparent Translation (TT0/TT1)                  -- Atari TT Only --
 ----------------------------------------------------------------------
 These are 32 bit registers used to bypass the \#PMMU\# and allow direct
@@ -1905,7 +1905,7 @@ These registers can be accessed using the \#MOVEC\# command.
 \end
 
 screen( "Supervisor Root Pointer",
-		sensitive("SRP") )
+        sensitive("SRP") )
 Supervisor Root Pointer (SRP)                      -- Atari TT Only --
 ----------------------------------------------------------------------
 Points to the \#Address Translation Cache\# to be used in \#Supervisor Mode\#.
@@ -1929,7 +1929,7 @@ See also \#CPU Root Pointer\#, \#Translation Control\# and \#PMMU\#.
 \end
 
 screen( "CPU Root Pointer",
-		sensitive("CRP") )
+        sensitive("CRP") )
 CPU Root Pointer (CRP)                             -- Atari TT Only --
 ----------------------------------------------------------------------
 Points to the \#Address Translation Cache\# to be used in User Mode.
@@ -1953,7 +1953,7 @@ See also \#Supervisor Root Pointer\# and \#PMMU\#.
 \end
 
 screen( "Translation Control",
-		sensitive("TC") )
+        sensitive("TC") )
 Translation Control Register (TC)                  -- Atari TT Only --
 ----------------------------------------------------------------------
 ... used to control \#PMMU\# operation.  It can be set using the \#PMOVE\#
@@ -1982,7 +1982,7 @@ exception (vector 56).
 \end
 
 screen( "PMMU Status Register",
-		sensitive("PSR") )
+        sensitive("PSR") )
 PMMU Status Register (PSR)                         -- Atari TT Only --
 ----------------------------------------------------------------------
 ... is set by the \#PTEST\# instruction.  It can be examined using the
@@ -2009,14 +2009,14 @@ See also \#PMMU Condition Codes\#.
 \end
 
 screen( "Floating Point Data Registers",
-		sensitive("FP6"),
-		sensitive("FP7"),
-		sensitive("FP0"),
-		sensitive("FP1"),
-		sensitive("FP2"),
-		sensitive("FP3"),
-		sensitive("FP4"),
-		sensitive("FP5") )
+        sensitive("FP6"),
+        sensitive("FP7"),
+        sensitive("FP0"),
+        sensitive("FP1"),
+        sensitive("FP2"),
+        sensitive("FP3"),
+        sensitive("FP4"),
+        sensitive("FP5") )
 Floating Point Data Registers  (FP0-FP7)           -- Atari TT Only --
 ----------------------------------------------------------------------
 These are 96 bit registers used for floating point operations.  Data
@@ -2026,7 +2026,7 @@ See also \#FPU\#.
 \end
 
 screen( "Floating Point Control Register",
-		sensitive("FPCR") )
+        sensitive("FPCR") )
 Floating Point Control Register  (FPCR)            -- Atari TT Only --
 ----------------------------------------------------------------------
 ... controls floating point exceptions and rounding.  It can be set
@@ -2058,7 +2058,7 @@ See also \#FPSR\#, \#FPU\# and \#Exceptions\#.
 \end
 
 screen( "Floating Point Status Register",
-		sensitive("FPSR") )
+        sensitive("FPSR") )
 Floating Point Status Register  (FPSR)             -- Atari TT Only --
 ----------------------------------------------------------------------
 This 32 bit register contains information about the result of the last
@@ -2174,7 +2174,7 @@ INEX | INEX1, INEX2 or OVFL
 \end
 
 screen( "Floating Point Instruction Address Register",
-		sensitive("FPIAR") )
+        sensitive("FPIAR") )
 Floating Point Instruction Address Register (FPIAR)  - Atari TT Only -
 ----------------------------------------------------------------------
 Contains the address of the instruction which caused an exception.
@@ -2429,7 +2429,7 @@ See also \#TEXT\#, \#DATA\# and \#BSS\#.
 \end
 
 screen( sensitive("ENDC"),
-		sensitive("ENDIF") )
+        sensitive("ENDIF") )
 ENDIF
 ENDC
 
@@ -2473,7 +2473,7 @@ See also \#=\#, \#SET\# and \#REG\#.
 \end
 
 screen( capsensitive("ERROR"),
-		capsensitive("error") )
+        capsensitive("error") )
 ERROR "message"
 
     Generate error message and stop assembly.
@@ -2548,18 +2548,18 @@ See also \#IMPORT\#, \#EXPORT\#, \#XDEF\# and \#XREF\#.
 \end
 
 screen( "IFcc",
-		sensitive("IF"),
-		sensitive("IF1"),
-		sensitive("IF2"),
-		sensitive("IFB"),
-		sensitive("IFEQ"),
-		sensitive("IFF"),
-		sensitive("IFGE"),
-		sensitive("IFGT"),
-		sensitive("IFLE"),
-		sensitive("IFLT"),
-		sensitive("IFNB"),
-		sensitive("IFNE") )
+        sensitive("IF"),
+        sensitive("IF1"),
+        sensitive("IF2"),
+        sensitive("IFB"),
+        sensitive("IFEQ"),
+        sensitive("IFF"),
+        sensitive("IFGE"),
+        sensitive("IFGT"),
+        sensitive("IFLE"),
+        sensitive("IFLT"),
+        sensitive("IFNB"),
+        sensitive("IFNE") )
 IFB  name       ;if not defined
 IFNB name       ;if defined
 IF   \#expression\# ;if true                  (expression != 0)
@@ -2652,13 +2652,13 @@ See also \#ENDM\#, \#EXITM\#, \#LOCAL\#, \#REPT\# and \#Macros\#.
 \end
 
 screen( "MC68nnn",
-		sensitive("MC60020"),
-		sensitive("MC68000"),
-		sensitive("MC68010"),
-		sensitive("MC68030"),
-		sensitive("MC68040"),
-		sensitive("MC68851"),
-		sensitive("MC68881") )
+        sensitive("MC60020"),
+        sensitive("MC68000"),
+        sensitive("MC68010"),
+        sensitive("MC68030"),
+        sensitive("MC68040"),
+        sensitive("MC68851"),
+        sensitive("MC68881") )
 MC68nnn
 MC68851 -   ;deactivate
 MC68881 -   ;deactivate
@@ -3111,20 +3111,20 @@ See also \#ASR\#, \#LSL\#, \#LSR\#, \#ROL\#, \#ROR\#, \#ROXL\#, \#ROXR\#
 \end
 
 screen( "Bcc",
-		sensitive("BCC"),
-		sensitive("BNE"),
-		sensitive("BPL"),
-		sensitive("BCS"),
-		sensitive("BEQ"),
-		sensitive("BVC"),
-		sensitive("BVS"),
-		sensitive("BGE"),
-		sensitive("BGT"),
-		sensitive("BHI"),
-		sensitive("BLE"),
-		sensitive("BLS"),
-		sensitive("BLT"),
-		sensitive("BMI") )
+        sensitive("BCC"),
+        sensitive("BNE"),
+        sensitive("BPL"),
+        sensitive("BCS"),
+        sensitive("BEQ"),
+        sensitive("BVC"),
+        sensitive("BVS"),
+        sensitive("BGE"),
+        sensitive("BGT"),
+        sensitive("BHI"),
+        sensitive("BLE"),
+        sensitive("BLS"),
+        sensitive("BLT"),
+        sensitive("BMI") )
 Bcc \#label\#
 
     Branch on \link("Condition Codes")condition code\#.
@@ -3664,22 +3664,22 @@ See also \#CMP\#, \#CMPA\#, \#CMPI\#, \#CMPM\#, \#TAS\#, \#TST\#
 \end
 
 screen( "DBcc",
-		sensitive("DBCC"),
-		sensitive("DBCS"),
-		sensitive("DBEQ"),
-		sensitive("DBF"),
-		sensitive("DBGE"),
-		sensitive("DBGT"),
-		sensitive("DBHI"),
-		sensitive("DBLE"),
-		sensitive("DBLS"),
-		sensitive("DBLT"),
-		sensitive("DBMI"),
-		sensitive("DBNE"),
-		sensitive("DBPL"),
-		sensitive("DBT"),
-		sensitive("DBVC"),
-		sensitive("DBVS") )
+        sensitive("DBCC"),
+        sensitive("DBCS"),
+        sensitive("DBEQ"),
+        sensitive("DBF"),
+        sensitive("DBGE"),
+        sensitive("DBGT"),
+        sensitive("DBHI"),
+        sensitive("DBLE"),
+        sensitive("DBLS"),
+        sensitive("DBLT"),
+        sensitive("DBMI"),
+        sensitive("DBNE"),
+        sensitive("DBPL"),
+        sensitive("DBT"),
+        sensitive("DBVC"),
+        sensitive("DBVS") )
 DBcc \#Dn\#,\#label\#
 
     Decrement Dn and branch on \link("Condition Codes")condition code\# unless
@@ -3744,7 +3744,7 @@ See also \#DIVSL\#, \#DIVU\#, \#DIVUL\#, \#MULS\#, \#MULS.L\#, \#MULU\#, \#MULU.
 \end
 
 screen( "DIVS.L",
-		sensitive("DIVSL") )
+        sensitive("DIVSL") )
 DIVS.L <ea>,\link("Dn")Dq\#            Dq / <ea>
 DIVS.L <ea>,\link("Dn")Dr\#:\link("Dn")Dq\#      Dr:Dq / <ea>
 DIVSL <ea>,\link("Dn")Dr\#:\link("Dn")Dq\#          Dq / <ea>
@@ -3792,7 +3792,7 @@ See also \#DIVS\#, \#DIVSL\#, \#DIVUL\#, \#MULS\#, \#MULS.L\#, \#MULU\#, \#MULU.
 \end
 
 screen( "DIVU.L",
-		sensitive("DIVUL") )
+        sensitive("DIVUL") )
 DIVU.L <ea>,\link("Dn")Dq\#            Dq / <ea>
 DIVU.L <ea>,\link("Dn")Dr\#:\link("Dn")Dq\#      Dr:Dq / <ea>
 DIVUL <ea>,\link("Dn")Dr\#:\link("Dn")Dq\#          Dq / <ea>
@@ -4962,22 +4962,22 @@ See also \#ABCD\#, \#NBCD\#, \#PACK\#, \#UNPK\#
 \end
 
 screen( "Scc",
-		sensitive("SCC"),
-		sensitive("SCS"),
-		sensitive("SVC"),
-		sensitive("SVS"),
-		sensitive("SEQ"),
-		sensitive("SF"),
-		sensitive("SGE"),
-		sensitive("SGT"),
-		sensitive("SHI"),
-		sensitive("SLE"),
-		sensitive("SLS"),
-		sensitive("SLT"),
-		sensitive("SMI"),
-		sensitive("SNE"),
-		sensitive("SPL"),
-		sensitive("ST") )
+        sensitive("SCC"),
+        sensitive("SCS"),
+        sensitive("SVC"),
+        sensitive("SVS"),
+        sensitive("SEQ"),
+        sensitive("SF"),
+        sensitive("SGE"),
+        sensitive("SGT"),
+        sensitive("SHI"),
+        sensitive("SLE"),
+        sensitive("SLS"),
+        sensitive("SLT"),
+        sensitive("SMI"),
+        sensitive("SNE"),
+        sensitive("SPL"),
+        sensitive("ST") )
 Scc <ea>
 
     Set <ea> to -1 (TRUE) on \link("Condition Codes")condition code\#.
@@ -5198,22 +5198,22 @@ See also \#BKPT\#, \#ILLEGAL\#, \#RTE\#, \#TRAPcc\#, \#TRAPV\#
 \end
 
 screen( "TRAPcc",
-		sensitive("TRAPVS"),
-		sensitive("TRAPCC"),
-		sensitive("TRAPCS"),
-		sensitive("TRAPEQ"),
-		sensitive("TRAPF"),
-		sensitive("TRAPGE"),
-		sensitive("TRAPGT"),
-		sensitive("TRAPHI"),
-		sensitive("TRAPLE"),
-		sensitive("TRAPLS"),
-		sensitive("TRAPLT"),
-		sensitive("TRAPMI"),
-		sensitive("TRAPNE"),
-		sensitive("TRAPPL"),
-		sensitive("TRAPT"),
-		sensitive("TRAPVC") )
+        sensitive("TRAPVS"),
+        sensitive("TRAPCC"),
+        sensitive("TRAPCS"),
+        sensitive("TRAPEQ"),
+        sensitive("TRAPF"),
+        sensitive("TRAPGE"),
+        sensitive("TRAPGT"),
+        sensitive("TRAPHI"),
+        sensitive("TRAPLE"),
+        sensitive("TRAPLS"),
+        sensitive("TRAPLT"),
+        sensitive("TRAPMI"),
+        sensitive("TRAPNE"),
+        sensitive("TRAPPL"),
+        sensitive("TRAPT"),
+        sensitive("TRAPVC") )
 TRAPcc
 TRAPcc.W \##data\#
 TRAPcc.L \##data\#
@@ -5365,9 +5365,9 @@ d(PC,Rx)| 18 | 18 |  26  |   26  |   26  |   30  |   32   |   30   |   34   |
 \end
 
 screen( "AND.W",
-		"ADD.W",
-		"OR.W",
-		"SUB.W" )
+        "ADD.W",
+        "OR.W",
+        "SUB.W" )
 \#ADD\#.W \#AND\#.W \#OR\#.W \#SUB\#.W
                        68000 Instruction Timing Chart
 -----------------------------------------------------------------------+
@@ -5397,9 +5397,9 @@ d(PC,Rx)| 14 |
 \end
 
 screen( "AND.L",
-		"ADD.L",
-		"OR.L",
-		"SUB.L" )
+        "ADD.L",
+        "OR.L",
+        "SUB.L" )
 \#ADD\#.L \#AND\#.L \#OR\#.L \#SUB\#.L
                        68000 Instruction Timing Chart
 -----------------------------------------------------------------------+
@@ -5429,7 +5429,7 @@ d(PC,Rx)| 20 |
 \end
 
 screen( "ADDA.W",
-		"SUBA.W" )
+        "SUBA.W" )
 \#ADDA\#.W \#SUBA\#.W           68000 Instruction Timing Chart
 ----------------------------------------------------------------------
  Source | Dest |
@@ -5456,7 +5456,7 @@ d(PC,Rx)|  18  |
 \end
 
 screen( "ADDA.L",
-		"SUBA.L" )
+        "SUBA.L" )
 \#ADDA\#.L  \#SUBA\#.L           68000 Instruction Timing Chart
 ----------------------------------------------------------------------
  Source | Dest |
@@ -5663,7 +5663,7 @@ Note: These are worst case timings.  Actual timing may be less.
 \end
 
 screen( "MULS.W",
-		"MULU.W" )
+        "MULU.W" )
 \#MULS\# \#MULU\#               68000 Instruction Timing Chart
 ----------------------------------------------------------------------
  Source | Dest |
@@ -5692,10 +5692,10 @@ Note: These are worst case timings.  Actual timing may be less.
 \end
 
 screen( "ANDI.W",
-		"ADDI.W",
-		"EORI.W",
-		"ORI.W",
-		"SUBI.W" )
+        "ADDI.W",
+        "EORI.W",
+        "ORI.W",
+        "SUBI.W" )
 \#ADDI\#.W \#ANDI\#.W \#EORI\#.W \#ORI\#.W \#SUBI\#.W
                        68000 Instruction Timing Chart
 -----------------------------------------------------------------------+
@@ -5708,10 +5708,10 @@ screen( "ANDI.W",
 \end
 
 screen( "ANDI.L",
-		"ADDI.L",
-		"EORI.L",
-		"ORI.L",
-		"SUBI.L" )
+        "ADDI.L",
+        "EORI.L",
+        "ORI.L",
+        "SUBI.L" )
 \#ADDI\#.L \#ANDI\#.L \#EORI\#.L \#ORI\#.L \#SUBI\#.L
                        68000 Instruction Timing Chart
 -----------------------------------------------------------------------+
@@ -5724,7 +5724,7 @@ screen( "ANDI.L",
 \end
 
 screen( "ADDQ.W",
-		"SUBQ.W" )
+        "SUBQ.W" )
 \#ADDQ\#.W \#SUBQ\#.W          68000 Instruction Timing Chart
 ----------------------------------------------------------------------------+
         |                           Dest                                    |
@@ -5736,7 +5736,7 @@ screen( "ADDQ.W",
 \end
 
 screen( "ADDQ.L",
-		"SUBQ.L" )
+        "SUBQ.L" )
 \#ADDQ\#.L \#SUBQ\#.L          68000 Instruction Timing Chart
 ----------------------------------------------------------------------------+
         |                           Dest                                    |
@@ -5770,10 +5770,10 @@ screen( "CMPI.L" )
 \end
 
 screen( "CLR.W",
-		"NEGX.W",
-		"NEG.W",
-		"NOT.W",
-		"SF.B" )
+        "NEGX.W",
+        "NEG.W",
+        "NOT.W",
+        "SF.B" )
 \#CLR\#.W \#NEG\#.W \#NEGX\#.W \#NOT\#.W \#SF\#
                     68000 Instruction Timing Chart
 ----------------------------------------------------------------------
@@ -5784,9 +5784,9 @@ screen( "CLR.W",
 \end
 
 screen( "CLR.L",
-		"NEGX.L",
-		"NEG.L",
-		"NOT.L" )
+        "NEGX.L",
+        "NEG.L",
+        "NOT.L" )
 \#CLR\#.L \#NEG\#.L \#NEGX\#.L \#NOT\#.L
                     68000 Instruction Timing Chart
 ----------------------------------------------------------------------
@@ -5797,7 +5797,7 @@ screen( "CLR.L",
 \end
 
 screen( "NBCD.B",
-		"ST.B" )
+        "ST.B" )
 \#NBCD\# \#ST\#             68000 Instruction Timing Chart
 ----------------------------------------------------------------------
  Dn | (An) | (An)+ | -(An) | d(An) |d(An,Rx)| addr.W | addr.L |
@@ -5834,13 +5834,13 @@ screen( "TST.L" )
 \end
 
 screen( "ASL.W",
-		"ASR.W",
-		"LSL.W",
-		"LSR.W",
-		"ROL.W",
-		"ROR.W",
-		"ROXL.W",
-		"ROXR.W" )
+        "ASR.W",
+        "LSL.W",
+        "LSR.W",
+        "ROL.W",
+        "ROR.W",
+        "ROXL.W",
+        "ROXR.W" )
 \#ASR\# \#ASL\# \#LSR\# \#LSL\# \#ROR\# \#ROL\# \#ROXR\# \#ROXL\#
                     68000 Instruction Timing Chart
 ----------------------------------------------------------------------
@@ -5865,7 +5865,7 @@ shifts | byte | word | long |  #data,Dn
 \end
 
 screen( "BCHG.B",
-		"BSET.B" )
+        "BSET.B" )
 \#BCHG\# \#BSET\#              68000 Instruction Timing Chart
 -----------------------------------------------------------------------+
         |                           Dest                               |
@@ -6002,7 +6002,7 @@ Restore Registers from Memory
 \end
 
 screen( "ADDX.W",
-		"SUBX.W" )
+        "SUBX.W" )
 \#ADDX\#.W \#SUBX\#.W           68000 Instruction Timing Chart
 ----------------------------------------------------------------------
         |   Dest     |
@@ -6016,7 +6016,7 @@ screen( "ADDX.W",
 \end
 
 screen( "ADDX.L",
-		"SUBX.L" )
+        "SUBX.L" )
 \#ADDX\#.L \#SUBX\#.L           68000 Instruction Timing Chart
 ----------------------------------------------------------------------
         |   Dest     |
@@ -6030,7 +6030,7 @@ screen( "ADDX.L",
 \end
 
 screen( "ABCD.B",
-		"SBCD.B" )
+        "SBCD.B" )
 \#ABCD\# \#SBCD\#               68000 Instruction Timing Chart
 ----------------------------------------------------------------------
         |   Dest     |
@@ -6044,7 +6044,7 @@ screen( "ABCD.B",
 \end
 
 screen( "MOVE to CCR Time",
-		"MOVE to SR Time" )
+        "MOVE to SR Time" )
 \#MOVE to SR\# \#MOVE to CCR\#
                        68000 Instruction Timing Chart
 ----------------------------------------------------------------------
@@ -6199,36 +6199,36 @@ See also \#FCOSH\#, \#FSINH\#, \#FTANH\#
 \end
 
 screen( "FBcc",
-		sensitive("FBEQ"),
-		sensitive("FBF"),
-		sensitive("FBGE"),
-		sensitive("FBGL"),
-		sensitive("FBGLE"),
-		sensitive("FBGT"),
-		sensitive("FBLE"),
-		sensitive("FBLT"),
-		sensitive("FBNE"),
-		sensitive("FBNGE"),
-		sensitive("FBNGL"),
-		sensitive("FBNGT"),
-		sensitive("FBNLE"),
-		sensitive("FBNLT"),
-		sensitive("FBOGE"),
-		sensitive("FBOGT"),
-		sensitive("FBOLE"),
-		sensitive("FBOLT"),
-		sensitive("FBOR"),
-		sensitive("FBSEQ"),
-		sensitive("FBSF"),
-		sensitive("FBSNE"),
-		sensitive("FBST"),
-		sensitive("FBT"),
-		sensitive("FBUEQ"),
-		sensitive("FBUGE"),
-		sensitive("FBUGT"),
-		sensitive("FBULE"),
-		sensitive("FBULT"),
-		sensitive("FBUN") )
+        sensitive("FBEQ"),
+        sensitive("FBF"),
+        sensitive("FBGE"),
+        sensitive("FBGL"),
+        sensitive("FBGLE"),
+        sensitive("FBGT"),
+        sensitive("FBLE"),
+        sensitive("FBLT"),
+        sensitive("FBNE"),
+        sensitive("FBNGE"),
+        sensitive("FBNGL"),
+        sensitive("FBNGT"),
+        sensitive("FBNLE"),
+        sensitive("FBNLT"),
+        sensitive("FBOGE"),
+        sensitive("FBOGT"),
+        sensitive("FBOLE"),
+        sensitive("FBOLT"),
+        sensitive("FBOR"),
+        sensitive("FBSEQ"),
+        sensitive("FBSF"),
+        sensitive("FBSNE"),
+        sensitive("FBST"),
+        sensitive("FBT"),
+        sensitive("FBUEQ"),
+        sensitive("FBUGE"),
+        sensitive("FBUGT"),
+        sensitive("FBULE"),
+        sensitive("FBULT"),
+        sensitive("FBUN") )
 FBcc <label>
 
     Branch on \#FPU Condition Codes\#.
@@ -6305,36 +6305,36 @@ See also \#FATANH\#, \#FSINH\#, \#FTANH\#
 \end
 
 screen( "FDBcc",
-		sensitive("FDBEQ"),
-		sensitive("FDBF"),
-		sensitive("FDBGE"),
-		sensitive("FDBGL"),
-		sensitive("FDBGLE"),
-		sensitive("FDBGT"),
-		sensitive("FDBLE"),
-		sensitive("FDBLT"),
-		sensitive("FDBNE"),
-		sensitive("FDBNGE"),
-		sensitive("FDBNGL"),
-		sensitive("FDBNGT"),
-		sensitive("FDBNLE"),
-		sensitive("FDBNLT"),
-		sensitive("FDBOGE"),
-		sensitive("FDBOGT"),
-		sensitive("FDBOLE"),
-		sensitive("FDBOLT"),
-		sensitive("FDBOR"),
-		sensitive("FDBSEQ"),
-		sensitive("FDBSF"),
-		sensitive("FDBSNE"),
-		sensitive("FDBST"),
-		sensitive("FDBT"),
-		sensitive("FDBUEQ"),
-		sensitive("FDBUGE"),
-		sensitive("FDBUGT"),
-		sensitive("FDBULE"),
-		sensitive("FDBULT"),
-		sensitive("FDBUN") )
+        sensitive("FDBEQ"),
+        sensitive("FDBF"),
+        sensitive("FDBGE"),
+        sensitive("FDBGL"),
+        sensitive("FDBGLE"),
+        sensitive("FDBGT"),
+        sensitive("FDBLE"),
+        sensitive("FDBLT"),
+        sensitive("FDBNE"),
+        sensitive("FDBNGE"),
+        sensitive("FDBNGL"),
+        sensitive("FDBNGT"),
+        sensitive("FDBNLE"),
+        sensitive("FDBNLT"),
+        sensitive("FDBOGE"),
+        sensitive("FDBOGT"),
+        sensitive("FDBOLE"),
+        sensitive("FDBOLT"),
+        sensitive("FDBOR"),
+        sensitive("FDBSEQ"),
+        sensitive("FDBSF"),
+        sensitive("FDBSNE"),
+        sensitive("FDBST"),
+        sensitive("FDBT"),
+        sensitive("FDBUEQ"),
+        sensitive("FDBUGE"),
+        sensitive("FDBUGT"),
+        sensitive("FDBULE"),
+        sensitive("FDBULT"),
+        sensitive("FDBUN") )
 FDBcc \#Dn\#,<label>
 
     Decrement Dn and branch on \#FPU Condition Codes\#
@@ -6869,36 +6869,36 @@ See also \#FGETEXP\# and \#FGETMAN\#.
 \end
 
 screen( "FScc",
-		sensitive("FSEQ"),
-		sensitive("FSF"),
-		sensitive("FSGE"),
-		sensitive("FSGL"),
-		sensitive("FSGLE"),
-		sensitive("FSGT"),
-		sensitive("FSLE"),
-		sensitive("FSLT"),
-		sensitive("FSNE"),
-		sensitive("FSNGE"),
-		sensitive("FSNGL"),
-		sensitive("FSNGT"),
-		sensitive("FSNLE"),
-		sensitive("FSNLT"),
-		sensitive("FSOGE"),
-		sensitive("FSOGT"),
-		sensitive("FSOLE"),
-		sensitive("FSOLT"),
-		sensitive("FSOR"),
-		sensitive("FSSEQ"),
-		sensitive("FSSF"),
-		sensitive("FSSNE"),
-		sensitive("FSST"),
-		sensitive("FST"),
-		sensitive("FSUEQ"),
-		sensitive("FSUGE"),
-		sensitive("FSUGT"),
-		sensitive("FSULE"),
-		sensitive("FSULT"),
-		sensitive("FSUN") )
+        sensitive("FSEQ"),
+        sensitive("FSF"),
+        sensitive("FSGE"),
+        sensitive("FSGL"),
+        sensitive("FSGLE"),
+        sensitive("FSGT"),
+        sensitive("FSLE"),
+        sensitive("FSLT"),
+        sensitive("FSNE"),
+        sensitive("FSNGE"),
+        sensitive("FSNGL"),
+        sensitive("FSNGT"),
+        sensitive("FSNLE"),
+        sensitive("FSNLT"),
+        sensitive("FSOGE"),
+        sensitive("FSOGT"),
+        sensitive("FSOLE"),
+        sensitive("FSOLT"),
+        sensitive("FSOR"),
+        sensitive("FSSEQ"),
+        sensitive("FSSF"),
+        sensitive("FSSNE"),
+        sensitive("FSST"),
+        sensitive("FST"),
+        sensitive("FSUEQ"),
+        sensitive("FSUGE"),
+        sensitive("FSUGT"),
+        sensitive("FSULE"),
+        sensitive("FSULT"),
+        sensitive("FSUN") )
 FScc <ea>
 
     Set <ea> = -1 on floating point \#FPU Condition Codes\#,
@@ -7111,36 +7111,36 @@ See also \#FETOX\#, \#FTWOTOX\#, \#FLOGN\#, \#FLOG10\#, \#FLOG2\#, \#FETOXM1\#, 
 \end
 
 screen( "FTRAPcc",
-		sensitive("FTRAPEQ"),
-		sensitive("FTRAPF"),
-		sensitive("FTRAPGE"),
-		sensitive("FTRAPGL"),
-		sensitive("FTRAPGLE"),
-		sensitive("FTRAPGT"),
-		sensitive("FTRAPLE"),
-		sensitive("FTRAPLT"),
-		sensitive("FTRAPNE"),
-		sensitive("FTRAPNGE"),
-		sensitive("FTRAPNGL"),
-		sensitive("FTRAPNGT"),
-		sensitive("FTRAPNLE"),
-		sensitive("FTRAPNLT"),
-		sensitive("FTRAPOGE"),
-		sensitive("FTRAPOGT"),
-		sensitive("FTRAPOLE"),
-		sensitive("FTRAPOLT"),
-		sensitive("FTRAPOR"),
-		sensitive("FTRAPSEQ"),
-		sensitive("FTRAPSF"),
-		sensitive("FTRAPSNE"),
-		sensitive("FTRAPST"),
-		sensitive("FTRAPT"),
-		sensitive("FTRAPUEQ"),
-		sensitive("FTRAPUGE"),
-		sensitive("FTRAPUGT"),
-		sensitive("FTRAPULE"),
-		sensitive("FTRAPULT"),
-		sensitive("FTRAPUN") )
+        sensitive("FTRAPEQ"),
+        sensitive("FTRAPF"),
+        sensitive("FTRAPGE"),
+        sensitive("FTRAPGL"),
+        sensitive("FTRAPGLE"),
+        sensitive("FTRAPGT"),
+        sensitive("FTRAPLE"),
+        sensitive("FTRAPLT"),
+        sensitive("FTRAPNE"),
+        sensitive("FTRAPNGE"),
+        sensitive("FTRAPNGL"),
+        sensitive("FTRAPNGT"),
+        sensitive("FTRAPNLE"),
+        sensitive("FTRAPNLT"),
+        sensitive("FTRAPOGE"),
+        sensitive("FTRAPOGT"),
+        sensitive("FTRAPOLE"),
+        sensitive("FTRAPOLT"),
+        sensitive("FTRAPOR"),
+        sensitive("FTRAPSEQ"),
+        sensitive("FTRAPSF"),
+        sensitive("FTRAPSNE"),
+        sensitive("FTRAPST"),
+        sensitive("FTRAPT"),
+        sensitive("FTRAPUEQ"),
+        sensitive("FTRAPUGE"),
+        sensitive("FTRAPUGT"),
+        sensitive("FTRAPULE"),
+        sensitive("FTRAPULT"),
+        sensitive("FTRAPUN") )
 FTRAPcc
 FTRAPcc.W #data
 FTRAPcc.L #data
@@ -7198,20 +7198,20 @@ See also \#FETOX\#, \#FTENTOX\#, \#FLOGN\#, \#FLOG10\#, \#FLOG2\#, \#FETOXM1\#, 
 \end
 
 screen( "PBcc",
-		sensitive("PBAC"),
-		sensitive("PBAS"),
-		sensitive("PBBC"),
-		sensitive("PBBS"),
-		sensitive("PBGC"),
-		sensitive("PBGS"),
-		sensitive("PBIC"),
-		sensitive("PBIS"),
-		sensitive("PBLC"),
-		sensitive("PBLS"),
-		sensitive("PBSC"),
-		sensitive("PBSS"),
-		sensitive("PBWC"),
-		sensitive("PBWS") )
+        sensitive("PBAC"),
+        sensitive("PBAS"),
+        sensitive("PBBC"),
+        sensitive("PBBS"),
+        sensitive("PBGC"),
+        sensitive("PBGS"),
+        sensitive("PBIC"),
+        sensitive("PBIS"),
+        sensitive("PBLC"),
+        sensitive("PBLS"),
+        sensitive("PBSC"),
+        sensitive("PBSS"),
+        sensitive("PBWC"),
+        sensitive("PBWS") )
 PBcc <label>                -- Not Applicable to Atari --
 
     Branch on \link("PMMU Condition Codes")PMMU Condition Code\#.
@@ -7222,20 +7222,20 @@ PBcc <label>                -- Not Applicable to Atari --
 \end
 
 screen( "PDBcc",
-		sensitive("PDBAC"),
-		sensitive("PDBAS"),
-		sensitive("PDBBC"),
-		sensitive("PDBBS"),
-		sensitive("PDBGC"),
-		sensitive("PDBGS"),
-		sensitive("PDBIC"),
-		sensitive("PDBIS"),
-		sensitive("PDBLC"),
-		sensitive("PDBLS"),
-		sensitive("PDBSC"),
-		sensitive("PDBSS"),
-		sensitive("PDBWC"),
-		sensitive("PDBWS") )
+        sensitive("PDBAC"),
+        sensitive("PDBAS"),
+        sensitive("PDBBC"),
+        sensitive("PDBBS"),
+        sensitive("PDBGC"),
+        sensitive("PDBGS"),
+        sensitive("PDBIC"),
+        sensitive("PDBIS"),
+        sensitive("PDBLC"),
+        sensitive("PDBLS"),
+        sensitive("PDBSC"),
+        sensitive("PDBSS"),
+        sensitive("PDBWC"),
+        sensitive("PDBWS") )
 PDBcc \#Dn\#,<label>        -- Not Applicable to Atari --
 
     Decrement and Branch on \link("PMMU Condition Codes")PMMU Condition Code\#.
@@ -7246,7 +7246,7 @@ PDBcc \#Dn\#,<label>        -- Not Applicable to Atari --
 \end
 
 screen( sensitive("PFLUSH"),
-		sensitive("PFLUSHA") )
+        sensitive("PFLUSHA") )
 PFLUSHA                       -- \#Privileged\# --
 PFLUSH <fc>,#mask
 PFLUSH <fc>,#mask,<ea>
@@ -7307,8 +7307,8 @@ PFLUSHR <ea>                 -- Not Applicable to Atari --
 \end
 
 screen( "PLOAD",
-		sensitive("PLOADR"),
-		sensitive("PLOADW") )
+        sensitive("PLOADR"),
+        sensitive("PLOADW") )
 PLOADR <fc>,<ea>
 PLOADW <fc>,<ea>
 
@@ -7329,7 +7329,7 @@ See also \#Address Translation Cache\#.
 \end
 
 screen( sensitive("PMOVE"),
-		sensitive("PMOVEFD") )
+        sensitive("PMOVEFD") )
 PMOVE preg,<ea>
 PMOVE <ea>,preg
 PMOVEFD <ea>,preg
@@ -7378,20 +7378,20 @@ See also \#PRESTORE\#
 \end
 
 screen( "PScc",
-		sensitive("PSAC"),
-		sensitive("PSAS"),
-		sensitive("PSBC"),
-		sensitive("PSBS"),
-		sensitive("PSGC"),
-		sensitive("PSGS"),
-		sensitive("PSIC"),
-		sensitive("PSIS"),
-		sensitive("PSLC"),
-		sensitive("PSLS"),
-		sensitive("PSSC"),
-		sensitive("PSSS"),
-		sensitive("PSWC"),
-		sensitive("PSWS") )
+        sensitive("PSAC"),
+        sensitive("PSAS"),
+        sensitive("PSBC"),
+        sensitive("PSBS"),
+        sensitive("PSGC"),
+        sensitive("PSGS"),
+        sensitive("PSIC"),
+        sensitive("PSIS"),
+        sensitive("PSLC"),
+        sensitive("PSLS"),
+        sensitive("PSSC"),
+        sensitive("PSSS"),
+        sensitive("PSWC"),
+        sensitive("PSWS") )
 PScc <ea>                  -- Not Applicable to Atari --
 
     Set <ea> to TRUE (-1) on \link("PMMU Condition Codes")PMMU Condition Code\#, FALSE (0) otherwise.
@@ -7405,8 +7405,8 @@ PScc <ea>                  -- Not Applicable to Atari --
 \end
 
 screen( "PTEST",
-		sensitive("PTESTR"),
-		sensitive("PTESTW") )
+        sensitive("PTESTR"),
+        sensitive("PTESTW") )
 PTESTR <fc>,<ea>,#level          -- Privileged --
 PTESTR <fc>,<ea>,#level,\#An\#
 PTESTW <fc>,<ea>,#level
@@ -7432,20 +7432,20 @@ See also \#MOVEC\#, \#Function Code\# and \#ATC\#.
 \end
 
 screen( "PTRAPcc",
-		sensitive("PTRAPAC"),
-		sensitive("PTRAPAS"),
-		sensitive("PTRAPBC"),
-		sensitive("PTRAPBS"),
-		sensitive("PTRAPGC"),
-		sensitive("PTRAPGS"),
-		sensitive("PTRAPIC"),
-		sensitive("PTRAPIS"),
-		sensitive("PTRAPLC"),
-		sensitive("PTRAPLS"),
-		sensitive("PTRAPSC"),
-		sensitive("PTRAPSS"),
-		sensitive("PTRAPWC"),
-		sensitive("PTRAPWS") )
+        sensitive("PTRAPAC"),
+        sensitive("PTRAPAS"),
+        sensitive("PTRAPBC"),
+        sensitive("PTRAPBS"),
+        sensitive("PTRAPGC"),
+        sensitive("PTRAPGS"),
+        sensitive("PTRAPIC"),
+        sensitive("PTRAPIS"),
+        sensitive("PTRAPLC"),
+        sensitive("PTRAPLS"),
+        sensitive("PTRAPSC"),
+        sensitive("PTRAPSS"),
+        sensitive("PTRAPWC"),
+        sensitive("PTRAPWS") )
 PTRAPcc                  -- Not Applicable to Atari --
 PTRAPcc.W #data
 PTRAPcc.L #data
@@ -7854,7 +7854,7 @@ XBIOS: \link("%%GLOBAL%%")Vsync\#.
 \end
 
 screen( "Cookie Jar",
-		capsensitive("_p_cookies") )
+        capsensitive("_p_cookies") )
 Cookie Jar
 ----------------------------------------------------------------------
 The cookie jar is used to transmit information about the system or
@@ -7932,7 +7932,7 @@ of each bank, then read back again.  Smaller RAM chips will create
 \end
 
 screen( "resvalid",
-		"resvector" )
+        "resvector" )
 resvalid     = $426  ;L   magic     Reset
 resvector    = $42A  ;L   vector    Reset   warm boot
 ----------------------------------------------------------------------
@@ -8221,9 +8221,9 @@ printers.
 \end
 
 screen( "prv_aux",
-		"prv_auxo",
-		"prv_lst",
-		"prv_lsto" )
+        "prv_auxo",
+        "prv_lst",
+        "prv_lsto" )
 prv_lsto     = $506  ;L   vector    XBIOS   printer status (parallel) 
 prv_lst      = $50A  ;L   vector    XBIOS   print character (parallel)
 prv_auxo     = $50E  ;L   vector    XBIOS   printer status (serial)
@@ -10481,7 +10481,7 @@ clock rate set by \link("SCC Misc. Control Bits")R14\#.
 \end
 
 screen( "NCR5380",
-		"SCSI Controller" )
+        "SCSI Controller" )
 NCR5380 SCSI Protocol Controller               -- TT only --
 ----------------------------------------------------------------------
 ... drives the SCSI bus used by both internal and external hard drives
@@ -11062,7 +11062,7 @@ See also \link("%%GLOBAL%%")devconnect\#() and \#External Serial Input\#.
 \end
 
 screen( "Joystick",
-		capsensitive("IKBD") )
+        capsensitive("IKBD") )
 Intelligent Keyboard (IKBD)
 ----------------------------------------------------------------------
 Returns one byte for each key press (1-$72) and key release ($81-$F2).

@@ -163,9 +163,9 @@ Querverweis    \#C Language\#
 \end
 
 screen( capsensitive("double"),
-		capsensitive("Flieûkommaformat"),
-		capsensitive("float"),
-		capsensitive("long double") )
+        capsensitive("Flieûkommaformat"),
+        capsensitive("float"),
+        capsensitive("long double") )
 Datentypen float, double, long double
 
 Pure C hÑlt sich an den IEEE-Standard. Darin sind drei Flieûkomma-
@@ -312,7 +312,7 @@ Querverweis    \#C Language\#
 \end
 
 screen( capsensitive("else"),
-		capsensitive("if") )
+        capsensitive("if") )
 if ( <Ausdruck> )                   if ( <Ausdruck> )
     <Block1>                            <Block1>
                          ODER       else
@@ -409,7 +409,7 @@ Querverweis    \#C Language\#
 \end
 
 screen( capsensitive("signed"),
-		capsensitive("unsigned") )
+        capsensitive("unsigned") )
 signed  \#int\#
         \#short\#
         \#char\#
@@ -509,8 +509,8 @@ Querverweis    \#C Language\#
 \end
 
 screen( capsensitive("case"),
-		capsensitive("default"),
-		capsensitive("switch") )
+        capsensitive("default"),
+        capsensitive("switch") )
 switch ( <Ausdruck> )
  {
      case <Konstante>: <Befehl>  [break;]
@@ -694,7 +694,7 @@ Operator                       Auswertung von
 \end
 
 screen( "Steuerzeichen",
-		capsensitive("Escapesequenzen") )
+        capsensitive("Escapesequenzen") )
 Escapesequenzen (Steuerzeichen)
 ----------------------------------------------------------------------
 
@@ -961,15 +961,15 @@ Funktion gemein. Es findet lediglich eine Textersetzung statt.
 \end
 
 screen( "Vordefinierte Makros",
-		capsensitive("__68881__"),
-		capsensitive("__DATE__"),
-		capsensitive("__FILE__"),
-		capsensitive("__LINE__"),
-		capsensitive("__PUREC__"),
-		capsensitive("__STDC__"),
-		capsensitive("__TIME__"),
-		capsensitive("__TOS__"),
-		capsensitive("__TURBOC__") )
+        capsensitive("__68881__"),
+        capsensitive("__DATE__"),
+        capsensitive("__FILE__"),
+        capsensitive("__LINE__"),
+        capsensitive("__PUREC__"),
+        capsensitive("__STDC__"),
+        capsensitive("__TIME__"),
+        capsensitive("__TOS__"),
+        capsensitive("__TURBOC__") )
 In Pure C sind einige \#Konstanten-Makros\# bereits vordefiniert.
 
 Im ANSI-Standard definierte Makros:
@@ -1010,7 +1010,7 @@ Querverweis    \#Funktionen-Makros\#,     \#Konstanten-Makros\#
 \end
 
 screen( "Ausdruck",
-		capsensitive("defined") )
+        capsensitive("defined") )
 "Ausdruck" im Sinne des PrÑprozessors hat entweder den Wert TRUE
 fÅr wahr oder FALSE fÅr falsch.
 
@@ -1025,8 +1025,8 @@ Beispiel:
 \end
 
 screen( capsensitive("#else"),
-		capsensitive("#endif"),
-		capsensitive("#if") )
+        capsensitive("#endif"),
+        capsensitive("#if") )
 Bedingte Compilierung - #if, #else, #endif
 
 Mit Hilfe der #if-Anweisung kann man Bedingungen testen, so daû
@@ -1127,7 +1127,7 @@ werden nur dann bearbeitet, wenn sie bekannt sind.
 \end
 
 screen( capsensitive("warn"),
-		capsensitive("#pragma warn") )
+        capsensitive("#pragma warn") )
 Die #pragma warn-Direktive
 
 Mit #pragma warn kînnen Kommandozeilen-parameter der Form -wxxx auûer 
