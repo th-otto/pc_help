@@ -22,7 +22,7 @@ struct helpfile {
 	uint16_t *compressed_size_table;
 };
 
-#define NUM_HELPFILES 5
+#define NUM_HELPFILES 10
 
 static struct helpfile helplibfiles[NUM_HELPFILES];
 
@@ -204,7 +204,7 @@ static int help_findkey(const char *str, struct helpfile *file)
 
 /* ---------------------------------------------------------------------- */
 
-static long help_find(const char *str)
+static short help_find(const char *str)
 {
 	struct helpfile *file;
 	char key[256];
@@ -224,7 +224,7 @@ static long help_find(const char *str)
 			if ((scr_code = help_findkey(str, file)) != -1 ||
 				(scr_code = help_findkey(key, file)) != -1)
 			{
-				return ((unsigned long)i << 16) | (unsigned long)(unsigned short)(scr_code & 0x7fff);
+				return ((scr_code & 0x7ff) << 4) | (i + 1);
 			}
 		}
 	}
@@ -285,7 +285,7 @@ static void help_decompress(FILE *fp, char *buf, size_t size)
 int help_find_online(char *link, const char **str, long *len)
 {
 	short screen_no;
-	short file_num;
+	unsigned short file_num;
 	struct helpfile *file;
 	uint16_t *screen_table;
 	uint16_t *compressed_table;
@@ -294,28 +294,41 @@ int help_find_online(char *link, const char **str, long *len)
 	short i;
 	short chunk;
 	long filepos;
-	long code;
+	short code;
 	char *buf;
 
 	if (*link == ESC_CHR)
 	{
-		screen_no = link[1];
-		screen_no <<= 8;
-		screen_no |= (unsigned char)link[2];
-		if (screen_no == 0)
+		code = link[1];
+		code <<= 8;
+		code |= (unsigned char)link[2];
+		if (code == 0)
 		{
 			*str = index_page;
 			*len = sizeof(index_page) - 1;
 			return 0;
 		}
 		link += 3;
+		if ((unsigned short)code == 0x8000)
+		{
+			/*
+			 * from the index page, where we don't know the file number
+			 */
+			code = help_find(link);
+			if (code < 0)
+				return AL_HELP_KEYWORD;
+		}
+	} else
+	{
+		code = help_find(link);
+		if (code < 0)
+			return AL_HELP_KEYWORD;
 	}
-	code = help_find(link);
-	if (code < 0)
-		return AL_HELP_KEYWORD;
-	screen_no = (short)code;
+	screen_no = (code >> 4) & 0x7ff;
+	file_num = (int)(code & 0x0f) - 1;
 
-	file_num = (int)(code >> 16);
+	if (file_num >= NUM_HELPFILES)
+		return AL_HELP_NOT_FOUND;
 
 	file = &helplibfiles[file_num];
 	if (file->fp == NULL)
@@ -377,8 +390,25 @@ int help_find_online(char *link, const char **str, long *len)
 			{
 				if (buf < end)
 				{
-					*buf |= 0x80;
-					buf += 2;
+					unsigned short scr_code;
+
+					/*
+					 * Replace the link code by a encoded screen number & file number.
+					 * This makes sure that
+					 * - the IS_LINK_START macro works in display.c
+					 * - there are no CRs accidently part of the screen code
+					 * - there are no NUL bytes in the stream
+					 */
+					scr_code = (unsigned char)buf[0];
+					scr_code <<= 8;
+					scr_code |= (unsigned char)buf[1];
+					if (scr_code != LINK_EXTERNAL)
+					{
+						scr_code = ((scr_code & 0x7ff) << 4) | (file_num + 1);
+						scr_code |= 0x8000;
+					}
+					*buf++ = scr_code >> 8;
+					*buf++ = scr_code;
 					while (buf < end)
 					{
 						if (*buf++ == ESC_CHR)

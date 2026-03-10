@@ -213,11 +213,6 @@ static void *binsearch(const char *key, const char *table, size_t num_entries)
 	right = num_entries;
 	if (right == 0)
 		return NULL;
-#if 0
-	/* unneeded: won't happen */
-	if (binsearch_entry_size == 0)
-		return NULL;
-#endif
 	right--;
 	func = keyword_cmp;
 	for (;;)
@@ -237,7 +232,7 @@ static void *binsearch(const char *key, const char *table, size_t num_entries)
 		{
 			left = middle + 1;
 		}
-		if (left >= right)
+		if (left > right)
 			return NULL;
 	}
 }

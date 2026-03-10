@@ -16,10 +16,10 @@ _WORD ap_id;
 
 
 static const char *const help_table[] = {
-	ESC_CHR_S "\377\377PASCAL",
-	ESC_CHR_S "\377\377UNITS",
-	ESC_CHR_S "\377\377Options",
-	ESC_CHR_S "\377\377Assembler",
+	ESC_CHR_S "\200\000PASCAL",
+	ESC_CHR_S "\200\000UNITS",
+	ESC_CHR_S "\200\000Options",
+	ESC_CHR_S "\200\000Assembler",
 	ESC_CHR_S "\0\0Index",
 };
 

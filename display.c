@@ -383,11 +383,6 @@ static int get_display_width(long offset)
 					in_link = TRUE;
 					ptr += 2;
 					len -= 2;
-				} else if (len > 0 && isdigit(*ptr))
-				{
-					in_link = TRUE;
-					ptr += 1;
-					len -= 1;
 				}
 			}
 		} else
@@ -432,11 +427,6 @@ static long get_file_pos(long offset, int column)
 					in_link = TRUE;
 					len -= 2;
 					ptr += 2;
-				} else if (len > 0 && isdigit(*ptr))
-				{
-					in_link = TRUE;
-					len -= 1;
-					ptr += 1;
 				}
 			}
 		} else
@@ -1460,10 +1450,6 @@ void edit_copy(void)
 					{
 						src += 2;
 						len -= 2;
-					} /* else */ if (len > 0 && isdigit(*src)) /* BUG? else missing? */
-					{
-						src += 1;
-						len -= 1;
 					}
 				} else
 				{
