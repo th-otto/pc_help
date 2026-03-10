@@ -237,7 +237,7 @@ static void *binsearch(const char *key, const char *table, size_t num_entries)
 		{
 			left = middle + 1;
 		}
-		if (left >= right)
+		if (left > right)
 			return NULL;
 	}
 }
