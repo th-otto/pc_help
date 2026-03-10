@@ -99,38 +99,45 @@ static bool pp_help_show(int mode)
 
 static bool ac_open(void)
 {
-	bool quit;
 	char buf[80];
 	_WORD button;
-	
-	button = do_dialog(MAIN_DIALOG, DLG_KEYWORD);
-	quit = FALSE;
-	switch (button)
+
+	for (;;)
 	{
-	case DLG_LANGUAGE:
-		quit = pp_help_show(HELP_MODE_LANGUAGE); /* 'Pascal Language' */
-		break;
-	case DLG_LIBRARIES:
-		quit = pp_help_show(HELP_MODE_LIBRARIES); /* 'Units' */
-		break;
-	case DLG_OPTIONS:
-		quit = pp_help_show(HELP_MODE_OPTIONS); /* 'Options' */
-		break;
-	case DLG_ASSEMBLER:
-		quit = pp_help_show(HELP_MODE_ASSEMBLER); /* 'Assembler' */
-		break;
-	case DLG_INDEX:
-		quit = pp_help_show(HELP_MODE_INDEX); /* 'Index' */
-		break;
-	case DLG_OK:
-		get_ptext(MAIN_DIALOG, DLG_KEYWORD, buf);
-		quit = buf[0] == '\0' || help_show_topic(buf);
-		break;
-	case DLG_CANCEL:
-		quit = TRUE;
-		break;
+		button = do_dialog(MAIN_DIALOG, DLG_KEYWORD);
+		switch (button)
+		{
+		case DLG_LANGUAGE:
+			if (pp_help_show(HELP_MODE_LANGUAGE) == FALSE) /* 'Pascal Language' */
+				return FALSE;
+			break;
+		case DLG_LIBRARIES:
+			if (pp_help_show(HELP_MODE_LIBRARIES) == FALSE) /* 'Units' */
+				return FALSE;
+			break;
+		case DLG_OPTIONS:
+			if (pp_help_show(HELP_MODE_OPTIONS) == FALSE) /* 'Options' */
+				return FALSE;
+			break;
+		case DLG_ASSEMBLER:
+			if (pp_help_show(HELP_MODE_ASSEMBLER) == FALSE) /* 'Assembler' */
+				return FALSE;
+			break;
+		case DLG_INDEX:
+			if (pp_help_show(HELP_MODE_INDEX) == FALSE) /* 'Index' */
+				return FALSE;
+			break;
+		case DLG_OK:
+			get_ptext(MAIN_DIALOG, DLG_KEYWORD, buf);
+			if (buf[0] == '\0')
+				return TRUE;
+			if (help_show_topic(buf) == FALSE)
+				return FALSE;
+			break;
+		case DLG_CANCEL:
+			return TRUE;
+		}
 	}
-	return quit;
 }
 
 /* ---------------------------------------------------------------------- */

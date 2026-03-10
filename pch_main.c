@@ -112,38 +112,45 @@ static bool pc_help_show(int mode)
 
 static bool ac_open(void)
 {
-	bool quit;
 	char buf[80];
 	_WORD button;
 	
-	button = do_dialog(MAIN_DIALOG, DLG_KEYWORD);
-	quit = FALSE;
-	switch (button)
+	for (;;)
 	{
-	case DLG_LANGUAGE:
-		quit = pc_help_show(HELP_MODE_LANGUAGE); /* 'C Language' */
-		break;
-	case DLG_LIBRARIES:
-		quit = pc_help_show(HELP_MODE_LIBRARIES); /* 'Libraries' */
-		break;
-	case DLG_OPTIONS:
-		quit = pc_help_show(HELP_MODE_OPTIONS); /* 'Options' */
-		break;
-	case DLG_ASSEMBLER:
-		quit = pc_help_show(HELP_MODE_ASSEMBLER); /* 'Assembler' */
-		break;
-	case DLG_INDEX:
-		quit = pc_help_show(HELP_MODE_INDEX); /* 'Index' */
-		break;
-	case DLG_OK:
-		get_ptext(MAIN_DIALOG, DLG_KEYWORD, buf);
-		quit = buf[0] == '\0' || help_show_topic(buf);
-		break;
-	case DLG_CANCEL:
-		quit = TRUE;
-		break;
+		button = do_dialog(MAIN_DIALOG, DLG_KEYWORD);
+		switch (button)
+		{
+		case DLG_LANGUAGE:
+			if (pc_help_show(HELP_MODE_LANGUAGE) == FALSE) /* 'C Language' */
+				return FALSE;
+			break;
+		case DLG_LIBRARIES:
+			if (pc_help_show(HELP_MODE_LIBRARIES) == FALSE) /* 'Libraries' */
+				return FALSE;
+			break;
+		case DLG_OPTIONS:
+			if (pc_help_show(HELP_MODE_OPTIONS) == FALSE) /* 'Options' */
+				return FALSE;
+			break;
+		case DLG_ASSEMBLER:
+			if (pc_help_show(HELP_MODE_ASSEMBLER) == FALSE) /* 'Assembler' */
+				return FALSE;
+			break;
+		case DLG_INDEX:
+			if (pc_help_show(HELP_MODE_INDEX) == FALSE) /* 'Index' */
+				return FALSE;
+			break;
+		case DLG_OK:
+			get_ptext(MAIN_DIALOG, DLG_KEYWORD, buf);
+			if (buf[0] == '\0')
+				return TRUE;
+			if (help_show_topic(buf) == FALSE)
+				return FALSE;
+			break;
+		case DLG_CANCEL:
+			return TRUE;
+		}
 	}
-	return quit;
 }
 
 /* ---------------------------------------------------------------------- */

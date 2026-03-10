@@ -334,7 +334,7 @@ static char pphlprsc_string_3[] = "Keyword: ____________________________________
 static char pphlprsc_string_4[] = "X";
 static char pphlprsc_string_5[] = "Cancel";
 static char pphlprsc_string_6[] = "OK";
-static char pphlprsc_string_7[] = "Pascal Language";
+static char pphlprsc_string_7[] = "Pascal";
 static char pphlprsc_string_8[] = "Libraries";
 static char pphlprsc_string_9[] = "Options";
 static char pphlprsc_string_10[] = "Assembler";
@@ -356,7 +356,7 @@ static OBJECT rs_object[NUM_OBS] = {
 	{ 4, -1, -1, G_FBOXTEXT, OF_EDITABLE, OS_NORMAL, C_UNION(&rs_tedinfo[0]), 2,11, 74,1 }, /* DLG_KEYWORD */
 	{ 5, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pphlprsc_string_5), 56,13, 8,1 }, /* DLG_CANCEL */
 	{ 6, -1, -1, G_BUTTON, 0x7, OS_NORMAL, C_UNION(pphlprsc_string_6), 67,13, 8,1 }, /* DLG_OK */
-	{ 7, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pphlprsc_string_7), 2,9, 15,1 }, /* DLG_LANGUAGE */
+	{ 7, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pphlprsc_string_7), 2,9, 14,1 }, /* DLG_LANGUAGE */
 	{ 8, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pphlprsc_string_8), 18,9, 12,1 }, /* DLG_LIBRARIES */
 	{ 9, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pphlprsc_string_9), 33,9, 12,1 }, /* DLG_OPTIONS */
 	{ 10, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pphlprsc_string_10), 48,9, 12,1 }, /* DLG_ASSEMBLER */
