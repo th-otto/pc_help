@@ -42,12 +42,23 @@ PCHELP_OBJS = \
 	mmalloc.o \
 	$(empty)
 
+PPHELP_OBJS = \
+	pph_main.o \
+	pch_help.o \
+	display.o \
+	win.o \
+	membuf.o \
+	pphlplib.o \
+	mmalloc.o \
+	$(empty)
+
 PROGRAMS =
 PROGRAMS += hc$(EXE)
 PROGRAMS += help_rc$(EXE)
 PROGRAMS += helpcomp$(EXE)
 ifneq ($(findstring mint,$(CROSS)),)
 PROGRAMS += pc_help.prg
+PROGRAMS += pp_help.prg
 LIBS=-liio
 endif
 
@@ -65,6 +76,9 @@ helpcomp$(EXE): helpcomp.o
 pc_help.prg: $(PCHELP_OBJS)
 	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(PCHELP_OBJS) $(LIBS) -lgem
 
+pp_help.prg: $(PPHELP_OBJS)
+	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(PPHELP_OBJS) $(LIBS) -lgem
+
 $(OBJS): $(MAKEFILE_LIST)
 
 findstr.o: findstr.s
@@ -74,4 +88,4 @@ gccstub.o: gccstub.s
 	$(AS) -c -o $@ $<
 
 clean::
-	$(RM) *.o *.pdb hc hc$(EXE) help_rc helpcomp help_rc$(EXE) pc_help.prg
+	$(RM) *.o *.pdb hc hc$(EXE) help_rc helpcomp help_rc$(EXE) pc_help.prg pp_help.prg

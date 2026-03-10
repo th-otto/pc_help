@@ -1,5 +1,5 @@
 /*
- * GEM resource C output of pchlprsc
+ * GEM resource C output of pphlprsc
  *
  * created by ORCS 2.18
  */
@@ -252,7 +252,7 @@
 #undef RSC_STATIC_FILE
 #define RSC_STATIC_FILE 1
 
-#include "pchlprsc.h"
+#include "pphlprsc.h"
 
 #ifndef RSC_NAMED_FUNCTIONS
 #  define RSC_NAMED_FUNCTIONS 0
@@ -327,23 +327,23 @@ extern void *hfix_objs(RSHDR *_hdr, OBJECT *_ob, _WORD _num_objs);
 #endif
 
 
-static char pchlprsc_string_0[] = "Turbo Help 1.1";
-static char pchlprsc_string_1[] = "\275 1990 by Borland International Inc.";
-static char pchlprsc_string_2[] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-static char pchlprsc_string_3[] = "Keyword: _______________________________________________________________";
-static char pchlprsc_string_4[] = "X";
-static char pchlprsc_string_5[] = "Cancel";
-static char pchlprsc_string_6[] = "OK";
-static char pchlprsc_string_7[] = "C Language";
-static char pchlprsc_string_8[] = "Libraries";
-static char pchlprsc_string_9[] = "Options";
-static char pchlprsc_string_10[] = "Assembler";
-static char pchlprsc_string_11[] = "Index";
-static char pchlprsc_string_12[] = "Type in your keyword or click any predefined key button.";
+static char pphlprsc_string_0[] = "Pascal Help 1.2";
+static char pphlprsc_string_1[] = "\275 1990 by Borland International Inc.";
+static char pphlprsc_string_2[] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+static char pphlprsc_string_3[] = "Keyword: _______________________________________________________________";
+static char pphlprsc_string_4[] = "X";
+static char pphlprsc_string_5[] = "Cancel";
+static char pphlprsc_string_6[] = "OK";
+static char pphlprsc_string_7[] = "Pascal Language";
+static char pphlprsc_string_8[] = "Libraries";
+static char pphlprsc_string_9[] = "Options";
+static char pphlprsc_string_10[] = "Assembler";
+static char pphlprsc_string_11[] = "Index";
+static char pphlprsc_string_12[] = "Type in your keyword or click any predefined key button.";
 
 
 static TEDINFO rs_tedinfo[NUM_TI] = {
-	{ pchlprsc_string_2, pchlprsc_string_3, pchlprsc_string_4, IBM, 6, TE_CNTR, 0x1180, 0x0, -1, 64,73 } /* DLG_KEYWORD */
+	{ pphlprsc_string_2, pphlprsc_string_3, pphlprsc_string_4, IBM, 6, TE_CNTR, 0x1180, 0x0, -1, 64,73 } /* DLG_KEYWORD */
 };
 
 
@@ -351,17 +351,17 @@ static OBJECT rs_object[NUM_OBS] = {
 /* MAIN_DIALOG */
 
 	{ -1, 1, 11, G_BOX, OF_NONE, OS_OUTLINED, C_UNION(0x21100L), -768,1538, 78,15 },
-	{ 2, -1, -1, G_BUTTON, OF_SELECTABLE, OS_SHADOWED, C_UNION(pchlprsc_string_0), 16,1, 44,1 },
-	{ 3, -1, -1, G_STRING, OF_NONE, OS_NORMAL, C_UNION(pchlprsc_string_1), 20,4, 36,1 },
+	{ 2, -1, -1, G_BUTTON, OF_SELECTABLE, OS_SHADOWED, C_UNION(pphlprsc_string_0), 16,1, 44,1 },
+	{ 3, -1, -1, G_STRING, OF_NONE, OS_NORMAL, C_UNION(pphlprsc_string_1), 20,4, 36,1 },
 	{ 4, -1, -1, G_FBOXTEXT, OF_EDITABLE, OS_NORMAL, C_UNION(&rs_tedinfo[0]), 2,11, 74,1 }, /* DLG_KEYWORD */
-	{ 5, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pchlprsc_string_5), 56,13, 8,1 }, /* DLG_CANCEL */
-	{ 6, -1, -1, G_BUTTON, 0x7, OS_NORMAL, C_UNION(pchlprsc_string_6), 67,13, 8,1 }, /* DLG_OK */
-	{ 7, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pchlprsc_string_7), 2,9, 12,1 }, /* DLG_LANGUAGE */
-	{ 8, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pchlprsc_string_8), 18,9, 12,1 }, /* DLG_LIBRARIES */
-	{ 9, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pchlprsc_string_9), 33,9, 12,1 }, /* DLG_OPTIONS */
-	{ 10, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pchlprsc_string_10), 48,9, 12,1 }, /* DLG_ASSEMBLER */
-	{ 11, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pchlprsc_string_11), 64,9, 12,1 }, /* DLG_INDEX */
-	{ 0, -1, -1, G_STRING, OF_LASTOB, OS_NORMAL, C_UNION(pchlprsc_string_12), 11,6, 56,1 }
+	{ 5, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pphlprsc_string_5), 56,13, 8,1 }, /* DLG_CANCEL */
+	{ 6, -1, -1, G_BUTTON, 0x7, OS_NORMAL, C_UNION(pphlprsc_string_6), 67,13, 8,1 }, /* DLG_OK */
+	{ 7, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pphlprsc_string_7), 2,9, 15,1 }, /* DLG_LANGUAGE */
+	{ 8, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pphlprsc_string_8), 18,9, 12,1 }, /* DLG_LIBRARIES */
+	{ 9, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pphlprsc_string_9), 33,9, 12,1 }, /* DLG_OPTIONS */
+	{ 10, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pphlprsc_string_10), 48,9, 12,1 }, /* DLG_ASSEMBLER */
+	{ 11, -1, -1, G_BUTTON, 0x5, OS_NORMAL, C_UNION(pphlprsc_string_11), 64,9, 12,1 }, /* DLG_INDEX */
+	{ 0, -1, -1, G_STRING, OF_LASTOB, OS_NORMAL, C_UNION(pphlprsc_string_12), 11,6, 56,1 }
 };
 
 
@@ -377,9 +377,9 @@ static OBJECT *rs_trindex[NUM_TREE] = {
 
 #if RSC_NAMED_FUNCTIONS
 #ifdef __STDC__
-_WORD pchlprsc_rsc_load(_WORD wchar, _WORD hchar)
+_WORD pphlprsc_rsc_load(_WORD wchar, _WORD hchar)
 #else
-_WORD pchlprsc_rsc_load(wchar, hchar)
+_WORD pphlprsc_rsc_load(wchar, hchar)
 _WORD wchar;
 _WORD wchar;
 #endif
@@ -411,9 +411,9 @@ _WORD wchar;
 
 
 #ifdef __STDC__
-_WORD pchlprsc_rsc_gaddr(_WORD type, _WORD idx, void *gaddr)
+_WORD pphlprsc_rsc_gaddr(_WORD type, _WORD idx, void *gaddr)
 #else
-_WORD pchlprsc_rsc_gaddr(type, idx, gaddr)
+_WORD pphlprsc_rsc_gaddr(type, idx, gaddr)
 _WORD type;
 _WORD idx;
 void *gaddr;
@@ -548,9 +548,9 @@ void *gaddr;
 
 
 #ifdef __STDC__
-_WORD pchlprsc_rsc_free(void)
+_WORD pphlprsc_rsc_free(void)
 #else
-_WORD pchlprsc_rsc_free()
+_WORD pphlprsc_rsc_free()
 #endif
 {
 #if NUM_OBS != 0
@@ -576,7 +576,7 @@ _WORD rs_numti = 1;
 _WORD rs_numobs = 12;
 _WORD rs_numtree = 1;
 
-char rs_name[] = "pchlprsc.rsc";
+char rs_name[] = "pphlprsc.rsc";
 
 _WORD _rsc_format = 2; /* RSC_FORM_SOURCE2 */
 #endif

@@ -140,7 +140,7 @@ extern _WORD ap_id;
 bool help_undo(void);
 bool help_close(void);
 void help_set_title(void);
-bool help_show(int mode);
+bool help_show(const char *topic);
 bool help_show_topic(const char *str);
 
 

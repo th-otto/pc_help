@@ -2,19 +2,9 @@
 #include "helpmsg.h"
 #include <stdint_.h>
 #include "hcint.h"
-#include "pchlprsc.h"
 
 static int help_win_idx = -1;
 static int help_level = -1;
-static const char *const help_table[] = {
-	ESC_CHR_S "\377\377C Language",
-	ESC_CHR_S "\377\377Libraries",
-	ESC_CHR_S "\377\377Options",
-	ESC_CHR_S "\377\377Assembler",
-	ESC_CHR_S "\0\0Index",
-};
-
-static const char *get_help_title(void);
 
 static struct {
 	long selection_start;
@@ -71,15 +61,6 @@ static void help_push(const char *str)
 
 /* ---------------------------------------------------------------------- */
 
-static void set_helpstr(const char *str, long len)
-{
-	const char *title = get_help_title();
-	edit_set_help(title, str, len, TRUE);
-	mouse_on();
-}
-
-/* ---------------------------------------------------------------------- */
-
 static const char *get_help_title(void)
 {
 	int maxlen;
@@ -105,6 +86,15 @@ static const char *get_help_title(void)
 		strcat(help_title, str);
 	}
 	return help_title;
+}
+
+/* ---------------------------------------------------------------------- */
+
+static void set_helpstr(const char *str, long len)
+{
+	const char *title = get_help_title();
+	edit_set_help(title, str, len, TRUE);
+	mouse_on();
 }
 
 /* ---------------------------------------------------------------------- */
@@ -146,10 +136,10 @@ bool help_show_topic(const char *topic)
 
 /* ---------------------------------------------------------------------- */
 
-bool help_show(int mode)
+bool help_show(const char *topic)
 {
 	help_level = -1;
-	return help_show_topic(help_table[mode]);
+	return help_show_topic(topic);
 }
 
 /* ---------------------------------------------------------------------- */

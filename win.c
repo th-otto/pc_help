@@ -764,13 +764,6 @@ _WORD win_get_handle(void)
 /* ---------------------------------------------------------------------- */
 /* ********************************************************************** */
 
-#ifndef BYTE
-#define BYTE char
-#define LONG long
-#define WORD _WORD
-#endif
-#include "pchlprsc.h"
-#include "pchlprsc.rsh"
 
 /* FIXME: move to resource */
 struct alertmsg {
@@ -808,13 +801,6 @@ void mouse_off(void)
 void arrow_mouse(void)
 {
 	graf_mouse(ARROW, NULL);
-}
-
-/* ---------------------------------------------------------------------- */
-
-OBJECT *obj_addr(_WORD tree, _WORD obj)
-{
-	return &rs_object[rs_trindex[tree] + obj];
 }
 
 /* ---------------------------------------------------------------------- */
@@ -1010,60 +996,3 @@ void copy_grect(const GRECT *src, const GRECT *dst)
 	pxy[7] = dst->g_y + dst->g_h - 1;
 	vro_cpyfm(vdi_handle, S_ONLY, pxy, &screen, &screen);
 }
-
-/* ---------------------------------------------------------------------- */
-
-static void fix_rsh(OBJECT *tree, _WORD obj, _WORD parent)
-{
-	OBJECT *ptr;
-	
-	while (obj >= 0 && obj != parent)
-	{
-		rsrc_obfix(tree, obj);
-		ptr = &tree[obj];
-		if (ptr->ob_head >= 0)
-			fix_rsh(tree, ptr->ob_head, obj);
-		switch (ptr->ob_type)
-		{
-		case G_TEXT:
-		case G_BOXTEXT:
-		case G_FTEXT:
-		case G_FBOXTEXT:
-			/* fix ob_spec */
-			ptr->ob_spec.tedinfo = &rs_tedinfo[ptr->ob_spec.index];
-			break;
-			/* ob_spec -> string */
-		case G_BUTTON:
-		case G_STRING:
-		case G_TITLE:
-			ptr->ob_spec.free_string = rs_strings[ptr->ob_spec.index];
-			break;
-			/* ob_specs not requiring fixups */
-		case G_USERDEF:
-		case G_BOX:
-		case G_IBOX:
-		case G_BOXCHAR:
-			break;
-		}
-		obj = ptr->ob_next;
-	}
-}
-
-/* ---------------------------------------------------------------------- */
-
-void rsrc_fix(void)
-{
-	TEDINFO *ted;
-	_WORD tree;
-	
-	/* fix pointers in TEDINFO */
-	for (ted = rs_tedinfo; ted < &rs_tedinfo[sizeof(rs_tedinfo) / sizeof(rs_tedinfo[0])]; ted++)
-	{
-		ted->te_ptext = rs_strings[(long) (ted->te_ptext)];
-		ted->te_ptmplt = rs_strings[(long) (ted->te_ptmplt)];
-		ted->te_pvalid = rs_strings[(long) (ted->te_pvalid)];
-	}
-	for (tree = 0; tree < NUM_TREE; tree++)
-		fix_rsh(&rs_object[rs_trindex[tree]], 0, NIL);
-}
-

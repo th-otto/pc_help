@@ -2,7 +2,7 @@
 #include "helpmsg.h"
 #include <stdint_.h>
 #include "hcint.h"
-#include "pchlprsc.h"
+#include "pphlprsc.h"
 #include "alerts.h"
 
 _WORD phys_handle;
@@ -16,8 +16,8 @@ _WORD ap_id;
 
 
 static const char *const help_table[] = {
-	ESC_CHR_S "\377\377C Language",
-	ESC_CHR_S "\377\377Libraries",
+	ESC_CHR_S "\377\377PASCAL",
+	ESC_CHR_S "\377\377UNITS",
 	ESC_CHR_S "\377\377Options",
 	ESC_CHR_S "\377\377Assembler",
 	ESC_CHR_S "\0\0Index",
@@ -29,14 +29,13 @@ static const char *const help_table[] = {
 
 static void read_inf(void)
 {
-	bool found;
 	int fd;
 	char pc_dir[128];
 	long size;
 	const char *env;
 	
-	found = TRUE;
-	fd = (int)Fopen("pc_help.inf", 0);
+	*pc_dir = '\0';
+	fd = (int)Fopen("pp_help.inf", 0);
 	if (fd >= 0)
 	{
 		size = Fread(fd, sizeof(pc_dir), pc_dir);
@@ -47,25 +46,13 @@ static void read_inf(void)
 		Fclose((int)fd);
 	} else
 	{
-		env = getenv("PC");
+		env = getenv("PP");
 		if (env != NULL)
 		{
 			strcpy(pc_dir, env);
-		} else
-		{
-			found = FALSE;
 		}
 	}
-	if (found)
-	{
-		size_t len = strlen(pc_dir);
-		if (len > 0 && pc_dir[len - 1] != '\\' && pc_dir[len - 1] != '/')
-		{
-			pc_dir[len++] = '\\';
-			pc_dir[len] = '\0';
-		}
-		help_init(pc_dir);
-	}
+	help_init(pc_dir);
 }
 
 /* ---------------------------------------------------------------------- */
@@ -103,7 +90,7 @@ static void handle_button(_WORD mox, _WORD moy, _WORD clicks)
 
 /* ---------------------------------------------------------------------- */
 
-static bool pc_help_show(int mode)
+static bool pp_help_show(int mode)
 {
 	return help_show(help_table[mode]);
 }
@@ -121,19 +108,19 @@ static bool ac_open(void)
 	switch (button)
 	{
 	case DLG_LANGUAGE:
-		quit = pc_help_show(HELP_MODE_LANGUAGE); /* 'C Language' */
+		quit = pp_help_show(HELP_MODE_LANGUAGE); /* 'Pascal Language' */
 		break;
 	case DLG_LIBRARIES:
-		quit = pc_help_show(HELP_MODE_LIBRARIES); /* 'Libraries' */
+		quit = pp_help_show(HELP_MODE_LIBRARIES); /* 'Units' */
 		break;
 	case DLG_OPTIONS:
-		quit = pc_help_show(HELP_MODE_OPTIONS); /* 'Options' */
+		quit = pp_help_show(HELP_MODE_OPTIONS); /* 'Options' */
 		break;
 	case DLG_ASSEMBLER:
-		quit = pc_help_show(HELP_MODE_ASSEMBLER); /* 'Assembler' */
+		quit = pp_help_show(HELP_MODE_ASSEMBLER); /* 'Assembler' */
 		break;
 	case DLG_INDEX:
-		quit = pc_help_show(HELP_MODE_INDEX); /* 'Index' */
+		quit = pp_help_show(HELP_MODE_INDEX); /* 'Index' */
 		break;
 	case DLG_OK:
 		get_ptext(MAIN_DIALOG, DLG_KEYWORD, buf);
@@ -287,7 +274,8 @@ static void eventloop(bool isapp, const char *keyword)
 
 /* ---------------------------------------------------------------------- */
 
-#include "pchlprsc.rsh"
+#include "pphlprsc.h"
+#include "pphlprsc.rsh"
 
 void rsrc_fix(void)
 {
